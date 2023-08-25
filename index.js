@@ -31,7 +31,23 @@ window.onload = async(event)=>{
     }) : null;
 
     rout.er(window.location.pathname);
-
+    firebase.initializeApp({
+        apiKey: "AIzaSyA2K41RYhtZm4nx2F1liIJ8ly4ejy6gqc8",
+        authDomain: "pro-jyx.firebaseapp.com",
+        projectId: "pro-jyx",
+        appId: "1:492439614306:web:58cffeca539613b875b23b"
+    });
+    firebase.auth().onAuthStateChanged(user=>{
+        if (user) {
+            console.log({
+                user
+            });
+        } else {
+            localStorage.removeItem('githubAccessToken');
+        }
+        dom.body.dataset.load = "ed";
+    }
+    );
     document.body.onclick = window.events.onclick.document;
 }
 
