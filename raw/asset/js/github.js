@@ -78,5 +78,27 @@ window.github = {
             }
             );
         }
+        ,
+        user: (username)=>{
+            return new Promise((resolve,reject)=>{
+                const url = github.endpoint + "/user";
+                const a = data=>{
+                    resolve(data);
+                }
+                const b = (error)=>{
+                    console.log(error);
+                    reject(error);
+                }
+                const accessToken = localStorage.githubAccessToken;
+                const settings = accessToken ? {
+                    headers: {
+                        Accept: "application/vnd.github+json",
+                        Authorization: "token " + accessToken
+                    }
+                } : null;
+                request(url, settings).then(a).catch(b);
+            }
+            );
+        }
     }
 }

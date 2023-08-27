@@ -39,13 +39,25 @@ window.onload = async(event)=>{
     });
     firebase.auth().onAuthStateChanged(user=>{
         if (user) {
-            console.log({
+            console.log(42, {
                 user
+            });
+            github.users.user().then(function(user) {
+                console.log(user);
+                var avatar_url = user.avatar_url;
+                Array.from(document.body.querySelectorAll(".avatar-image")).forEach(function(avatar) {
+                    var img = document.createElement("img");
+                    img.src = avatar_url;
+                    avatar.innerHTML = img.outerHTML;
+                });
             });
         } else {
             localStorage.removeItem('githubAccessToken');
+                Array.from(document.body.querySelectorAll(".avatar-image")).forEach(function(avatar) {
+                    avatar.innerHTML = "";
+                });
         }
-        dom.body.dataset.load = "ed";
+        //dom.body.dataset.load = "ed";
     }
     );
     document.body.onclick = window.events.onclick.document;

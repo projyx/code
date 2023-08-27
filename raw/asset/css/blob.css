@@ -88,7 +88,6 @@
 
     .component-blob .header-code .code-authenticate .authenticate-avatar .avatar-image {
         align-items: center;
-        background: #000;
         border-radius: 50%;
         display: flex;
         justify-content: center;
@@ -96,11 +95,21 @@
         width: 30px;
     }
 
-    .component-blob .header-code .code-authenticate .authenticate-avatar .avatar-image img {
+    .component-blob .header-code .code-authenticate .authenticate-avatar .avatar-image:empty {
+        background-color: white;
+        background-image: url(/raw/asset/svg/github.svg);
+        background-position: bottom center;
+        background-repeat: no-repeat;
+        background-size: 75%;
         filter: invert(1);
-        height: 75%;
-        margin: auto auto 0;
-        width: 75%;
+    }
+
+    .component-blob .header-code .code-authenticate .authenticate-avatar .avatar-image img {
+        /* filter: invert(1); */
+        border-radius: 50%;
+        height: 100%;
+        margin: 0;
+        width: 100%;
     }
 }
 
