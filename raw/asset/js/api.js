@@ -31,13 +31,28 @@ window.api.oauth.login = function() {
     });
 }
 
-window.api.rooms = {};
-window.api.rooms.random = function() {
-    request('/assets/json/rooms.json').then(room);
-    function room(rooms) {
-        var n = Math.floor(Math.random() * (rooms.length - 0 + 1) + 0);
-        console.log(10, n);
-        var room = rooms[n].name;
-        browse.route('/chat/' + room);
-    }
+window.api.code = {};
+api.code.push = function() {
+    var paths = window.location.pathname.split("/").filter(o => o.length > 1);
+    var names = paths.splice(5, paths.length - 1);
+    var path = names.join('/')
+    var params = {
+        message: "Update /" + path,
+        repo: paths[1],
+        owner: paths[0]
+    };
+    var array = [{
+        content: cm.html.getValue(),
+        path: path + "index.html"
+    }, {
+        content: cm.css.getValue(),
+        path: path + "index.css"
+    }, {
+        content: cm.js.getValue(),
+        path: path + "index.js"
+    }];
+    console.log(52, path, params, array);
+    0 < 1 ? github.repos.push(params, array).then(function(response) {
+        console.log(37, response);
+    }) : null
 }
