@@ -12,7 +12,7 @@ window.fetch = window.request = async(resource,options)=>{
             const accessToken = window.parent.localStorage.githubAccessToken;
             const settings = accessToken ? {
                 headers: {
-                    Accept: "application/vnd.github+json",
+                    Accept: "application/vnd.github.raw",
                     Authorization: "token " + accessToken
                 }
             } : null;
@@ -26,7 +26,7 @@ window.fetch = window.request = async(resource,options)=>{
 
         }
         0 < 1 ? await Fetch(url, options).then(async(response)=>{
-            console.log(response);
+            //console.log(response);
             if (!response.ok) {
                 return response.text().then(text=>{
                     var text = JSON.stringify({
@@ -41,9 +41,9 @@ window.fetch = window.request = async(resource,options)=>{
         }
         ).then(response=>{
             try {
-                console.log(39, response);
+                //console.log(39, response);
                 response = JSON.parse(response);
-                console.log(41, response);
+                console.log(41, 'fetch.request', response);
                 resolve(response);
             } catch (err) {
                 resolve(response);
