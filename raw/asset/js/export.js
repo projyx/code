@@ -211,6 +211,11 @@ async function pvw() {
         s
     }) : null;
 
+            var json = await request("/raw/asset/js/blob.js");
+            var text = json;
+            var blob = getBlobURL(text, 'text/javascript');
+            var elem = `<script src="${blob}">${atob('PC9zY3JpcHQ+')}`;
+    
     const htmlHead = (l && l.join(" ")) + (s && s.join(" "));
     const htmlBody = body.querySelector('body');
     const src = `
@@ -226,6 +231,8 @@ async function pvw() {
         <style>${css}</style>
 
         <script>${js}</script>
+
+        ${elem}
 
       </head>
 
