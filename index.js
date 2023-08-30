@@ -43,7 +43,7 @@ window.onload = async(event)=>{
                 user
             });
             github.users.user().then(function(user) {
-                console.log(user);
+                //console.log(user);
                 var avatar_url = user.avatar_url;
                 Array.from(document.body.querySelectorAll(".avatar-image")).forEach(function(avatar) {
                     var img = document.createElement("img");

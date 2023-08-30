@@ -165,7 +165,7 @@ async function pvw() {
         var i = 0;
         do {
             var link = styles[i];
-            console.log(i, link, styles);
+            //console.log(i, link, styles);
             var uri = new URL(link.href);
             var path = uri.pathname;
             var json = await github.repos.contents(owner, repo, path);
