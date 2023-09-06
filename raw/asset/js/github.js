@@ -5,7 +5,6 @@ window.github = {
             "code.jyxer.tld": "627d321fca16fcbe8180",
         },
         login: (target)=>{
-
             var provider = new firebase.auth.GithubAuthProvider();
             provider.addScope('repo');
             provider.setCustomParameters({
@@ -276,6 +275,38 @@ github.database.trees = function(params, settings) {
         }
         );
     }
+}
+
+github.raw = {};
+github.raw.blob = async(params)=>{
+    return new Promise((resolve,reject)=>{
+        fetch("https://api.github.com/repos/" + params.owner + "/" + params.repo + "/contents" + params.resource, {
+            cache: "reload",
+            headers: {
+                Accept: "application/vnd.github.raw",
+                Authorization: "token " + localStorage.githubAccessToken
+            }
+        }).then(async(response)=>{
+            if (response.status === 404) {
+                var res = await response.json();
+                var json = {
+                    json: res,
+                    error: new Error(response.status)
+                }
+                throw json;
+            } else {
+                return response.blob()
+            }
+        }
+        ).then((blob)=>{
+            resolve(URL.createObjectURL(blob));
+        }
+        ).catch((e)=>{
+            reject(e.json)
+        }
+        );
+    }
+    );
 }
 
 github.repos = {};

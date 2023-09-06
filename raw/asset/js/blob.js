@@ -5,8 +5,7 @@ window.fetch = window.request = async(resource,options)=>{
     return new Promise(async function(resolve, reject) {
         if (resource.startsWith("/")) {
             var parent = window.parent;
-            var route = parent.rout.e;
-            var paths = route.uri.split("/").filter(o=>o.length > 1);
+            var paths = parent.location.pathname.split("/").filter(o=>o.length > 1);
             var owner = paths[0];
             var repo = paths[1];
             var dirs = resource.split("/").filter(o=>o.length > 1);

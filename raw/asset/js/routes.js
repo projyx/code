@@ -21,7 +21,7 @@ window.routes = function(uri, options) {
                     if (paths.length > 2) {
                         if (paths[2] === "blob") {
                             var file = paths[paths.length - 1];
-                            if (file.includes('.')) {
+                            if (file) {
                                 console.log(37, 'routes.view editor');
 
                                 window.dom = {
@@ -62,78 +62,6 @@ window.routes = function(uri, options) {
 
                                 };
 
-                                window.cm = {};
-                                cm.html = CodeMirror(component.querySelector('#code-html'), {
-
-                                    lineNumbers: true,
-
-                                    lineWrapping: true,
-
-                                    htmlMode: true,
-
-                                    mode: 'xml',
-
-                                    styleActiveLine: true,
-
-                                    theme: 'abcdef',
-
-                                    matchBrackets: true
-
-                                });
-
-                                cm.html.on("change", (change)=>{
-
-                                    upd();
-
-                                }
-                                );
-
-                                cm.css = CodeMirror(component.querySelector('#code-css'), {
-
-                                    lineNumbers: true,
-
-                                    lineWrapping: true,
-
-                                    mode: 'css',
-
-                                    styleActiveLine: true,
-
-                                    theme: 'abcdef',
-
-                                    matchBrackets: true
-
-                                });
-
-                                cm.css.on("change", (change)=>{
-
-                                    upd();
-
-                                }
-                                );
-
-                                cm.js = CodeMirror(component.querySelector('#code-js'), {
-
-                                    lineNumbers: true,
-
-                                    lineWrapping: true,
-
-                                    mode: 'javascript',
-
-                                    styleActiveLine: true,
-
-                                    theme: 'abcdef',
-
-                                    matchBrackets: true
-
-                                });
-
-                                cm.js.on("change", (change)=>{
-
-                                    upd();
-
-                                }
-                                );
-
                                 var file = paths[paths.length - 1];
                                 var owner = paths[0];
                                 var repo = paths[1];
@@ -141,13 +69,128 @@ window.routes = function(uri, options) {
                                 path.pop();
                                 path = path.join('/');
                                 console.log(143, path, file);
+
+                                var parent = window.parent;
+                                var name = window.parent.location.pathname;
+                                console.log(229, [parent]);
+                                var pathed = name.split("/").filter(o=>o.length > 1);
+                                console.log(231, [parent, paths]);
+                                var owner = pathed[0];
+                                var repo = pathed[1];
+                                var path = paths.splice(4, paths.length - 1);
+                                path.pop()
+
+                                window.blobs = {
+                                    "html": {
+                                        links: [],
+                                        scripts: []
+                                    }
+                                };
+                                window.cm = {};
                                 ["html", "css", "js"].forEach(async(ext)=>{
                                     try {
-                                        var json = await github.repos.contents(owner, repo, path + "/" + file.split('.')[0] + "." + ext);
+                                        var url = new URL(name,parent.origin);
+                                        var pn = url.pathname.split("/").filter(o=>o.length > 1);
+                                        //var resource = pn.splice(4, pn.length - 1).join("/");
+                                        var resource = path + "/" + file.split('.')[0] + "." + ext;
+                                        console.log(93, path, resource);
+
+                                        var json = await github.repos.contents(owner, repo, resource);
                                         var content = atob(json.content);
-                                        cm[ext].setValue(content);
+                                        var doc = new DOMParser().parseFromString(content, "text/html");
+                                        var url = "https://api.github.com" + "/repos/" + owner + "/" + repo + "/contents/" + resource;
+                                        var blob = await github.raw.blob({
+                                            owner,
+                                            repo,
+                                            resource
+                                        })
+                                        console.log(246, ext, {
+                                            blob,
+                                            content
+                                        }, {
+                                            owner,
+                                            repo,
+                                            resource
+                                        });
+                                        console.log(149, doc, ext);
+
+                                        if (ext === "html") {
+
+                                            cm[ext] = CodeMirror(component.querySelector('#code-html'), {
+
+                                                lineNumbers: true,
+
+                                                lineWrapping: true,
+
+                                                htmlMode: true,
+
+                                                mode: 'xml',
+
+                                                styleActiveLine: true,
+
+                                                theme: 'abcdef',
+
+                                                matchBrackets: true
+
+                                            });
+
+                                            cm[ext].on("change", pvw);
+                                            //cm[ext].setValue(content);
+
+                                            var links = doc.head.querySelectorAll('link');
+                                            var parsed = doc.head.outerHTML + doc.body.outerHTML;
+                                            console.log(229, doc.head, content);
+                                            cm[ext].setValue(content);
+                                            document.getElementById('code-frame')[ext] = content;
+                                        }
+
+                                        if (ext === "css") {
+
+                                            cm[ext] = CodeMirror(component.querySelector('#code-css'), {
+
+                                                lineNumbers: true,
+
+                                                lineWrapping: true,
+
+                                                mode: 'css',
+
+                                                styleActiveLine: true,
+
+                                                theme: 'abcdef',
+
+                                                matchBrackets: true
+
+                                            });
+
+                                            console.log(292, content);
+
+                                            cm[ext].on("change", pvw);
+                                            cm[ext].setValue(content);
+                                            document.getElementById('code-frame')[ext] = content;
+                                        }
+
+                                        if (ext === "js") {
+                                            cm[ext] = CodeMirror(component.querySelector('#code-js'), {
+
+                                                lineNumbers: true,
+
+                                                lineWrapping: true,
+
+                                                mode: 'javascript',
+
+                                                styleActiveLine: true,
+
+                                                theme: 'abcdef',
+
+                                                matchBrackets: true
+
+                                            });
+
+                                            cm[ext].on("change", pvw);
+                                            cm[ext].setValue(content);
+                                        }
                                     } catch (e) {
-                                        console.log(e);
+                                        console.log(e ? e : null);
                                     }
                                 }
                                 );
@@ -243,22 +286,6 @@ window.routes = function(uri, options) {
                     }
                 } else {
                     console.log("routes.view user");
-                    component.querySelector('.explorer-section').innerHTML = "";
-                    var repos = await github.users.repos(sub);
-                    var explorer = component.querySelector('.explorer-section');
-                    explorer.innerHTML = "";
-                    var html = await request("/raw/asset/html/explorer.user.html");
-                    explorer.innerHTML = html;
-                    var feed = explorer.querySelector('.section-repositories > section');
-                    var template = feed.nextElementSibling.content.firstElementChild;
-                    repos.forEach((repo,index)=>{
-                        var el = template.cloneNode(true);
-                        el.setAttribute('href', '/' + sub + '/' + repo.name);
-                        el.querySelector('.folder-name').textContent = repo.name;
-                        feed.insertAdjacentHTML('beforeend', el.outerHTML)
-                    }
-                    );
-                    console.log('users.repos', repos);
                 }
             }
         } else {

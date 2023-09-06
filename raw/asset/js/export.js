@@ -1,6 +1,7 @@
 function request(resource, options) {
     return new Promise(async function(resolve, reject) {
         await fetch(resource, options).then(async(response)=>{
+            console.log(4, response);
             if (!response.ok) {
                 return response.text().then(text=>{
                     var text = JSON.stringify({
@@ -129,17 +130,20 @@ function getPageURL(html, css, js) {
 
 }
 
-async function pvw() {
+async function pvw(e) {
 
-    const html = dom.iframe.code.doc = window.cm.html.getValue();
-    const css = dom.iframe.code.doc = window.cm.css.getValue();
-    const js = dom.iframe.code.doc = window.cm.js.getValue();
+    console.log(134, e);
+
+    const html = dom.iframe.code.doc = window.cm.html ? window.cm.html.getValue() : null;
+    const css = dom.iframe.code.doc = window.cm.css ? window.cm.css.getValue() : null;
+    const js = dom.iframe.code.doc = window.cm.js ? window.cm.js.getValue() : null;
     const doc = new DOMParser().parseFromString(html, 'text/html');
 
     const head = doc.head;
     const body = doc.body;
     const styles = head.querySelectorAll("link");
     const scripts = head.querySelectorAll("script")
+    const srcs = body.querySelectorAll("[src]")
 
     dom.iframe.code.head = head;
     dom.iframe.code.body = body;
@@ -161,20 +165,22 @@ async function pvw() {
     }) : null;
 
     var l = [];
-    if (styles.length > 0) {
+    if (0 < 1 && styles.length > 0) {
         var i = 0;
         do {
             var link = styles[i];
-            //console.log(i, link, styles);
-            var uri = new URL(link.href);
-            var path = uri.pathname;
-            var json = await github.repos.contents(owner, repo, path);
-            var text = atob(json.content);
-            var blob = getBlobURL(text, 'text/javascript');
-            var elem = `<link rel="stylesheet" type="text/css" href="${blob}" />`
-            //console.log(path, {json,text,blob});
-            l.push(elem)
-            //console.log(164, l);
+            console.log(172, i, link, styles);
+            if (!link.href.includes("/index.css")) {
+                var uri = new URL(link.href);
+                var path = uri.pathname;
+                var json = await github.repos.contents(owner, repo, path);
+                var text = atob(json.content);
+                var blob = getBlobURL(text, 'text/javascript');
+                var elem = `<link rel="stylesheet" type="text/css" href="${blob}" />`
+                //console.log(path, {json,text,blob});
+                l.push(elem)
+                //console.log(164, l);
+            }
             i++;
         } while (i < styles.length);
     }
@@ -189,18 +195,20 @@ async function pvw() {
         var i = 0;
         do {
             var script = scripts[i];
-            if(script.src.startsWith("http")) {
-            var uri = new URL(script.src);
-            var path = uri.pathname;
-            var json = await github.repos.contents(owner, repo, path);
-            var text = atob(json.content);
-            var blob = getBlobURL(text, 'text/javascript');
-            var elem = `<script src="${blob}">${atob('PC9zY3JpcHQ+')}`;
-            } else {
-            var elem = `<script src="${script.src}"></script>`;                
+            if (!script.src.includes("/index.js")) {
+                if (script.src.startsWith("http")) {
+                    var uri = new URL(script.src);
+                    var path = uri.pathname;
+                    var json = await github.repos.contents(owner, repo, path);
+                    var text = atob(json.content);
+                    var blob = getBlobURL(text, 'text/javascript');
+                    var elem = `<script src="${blob}" data-src="${script.src}">${atob('PC9zY3JpcHQ+')}`;
+                } else {
+                    var elem = `<script src="${script.src}"></script>`;
+                }
+                //console.log(path, {json,text,blob});
+                s.push(elem);
             }
-            //console.log(path, {json,text,blob});
-            s.push(elem);
             //console.log(182, s);
             i++;
         } while (i < scripts.length);
@@ -211,11 +219,34 @@ async function pvw() {
         s
     }) : null;
 
-            var json = await request("/raw/asset/js/blob.js");
-            var text = json;
-            var blob = getBlobURL(text, 'text/javascript');
-            var elem = `<script src="${blob}">${atob('PC9zY3JpcHQ+')}`;
-    
+    var i = [];
+    if (srcs.length > 0) {
+        var i = 0;
+        do {
+            var script = srcs[i];
+            var uri = new URL(script.src);
+            var resource = uri.pathname;
+            console.log(222, script, path);
+            if (!path.startsWith("http")) {
+                console.log(224, script.src);
+                var blob = await github.raw.blob({
+                    owner,
+                    repo,
+                    resource
+                });
+                var source = body.querySelectorAll("[src]")[i];
+                source.src = blob;
+                console.log(232, source);
+            }
+            i++;
+        } while (i < srcs.length);
+    }
+
+    var json = await request("/raw/asset/js/blob.js");
+    var text = json;
+    var blob = getBlobURL(text, 'text/javascript');
+    var elem = `<script src="${blob}">${atob('PC9zY3JpcHQ+')}`;
+
     const htmlHead = (l && l.join(" ")) + (s && s.join(" "));
     const htmlBody = body.querySelector('body');
     const src = `
@@ -246,14 +277,14 @@ async function pvw() {
 
   `;
 
-    0 > 1 ? console.log(211, dom.iframe.code, dom.iframe.code.head, {
+    0 < 1 ? console.log(211, dom.iframe.code, dom.iframe.code.head, {
         html,
         src,
         head,
         l,
         s,
-        htmlHead: l.join(" "),
-        htmlBody: l.join(" "),
+        htmlStyles: l.join(" "),
+        htmlScript: s.join(" "),
     }) : null;
 
     //dom.iframe.code.head.innerHTML = '<style id="style"></style>';
@@ -264,39 +295,21 @@ async function pvw() {
     //dom.iframe.code.body = document.getElementById("code-frame").contentDocument.querySelector('body');
 
     dom.iframe.code.elem.src = getBlobURL(src, 'text/html');
-
-}
-
-function upd() {
-
-    pvw();
-
-    var html = cm.html.getValue();
-
-    var css = cm.css.getValue();
-
-    var js = cm.js.getValue();
-
-    //var page = getPageURL(html, css, js);
-    //console.log(153, page);
-
-    //dom.iframe.code.style.textContent = css;
-
-    //dom.iframe.code.elem.src = page;
+    //dom.iframe.code.elem.contentWindow.document.body.parentNode.outerHTML = src;
 
 }
 
 window.Crypto = crypt = cx = {
-  uid: {
-    create: x => {
-      if (window.crypto || window.msCrypto) {
-        var array = new Uint32Array(x);
-        window.crypto.getRandomValues(array);
-        array.length === 1 ? array = array[0] : null;
-        return array;
-      } else {
-        throw new Error("Your browser can't generate secure random numbers");
-      }
+    uid: {
+        create: x=>{
+            if (window.crypto || window.msCrypto) {
+                var array = new Uint32Array(x);
+                window.crypto.getRandomValues(array);
+                array.length === 1 ? array = array[0] : null;
+                return array;
+            } else {
+                throw new Error("Your browser can't generate secure random numbers");
+            }
+        }
     }
-  }
 };
