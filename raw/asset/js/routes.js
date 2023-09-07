@@ -293,10 +293,10 @@ window.routes = function(uri, options) {
             explorer.innerHTML = "";
             var html = await request("/raw/asset/html/explorer.home.html");
             explorer.innerHTML = html;
-            console.log("routes.view home");
+
+            console.log(135, 'routes.view profile', '/*', uri);
         }
 
-        console.log(135, uri);
         status === 200 ? resolve(uri) : reject(e);
     }
 }

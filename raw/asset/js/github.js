@@ -332,6 +332,29 @@ github.repos.contents = (owner,repo,path)=>{
     );
 }
 
+github.user = {};
+github.user.repos = (username)=>{
+    return new Promise(function(resolve, reject) {
+        const url = github.endpoint + "/user/" + username + "/repos";
+        const a = data=>{
+            resolve(data);
+        }
+        const b = (error)=>{
+            console.log(error);
+            reject(error);
+        }
+        const accessToken = localStorage.githubAccessToken;
+        const settings = accessToken ? {
+            headers: {
+                Accept: "application/vnd.github+json",
+                Authorization: "token " + accessToken
+            }
+        } : null;
+        request(url, settings).then(a).catch(b);
+    }
+    );
+}
+
 github.users = {};
 github.users.repos = (username)=>{
     return new Promise(function(resolve, reject) {
@@ -354,7 +377,6 @@ github.users.repos = (username)=>{
     }
     );
 }
-;
 github.users.user = function(username) {
     return new Promise((resolve,reject)=>{
         const url = github.endpoint + "/user";

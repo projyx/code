@@ -1,0 +1,73 @@
+<header class="header-user">
+    <row>
+        <div class="user-authenticate">
+            <section>
+                <span class="authenticate-avatar">
+                    <section>
+                        <i class="avatar-image" onclick="window[0 < 1 ? 'github' : 'api'].oauth.login(event.target)"></i>
+                    </section>
+                </span>
+            </section>
+        </div>
+    </row>
+</header>
+<block class="block-cover">
+    <column>
+        <card class="cover-photo">
+            <column>
+                <box class="photo-user">
+                    <column>
+                        <text placeholder="Firstname Lastname"></text>
+                        <text placeholder="@username"></text>
+                    </column>
+                </box>
+                <box class="photo-avatar">
+                    <column>
+                        <picture></picture>
+                    </column>
+                </box>
+            </column>
+        </card>
+    </column>
+    <footer>
+        <card class="cover-stats">
+            <column>
+                <box class="stats-follow">
+                    <section>
+                        <text>
+                            <span>0</span>
+                            <span>followers</span>
+                        </text>
+                        <text>
+                            <span>0</span>
+                            <span>following</span>
+                        </text>
+                    </section>
+                </box>
+            </column>
+        </card>
+    </footer>
+</block>
+<block class="block-source">
+    <column>
+        <card class="source-code">
+            <column id="user-repositories">
+                <box class="code-repository">
+                    <row>
+                        <text>Name</text>
+                    </row>
+                </box>
+                <box>
+                    <row>
+                        <text>Name</text>
+                    </row>
+                </box>
+                <box>
+                    <row>
+                        <text>Name</text>
+                    </row>
+                </box>
+            </column>
+        </card>
+    </column>
+</block>

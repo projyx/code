@@ -39,7 +39,7 @@ window.events.onclick.exit = function(event) {
     paths.pop();
     //console.log(paths);
     var href = "/" + (paths.length > 0 ? paths.join("/") : "");
-    //console.log(href);
+    console.log(42, href);
     rout.er(href);
 }
 
