@@ -53,7 +53,7 @@
 }
 
 @media {    
-    .component {
+    component, .component {
         display: flex;
         flex-direction: column;
         width: 100%;

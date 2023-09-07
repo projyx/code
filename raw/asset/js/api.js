@@ -6,7 +6,7 @@ window.api.oauth.config = {
     redirect_uri: window.location.protocol + "//" + window.location.host + window.location.pathname,
     scope: "delete_repo,user,public_repo,repo"
 }
-window.api.oauth.login = function() {
+window.api.oauth.login = function(target) {
     var client_id = api.oauth.config.client_id;
     var redirect_uri = api.oauth.config.redirect_uri;
 
@@ -33,7 +33,7 @@ window.api.oauth.login = function() {
 
 window.api.code = {};
 api.code.push = function() {
-    var paths = window.location.pathname.split("/").filter(o => o.length > 1);
+    var paths = window.location.pathname.split("/").filter(o=>o.length > 1);
     var names = paths.splice(5, paths.length - 1);
     var path = names.join('/')
     var params = {
@@ -55,4 +55,32 @@ api.code.push = function() {
     0 < 1 ? github.repos.push(params, array).then(function(response) {
         console.log(37, response);
     }) : null
+}
+
+window.api.time = {};
+api.time.date = (previous)=>{
+    var date = Date.now();
+    var current = date;
+    var msPerMinute = 60 * 1000;
+    var msPerHour = msPerMinute * 60;
+    var msPerDay = msPerHour * 24;
+    var msPerMonth = msPerDay * 30;
+    var msPerYear = msPerDay * 365;
+
+    var elapsed = current - previous;
+
+    if (elapsed < msPerMinute) {
+        return Math.round(elapsed / 1000) + ' seconds ago';
+    } else if (elapsed < msPerHour) {
+        return Math.round(elapsed / msPerMinute) + ' minutes ago';
+    } else if (elapsed < msPerDay) {
+        return Math.round(elapsed / msPerHour) + ' hours ago';
+    } else if (elapsed < msPerMonth) {
+        return 'approximately ' + Math.round(elapsed / msPerDay) + ' days ago';
+    } else if (elapsed < msPerYear) {
+        return 'approximately ' + Math.round(elapsed / msPerMonth) + ' months ago';
+    } else {
+        return 'approximately ' + Math.round(elapsed / msPerYear) + ' years ago';
+    }
+
 }

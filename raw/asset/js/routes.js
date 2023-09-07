@@ -261,7 +261,7 @@ window.routes = function(uri, options) {
 
                     var feed = document.getElementById('user-repositories');
                     var template = feed.nextElementSibling;
-                    var json = await github.user.repos();
+                    var json = await github.users.repos(sub);
                     console.log(291, {
                         json
                     })
@@ -272,6 +272,7 @@ window.routes = function(uri, options) {
                             var el = template.content.firstElementChild.cloneNode(true);
                             el.setAttribute('href', '/:get/' + row.name)
                             el.querySelector('text > span:first-child').textContent = row.name;
+                            el.querySelector('text > span:last-child').textContent = "Last pushed " + api.time.date(Date.parse(row.updated_at));
                             feed.insertAdjacentHTML('beforeend', el.outerHTML);
                             i++;
                         } while (i < json.length - 1);

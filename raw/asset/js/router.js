@@ -17,21 +17,30 @@ window.rout.er = (href,params)=>{
         var link = pathname;
         if (paths.length > 0) {
             var r = [];
-            paths.forEach((path,index)=>schema(path, index));
-            function schema(path, index) {
+            paths.forEach(function(path, index) {
                 var p = path;
                 if (p.startsWith(":")) {
                     var x = p.split(":")[1];
-                    if (x === "room") {
-                        p = window.location.pathname.split('/').splice(1)[i];
+                    if (x === "get") {
+                        var p = window.location.pathname.split("/").splice(1).filter(n=>n.length > 0);
+                        console.log(p);
+                    }
+                    if (x === "user") {
+                        var p = localStorage.user;
+                        console.log(p);
                     }
                 } else if (p.startsWith("*")) {
                     p = window.location.pathname.split('/').splice(1)[i];
                 }
                 r.push(p);
-            }
+                //return p;
+                console.log(link, r, p);
+            });
             link = "/" + r.join('/');
+            console.log(38, link, r);
         }
+        pathname = link;
+        paths = pathname.split("/").splice(1).filter(n=>n.length > 0);
 
         //DYNAMIC URL
         var loop = null;
@@ -58,13 +67,20 @@ window.rout.er = (href,params)=>{
                         var q = path[z] ? path[z] : null;
                         var d = p;
                         var e = null;
-                        //console.log(z, path, route.url);
                         if (z < path.length) {
+                            console.log(62, {
+                                z,
+                                p,
+                                q,
+                                path
+                            }, route.url);
                             if (q.startsWith(':')) {
                                 var b = p.split(':')[1];
                                 var c = '*';
+                                alert(b);
                                 if (b === "user") {
-                                    d = window.auth.user().localId;
+                                    d = localStorage.user;
+                                    alert(d);
                                 }
                                 bool.push(true);
                                 //console.log(69, paths[z], q, bool[bool.length - 1]);
@@ -187,6 +203,9 @@ window.rout.er = (href,params)=>{
                 }
             })
             link = '/' + shtap.join('/');
+            console.log({
+                shtap
+            });
         }
 
         //PAGE ROUTE
@@ -198,6 +217,7 @@ window.rout.er = (href,params)=>{
             loop,
             pool,
             component,
+            link,
             match: {
                 dynamic,
                 matched,
@@ -208,7 +228,7 @@ window.rout.er = (href,params)=>{
                 search
             }
         };
-        0 > 1 ? console.log(4, "browse.route", {
+        0 < 1 ? console.log(4, "browse.route", {
             uri,
             options,
             params

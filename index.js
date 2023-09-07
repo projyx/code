@@ -47,9 +47,11 @@ window.onload = async(event)=>{
                 var avatar_url = user.avatar_url;
                 Array.from(document.body.querySelectorAll(".avatar-image")).forEach(function(avatar) {
                     var img = document.createElement("img");
+                    img.setAttribute('href', '/:user');
                     img.src = avatar_url;
                     avatar.innerHTML = img.outerHTML;
                 });
+                localStorage.setItem("user", user.login);
             });
         } else {
             localStorage.removeItem('githubAccessToken');

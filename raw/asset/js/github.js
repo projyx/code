@@ -5,31 +5,44 @@ window.github = {
             "code.jyxer.tld": "627d321fca16fcbe8180",
         },
         login: (target)=>{
-            var provider = new firebase.auth.GithubAuthProvider();
-            provider.addScope('repo');
-            provider.setCustomParameters({
-                'redirect_uri': window.location.protocol + "//" + window.location.pathname
-            });
+            console.log(8, target);
+            if (target.closest('i').innerHTML === "") {
+                var provider = new firebase.auth.GithubAuthProvider();
+                provider.addScope('repo');
+                provider.setCustomParameters({
+                    'redirect_uri': window.location.protocol + "//" + window.location.pathname
+                });
 
-            firebase.auth().signInWithPopup(provider).then((result)=>{
-                var credential = result.credential;
-                var token = credential.accessToken;
-                var user = result.user;
-                console.log({
-                    result
-                });
-                localStorage.setItem('githubAccessToken', token);
+                firebase.auth().signInWithPopup(provider).then((result)=>{
+                    var credential = result.credential;
+                    var token = credential.accessToken;
+                    var user = result.user;
+                    console.log({
+                        result
+                    });
+                    localStorage.setItem('githubAccessToken', token);
+                }
+                ).catch((error)=>{
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    var email = error.email;
+                    var credential = error.credential;
+                    console.log({
+                        error
+                    });
+                }
+                );
             }
-            ).catch((error)=>{
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                var email = error.email;
-                var credential = error.credential;
-                console.log({
-                    error
-                });
+        }
+        ,
+        user: async(target)=>{
+            try {
+                var user = await github.users.user()
+            } catch (e) {
+                console.log(e);
             }
-            );
+            console.log(44, user)
+            return user
         }
     }
 };
