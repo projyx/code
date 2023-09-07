@@ -333,9 +333,9 @@ github.repos.contents = (owner,repo,path)=>{
 }
 
 github.user = {};
-github.user.repos = (username)=>{
+github.user.repos = ()=>{
     return new Promise(function(resolve, reject) {
-        const url = github.endpoint + "/user/" + username + "/repos";
+        const url = github.endpoint + "/user/repos";
         const a = data=>{
             resolve(data);
         }

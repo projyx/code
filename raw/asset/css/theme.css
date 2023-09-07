@@ -33,7 +33,7 @@
         box-sizing: border-box;
         position: relative;
         display: block;
-        transform: scale(var(--ggs,1));
+        transform: scale(var(--icons,1));
         width: 22px;
         height: 22px
     }
@@ -68,7 +68,7 @@
         box-sizing: border-box;
         position: relative;
         display: block;
-        transform: scale(var(--ggs,1));
+        transform: scale(var(--icons,1));
         width: 22px;
         height: 22px
     }
@@ -103,7 +103,7 @@
         box-sizing: border-box;
         position: relative;
         display: block;
-        transform: scale(var(--ggs,1));
+        transform: scale(var(--icons,1));
         width: 22px;
         height: 22px
     }
@@ -138,7 +138,7 @@
         box-sizing: border-box;
         position: relative;
         display: block;
-        transform: scale(var(--ggs,1));
+        transform: scale(var(--icons,1));
         width: 22px;
         height: 22px;
         border: 2px solid transparent;
@@ -161,11 +161,38 @@
 }
 
 @media {
+    .icon-chevron-right {
+        box-sizing: border-box;
+        position: relative;
+        display: block;
+        transform: scale(var(--icons,1));
+        width: 22px;
+        height: 22px;
+        border: 2px solid transparent;
+        border-radius: 100px
+    }
+
+    .icon-chevron-right::after {
+        content: "";
+        display: block;
+        box-sizing: border-box;
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-bottom: 2px solid;
+        border-right: 2px solid;
+        transform: rotate(-45deg);
+        right: 6px;
+        top: 4px
+    }
+}
+
+@media {
     .icon-code-slash {
         display: block;
         position: relative;
         box-sizing: border-box;
-        transform: rotate(15deg) scale(var(--ggs,0.8));
+        transform: rotate(15deg) scale(var(--icons,0.8));
         width: 2px;
         height: 16px;
         background: currentColor
@@ -201,7 +228,7 @@
         box-sizing: border-box;
         position: relative;
         display: block;
-        transform: scale(var(--ggs,1));
+        transform: scale(var(--icons,1));
         width: 10px;
         height: 2px;
         box-shadow: -3px 4px 0 0, 3px -4px 0 0
@@ -233,7 +260,7 @@
     .icon-eye {
         position: relative;
         display: block;
-        transform: scale(var(--ggs,1));
+        transform: scale(var(--icons,1));
         width: 24px;
         height: 18px;
         border-bottom-right-radius: 100px;
@@ -268,7 +295,7 @@
 
 @media {
     .icon-menu {
-        transform: scale(var(--ggs,1))
+        transform: scale(var(--icons,1))
     }
 
     .icon-menu, .icon-menu::after, .icon-menu::before {
@@ -297,7 +324,7 @@
         box-sizing: border-box;
         position: relative;
         display: block;
-        transform: scale(var(--ggs,0.75));
+        transform: scale(var(--icons,0.75));
         width: 16px;
         height: 16px;
         border: 2px solid;
@@ -326,7 +353,7 @@
         box-sizing: border-box;
         position: relative;
         display: block;
-        transform: scale(var(--ggs,1));
+        transform: scale(var(--icons,1));
         width: 16px;
         height: 6px;
         border: 2px solid;

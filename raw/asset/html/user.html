@@ -17,7 +17,7 @@
             <column>
                 <box class="photo-user">
                     <column>
-                        <text placeholder="Firstname Lastname"></text>
+                        <text>Firstname Lastname</text>
                         <text placeholder="@username"></text>
                     </column>
                 </box>
@@ -51,23 +51,21 @@
 <block class="block-source">
     <column>
         <card class="source-code">
-            <column id="user-repositories">
+            <column id="user-repositories"></column>
+            <template>
                 <box class="code-repository">
                     <row>
-                        <text>Name</text>
+                        <picture></picture>
+                        <text>
+                            <span>Name</span>
+                            <span>Last pushed on Jan 1, 1970</span>
+                        </text>
+                        <i>
+                            <con class="icon-chevron-right"></con>
+                        </i>
                     </row>
                 </box>
-                <box>
-                    <row>
-                        <text>Name</text>
-                    </row>
-                </box>
-                <box>
-                    <row>
-                        <text>Name</text>
-                    </row>
-                </box>
-            </column>
+            </template>
         </card>
     </column>
 </block>

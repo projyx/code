@@ -10,11 +10,14 @@
 
 @media {
     .component-user .header-user {
-        background: #111;
-        /* border-bottom: 1px solid #555; */
-        /* box-sizing: border-box; */
+        background: #292a2d;
+        border-bottom: 1px solid #555;
+        box-sizing: border-box;
         height: 50px;
         padding: 0 10px;
+        position: fixed;
+        width: 100%;
+        z-index: 12345;
     }
     .component-user .header-user > row {
         align-items: center;
@@ -35,6 +38,11 @@
         overflow: hidden;
         width: 30px;
     }
+    
+    .component-user .header-user .user-authenticate .authenticate-avatar i:empty {
+        border: 1px solid #555;
+        box-sizing: border-box;
+    }
 
     .component-user .header-user .user-authenticate .authenticate-avatar i img {
         height: 100%;
@@ -44,7 +52,7 @@
 
 @media {
     .component-user .block-cover {
-        background-color: #222;
+        /* background-color: #222; */
         position: relative;
     }
 
@@ -55,7 +63,7 @@
     }
 
     .component-user .block-cover .cover-photo {
-        padding-top: 120px;
+        padding-top: 170px;
     }
 
     .component-user .block-cover .cover-photo > column {
@@ -73,17 +81,24 @@
     }
 
     .component-user .block-cover .cover-photo .photo-user text:nth-child(2) {
+        color: #ccc;
         font-size: 16px;
     }
 
     .component-user .block-cover .cover-photo .photo-avatar picture {
-        background-color: #111;
+        background-color: #292a2d;
+        border: 1px solid #555;
         border-radius: 50%;
+        box-sizing: border-box;
         height: 120px;
         width: 120px;
     }
 
     .component-user .block-cover > footer {
+        /* background: #292a2d; */
+        border-bottom: 1px solid #555;
+        border-top: 1px solid #555;
+        box-sizing: border-box;
         bottom: 0;
         position: absolute;
         width: 100%;
@@ -91,7 +106,6 @@
     
     .component-user .block-cover .cover-stats .stats-follow {
         align-items: center;
-        background-color: black;
         display: flex;
         height: 50px;
         justify-content: end;
@@ -109,12 +123,14 @@
 
 @media {
     .component-user .block-source .source-code {
-        background-color: #222;
+        /* background-color: #222; */
         position: relative;
     }
     
-    .component-user .block-source .source-code > column > box:nth-child(odd) {
-        background-color: #292a2d;
+    .component-user .block-source .source-code > column > box {
+        /* background-color: #292a2d; */
+        border-bottom: 1px solid #555;
+        box-sizing: border-box;
     }
     
     .component-user .block-source .source-code > column > box > row {
@@ -125,8 +141,10 @@
     }
     
     .component-user .block-source .source-code > column > box > row > picture {
-        background-color: black;
+        /* background-color: black; */
+        border: 1px solid #555;
         border-radius: 15%;
+        box-sizing: border-box;
         height: 64px;
         width: 64px;
     }

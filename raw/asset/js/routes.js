@@ -286,6 +286,23 @@ window.routes = function(uri, options) {
                     }
                 } else {
                     console.log("routes.view user");
+
+                    var feed = document.getElementById('user-repositories');
+                    var template = feed.nextElementSibling;
+                    var json = await github.user.repos();
+                    console.log(291, {
+                        json
+                    })
+                    if (json.length > 0) {
+                        var i = 0;
+                        do {
+                            var row = json[i];
+                            var el = template.content.firstElementChild.cloneNode(true);
+                            el.querySelector('text > span:first-child').textContent = row.name;
+                            feed.insertAdjacentHTML('beforeend', el.outerHTML);
+                            i++;
+                        } while (i < json.length - 1);
+                    }
                 }
             }
         } else {
