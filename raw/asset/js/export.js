@@ -1,7 +1,7 @@
 function request(resource, options) {
     return new Promise(async function(resolve, reject) {
         await fetch(resource, options).then(async(response)=>{
-            console.log(4, response);
+            //console.log(4, response);
             if (!response.ok) {
                 return response.text().then(text=>{
                     var text = JSON.stringify({
@@ -169,7 +169,7 @@ async function pvw(e) {
         var i = 0;
         do {
             var link = styles[i];
-            console.log(172, i, link, styles);
+            //console.log(172, i, link, styles);
             if (!link.href.includes("/index.css")) {
                 var uri = new URL(link.href);
                 var path = uri.pathname;
@@ -277,7 +277,7 @@ async function pvw(e) {
 
   `;
 
-    0 < 1 ? console.log(211, dom.iframe.code, dom.iframe.code.head, {
+    0 > 1 ? console.log(211, dom.iframe.code, dom.iframe.code.head, {
         html,
         src,
         head,

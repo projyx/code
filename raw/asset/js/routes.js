@@ -19,7 +19,10 @@ window.routes = function(uri, options) {
             } else {
                 if (paths.length > 1) {
                     if (paths.length > 2) {
-                        if (paths[2] === "blob") {
+                        if (paths[2] === "code") {
+                            console.log(23, 'routes.view code', uri);
+                        }
+                        else if (paths[2] === "edit") {
                             var file = paths[paths.length - 1];
                             if (file) {
                                 console.log(37, 'routes.view editor');
@@ -68,13 +71,13 @@ window.routes = function(uri, options) {
                                 var path = uri.split('/').filter(o=>o.length > 0).splice(4);
                                 path.pop();
                                 path = path.join('/');
-                                console.log(143, path, file);
+                                //console.log(143, path, file);
 
                                 var parent = window.parent;
                                 var name = window.parent.location.pathname;
-                                console.log(229, [parent]);
+                                //console.log(229, [parent]);
                                 var pathed = name.split("/").filter(o=>o.length > 1);
-                                console.log(231, [parent, paths]);
+                                //console.log(231, [parent, paths]);
                                 var owner = pathed[0];
                                 var repo = pathed[1];
                                 var path = paths.splice(4, paths.length - 1);
@@ -93,7 +96,7 @@ window.routes = function(uri, options) {
                                         var pn = url.pathname.split("/").filter(o=>o.length > 1);
                                         //var resource = pn.splice(4, pn.length - 1).join("/");
                                         var resource = path + "/" + file.split('.')[0] + "." + ext;
-                                        console.log(93, path, resource);
+                                        //console.log(93, path, resource);
 
                                         var json = await github.repos.contents(owner, repo, resource);
                                         var content = atob(json.content);
@@ -111,8 +114,10 @@ window.routes = function(uri, options) {
                                             owner,
                                             repo,
                                             resource
+                                        }, {
+                                            doc,
+                                            ext
                                         });
-                                        console.log(149, doc, ext);
 
                                         if (ext === "html") {
 
@@ -134,13 +139,8 @@ window.routes = function(uri, options) {
 
                                             });
 
-                                            cm[ext].on("change", pvw);
-                                            //cm[ext].setValue(content);
-
-                                            var links = doc.head.querySelectorAll('link');
-                                            var parsed = doc.head.outerHTML + doc.body.outerHTML;
-                                            console.log(229, doc.head, content);
                                             cm[ext].setValue(content);
+                                            cm[ext].on("change", pvw);
                                             document.getElementById('code-frame')[ext] = content;
                                         }
 
@@ -162,10 +162,10 @@ window.routes = function(uri, options) {
 
                                             });
 
-                                            console.log(292, content);
+                                            //console.log(292, content);
 
-                                            cm[ext].on("change", pvw);
                                             cm[ext].setValue(content);
+                                            cm[ext].on("change", pvw);
                                             document.getElementById('code-frame')[ext] = content;
                                         }
 
@@ -186,9 +186,11 @@ window.routes = function(uri, options) {
 
                                             });
 
-                                            cm[ext].on("change", pvw);
                                             cm[ext].setValue(content);
+                                            cm[ext].on("change", pvw);
                                         }
+
+                                        pvw();
                                     } catch (e) {
                                         console.log(e ? e : null);
                                     }
@@ -196,93 +198,63 @@ window.routes = function(uri, options) {
                                 );
 
                             } else {
-                                status = 400;
+                                status = 404;
                                 e = {
                                     code: status,
                                     message: "This page does not exist"
                                 }
                             }
                         } else if (paths[2] === "tree") {
-                            component.querySelector('.explorer-section').innerHTML = "";
-                            var path = uri.split('/').filter(o=>o.length > 0).splice(4).join('/');
-                            console.log("routes.view repository", {
-                                path
-                            });
-                            var contents = await github.repos.contents(sub, paths[1], path);
-                            var explorer = component.querySelector('.explorer-section');
-                            explorer.innerHTML = "";
-                            var html = await request("/raw/asset/html/explorer.repo.html");
-                            explorer.innerHTML = html;
-                            var feed = explorer.querySelector('.section-repositories > section');
-                            var template = feed.nextElementSibling.content.firstElementChild;
-                            function compare(a, b) {
-                                return a.type.localeCompare(b.type) || b.name - a.name;
-                            }
-                            contents.sort(compare).forEach((content,index)=>{
-                                var el = template.cloneNode(true);
-                                var icon = null;
-                                var href = null;
-                                if (content.type === "file") {
-                                    href = '/' + sub + '/' + paths[1] + '/blob/main/' + path + '/' + content.name;
-                                    icon = "/raw/asset/png/file-repository.png";
-                                } else if (content.type === "dir") {
-                                    href = '/' + sub + '/' + paths[1] + '/tree/main/' + path + '/' + content.name;
-                                    icon = "/raw/asset/png/folder-repository.png";
-                                }
-                                console.log({
-                                    href,
-                                    icon,
-                                    content
+                            if (0 > 1) {
+                                component.querySelector('.explorer-section').innerHTML = "";
+                                var path = uri.split('/').filter(o=>o.length > 0).splice(4).join('/');
+                                console.log("routes.view repository", {
+                                    path
                                 });
-                                href ? el.setAttribute('href', href) : null;
-                                icon ? el.querySelector('.folder-image img').src = icon : null;
-                                el.querySelector('.folder-name').textContent = content.name;
-                                feed.insertAdjacentHTML('beforeend', el.outerHTML)
+                                var contents = await github.repos.contents(sub, paths[1], path);
+                                var explorer = component.querySelector('.explorer-section');
+                                explorer.innerHTML = "";
+                                var html = await request("/raw/asset/html/explorer.repo.html");
+                                explorer.innerHTML = html;
+                                var feed = explorer.querySelector('.section-repositories > section');
+                                var template = feed.nextElementSibling.content.firstElementChild;
+                                function compare(a, b) {
+                                    return a.type.localeCompare(b.type) || b.name - a.name;
+                                }
+                                contents.sort(compare).forEach((content,index)=>{
+                                    var el = template.cloneNode(true);
+                                    var icon = null;
+                                    var href = null;
+                                    if (content.type === "file") {
+                                        href = '/' + sub + '/' + paths[1] + '/blob/main/' + path + '/' + content.name;
+                                        icon = "/raw/asset/png/file-repository.png";
+                                    } else if (content.type === "dir") {
+                                        href = '/' + sub + '/' + paths[1] + '/tree/main/' + path + '/' + content.name;
+                                        icon = "/raw/asset/png/folder-repository.png";
+                                    }
+                                    console.log({
+                                        href,
+                                        icon,
+                                        content
+                                    });
+                                    href ? el.setAttribute('href', href) : null;
+                                    icon ? el.querySelector('.folder-image img').src = icon : null;
+                                    el.querySelector('.folder-name').textContent = content.name;
+                                    feed.insertAdjacentHTML('beforeend', el.outerHTML)
+                                }
+                                );
+                                console.log('users.repos', repos);
                             }
-                            );
-                            console.log('users.repos', repos);
                         } else {
                             status = 400;
                             e = {
                                 code: status,
                                 message: "This page does not exist"
                             }
+                            alert(e.code)
                         }
                     } else {
                         console.log("routes.view repository");
-                        component.querySelector('.explorer-section').innerHTML = "";
-                        var path = uri.split('/').splice(3).join('/');
-                        console.log(82, path, uri.split('/').splice(3));
-                        var contents = await github.repos.contents(sub, paths[1], path);
-                        var explorer = component.querySelector('.explorer-section');
-                        explorer.innerHTML = "";
-                        var html = await request("/raw/asset/html/explorer.repo.html");
-                        explorer.innerHTML = html;
-                        var feed = explorer.querySelector('.section-repositories > section');
-                        var template = feed.nextElementSibling.content.firstElementChild;
-                        function compare(a, b) {
-                            return a.type.localeCompare(b.type) || b.name - a.name;
-                        }
-                        contents.sort(compare).forEach((content)=>{
-                            console.log(84, path, content.name, '/' + sub + '/' + paths[1] + '/blob/main/' + path);
-                            var el = template.cloneNode(true);
-                            var icon = null;
-                            var href = null;
-                            if (content.type === "file") {
-                                href = '/' + sub + '/' + paths[1] + '/blob/main/' + path + content.name;
-                                icon = "/raw/asset/png/file-repository.png";
-                            } else if (content.type === "dir") {
-                                href = '/' + sub + '/' + paths[1] + '/tree/main/' + path + content.name;
-                                icon = "/raw/asset/png/folder-repository.png";
-                            }
-                            el.setAttribute('href', href);
-                            icon ? el.querySelector('.folder-image img').src = icon : null;
-                            el.querySelector('.folder-name').textContent = content.name;
-                            feed.insertAdjacentHTML('beforeend', el.outerHTML)
-                        }
-                        );
-                        console.log('users.repos', repos);
-
                     }
                 } else {
                     console.log("routes.view user");
@@ -298,6 +270,7 @@ window.routes = function(uri, options) {
                         do {
                             var row = json[i];
                             var el = template.content.firstElementChild.cloneNode(true);
+                            el.setAttribute('href', '/:get/' + row.name)
                             el.querySelector('text > span:first-child').textContent = row.name;
                             feed.insertAdjacentHTML('beforeend', el.outerHTML);
                             i++;
@@ -306,14 +279,8 @@ window.routes = function(uri, options) {
                 }
             }
         } else {
-            var explorer = component.querySelector('.explorer-section');
-            explorer.innerHTML = "";
-            var html = await request("/raw/asset/html/explorer.home.html");
-            explorer.innerHTML = html;
-
-            console.log(135, 'routes.view profile', '/*', uri);
+            console.log(135, 'routes.view home', '/', uri);
         }
-
         status === 200 ? resolve(uri) : reject(e);
     }
 }

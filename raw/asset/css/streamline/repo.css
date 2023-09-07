@@ -1,0 +1,51 @@
+@media {
+    .component-repo {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+@media {
+    .component-repo .header-user {
+        background: #292a2d;
+        border-bottom: 1px solid #555;
+        box-sizing: border-box;
+        height: 50px;
+        padding: 0 10px;
+        position: fixed;
+        width: 100%;
+        z-index: 12345;
+    }
+    .component-repo .header-user > row {
+        align-items: center;
+        display: flex;
+        flex: 1;
+        height: 100%;
+    }
+    
+    .component-repo .header-user .user-authenticate {
+        height: 30px;
+        margin-left: auto;
+        width: 30px;
+    }
+    
+    .component-repo .header-user .user-authenticate .authenticate-avatar i {
+        border-radius: 50%;
+        height: 30px;
+        overflow: hidden;
+        width: 30px;
+    }
+    
+    .component-repo .header-user .user-authenticate .authenticate-avatar i:empty {
+        border: 1px solid #555;
+        box-sizing: border-box;
+    }
+
+    .component-repo .header-user .user-authenticate .authenticate-avatar i img {
+        height: 100%;
+        width: 100%;
+    }
+}

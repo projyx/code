@@ -45,7 +45,7 @@ window.rout.er = (href,params)=>{
             var route = window.rout.es.every(function(route, index) {
                 //console.log('manifest.route', {dynamic, url: route.url});
                 var path = route.url.split('/').filter(o=>o.length > 0);
-                console.log(41, route.url, path, paths);
+                //console.log(41, route.url, path, paths);
                 shtap = [];
                 bool = [];
                 loob = [];
@@ -58,7 +58,7 @@ window.rout.er = (href,params)=>{
                         var q = path[z] ? path[z] : null;
                         var d = p;
                         var e = null;
-                        console.log(z, path, route.url);
+                        //console.log(z, path, route.url);
                         if (z < path.length) {
                             if (q.startsWith(':')) {
                                 var b = p.split(':')[1];
@@ -67,15 +67,15 @@ window.rout.er = (href,params)=>{
                                     d = window.auth.user().localId;
                                 }
                                 bool.push(true);
-                                console.log(69, paths[z], q, bool[bool.length - 1]);
+                                //console.log(69, paths[z], q, bool[bool.length - 1]);
                             } else if (a.startsWith('*')) {
                                 var c = '*';
                                 bool.push(true);
-                                console.log(73, paths[z], q, bool[bool.length - 1]);
+                                //console.log(73, paths[z], q, bool[bool.length - 1]);
                             } else {
                                 c = a;
                                 bool.push((paths[z] === q) || (q === "*"));
-                                console.log(77, paths[z], q, bool[bool.length - 1]);
+                                //console.log(77, paths[z], q, bool[bool.length - 1]);
                             }
                             e = q === "*" ? q : d;
                             loob.push(c);
@@ -84,7 +84,7 @@ window.rout.er = (href,params)=>{
                             var h = '/' + pool.join('/') + (z > 0 ? '/' : '') + e;
                             var ifit = window.rout.es.some(e=>e.url.startsWith(h))
                             if (q === "*") {
-                                0 < 1 ? console.log(82, {
+                                0 > 1 ? console.log(82, {
                                     z,
                                     h,
                                     q,
@@ -100,7 +100,7 @@ window.rout.er = (href,params)=>{
 
                                 ifit ? pool.push(q) : null
                             } else {
-                                0 < 1 ? console.log(98, {
+                                0 > 1 ? console.log(98, {
                                     z,
                                     h,
                                     q,
@@ -125,7 +125,7 @@ window.rout.er = (href,params)=>{
                             path[z] ? pool.push(p) : null;
                             bool.push((paths[z] === a && q !== "*"));
 
-                            0 < 1 ? console.log(125, {
+                            0 > 1 ? console.log(125, {
                                 route,
                                 z,
                                 h,
@@ -141,7 +141,7 @@ window.rout.er = (href,params)=>{
                             }) : null;
 
                         }
-                        0 < 1 ? console.log(66, route.url, {
+                        0 > 1 ? console.log(66, route.url, {
                             paths,
                             shtap,
                             a,
@@ -160,7 +160,7 @@ window.rout.er = (href,params)=>{
                 }
                 var booled = bool.length > 0 && bool.every(Boolean);
                 var rooted = booled && ('/' + loop.join('/').startsWith(route.url));
-                0 < 1 ? console.log(68, {
+                0 > 1 ? console.log(68, {
                     bool,
                     booled,
                     rooted,
@@ -192,7 +192,7 @@ window.rout.er = (href,params)=>{
         //PAGE ROUTE
         var uri = link + (search ? "?" + search : "");
         var route = window.rout.es.filter(o=>o.url === matched)[0];
-        console.log(145, route, matched, pool);
+        //console.log(145, route, matched, pool);
         var component = document.querySelector('[component="' + route.file.split('.')[0] + '"]');
         var options = {
             loop,
@@ -208,11 +208,11 @@ window.rout.er = (href,params)=>{
                 search
             }
         };
-        console.log(4, "browse.route", {
+        0 > 1 ? console.log(4, "browse.route", {
             uri,
             options,
             params
-        });
+        }) : null;
         document.querySelectorAll('.component').forEach(c=>c.classList.remove('active'));
         var html = await request('/raw/asset/html/' + route.file);
         component.innerHTML.length === 0 ? component.innerHTML = html : null;
@@ -220,7 +220,7 @@ window.rout.er = (href,params)=>{
             uri = await window.routes(uri, options);
             component.classList.add('active');
         } catch (e) {
-            console.log(e);
+            console.log(route.file, e);
             alert(e.message);
         }
 
