@@ -34,8 +34,9 @@
     
     [component="wide"] .dev-tools > header {
         border-bottom: 1px solid #555;
-        height: 30px;
-        line-height: 30px;
+        color: #999;
+        font-size: 13px;
+        line-height: 23px;
         width: 100%;
     }
 
@@ -46,6 +47,31 @@
     [component="wide"] .dev-tools .tab-sources {
         display: flex;
         height: 100%;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-files {
+        color: #999;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-files > column > text {
+        align-items: center;
+        display: flex;
+        font-size: 12px;
+        gap: 5px;
+        padding: 0px 10px;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-files > column > text i {
+        height: 24px;
+        width: 24px;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-files > column > text .icon-folder {
+        --ggs: calc(2/3);
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-files > column > text .icon-file {
+        --ggs: calc(2/3);
     }
     
     [component="wide"] .dev-tools .tab-sources > aside {
@@ -60,21 +86,41 @@
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-files > header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-files > header > text:nth-child(1) {
         align-items: center;
         border-bottom: 1px solid #555;
         color: aliceblue;
         display: flex;
+        font-size: 13px;
         justify-content: space-between;
-        line-height: 30px;
+        line-height: 23px;
         padding: 0 10px;
     }
 
-    [component="wide"] .dev-tools .tab-sources .sources-files > header > text:last-child {
-        border: 1px solid;
+    [component="wide"] .dev-tools .tab-sources .sources-files > header > text:nth-child(2) {
+        align-items: center;
+        border-bottom: 1px solid #555;
+        color: #999;
+        display: flex;
+        gap: 5px;
+        font-size: 11px;
+        line-height: 24px;
+        padding: 0 10px;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-files > header > text:nth-child(2) > i {
+        --ggs: 0.75;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-files > header > text:first-child > span:last-child {
+        border: 1px solid #555;
         border-radius: 50px;
         color: #aaa;
-        height: 20px;
-        line-height: 20px;
+        line-height: 16px;
         padding: 0 10px;
     }
 
@@ -86,6 +132,7 @@
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-panel text {
+        color: #999;
         display: flex;
         font-size: 13px;
         gap: 5px;
@@ -100,7 +147,7 @@
         border-bottom: 1px solid #555;
         display: flex;
         gap: 20px;
-        height: 30px;
+        height: 23px;
         padding: 0 10px;
     }
 
@@ -117,6 +164,7 @@
     }
     
     [component="wide"] .dev-tools .tools-tabs box:hover {
-        background: #444
+        background: #444;
+        color: #fff;
     }
 }
