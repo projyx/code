@@ -6,7 +6,7 @@ window.github = {
         },
         login: (target)=>{
             console.log(8, target);
-            if (target.closest('i').innerHTML === "") {
+            if (target.closest('avi').innerHTML === "") {
                 var provider = new firebase.auth.GithubAuthProvider();
                 provider.addScope('repo');
                 provider.setCustomParameters({
@@ -344,6 +344,27 @@ github.repos.contents = (owner,repo,path)=>{
     }
     );
 }
+github.repos.repo = (owner,repo)=>{
+    return new Promise(function(resolve, reject) {
+        const url = github.endpoint + "/repos/" + owner + "/" + repo;
+        const a = data=>{
+            resolve(data);
+        }
+        const b = (error)=>{
+            console.log(error);
+            reject(error);
+        }
+        const accessToken = localStorage.githubAccessToken;
+        const settings = accessToken ? {
+            headers: {
+                Accept: "application/vnd.github+json",
+                Authorization: "token " + accessToken
+            }
+        } : null;
+        request(url, settings).then(a).catch(b);
+    }
+    );
+}
 
 github.user = {};
 github.user.repos = ()=>{
@@ -367,8 +388,71 @@ github.user.repos = ()=>{
     }
     );
 }
+github.user.repos = ()=>{
+    return new Promise(function(resolve, reject) {
+        const url = github.endpoint + "/user/repos";
+        const a = data=>{
+            resolve(data);
+        }
+        const b = (error)=>{
+            console.log(error);
+            reject(error);
+        }
+        const accessToken = localStorage.githubAccessToken;
+        const settings = accessToken ? {
+            headers: {
+                Accept: "application/vnd.github+json",
+                Authorization: "token " + accessToken
+            }
+        } : null;
+        request(url, settings).then(a).catch(b);
+    }
+    );
+}
+github.user.self = function(username) {
+    return new Promise((resolve,reject)=>{
+        const url = github.endpoint + "/user";
+        const a = data=>{
+            resolve(data);
+        }
+        const b = (error)=>{
+            console.log(error);
+            reject(error);
+        }
+        const accessToken = localStorage.githubAccessToken;
+        const settings = accessToken ? {
+            headers: {
+                Accept: "application/vnd.github+json",
+                Authorization: "token " + accessToken
+            }
+        } : null;
+        request(url, settings).then(a).catch(b);
+    }
+    );
+}
 
 github.users = {};
+github.users.events = (username)=>{
+    return new Promise(function(resolve, reject) {
+        const url = github.endpoint + "/users/" + username + "/events";
+        const a = data=>{
+            resolve(data);
+        }
+        const b = (error)=>{
+            console.log(error);
+            reject(error);
+        }
+        const accessToken = localStorage.githubAccessToken;
+        const settings = accessToken ? {
+            headers: {
+                Accept: "application/vnd.github+json",
+                Authorization: "token " + accessToken
+            }
+        } : null;
+        request(url, settings).then(a).catch(b);
+    }
+    );
+}
 github.users.repos = (username)=>{
     return new Promise(function(resolve, reject) {
         const url = github.endpoint + "/users/" + username + "/repos";
@@ -392,7 +476,7 @@ github.users.repos = (username)=>{
 }
 github.users.user = function(username) {
     return new Promise((resolve,reject)=>{
-        const url = github.endpoint + "/user";
+        const url = github.endpoint + "/users/" + username;
         const a = data=>{
             resolve(data);
         }

@@ -82,5 +82,36 @@ api.time.date = (previous)=>{
     } else {
         return 'approximately ' + Math.round(elapsed / msPerYear) + ' years ago';
     }
+}
 
+window.api.tree = {};
+window.api.tree.edit = function(target) {
+    var box = target.closest('box');
+    var link = box.querySelector('text span');
+    var filename = link.textContent;
+    var parts = filename.split('.');
+    var ext = parts[parts.length - 1];
+    //console.log(90, filename, ext);
+
+    if (box.querySelector('.icon-file')) {
+        if (["index.css", "index.html", "index.js"].includes(filename)) {
+            var href = link.getAttribute('href');
+            var dirs = href.split('/').filter(o=>o.length > 0);
+            dirs[2] = 'edit';
+            console.log(97, href, dirs);
+            rout.er("/" + dirs.join("/"))
+        }
+
+        if (["jpg", "jpeg", "png", "svg"].includes(ext)) {
+            console.log("Cannot edit images...");
+        }
+    }
+
+    if (box.querySelector('.icon-folder')) {
+            var href = link.getAttribute('href');
+            var dirs = href.split('/').filter(o=>o.length > 0);
+            dirs[2] = 'wide';
+            console.log(97, href, dirs);
+            rout.er("/" + dirs.join("/"));
+    }
 }

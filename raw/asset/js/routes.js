@@ -21,8 +21,7 @@ window.routes = function(uri, options) {
                     if (paths.length > 2) {
                         if (paths[2] === "code") {
                             console.log(23, 'routes.view code', uri);
-                        }
-                        else if (paths[2] === "edit") {
+                        } else if (paths[2] === "edit") {
                             var file = paths[paths.length - 1];
                             if (file) {
                                 console.log(37, 'routes.view editor');
@@ -122,21 +121,13 @@ window.routes = function(uri, options) {
                                         if (ext === "html") {
 
                                             cm[ext] = CodeMirror(component.querySelector('#code-html'), {
-
                                                 lineNumbers: true,
-
                                                 lineWrapping: true,
-
                                                 htmlMode: true,
-
                                                 mode: 'xml',
-
                                                 styleActiveLine: true,
-
                                                 theme: 'abcdef',
-
                                                 matchBrackets: true
-
                                             });
 
                                             cm[ext].setValue(content);
@@ -147,19 +138,12 @@ window.routes = function(uri, options) {
                                         if (ext === "css") {
 
                                             cm[ext] = CodeMirror(component.querySelector('#code-css'), {
-
                                                 lineNumbers: true,
-
                                                 lineWrapping: true,
-
                                                 mode: 'css',
-
                                                 styleActiveLine: true,
-
                                                 theme: 'abcdef',
-
                                                 matchBrackets: true
-
                                             });
 
                                             //console.log(292, content);
@@ -205,66 +189,151 @@ window.routes = function(uri, options) {
                                 }
                             }
                         } else if (paths[2] === "tree") {
-                            if (0 > 1) {
-                                component.querySelector('.explorer-section').innerHTML = "";
-                                var path = uri.split('/').filter(o=>o.length > 0).splice(4).join('/');
-                                console.log("routes.view repository", {
+                            if (0 < 1) {
+                                console.log("routes.view tree");
+
+                                var json = await github.repos.repo(paths[0], paths[1]);
+                                0 > 1 ? console.log(258, {
+                                    json
+                                }) : null;
+                                var img = document.createElement('img');
+                                img.src = json.owner.avatar_url;
+                                component.querySelector('avi').innerHTML = img.outerHTML;
+                                component.querySelector('[placeholder="owner"]').setAttribute("href", '/' + json.owner.login);
+                                component.querySelector('[placeholder="owner"]').textContent = json.owner.login;
+                                component.querySelector('[placeholder="repo"]').setAttribute("href", '/' + json.owner.login + "/" + paths[1]);
+                                component.querySelector('[placeholder="repo"]').textContent = json.name;
+                                component.querySelector('.info-repo button').textContent = json.private ? 'Private' : 'Public';
+
+                                var href = uri.split("/").splice(1).filter(n=>n.length > 0);
+                                var path = href.splice(4, href.length - 1)
+                                0 > 1 ? console.log(245, {
+                                    href,
+                                    path
+                                }) : null;
+                                var json = await github.repos.contents(paths[0], paths[1], path.join('/'));
+                                console.log(258, {
+                                    json,
                                     path
                                 });
-                                var contents = await github.repos.contents(sub, paths[1], path);
-                                var explorer = component.querySelector('.explorer-section');
-                                explorer.innerHTML = "";
-                                var html = await request("/raw/asset/html/explorer.repo.html");
-                                explorer.innerHTML = html;
-                                var feed = explorer.querySelector('.section-repositories > section');
-                                var template = feed.nextElementSibling.content.firstElementChild;
-                                function compare(a, b) {
-                                    return a.type.localeCompare(b.type) || b.name - a.name;
-                                }
-                                contents.sort(compare).forEach((content,index)=>{
-                                    var el = template.cloneNode(true);
-                                    var icon = null;
-                                    var href = null;
-                                    if (content.type === "file") {
-                                        href = '/' + sub + '/' + paths[1] + '/blob/main/' + path + '/' + content.name;
-                                        icon = "/raw/asset/png/file-repository.png";
-                                    } else if (content.type === "dir") {
-                                        href = '/' + sub + '/' + paths[1] + '/tree/main/' + path + '/' + content.name;
-                                        icon = "/raw/asset/png/folder-repository.png";
+                                json.sort((i,o)=>i.type.localeCompare(o.type));
+                                var feed = component.querySelector("#code-base");
+                                var template = feed.nextElementSibling;
+                                feed.innerHTML = "";
+                                if (json.length > 0) {
+                                    var urx = uri.split('/').splice(1);
+                                    if (urx.length > 4) {
+                                        var ls = template.content.children[0].cloneNode(true);
+                                        var dirs = urx.length > 2 && urx.length < 5 ? [urx[0], urx[1]] : urx.splice(0, urx.length - 1);
+                                        console.log(261, dirs, urx);
+                                        ls.setAttribute('href', "/" + dirs.join('/'));
+                                        feed.insertAdjacentHTML('beforeend', ls.outerHTML);
                                     }
-                                    console.log({
-                                        href,
-                                        icon,
-                                        content
-                                    });
-                                    href ? el.setAttribute('href', href) : null;
-                                    icon ? el.querySelector('.folder-image img').src = icon : null;
-                                    el.querySelector('.folder-name').textContent = content.name;
-                                    feed.insertAdjacentHTML('beforeend', el.outerHTML)
+
+                                    var i = 0;
+                                    do {
+                                        var row = json[i];
+                                        //console.log(266, row.type);
+                                        if (row.type === "dir") {
+                                            var folder = template.content.children[1].cloneNode(true);
+                                            var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["tree", "main", row.name]);
+                                            folder.querySelector('[placeholder="Folder"]').setAttribute('href', "/" + dirs.join('/'));
+                                            folder.querySelector('[placeholder="Folder"]').textContent = row.name;
+                                            feed.insertAdjacentHTML('beforeend', folder.outerHTML);
+                                        }
+                                        if (row.type === "file") {
+                                            var file = template.content.children[2].cloneNode(true);
+                                            var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["tree", "main", row.name]);
+                                            file.querySelector('[placeholder="File"]').setAttribute('href', "/" + dirs.join('/'));
+                                            file.querySelector('[placeholder="File"]').textContent = row.name;
+                                            feed.insertAdjacentHTML('beforeend', file.outerHTML);
+                                        }
+                                        i++;
+                                    } while (i < json.length - 1)
                                 }
-                                );
-                                console.log('users.repos', repos);
                             }
+                        } else if (paths[2] === "wide") {
+                            console.log("wide");
                         } else {
                             status = 400;
                             e = {
                                 code: status,
                                 message: "This page does not exist"
                             }
-                            alert(e.code)
                         }
                     } else {
                         console.log("routes.view repository");
+
+                        var json = await github.repos.repo(paths[0], paths[1]);
+                        console.log(258, {
+                            json
+                        });
+                        var img = document.createElement('img');
+                        img.src = json.owner.avatar_url;
+                        component.querySelector('avi').innerHTML = img.outerHTML;
+                        component.querySelector('[placeholder="owner"]').setAttribute("href", '/' + json.owner.login);
+                        component.querySelector('[placeholder="owner"]').textContent = json.owner.login;
+                        component.querySelector('[placeholder="repo"]').setAttribute("href", '/' + json.owner.login + "/" + paths[1]);
+                        component.querySelector('[placeholder="repo"]').textContent = json.name;
+                        component.querySelector('.info-repo button').textContent = json.private ? 'Private' : 'Public';
+
+                        var href = uri.split("/").splice(1).filter(n=>n.length > 0);
+                        var path = href.splice(4, href.length - 1)
+                        var json = await github.repos.contents(paths[0], paths[1], path.join('/'));
+                        console.log(258, {
+                            json,
+                            path
+                        });
+                        json.sort((i,o)=>i.type.localeCompare(o.type));
+
+                        var feed = component.querySelector("#code-base");
+                        var template = feed.nextElementSibling;
+                        feed.innerHTML = "";
+                        if (json.length > 0) {
+                            var i = 0;
+                            do {
+                                var row = json[i];
+                                console.log(266, row.type);
+                                if (row.type === "dir") {
+                                    var folder = template.content.children[1].cloneNode(true);
+                                    var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["tree", "main", row.name]);
+                                    folder.querySelector('[placeholder="Folder"]').setAttribute('href', "/" + dirs.join('/'));
+                                    folder.querySelector('[placeholder="Folder"]').textContent = row.name;
+                                    feed.insertAdjacentHTML('beforeend', folder.outerHTML);
+                                }
+                                if (row.type === "file") {
+                                    var file = template.content.children[2].cloneNode(true);
+                                    var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["tree", "main", row.name]);
+                                    file.querySelector('[placeholder="File"]').setAttribute('href', "/" + dirs.join('/'));
+                                    file.querySelector('[placeholder="File"]').textContent = row.name;
+                                    feed.insertAdjacentHTML('beforeend', file.outerHTML);
+                                }
+                                i++;
+                            } while (i < json.length - 1)
+                        }
                     }
                 } else {
                     console.log("routes.view user");
 
-                    var feed = document.getElementById('user-repositories');
-                    var template = feed.nextElementSibling;
+                    var json = await github.users.user(sub);
+                    console.log(286, {
+                        json
+                    })
+
+                    component.querySelector('[placeholder="Firstname Lastname"]').textContent = json.name;
+                    component.querySelector('[placeholder="@username"]').textContent = '@' + json.login;
+
+                    var img = document.createElement('img');
+                    img.src = json.avatar_url;
+                    component.querySelector('.photo-avatar picture').innerHTML = img.outerHTML;
+
                     var json = await github.users.repos(sub);
                     console.log(291, {
                         json
                     })
+                    var feed = document.getElementById('user-repositories');
+                    var template = feed.nextElementSibling;
+                    feed.innerHTML = "";
                     if (json.length > 0) {
                         var i = 0;
                         do {
@@ -281,6 +350,11 @@ window.routes = function(uri, options) {
             }
         } else {
             console.log(135, 'routes.view home', '/', uri);
+
+            var json = await github.users.events(localStorage.user);
+            console.log(322, {
+                json
+            })
         }
         status === 200 ? resolve(uri) : reject(e);
     }

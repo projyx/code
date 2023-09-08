@@ -1,0 +1,131 @@
+<block class="block-info">
+    <row>
+        <card class="info-repo">
+            <column>
+                <box class="repo-owner">
+                    <row>
+                        <avi></avi>
+                        <text>
+                            <span placeholder="owner"></span>
+                            <span>/</span>
+                            <span placeholder="repo"></span>
+                        </text>
+                        <button value="visibility" placeholder="Visibility"></button>
+                    </row>
+                </box>
+            </column>
+        </card>
+        <card class="info-stat">
+            <row>
+                <box class="stat-watch">
+                    <row>
+                        <text>
+                            <i>
+                                <con class="icon-eye"></con>
+                            </i>
+                            <int>0</int>
+                        </text>
+                        <i>
+                            <con class="icon-ellipsis-vertical"></con>
+                        </i>
+                    </row>
+                </box>
+                <box class="stat-forks">
+                    <row>
+                        <text>
+                            <i>
+                                <con class="icon-fork"></con>
+                            </i>
+                            <int>0</int>
+                        </text>
+                        <i>
+                            <con class="icon-ellipsis-vertical"></con>
+                        </i>
+                    </row>
+                </box>
+                <box class="stat-stars">
+                    <row>
+                        <text>
+                            <i>
+                                <con class="icon-star"></con>
+                            </i>
+                            <int>0</int>
+                        </text>
+                        <i>
+                            <con class="icon-ellipsis-vertical"></con>
+                        </i>
+                    </row>
+                </box>
+            </row>
+        </card>
+    </row>
+</block>
+<block class="block-code">
+    <header>
+        <card>
+            <row>
+                <box></box>
+                <box></box>
+                <box></box>
+                <box></box>
+            </row>
+        </card>
+    </header>
+    <column>
+        <card class="source-code">
+            <column id="code-base"></column>
+            <template>
+                <box class="base-ls">
+                    <row>
+                        <i>
+                            <con class="icon-folder"></con>
+                        </i>
+                        <text>
+                            <span>...</span>
+                        </text>
+                    </row>
+                </box>
+                <box class="base-folder">
+                    <row>
+                        <i>
+                            <con class="icon-folder"></con>
+                        </i>
+                        <text>
+                            <span placeholder="Folder"></span>
+                        </text>
+                        <button>
+                            <i drop="down">
+                                <con class="icon-ellipsis"></con>
+                            </i>
+                            <column css-display="none">
+                                <text>View</text>
+                                <text onclick="api.tree.edit(event.target)">Edit</text>
+                                <text>Delete</text>
+                            </column>
+                        </button>
+                    </row>
+                </box>
+                <box class="base-file">
+                    <row>
+                        <i>
+                            <con class="icon-file"></con>
+                        </i>
+                        <text>
+                            <span placeholder="File"></span>
+                        </text>
+                        <button>
+                            <i drop="down">
+                                <con class="icon-ellipsis"></con>
+                            </i>
+                            <column css-display="none">
+                                <text>View</text>
+                                <text onclick="api.tree.edit(event.target)">Edit</text>
+                                <text>Delete</text>
+                            </column>
+                        </button>
+                    </row>
+                </box>
+            </template>
+        </card>
+    </column>
+</block>

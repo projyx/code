@@ -1,5 +1,13 @@
 @media {
-    .header-user {
+    body:has(.active[routes="/*/*/wide"]) .header-shell {
+        display: none;
+    }
+    
+    body:has(.active[routes="/*/*/edit"]) .header-shell {
+        display: none;
+    }
+    
+    .header-shell {
         background: #292a2d;
         border-bottom: 1px solid #555;
         box-sizing: border-box;
@@ -9,19 +17,19 @@
         width: 100%;
         z-index: 12345;
     }
-    .header-user > row {
+    .header-shell > row {
         align-items: center;
         display: flex;
         flex: 1;
         height: 100%;
     }
     
-    .header-user .user-brand .brand-image > section {
+    .header-shell .shell-brand .brand-image > section {
         align-items: center;
         justify-content: center;
     }
     
-    .header-user .user-brand .brand-image i {
+    .header-shell .shell-brand .brand-image i {
         align-items: center;
         display: flex;
         height: 30px;
@@ -30,25 +38,25 @@
         width: 30px;
     }
     
-    .header-user .user-authenticate {
+    .header-shell .shell-authenticate {
         height: 30px;
         margin-left: auto;
         width: 30px;
     }
     
-    .header-user .user-authenticate .authenticate-avatar i {
+    .header-shell .shell-authenticate .authenticate-avatar avi {
         border-radius: 50%;
         height: 30px;
         overflow: hidden;
         width: 30px;
     }
     
-    .header-user .user-authenticate .authenticate-avatar i:empty {
+    .header-shell .shell-authenticate .authenticate-avatar avi:empty {
         border: 1px solid #555;
         box-sizing: border-box;
     }
 
-    .header-user .user-authenticate .authenticate-avatar i img {
+    .header-shell .shell-authenticate .authenticate-avatar avi img {
         height: 100%;
         width: 100%;
     }

@@ -34,7 +34,7 @@ window.rout.er = (href,params)=>{
                 }
                 r.push(p);
                 //return p;
-                console.log(link, r, p);
+                //console.log(link, r, p);
             });
             link = "/" + r.join('/');
             console.log(38, link, r);
@@ -68,12 +68,12 @@ window.rout.er = (href,params)=>{
                         var d = p;
                         var e = null;
                         if (z < path.length) {
-                            console.log(62, {
+                            0 > 1 ? console.log(62, {
                                 z,
                                 p,
                                 q,
                                 path
-                            }, route.url);
+                            }, route.url) : null;
                             if (q.startsWith(':')) {
                                 var b = p.split(':')[1];
                                 var c = '*';
@@ -203,9 +203,9 @@ window.rout.er = (href,params)=>{
                 }
             })
             link = '/' + shtap.join('/');
-            console.log({
+            0 > 1 ? console.log({
                 shtap
-            });
+            }) : null;
         }
 
         //PAGE ROUTE
@@ -228,12 +228,12 @@ window.rout.er = (href,params)=>{
                 search
             }
         };
-        0 < 1 ? console.log(4, "browse.route", {
+        0 > 1 ? console.log(4, "browse.route", {
             uri,
             options,
             params
         }) : null;
-        document.querySelectorAll('.component').forEach(c=>c.classList.remove('active'));
+        document.querySelectorAll('component').forEach(c=>c.classList.remove('active'));
         var html = await request('/raw/asset/html/' + route.file);
         component.innerHTML.length === 0 ? component.innerHTML = html : null;
         try {

@@ -1,5 +1,5 @@
 @media {
-    .component-user {
+    [component="user"] {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
@@ -9,7 +9,7 @@
 }
 
 @media {
-    .component-user .header-user {
+    [component="user"] .header-user {
         background: #292a2d;
         border-bottom: 1px solid #555;
         box-sizing: border-box;
@@ -19,82 +19,89 @@
         width: 100%;
         z-index: 12345;
     }
-    .component-user .header-user > row {
+    [component="user"] .header-user > row {
         align-items: center;
         display: flex;
         flex: 1;
         height: 100%;
     }
     
-    .component-user .header-user .user-authenticate {
+    [component="user"] .header-user .user-authenticate {
         height: 30px;
         margin-left: auto;
         width: 30px;
     }
     
-    .component-user .header-user .user-authenticate .authenticate-avatar i {
+    [component="user"] .header-user .user-authenticate .authenticate-avatar i {
         border-radius: 50%;
         height: 30px;
         overflow: hidden;
         width: 30px;
     }
     
-    .component-user .header-user .user-authenticate .authenticate-avatar i:empty {
+    [component="user"] .header-user .user-authenticate .authenticate-avatar i:empty {
         border: 1px solid #555;
         box-sizing: border-box;
     }
 
-    .component-user .header-user .user-authenticate .authenticate-avatar i img {
+    [component="user"] .header-user .user-authenticate .authenticate-avatar i img {
         height: 100%;
         width: 100%;
     }
 }
 
 @media {
-    .component-user .block-cover {
+    [component="user"] .block-cover {
         /* background-color: #222; */
         position: relative;
     }
 
-    .component-user .block-cover > column {
+    [component="user"] .block-cover > column {
         padding-bottom: 25px;
         position: relative;
         z-index: 123;
     }
 
-    .component-user .block-cover .cover-photo {
+    [component="user"] .block-cover .cover-photo {
         padding-top: 170px;
     }
 
-    .component-user .block-cover .cover-photo > column {
+    [component="user"] .block-cover .cover-photo > column {
         align-items: center;
         text-align: center;
     }
 
-    .component-user .block-cover .cover-photo .photo-user {
+    [component="user"] .block-cover .cover-photo .photo-user {
         margin: 10px 0;
     }
 
-    .component-user .block-cover .cover-photo .photo-user text:nth-child(1) {
+    [component="user"] .block-cover .cover-photo .photo-user text:nth-child(1) {
         font-size: 24px;
         font-weight: bolder;
     }
 
-    .component-user .block-cover .cover-photo .photo-user text:nth-child(2) {
+    [component="user"] .block-cover .cover-photo .photo-user text:nth-child(2) {
         color: #ccc;
         font-size: 16px;
     }
 
-    .component-user .block-cover .cover-photo .photo-avatar picture {
+    [component="user"] .block-cover .cover-photo .photo-avatar picture {
         background-color: #292a2d;
         border: 1px solid #555;
-        border-radius: 50%;
+        border-radius: 15%;
         box-sizing: border-box;
         height: 120px;
+        overflow: hidden;
         width: 120px;
     }
 
-    .component-user .block-cover > footer {
+    [component="user"] .block-cover .cover-photo .photo-avatar picture img {
+        height: 100%;
+        object-fit: contain;
+        width: 100%;
+    }
+
+    [component="user"] .block-cover > footer {
         /* background: #292a2d; */
         border-bottom: 1px solid #555;
         border-top: 1px solid #555;
@@ -104,7 +111,7 @@
         width: 100%;
     }
     
-    .component-user .block-cover .cover-stats .stats-follow {
+    [component="user"] .block-cover .cover-stats .stats-follow {
         align-items: center;
         display: flex;
         height: 50px;
@@ -112,35 +119,35 @@
         padding: 0 20px;
     }
 
-    .component-user .block-cover .cover-stats .stats-follow > section {
+    [component="user"] .block-cover .cover-stats .stats-follow > section {
         gap: 10px;
     }
 
-    .component-user .block-cover .cover-stats .stats-follow > section > text > span:last-child {
+    [component="user"] .block-cover .cover-stats .stats-follow > section > text > span:last-child {
         color: #777;
     }
 }
 
 @media {
-    .component-user .block-source .source-code {
+    [component="user"] .block-source .source-code {
         /* background-color: #222; */
         position: relative;
     }
     
-    .component-user .block-source .source-code > column > box {
+    [component="user"] .block-source .source-code > column > box {
         /* background-color: #292a2d; */
         border-bottom: 1px solid #555;
         box-sizing: border-box;
     }
     
-    .component-user .block-source .source-code > column > box > row {
+    [component="user"] .block-source .source-code > column > box > row {
         align-items: center;
         margin: auto;
         max-width: 768px;
         padding: 10px 0;
     }
     
-    .component-user .block-source .source-code > column > box > row > picture {
+    [component="user"] .block-source .source-code > column > box > row > picture {
         /* background-color: black; */
         border: 1px solid #555;
         border-radius: 15%;
@@ -149,22 +156,22 @@
         width: 64px;
     }
     
-    .component-user .block-source .source-code > column > box > row > text {
+    [component="user"] .block-source .source-code > column > box > row > text {
         display: flex;
         flex-direction: column;
         padding: 0 10px;
     }
 
-    .component-user .block-source .source-code > column > box > row > text > span:first-child {
+    [component="user"] .block-source .source-code > column > box > row > text > span:first-child {
         font-weight: bolder;
     }
 
-    .component-user .block-source .source-code > column > box > row > text > span:last-child {
+    [component="user"] .block-source .source-code > column > box > row > text > span:last-child {
         color: #ccc;
         font-size: 13px;
     }
     
-    .component-user .block-source .source-code > column > box > row > i {
+    [component="user"] .block-source .source-code > column > box > row > i {
         margin-left: auto;
     }
 }

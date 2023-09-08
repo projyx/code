@@ -1,0 +1,223 @@
+@media {
+    [component="tree"] {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+@media {
+    [component="tree"] .block-info {
+        border-bottom: 1px solid #555;
+        position: relative;
+    }
+
+    [component="tree"] .block-info > row {
+        height: 50px;
+        margin: 50px auto 0;
+        max-width: 100%;
+        padding: 0 20px;
+        position: relative;
+        z-index: 123;
+    }
+
+    [component="tree"] .block-info .info-repo {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    [component="tree"] .block-info .info-repo .repo-owner > row {
+        align-items: center;
+        justify-content: center;
+    }
+
+    [component="tree"] .block-info .info-repo .repo-owner > row > text {
+        color: white;
+        font-weight: bolder;
+        margin: 0 5px;
+    }
+
+    [component="tree"] .block-info .info-repo .repo-owner > row > text span[placeholder] {
+        color: #0096c7;
+    }
+
+    [component="tree"] .block-info .info-repo .repo-owner > row > button {
+        border: 1px solid;
+        border-radius: 50px;
+        color: #777;
+        margin: 0 5px;
+        padding: 5px 10px;
+    }
+
+    [component="tree"] .block-info .info-repo .repo-owner avi {
+        border-radius: 50%;
+        height: 30px;
+        overflow: hidden;
+        width: 30px;
+    }
+
+    [component="tree"] .block-info .info-repo .repo-owner avi img {
+        height: 100%;
+        width: 100%;
+    }
+
+    [component="tree"] .block-info .info-repo .repo-owner avi:empty {
+        border: 1px dashed;
+        box-sizing: border-box;
+    }
+
+    [component="tree"] .block-info .info-stat {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        margin-left: auto;
+    }
+
+    [component="tree"] .block-info .info-stat > row {
+        gap: 10px;
+    }
+
+    [component="tree"] .block-info .info-stat > row > box {
+        border: 1px solid #777;
+        border-radius: 50px;
+        height: 30px;
+        /* padding: 0 10px; */
+    }
+
+    [component="tree"] .block-info .info-stat > row > box > row > text {
+        align-items: center;
+        border-right: 1px solid #777;
+        display: flex;
+        gap: 5px;
+        padding: 0 10px 0 10px;
+    }
+
+    [component="tree"] .block-info .info-stat > row > box > row > text i {
+        align-items: center;
+        display: flex;
+        height: 20px;
+        justify-content: center;
+    }
+
+    [component="tree"] .block-info .info-stat > row > box > row > text i {
+        align-items: center;
+        display: flex;
+        height: 20px;
+        justify-content: center;
+    }
+
+    [component="tree"] .block-info .info-stat > row > box > row > text i:has(.icon-fork) {
+        width: 14px;
+    }
+
+    [component="tree"] .block-info .info-stat > row > box > row > text int {
+        font-size: 18px;
+        font-weight: bolder;
+        line-height: 20px;
+    }
+
+    [component="tree"] .block-info .info-stat > row > box > row > i {
+        align-items: center;
+        display: flex;
+        height: 30px;
+        justify-content: center;
+        width: 30px;
+    }
+}
+
+@media {
+    [component="tree"] .block-code .source-code {
+        border: 1px solid #555;
+        border-radius: 20px;
+        margin: 20px auto;
+        max-width: 768px;
+        width: 100%;
+    }
+
+    [component="tree"] .block-code .source-code > column > :not(:last-child) {
+        border-bottom: 1px solid #555;
+        box-sizing: border-box;
+    }
+
+    [component="tree"] .block-code .source-code > column > * > row > text {
+        /* border-bottom: 1px solid #555; */
+        box-sizing: border-box;
+        margin: 0 10px;
+    }
+
+    [component="tree"] .block-code .source-code > column > * > row > text:hover {
+        border-bottom: 1px solid;
+        color: #0096c7;
+    }
+
+    [component="tree"] .block-code .source-code > column > * button {
+        color: white;
+        margin-left: auto;
+        position: relative;
+    }
+
+    [component="tree"] .block-code .source-code > column > * button > column {
+        background-color: #292a2d;
+        border: 1px solid #555;
+        border-radius: 10px;
+        padding: 5px 20px;
+        position: absolute;
+        text-align: left;
+        top: 0px;
+        right: 0;
+        z-index: 123;
+    }
+
+    [component="tree"] .block-code .source-code > column > * button > column > * {
+        line-height: 30px;
+    }
+    
+    [component="tree"] .block-code .source-code .base-ls {
+        padding: 10px 0;
+    }
+    
+    [component="tree"] .block-code .source-code .base-ls > row {
+        align-items: center;
+        padding: 0 10px;
+    }
+    
+    [component="tree"] .block-code .source-code .base-ls i {
+        height: 30px;
+        width: 30px;
+    }    
+    
+    [component="tree"] .block-code .source-code .base-folder {
+        padding: 10px 0;
+    }
+    
+    [component="tree"] .block-code .source-code .base-folder > row {
+        align-items: center;
+        padding: 0 10px;
+    }
+    
+    [component="tree"] .block-code .source-code .base-folder i {
+        height: 30px;
+        width: 30px;
+    }
+
+    [component="tree"] .block-code .source-code .base-folder > row > i column {
+        display: none;
+    }
+    
+    [component="tree"] .block-code .source-code .base-file {
+        padding: 10px 0;
+    }
+    
+    [component="tree"] .block-code .source-code .base-file > row {
+        align-items: center;
+        padding: 0 10px;
+    }
+    
+    [component="tree"] .block-code .source-code .base-file i {
+        height: 30px;
+        width: 30px;
+    }
+}

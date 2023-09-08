@@ -25,12 +25,30 @@ window.events.onclick.document = async function(event) {
     var target = event.target;
     var elem = target;
 
+    Array.from(document.querySelectorAll('[drop="down"]')).forEach(elem=>{
+        elem.nextElementSibling.setAttribute('css-display', 'none');
+    }
+    );
+
     elem = target.closest('[href]');
     if (elem) {
         event.preventDefault();
         var href = elem.getAttribute('href');
         //console.log(47, href);
         rout.er(href);
+    }
+
+    elem = target.closest('[drop]');
+    if (elem) {
+        if (elem.nextElementSibling.getAttribute("css-display") === 'none') {
+            Array.from(document.querySelectorAll('[onclick="events.onclick.dropdown(event.target)"]')).forEach(elem=>{
+                elem.nextElementSibling.setAttribute('css-display', 'none');
+            }
+            );
+            elem.nextElementSibling['removeAttribute']('css-display', 'none');
+        } else {
+            elem.nextElementSibling['setAttribute']('css-display', 'none');
+        }
     }
 }
 window.events.onclick.exit = function(event) {
