@@ -1,3 +1,122 @@
 @media {
+    [component="wide"] {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+@media {    
+    [component="wide"] .live-preview {
+        flex: 1;
+        height: 100%;
+    }
+}
+
+@media {    
+    [component="wide"] line {
+        /* background: #555555; */
+        cursor: ew-resize;
+        height: 100%;
+        width: 10px;
+    }
+}
+
+@media {    
+    [component="wide"] .dev-tools {
+        border-right: 1px solid #555;
+        height: 100%;
+        width: 720px;
+    }
     
+    [component="wide"] .dev-tools > header {
+        border-bottom: 1px solid #555;
+        height: 30px;
+        line-height: 30px;
+        width: 100%;
+    }
+
+    [component="wide"] .dev-tools > column {
+        height: 100%;
+    }
+
+    [component="wide"] .dev-tools .tab-sources {
+        display: flex;
+        height: 100%;
+    }
+    
+    [component="wide"] .dev-tools .tab-sources > aside {
+        border-right: 1px solid #555;
+        height: 100%;
+        width: 300px;
+    }
+
+    [component="wide"] .dev-tools .tab-sources > section {
+        display: flex;
+        flex: 1;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-files > header {
+        align-items: center;
+        border-bottom: 1px solid #555;
+        color: aliceblue;
+        display: flex;
+        justify-content: space-between;
+        line-height: 30px;
+        padding: 0 10px;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-files > header > text:last-child {
+        border: 1px solid;
+        border-radius: 50px;
+        color: #aaa;
+        height: 20px;
+        line-height: 20px;
+        padding: 0 10px;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        height: 100%;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel text {
+        display: flex;
+        font-size: 13px;
+        gap: 5px;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel text > i con {
+        --ggs: calc(2/3);
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel > header {
+        align-items: center;
+        border-bottom: 1px solid #555;
+        display: flex;
+        gap: 20px;
+        height: 30px;
+        padding: 0 10px;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel > section {
+        width: 100%;
+    }
+    
+    [component="wide"] .dev-tools .tools-tabs {
+        width: 100%;
+    }
+    
+    [component="wide"] .dev-tools .tools-tabs box {
+        padding: 0 10px;
+    }
+    
+    [component="wide"] .dev-tools .tools-tabs box:hover {
+        background: #444
+    }
 }

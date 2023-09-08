@@ -1,1 +1,87 @@
-wIDE
+<block class="dev-tools">
+    <header>
+        <card class="tools-tabs">
+            <row>
+                <box>
+                    <row>
+                        <text>
+                            <span>Sources</span>
+                        </text>
+                    </row>
+                </box>
+                <box>
+                    <row>
+                        <text>
+                            <span>Console</span>
+                        </text>
+                    </row>
+                </box>
+                <box>
+                    <row>
+                        <text>
+                            <span>Elements</span>
+                        </text>
+                    </row>
+                </box>
+            </row>
+        </card>
+    </header>
+    <column>
+        <card class="tools-tab tab-sources">
+            <aside>
+                <box class="sources-files">
+                    <header>
+                        <text>
+                            <span placeholder="Source"></span>
+                        </text>
+                        <text>
+                            <span>main</span>
+                        </text>
+                    </header>
+                    <column>
+                        <text>
+                            <span>file.html</span>
+                        </text>
+                        <text>
+                            <span>file.css</span>
+                        </text>
+                        <text>
+                            <span>file.js</span>
+                        </text>
+                    </column>
+                </box>
+            </aside>
+            <section>
+                <box class="sources-panel">
+                    <header>
+                        <text>
+                            <i>
+                                <con class="icon-file"></con>
+                            </i>
+                            <span>file.html</span>
+                        </text>
+                        <text>
+                            <i>
+                                <con class="icon-file"></con>
+                            </i>
+                            <span>file.css</span>
+                        </text>
+                        <text>
+                            <i>
+                                <con class="icon-file"></con>
+                            </i>
+                            <span>file.js</span>
+                        </text>
+                    </header>
+                    <column></column>
+                </box>
+            </section>
+        </card>
+        <card class="tools-tab tab-console"></card>
+        <card class="tools-tab tab-elements"></card>
+    </column>
+</block>
+<line></line>
+<block class="live-preview">
+    <iframe></iframe>
+</block>
