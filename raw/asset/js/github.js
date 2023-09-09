@@ -37,7 +37,7 @@ window.github = {
         ,
         user: async(target)=>{
             try {
-                var user = await github.users.user()
+                var user = await github.users.user(localStorage.user)
             } catch (e) {
                 console.log(e);
             }
@@ -484,7 +484,7 @@ github.users.events = (username)=>{
 }
 github.users.repos = (username)=>{
     return new Promise(function(resolve, reject) {
-        const url = github.endpoint + "/users/" + username + "/repos";
+        const url = github.endpoint + "/users/" + username + "/repos?type=all";
         const a = data=>{
             resolve(data);
         }

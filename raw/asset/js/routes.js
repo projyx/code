@@ -283,7 +283,7 @@ window.routes = function(uri, options) {
                                         console.log(283, i, feed, row.type);
                                         if (row.type === "dir") {
                                             var folder = template.content.children[1].cloneNode(true);
-                                            var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["tree", "main", row.name]);
+                                            var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["wide", "main", row.name]);
                                             folder.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
                                             folder.querySelector('span').textContent = row.name;
                                             feed.insertAdjacentHTML('beforeend', folder.outerHTML);
@@ -291,7 +291,7 @@ window.routes = function(uri, options) {
                                         }
                                         if (row.type === "file") {
                                             var file = template.content.children[2].cloneNode(true);
-                                            var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["tree", "main", row.name]);
+                                            var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["wide", "main", row.name]);
                                             file.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
                                             file.querySelector('span').textContent = row.name;
                                             feed.insertAdjacentHTML('beforeend', file.outerHTML);
@@ -374,7 +374,16 @@ window.routes = function(uri, options) {
                     img.src = json.avatar_url;
                     component.querySelector('.photo-avatar picture').innerHTML = img.outerHTML;
 
-                    var json = await github.users.repos(sub);
+                    try {
+                        var res = await github.oauth.user();
+                        var user = res.login;
+                    } catch (e) {}
+                                    
+                    if (sub === user) {
+                        var json = await github.user.repos(user);
+                    } else {
+                        var json = await github.users.repos(sub);
+                    }
                     console.log(291, {
                         json
                     })
@@ -391,7 +400,7 @@ window.routes = function(uri, options) {
                             el.querySelector('text > span:last-child').textContent = "Last pushed " + api.time.date(Date.parse(row.updated_at));
                             feed.insertAdjacentHTML('beforeend', el.outerHTML);
                             i++;
-                        } while (i < json.length - 1);
+                        } while (i < json.length);
                     }
                 }
             }
