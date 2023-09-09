@@ -41,95 +41,6 @@ function getBlobURL(code, type) {
 
 }
 
-function getPageURL(html, css, js) {
-
-    const cssURL = getBlobURL(css, 'text/css');
-
-    const jsURL = getBlobURL(js, 'text/javascript');
-
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    const body = doc.documentElement;
-    const head = body.querySelector("head");
-    const styles = head.querySelectorAll("link");
-    const scripts = head.querySelectorAll("script")
-
-    var paths = window.location.pathname.split("/").filter(n=>n.length > 0);
-    const owner = paths[0];
-    const repo = paths[1];
-
-    console.log({
-        owner,
-        repo
-    });
-
-    var l = [];
-    Array.from(styles).forEach(async(link)=>{
-        var uri = new URL(link.href);
-        var path = uri.pathname;
-        var json = await github.repos.contents(owner, repo, path);
-        var text = atob(json.content);
-        var blob = getBlobURL(text, 'text/javascript');
-        var elem = `<link rel="stylesheet" type="text/css" href="${blob}" />`
-        //console.log(path, {json,text,blob});
-        l.push(elem)
-    }
-    )
-
-    0 < 1 ? console.log(95, body, {
-        styles,
-        l
-    }) : null;
-
-    var s = [];
-    Array.from(scripts).forEach(async(script)=>{
-        var uri = new URL(script.src);
-        var path = uri.pathname;
-        var json = await github.repos.contents(owner, repo, path);
-        var text = atob(json.content);
-        var blob = getBlobURL(text, 'text/javascript');
-        var elem = `<script src="${jsURL}">${atob('PC9zY3JpcHQ+')}`;
-        //console.log(path, {json,text,blob});
-        s.push(elem)
-    }
-    )
-
-    0 < 1 ? console.log(112, body, {
-        scripts,
-        s
-    }) : null;
-
-    const src = `
-
-    <html>
-
-      <head>
-
-        ${l && l.join(" ")}
-
-        ${s && s.join(" ")}
-
-      </head>
-
-      <body>
-
-        ${html || ''}
-
-      </body>
-
-    </html>
-
-  `;
-
-    console.log(120, {
-        l,
-        s,
-        src
-    })
-
-    return getBlobURL(src, 'text/html');
-
-}
-
 async function pvw(e) {
 
     console.log(134, e);
@@ -297,6 +208,119 @@ async function pvw(e) {
     dom.iframe.code.elem.src = getBlobURL(src, 'text/html');
     //dom.iframe.code.elem.contentWindow.document.body.parentNode.outerHTML = src;
 
+}
+
+async function wIDE(paths) {
+    var l = [];
+    var s = [];
+
+    var css = "";
+    var js = "";
+
+    var href = window.location.href;
+    var url = new URL(href,location.origin);
+    var pathname = url.pathname;
+    var search = url.search ? url.search : null;
+    var paths = pathname.split("/").splice(1).filter(n=>n.length > 0);
+    var ext = paths[paths.length - 1];
+    ext.includes('.') ? ext.split('.')[1] : '';
+
+    console.log(231, {
+        file,
+        paths,
+        pathname,
+        ext
+    });
+
+    var file = paths[paths.length - 1];
+    var path = paths.splice(4, paths.length - 1);
+    var resource = "index.html";
+    console.log(243, resource);
+    
+    var html = await github.raw.file({
+        owner: paths[0],
+        repo: paths[1],
+        resource: "/index.html"
+    });
+    console.log(258, {
+        html,
+        path
+    });
+    //var feed = component.querySelector("#code-base");
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const head = doc.head;
+    const body = doc.body;
+    const styles = head.querySelectorAll("link");
+    const scripts = head.querySelectorAll("script");
+    const srcs = body.querySelectorAll("[src]");
+
+    var l = [];
+    if (0 < 1 && styles.length > 0) {
+        var i = 0;
+        do {
+            var link = styles[i];
+            //console.log(172, i, link, styles);
+            if (0 < 1) {
+                var uri = new URL(link.href);
+                var path = uri.pathname;
+                var json = await github.repos.contents(paths[0], paths[1], path);
+                var text = atob(json.content);
+                var blob = getBlobURL(text, 'text/javascript');
+                var elem = `<link rel="stylesheet" type="text/css" href="${blob}" />`
+                //console.log(path, {json,text,blob});
+                l.push(elem)
+                //console.log(164, l);
+            }
+            i++;
+        } while (i < styles.length);
+    }
+
+    var s = [];
+    if (scripts.length > 0) {
+        var i = 0;
+        do {
+            var script = scripts[i];
+            if (0 < 1) {
+                if (script.src.startsWith("http")) {
+                    var uri = new URL(script.src);
+                    var path = uri.pathname;
+                    var json = await github.repos.contents(paths[0], paths[1], path);
+                    var text = atob(json.content);
+                    var blob = getBlobURL(text, 'text/javascript');
+                    var elem = `<script src="${blob}" data-src="${script.src}">${atob('PC9zY3JpcHQ+')}`;
+                } else {
+                    var elem = `<script src="${script.src}"></script>`;
+                }
+                //console.log(path, {json,text,blob});
+                s.push(elem);
+            }
+            //console.log(182, s);
+            i++;
+        } while (i < scripts.length);
+    }
+    
+    var json = await request("/raw/asset/js/blob.js");
+    var text = json;
+    var blob = getBlobURL(text, 'text/javascript');
+    var elem = `<script src="${blob}">${atob('PC9zY3JpcHQ+')}`;
+    
+    const src = `
+        <html>
+          <head>
+            ${l.join(" ")}
+            ${s.join(" ")}
+            <style>${css}</style>
+            <script>${js}</script>
+            ${elem}
+          </head>
+          <body>
+            ${body.innerHTML}
+          </body>
+        </html>
+    `;
+
+    const editor = document.getElementById('preview-editor');
+    editor.src = getBlobURL(src, 'text/html');
 }
 
 window.Crypto = crypt = cx = {

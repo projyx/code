@@ -42,34 +42,15 @@
                             <span>Create new project</span>
                         </text>
                     </header>
-                    <column>
+                    <column id="files-list"></column>
+                    <template>
                         <text>
                             <i>
                                 <con class="icon-folder"></con>
                             </i>
-                            <span placeholder="dir">dir</span>
+                            <span>...</span>
                         </text> 
-                        <text>
-                            <i>
-                                <con class="icon-file"></con>
-                            </i>
-                            <span>file.html</span>
-                        </text>
-                        <text>
-                            <i>
-                                <con class="icon-file"></con>
-                            </i>
-                            <span>file.css</span>
-                        </text>
-                        <text>
-                            <i>
-                                <con class="icon-file"></con>
-                            </i>
-                            <span>file.js</span>
-                        </text>
-                    </column>
-                    <template>
-                        <text>
+                        <text data-before="&#9654;">
                             <i>
                                 <con class="icon-folder"></con>
                             </i>
@@ -79,7 +60,7 @@
                             <i>
                                 <con class="icon-file"></con>
                             </i>
-                            <span placeholder="file.html"></span>
+                            <span placeholder="file"></span>
                         </text>
                     </template>
                 </box>
@@ -116,5 +97,5 @@
 </block>
 <line></line>
 <block class="live-preview">
-    <iframe></iframe>
+    <iframe id="preview-editor"></iframe>
 </block>

@@ -321,6 +321,35 @@ github.raw.blob = async(params)=>{
     }
     );
 }
+github.raw.file = async(params)=>{
+    return new Promise((resolve,reject)=>{
+        fetch("https://api.github.com/repos/" + params.owner + "/" + params.repo + "/contents" + params.resource, {
+            cache: "reload",
+            headers: {
+                Accept: "application/vnd.github.raw",
+                Authorization: "token " + localStorage.githubAccessToken
+            }
+        }).then(async(response)=>{
+            if (response.status === 404) {
+                var res = await response.json();
+                var json = {
+                    json: res,
+                    error: new Error(response.status)
+                }
+                throw json;
+            } else {
+                return response.text()
+            }
+        }).then((response)=>{
+            resolve(response);
+        }
+        ).catch((e)=>{
+            reject(e.json)
+        }
+        );
+    }
+    );
+}
 
 github.repos = {};
 github.repos.contents = (owner,repo,path)=>{

@@ -254,6 +254,53 @@ window.routes = function(uri, options) {
                             }
                         } else if (paths[2] === "wide") {
                             console.log("wide");
+                            if (paths.length > 3) {
+                                var href = uri.split("/").splice(1).filter(n=>n.length > 0);
+                                var path = href.splice(4, href.length - 1)
+                                var json = await github.repos.contents(paths[0], paths[1], path.join('/'));
+                                json.sort((i,o)=>i.type.localeCompare(o.type));
+                                console.log(261, {
+                                    json,
+                                    path
+                                });
+
+                                var feed = component.querySelector("#files-list");
+                                var template = feed.nextElementSibling;
+                                feed.innerHTML = "";
+                                if (json.length > 0) {
+                                    var urx = uri.split('/').splice(1);
+                                    if (urx.length > 4) {
+                                        var ls = template.content.children[0].cloneNode(true);
+                                        var dirs = urx.length > 2 && urx.length < 5 ? [urx[0], urx[1]] : urx.splice(0, urx.length - 1);
+                                        console.log(275, dirs, urx);
+                                        ls.setAttribute('href', "/" + dirs.join('/'));
+                                        feed.insertAdjacentHTML('beforeend', ls.outerHTML);
+                                    }
+
+                                    var i = 0;
+                                    do {
+                                        var row = json[i];
+                                        console.log(283, i, feed, row.type);
+                                        if (row.type === "dir") {
+                                            var folder = template.content.children[1].cloneNode(true);
+                                            var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["tree", "main", row.name]);
+                                            folder.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
+                                            folder.querySelector('span').textContent = row.name;
+                                            feed.insertAdjacentHTML('beforeend', folder.outerHTML);
+                                            //console.log(290, feed, folder.outerHTML);
+                                        }
+                                        if (row.type === "file") {
+                                            var file = template.content.children[2].cloneNode(true);
+                                            var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["tree", "main", row.name]);
+                                            file.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
+                                            file.querySelector('span').textContent = row.name;
+                                            feed.insertAdjacentHTML('beforeend', file.outerHTML);
+                                        }
+                                        i++;
+                                    } while (i < json.length - 1)
+                                }
+                                wIDE(paths);
+                            }
                         } else {
                             status = 400;
                             e = {

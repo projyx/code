@@ -26,10 +26,66 @@
 }
 
 @media {    
+    .header-wide {
+        background: #292a2d;
+        border-bottom: 1px solid #555;
+        box-sizing: border-box;
+        height: 50px;
+        padding: 0 10px;
+        position: fixed;
+        width: 100%;
+        z-index: 12345;
+    }
+    .header-wide > row {
+        align-items: center;
+        display: flex;
+        flex: 1;
+        height: 100%;
+    }
+    
+    .header-wide .shell-brand .brand-image > section {
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .header-wide .shell-brand .brand-image i {
+        align-items: center;
+        display: flex;
+        height: 30px;
+        justify-content: center;
+        margin-left: auto;
+        width: 30px;
+    }
+    
+    .header-wide .shell-authenticate {
+        height: 30px;
+        margin-left: auto;
+        width: 30px;
+    }
+    
+    .header-wide .shell-authenticate .authenticate-avatar avi {
+        border-radius: 50%;
+        height: 30px;
+        overflow: hidden;
+        width: 30px;
+    }
+    
+    .header-wide .shell-authenticate .authenticate-avatar avi:empty {
+        border: 1px solid #555;
+        box-sizing: border-box;
+    }
+
+    .header-wide .shell-authenticate .authenticate-avatar avi img {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+@media {    
     [component="wide"] .dev-tools {
         border-right: 1px solid #555;
         height: 100%;
-        width: 720px;
+        width: 960px;
     }
     
     [component="wide"] .dev-tools > header {
@@ -61,8 +117,22 @@
         padding: 0px 10px;
     }
 
+    [component="wide"] .dev-tools .tab-sources .sources-files > column > text[data-before]:before {
+        text-align: center;
+        width: 14px;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-files > column > text:has(.icon-file):before {
+        content: '';
+        text-align: center;
+        width: 14px;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-files > column > text:has(.icon-file) {
+    }
+
     [component="wide"] .dev-tools .tab-sources .sources-files > column > text i {
-        height: 24px;
+        height: 18px;
         width: 24px;
     }
 

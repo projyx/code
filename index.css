@@ -51,6 +51,10 @@
 }
 
 @media {
+    [data-before]::before {
+        content: attr(data-before)
+    }
+    
     [placeholder]:not(input):empty:before {
         content: attr(placeholder);
         opacity: 0.5;
