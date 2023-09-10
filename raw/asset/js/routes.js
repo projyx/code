@@ -279,7 +279,7 @@ window.routes = function(uri, options) {
                                         console.log(275, dirs, urx);
                                         //ls.setAttribute('href', "/" + dirs.join('/'));
                                         feed.insertAdjacentHTML('beforeend', ls.outerHTML);
-                                        feed.lastElementChild.querySelector('span').onclick = ()=>editor.tree.ls(row.name);
+                                        feed.lastElementChild.querySelector('span').onclick = ()=>editor.tree.ls("/" + dirs.join('/'));
                                     }
 
                                     var i = 0;

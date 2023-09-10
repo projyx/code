@@ -69,22 +69,33 @@ window.editor.tree.cd = async function(dir) {
 }
 window.editor.tree.ls = async function(dir) {
     const feed = document.getElementById('files-list');
-    console.log(8, 'editor.tree.ls', dir, feed.path);
+    console.log(5, 'editor.tree.cd', dir, feed.path);
 
-    var href = uri.split("/").splice(1).filter(n=>n.length > 0);
-    var path = href.splice(4, href.length - 1)
-    var json = await github.repos.contents(paths[0], paths[1], path.join('/'));
+    var fp = feed.path.split("/").filter(n=>n.length > 0);
+    var fref = fp.splice(5, fp.length - 1).filter(n=>n.length > 0);
+    var uri = window.location.pathname;
+    var paths = uri.split("/").splice(1).filter(n=>n.length > 0);
+    var split = feed.path.split("/").filter(n=>n.length > 0);
+    var href = split.splice(5, split.length - 1).filter(n=>n.length > 0);
+    var path = [].join("/") + "/" + dir;
+    console.log(12, 'editor.tree.cd', {
+        dir,
+        feed: feed.path,
+        fref,
+        href,
+        path
+    });
+    var json = await github.repos.contents(paths[0], paths[1], feed.path + path);
     json.sort((i,o)=>i.type.localeCompare(o.type));
     console.log(261, {
-        json,
-        path
+        json
     });
 
     var template = feed.nextElementSibling;
     feed.innerHTML = "";
     var split = uri.split('/');
     var urt = split.splice(5, split.length - 1);
-    feed.path = "/" + urt.join("/");
+    feed.path = path;
     if (json.length > 0) {
         var urx = feed.path.split('/').splice(1);
         console.log(274, urx);
@@ -107,7 +118,7 @@ window.editor.tree.ls = async function(dir) {
                 //folder.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
                 folder.querySelector('span').textContent = row.name;
                 feed.insertAdjacentHTML('beforeend', folder.outerHTML);
-                feed.lastElementChild.querySelector('span').onclick = ()=>editor.tree.cd(row.name);
+                feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.cd(e.target.closest('text').querySelector('span').textContent);
                 //console.log(290, feed, folder.outerHTML);
             }
             if (row.type === "file") {
