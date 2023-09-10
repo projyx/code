@@ -267,14 +267,19 @@ window.routes = function(uri, options) {
                                 var feed = component.querySelector("#files-list");
                                 var template = feed.nextElementSibling;
                                 feed.innerHTML = "";
+                                var split = uri.split('/');
+                                var urt = split.splice(5, split.length - 1);
+                                feed.path = (urt.length > 1 ? "/" : "") + urt.join("/");
                                 if (json.length > 0) {
-                                    var urx = uri.split('/').splice(1);
-                                    if (urx.length > 4) {
+                                    var urx = feed.path.split('/').splice(1);
+                                    console.log(274, urx);
+                                    if (urx.length > 0) {
                                         var ls = template.content.children[0].cloneNode(true);
                                         var dirs = urx.length > 2 && urx.length < 5 ? [urx[0], urx[1]] : urx.splice(0, urx.length - 1);
                                         console.log(275, dirs, urx);
-                                        ls.setAttribute('href', "/" + dirs.join('/'));
+                                        //ls.setAttribute('href', "/" + dirs.join('/'));
                                         feed.insertAdjacentHTML('beforeend', ls.outerHTML);
+                                        feed.lastElementChild.querySelector('span').onclick = ()=>editor.tree.ls(row.name);
                                     }
 
                                     var i = 0;
@@ -284,15 +289,16 @@ window.routes = function(uri, options) {
                                         if (row.type === "dir") {
                                             var folder = template.content.children[1].cloneNode(true);
                                             var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["wide", "main", row.name]);
-                                            folder.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
+                                            //folder.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
                                             folder.querySelector('span').textContent = row.name;
                                             feed.insertAdjacentHTML('beforeend', folder.outerHTML);
+                                            feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.cd(e.target.closest('text').querySelector('span').textContent);
                                             //console.log(290, feed, folder.outerHTML);
                                         }
                                         if (row.type === "file") {
                                             var file = template.content.children[2].cloneNode(true);
                                             var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["wide", "main", row.name]);
-                                            file.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
+                                            //file.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
                                             file.querySelector('span').textContent = row.name;
                                             feed.insertAdjacentHTML('beforeend', file.outerHTML);
                                         }
@@ -378,7 +384,7 @@ window.routes = function(uri, options) {
                         var res = await github.oauth.user();
                         var user = res.login;
                     } catch (e) {}
-                                    
+
                     if (sub === user) {
                         var json = await github.user.repos(user);
                     } else {
