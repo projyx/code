@@ -240,7 +240,7 @@ window.rout.er = (href,params)=>{
             uri = await window.routes(uri, options);
             component.classList.add('active');
         } catch (e) {
-            console.log(route.file, e);
+            console.log(route, route.file, e);
             alert(e.message);
         }
 
@@ -251,11 +251,13 @@ window.rout.er = (href,params)=>{
         const state = {
             url: uri
         }
-        if (!(pop)) {
-            //console.log(121, obj);
-            history.pushState(state, null, uri)
-        } else {
-            history.replaceState(state, null, uri);
+        if (!["blob:"].includes(window.location.protocol)) {
+            if (!(pop)) {
+                //console.log(121, obj);
+                history.pushState(state, null, uri)
+            } else {
+                history.replaceState(state, null, uri);
+            }
         }
         window.rout.e = {
             paths: uri.split("/").filter(o=>o.length > 1),

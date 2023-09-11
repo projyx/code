@@ -118,6 +118,7 @@
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-files > column > text[data-before]:before {
+        opacity: 0;
         text-align: center;
         width: 14px;
     }

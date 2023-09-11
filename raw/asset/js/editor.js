@@ -11,7 +11,7 @@ window.editor.tree.cd = async function(dir) {
     var paths = uri.split("/").splice(1).filter(n=>n.length > 0);
     var split = feed.path.split("/").filter(n=>n.length > 0);
     var href = split.splice(5, split.length - 1).filter(n=>n.length > 0);
-    var path = feed.path + "/" + dir;
+    var path = feed.path + (dir ? "/" + dir : "");
     console.log(12, 'editor.tree.cd', {
         dir,
         feed: feed.path,

@@ -290,6 +290,50 @@ github.database.trees = function(params, settings) {
     }
 }
 
+github.orgs = {};
+github.orgs.members = async(org,username) => {
+    return new Promise(function(resolve, reject) {
+        const url = github.endpoint + "/orgs/" + org + "/members/" + username;
+        const a = data=>{
+            resolve(data);
+        }
+        const b = (error)=>{
+            console.log(error);
+            resolve(error);
+        }
+        const accessToken = localStorage.githubAccessToken;
+        const settings = accessToken ? {
+            headers: {
+                Accept: "application/vnd.github+json",
+                Authorization: "token " + accessToken
+            }
+        } : null;
+        fetch(url, settings).then(a).catch(b);
+    }
+    );    
+}
+github.orgs.repos = (org)=>{
+    return new Promise(function(resolve, reject) {
+        const url = github.endpoint + "/orgs/" + org + "/repos?type=all";
+        const a = data=>{
+            resolve(data);
+        }
+        const b = (error)=>{
+            console.log(error);
+            reject(error);
+        }
+        const accessToken = localStorage.githubAccessToken;
+        const settings = accessToken ? {
+            headers: {
+                Accept: "application/vnd.github+json",
+                Authorization: "token " + accessToken
+            }
+        } : null;
+        request(url, settings).then(a).catch(b);
+    }
+    );
+}
+
 github.raw = {};
 github.raw.blob = async(params)=>{
     return new Promise((resolve,reject)=>{
@@ -396,27 +440,6 @@ github.repos.repo = (owner,repo)=>{
 }
 
 github.user = {};
-github.user.repos = ()=>{
-    return new Promise(function(resolve, reject) {
-        const url = github.endpoint + "/user/repos";
-        const a = data=>{
-            resolve(data);
-        }
-        const b = (error)=>{
-            console.log(error);
-            reject(error);
-        }
-        const accessToken = localStorage.githubAccessToken;
-        const settings = accessToken ? {
-            headers: {
-                Accept: "application/vnd.github+json",
-                Authorization: "token " + accessToken
-            }
-        } : null;
-        request(url, settings).then(a).catch(b);
-    }
-    );
-}
 github.user.repos = ()=>{
     return new Promise(function(resolve, reject) {
         const url = github.endpoint + "/user/repos";

@@ -255,21 +255,21 @@ window.routes = function(uri, options) {
                         } else if (paths[2] === "wide") {
                             console.log("wide");
                             if (paths.length > 3) {
-                                var href = uri.split("/").splice(1).filter(n=>n.length > 0);
-                                var path = href.splice(4, href.length - 1)
-                                var json = await github.repos.contents(paths[0], paths[1], path.join('/'));
-                                json.sort((i,o)=>i.type.localeCompare(o.type));
-                                console.log(261, {
-                                    json,
-                                    path
-                                });
-
                                 var feed = component.querySelector("#files-list");
                                 var template = feed.nextElementSibling;
                                 feed.innerHTML = "";
                                 var split = uri.split('/');
                                 var urt = split.splice(5, split.length - 1);
-                                feed.path = (urt.length > 1 ? "/" : "") + urt.join("/");
+                                feed.path = 0 < 1 ? "" : (urt.length > 1 ? "/" : "") + urt.join("/");
+                                                
+                                var href = uri.split("/").splice(1).filter(n=>n.length > 0);
+                                var path = href.splice(4, href.length - 1)
+                                var json = await github.repos.contents(paths[0], paths[1], feed.path);
+                                json.sort((i,o)=>i.type.localeCompare(o.type));
+                                console.log(261, {
+                                    json,
+                                    path
+                                });
                                 if (json.length > 0) {
                                     var urx = feed.path.split('/').splice(1);
                                     console.log(274, urx);
@@ -388,7 +388,20 @@ window.routes = function(uri, options) {
                     if (sub === user) {
                         var json = await github.user.repos(user);
                     } else {
-                        var json = await github.users.repos(sub);
+                        var req = 500;
+                        try {
+                            var member = await github.orgs.members(paths[0], user);
+                            req = member.status;
+                            console.log(392, member);
+                        } catch (e) {
+                            console.log(397, e);
+                        }
+
+                        if (req === 302) {
+                            var json = await github.users.repos(sub);
+                        } else {
+                            var json = await github.orgs.repos(sub);
+                        }
                     }
                     console.log(291, {
                         json
