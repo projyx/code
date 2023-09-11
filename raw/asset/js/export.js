@@ -250,6 +250,9 @@ async function wIDE(paths) {
     const doc = new DOMParser().parseFromString(html, 'text/html');
     const head = doc.head;
     const body = doc.body;
+    var boot = url.pathname.split("/").splice(1).filter(n=>n.length > 0);
+    var link = boot.splice(4, boot.length - 1);
+    doc.body.querySelector('boot').setAttribute('route', "/" + link.join("/"));
     const styles = head.querySelectorAll("link");
     const scripts = head.querySelectorAll("script");
     const srcs = body.querySelectorAll("[src]");
@@ -321,6 +324,9 @@ async function wIDE(paths) {
 
     const editor = document.getElementById('preview-editor');
     editor.src = getBlobURL(src, 'text/html');
+    editor.onload = function() {
+        console.log("Iframe loaded");
+    }
 }
 
 window.Crypto = crypt = cx = {
