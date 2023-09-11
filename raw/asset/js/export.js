@@ -236,7 +236,7 @@ async function wIDE(paths) {
     var path = paths.splice(4, paths.length - 1);
     var resource = "index.html";
     console.log(243, resource);
-    
+
     var html = await github.raw.file({
         owner: paths[0],
         repo: paths[1],
@@ -250,9 +250,6 @@ async function wIDE(paths) {
     const doc = new DOMParser().parseFromString(html, 'text/html');
     const head = doc.head;
     const body = doc.body;
-    var boot = url.pathname.split("/").splice(1).filter(n=>n.length > 0);
-    var link = boot.splice(4, boot.length - 1);
-    doc.body.querySelector('boot').setAttribute('route', "/" + link.join("/"));
     const styles = head.querySelectorAll("link");
     const scripts = head.querySelectorAll("script");
     const srcs = body.querySelectorAll("[src]");
@@ -301,12 +298,12 @@ async function wIDE(paths) {
             i++;
         } while (i < scripts.length);
     }
-    
+
     var json = await request("/raw/asset/js/blob.js");
     var text = json;
     var blob = getBlobURL(text, 'text/javascript');
     var elem = `<script src="${blob}">${atob('PC9zY3JpcHQ+')}`;
-    
+
     const src = `
         <html>
           <head>
@@ -324,9 +321,68 @@ async function wIDE(paths) {
 
     const editor = document.getElementById('preview-editor');
     editor.src = getBlobURL(src, 'text/html');
-    editor.onload = function() {
-        console.log("Iframe loaded");
+    iFrameReady(editor, function() {
+        const boot = url.pathname.split("/").splice(1).filter(n=>n.length > 0);
+        var load = "/" + boot.splice(4, boot.length - 1).join("/");
+        //doc.body.querySelector('boot').setAttribute('route', load);
+        console.log(328, load, boot, window.location.href);
+
+        const state = 'blob:' + editor.contentWindow.location.origin + load;
+        document.getElementById('preview-editor').contentWindow.history.pushState(state, null, state);
+        console.log("Iframe domcontentloaded", editor.contentWindow.location, state);
+    })
+}
+
+// This function ONLY works for iFrames of the same origin as their parent
+function iFrameReady(iFrame, fn) {
+    var timer;
+    var fired = false;
+
+    function ready() {
+        if (!fired) {
+            fired = true;
+            clearTimeout(timer);
+            fn.call(this);
+        }
     }
+
+    function readyState() {
+        if (this.readyState === "complete") {
+            ready.call(this);
+        }
+    }
+
+    // cross platform event handler for compatibility with older IE versions
+    function addEvent(elem, event, fn) {
+        if (elem.addEventListener) {
+            return elem.addEventListener(event, fn);
+        } else {
+            return elem.attachEvent("on" + event, function () {
+                return fn.call(elem, window.event);
+            });
+        }
+    }
+
+    // use iFrame load as a backup - though the other events should occur first
+
+    function checkLoaded() {
+        var doc = iFrame.contentDocument || iFrame.contentWindow.document;
+        // We can tell if there is a dummy document installed because the dummy document
+        // will have an URL that starts with "about:".  The real document will not have that URL
+        if (doc.URL.indexOf("about:") !== 0) {
+            if (doc.readyState === "complete") {
+                ready.call(doc);
+            } else {
+                // set event listener for DOMContentLoaded on the new document
+                addEvent(doc, "DOMContentLoaded", ready);
+                addEvent(doc, "readystatechange", readyState);
+            }
+        } else {
+            // still same old original document, so keep looking for content or new document
+            timer = setTimeout(checkLoaded, 1);
+        }
+    }
+    checkLoaded();
 }
 
 window.Crypto = crypt = cx = {
