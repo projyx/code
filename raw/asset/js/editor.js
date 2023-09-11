@@ -6,20 +6,21 @@ window.editor.tree.cd = async function(dir) {
     console.log(5, 'editor.tree.cd', dir, feed.path);
 
     var fp = feed.path.split("/").filter(n=>n.length > 0);
-    var fref = fp.splice(5, fp.length - 1).filter(n=>n.length > 0);
+    var fref = fp.splice(0, fp.length - 1).filter(n=>n.length > 0);
     var uri = window.location.pathname;
     var paths = uri.split("/").splice(1).filter(n=>n.length > 0);
     var split = feed.path.split("/").filter(n=>n.length > 0);
     var href = split.splice(5, split.length - 1).filter(n=>n.length > 0);
-    var path = [].join("/") + "/" + dir;
+    var path = feed.path + "/" + dir;
     console.log(12, 'editor.tree.cd', {
         dir,
         feed: feed.path,
+        fp,
         fref,
         href,
         path
     });
-    var json = await github.repos.contents(paths[0], paths[1], feed.path + path);
+    var json = await github.repos.contents(paths[0], paths[1], path);
     json.sort((i,o)=>i.type.localeCompare(o.type));
     console.log(261, {
         json
@@ -69,15 +70,15 @@ window.editor.tree.cd = async function(dir) {
 }
 window.editor.tree.ls = async function(dir) {
     const feed = document.getElementById('files-list');
-    console.log(5, 'editor.tree.cd', dir, feed.path);
+    console.log(5, 'editor.tree.ls', dir, feed.path);
 
     var fp = feed.path.split("/").filter(n=>n.length > 0);
-    var fref = fp.splice(5, fp.length - 1).filter(n=>n.length > 0);
+    var fref = fp.splice(0, fp.length - 1).filter(n=>n.length > 0);
     var uri = window.location.pathname;
     var paths = uri.split("/").splice(1).filter(n=>n.length > 0);
     var split = feed.path.split("/").filter(n=>n.length > 0);
     var href = split.splice(5, split.length - 1).filter(n=>n.length > 0);
-    var path = [].join("/") + "/" + dir;
+    var path = (fref.length > 0 ? '/' : '') + fref.join("/");
     console.log(12, 'editor.tree.cd', {
         dir,
         feed: feed.path,
@@ -85,7 +86,7 @@ window.editor.tree.ls = async function(dir) {
         href,
         path
     });
-    var json = await github.repos.contents(paths[0], paths[1], feed.path + path);
+    var json = await github.repos.contents(paths[0], paths[1], path);
     json.sort((i,o)=>i.type.localeCompare(o.type));
     console.log(261, {
         json
