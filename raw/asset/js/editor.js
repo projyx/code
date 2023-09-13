@@ -161,11 +161,15 @@ window.editor.tree.nl = async function(target) {
         tabs.lastElementChild.onclick = function(e) {
             var target = e.target.closest('text');
             var path = target.getAttribute('path');
-            Array.from(code.children).forEach(tab=>{
+            Array.from(tabs.children).forEach(tab=>{
                 tab.classList.remove('active');
+            }
+            );
+            Array.from(code.children).forEach(tab=>{
                 tab.removeAttribute('css-display', 'none');
             }
             );
+            tabs.querySelector('text[path="' + path + '"]').classList.add('active');
             code.querySelector('cell[path="' + path + '"]').setAttribute('css-display', 'flex');
         }
         Array.from(tabs.children).forEach(tab=>{

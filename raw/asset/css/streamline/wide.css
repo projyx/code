@@ -211,6 +211,7 @@
     [component="wide"] .dev-tools .tab-sources .sources-panel button {
         color: #999;
         height: 16px;
+        padding: 0 10px;
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-panel text {
@@ -227,8 +228,8 @@
         background: black;
     }
 
-    [component="wide"] .dev-tools .tab-sources .sources-panel text:hover {
-        background: #333;
+    [component="wide"] .dev-tools .tab-sources .sources-panel text:not(.active):hover {
+        background: #444;
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-panel text > i con {
@@ -241,7 +242,7 @@
         display: flex;
         /* gap: 20px; */
         height: 23px;
-        padding: 0 10px;
+        /* padding: 0 10px; */
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-panel > column {
