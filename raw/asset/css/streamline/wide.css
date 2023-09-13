@@ -214,10 +214,21 @@
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-panel text {
+        align-items: center;
         color: #999;
         display: flex;
         font-size: 13px;
         gap: 5px;
+        height: 23px;
+        padding: 0 10px;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel text.active {
+        background: black;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel text:hover {
+        background: #333;
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-panel text > i con {
@@ -228,7 +239,7 @@
         align-items: center;
         border-bottom: 1px solid #555;
         display: flex;
-        gap: 20px;
+        /* gap: 20px; */
         height: 23px;
         padding: 0 10px;
     }

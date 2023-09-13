@@ -141,41 +141,115 @@ window.editor.tree.nl = async function(target) {
     var uri = window.location.pathname;
     var paths = uri.split("/").filter(n=>n.length > 0);
     var split = paths.splice(5, paths.length - 1).filter(n=>n.length > 0);
-    var repo = paths[0] + '/' + paths[1];
+    var owner = paths[0];
+    var repo = paths[1];
+    var fullname = owner + '/' + paths[1];
     var feed = target.closest('#files-list');
     var filename = target.closest('span').textContent;
     var path = feed.path + "/" + filename;
+    var ext = filename.split('.')[filename.split('.').length - 1];
     var component = target.closest('component');
+
+    var tabs = component.querySelector('.sources-panel > header');
     var code = component.querySelector('.sources-panel > section');
-    var cell = document.createElement('cell');
-    console.log(code,cell);
-    code.insertAdjacentHTML('beforeend', cell.outerHTML);
-    var tab = code.lastElementChid;
-    console.log(146, {
-        uri,
-        repo,
-        feed: feed.path,
-        filename,
-        path,
-        component,
-        code,
-        tab
-    });
-    Array.from(code.children).forEach(tab=>{
-        console.log(168, tab);
-        tab.removeAttribute('css-display', 'none');
+    console.log(path);
+    if (!code.querySelector('cell[path="' + path + '"]')) {
+        var tab = tabs.nextElementSibling.content.firstElementChild.cloneNode(true);
+        tab.querySelector('[placeholder="file.ext"]').textContent = filename;
+        tab.setAttribute('path', path);
+        tabs.insertAdjacentHTML('beforeend', tab.outerHTML);
+        tabs.lastElementChild.onclick = function(e) {
+            var target = e.target.closest('text');
+            var path = target.getAttribute('path');
+            Array.from(code.children).forEach(tab=>{
+                tab.classList.remove('active');
+                tab.removeAttribute('css-display', 'none');
+            }
+            );
+            code.querySelector('cell[path="' + path + '"]').setAttribute('css-display', 'flex');
+        }
+        Array.from(tabs.children).forEach(tab=>{
+            tab.classList.remove('active');
+            tab.removeAttribute('css-display', 'none');
+        }
+        );
+        tabs.lastElementChild.classList.add('active');
+
+        var cell = document.createElement('cell');
+        console.log(code, cell);
+        code.insertAdjacentHTML('beforeend', cell.outerHTML);
+        var tab = code.lastElementChid;
+        console.log(146, {
+            uri,
+            repo,
+            feed: feed.path,
+            filename,
+            path,
+            ext,
+            component,
+            code,
+            tab
+        });
+        Array.from(code.children).forEach(tab=>{
+            tab.removeAttribute('css-display', 'none');
+        }
+        );
+        var mime = null;
+        if (ext === "html") {
+            mime = 'text/html';
+        } else if (ext === "js") {
+            mime = "text/javascript";
+        } else if (ext === "css") {
+            mime = "text/css";
+        }
+        code.lastElementChild.setAttribute('id', Crypto.uid.create(1));
+        code.lastElementChild.setAttribute('path', path);
+        code.lastElementChild.setAttribute('css-display', 'flex');
+        code.lastElementChild.cm = CodeMirror(code.lastElementChild, {
+            lineNumbers: true,
+            lineWrapping: true,
+            htmlMode: true,
+            mode: mime,
+            styleActiveLine: true,
+            theme: 'abcdef',
+            matchBrackets: true
+        });
+
+        var content = await github.raw.file({
+            owner,
+            repo,
+            resource: path
+        });
+        //console.log(158, content);
+        code.lastElementChild.cm.setValue(content);
+    } else {
+        Array.from(tabs.children).forEach(tab=>{
+            tab.classList.remove('active');
+            tab.removeAttribute('css-display', 'none');
+        }
+        );
+        tabs.querySelector('[path="' + path + '"]').classList.add('active');
+        code.querySelector('[path="' + path + '"]').classList.add('active');
+
+        var cell = document.createElement('cell');
+        console.log(code, cell);
+        code.insertAdjacentHTML('beforeend', cell.outerHTML);
+        var tab = code.lastElementChid;
+        console.log(146, {
+            uri,
+            repo,
+            feed: feed.path,
+            filename,
+            path,
+            ext,
+            component,
+            code,
+            tab
+        });
+        Array.from(code.children).forEach(tab=>{
+            tab.removeAttribute('css-display', 'none');
+        }
+        );
+        code.querySelector('cell[path="' + path + '"]').setAttribute('css-display', 'flex');
     }
-    );
-    code.lastElementChild.setAttribute('id', Crypto.uid.create(1));
-    code.lastElementChild.setAttribute('path', path);
-    code.lastElementChild.setAttribute('css-display', 'flex');
-    CodeMirror(code.lastElementChild, {
-        lineNumbers: true,
-        lineWrapping: true,
-        htmlMode: true,
-        mode: 'xml',
-        styleActiveLine: true,
-        theme: 'abcdef',
-        matchBrackets: true
-    });
 }

@@ -286,6 +286,7 @@ window.routes = function(uri, options) {
                                             folder.querySelector('span').textContent = row.name;
                                             feed.insertAdjacentHTML('beforeend', folder.outerHTML);
                                             feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.cd(e.target.closest('text').querySelector('span').textContent);
+                                            feed.lastElementChild.classList.add('active');
                                             //console.log(290, feed, folder.outerHTML);
                                         }
                                         if (row.type === "file") {
@@ -295,6 +296,12 @@ window.routes = function(uri, options) {
                                             file.querySelector('span').textContent = row.name;
                                             feed.insertAdjacentHTML('beforeend', file.outerHTML);
                                             feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.nl(e.target);
+                                            Array.from(feed.children).forEach(tab=>{
+                                                tab.classList.remove('active');
+                                                tab.removeAttribute('css-display', 'none');
+                                            }
+                                            );
+                                            feed.lastElementChild.classList.add('active');
                                             console.log(paths[0] + '/' + paths[1], feed.path + row.name);
                                         }
                                         i++;

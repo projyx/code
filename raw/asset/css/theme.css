@@ -26,3 +26,17 @@
         color: #c53535;
     }
 }
+
+/*SCROLLBAR*/
+::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgb(52 52 52);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a2a2a2;
+}
