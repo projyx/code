@@ -281,8 +281,13 @@
         width: 100%;
     }
 
+    [component="wide"] .dev-tools .tab-sources .sources-panel > section > cell:not([css-display]) {
+        display: none;
+    }
+
     [component="wide"] .dev-tools .tab-sources .sources-panel > section > cell > .CodeMirror {
-        height: 100%
+        height: 100%;
+        width: 100%;
     }
     
     [component="wide"] .dev-tools .tools-tabs {

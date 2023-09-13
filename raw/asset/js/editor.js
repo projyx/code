@@ -168,7 +168,7 @@ window.editor.tree.nl = async function(target) {
     );
     code.lastElementChild.setAttribute('id', Crypto.uid.create(1));
     code.lastElementChild.setAttribute('path', path);
-    //code.lastElementChild.setAttribute('css-display', 'flex');
+    code.lastElementChild.setAttribute('css-display', 'flex');
     CodeMirror(code.lastElementChild, {
         lineNumbers: true,
         lineWrapping: true,
