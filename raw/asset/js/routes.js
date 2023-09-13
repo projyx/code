@@ -155,19 +155,12 @@ window.routes = function(uri, options) {
 
                                         if (ext === "js") {
                                             cm[ext] = CodeMirror(component.querySelector('#code-js'), {
-
                                                 lineNumbers: true,
-
                                                 lineWrapping: true,
-
                                                 mode: 'javascript',
-
                                                 styleActiveLine: true,
-
                                                 theme: 'abcdef',
-
                                                 matchBrackets: true
-
                                             });
 
                                             cm[ext].setValue(content);
@@ -261,7 +254,7 @@ window.routes = function(uri, options) {
                                 var split = uri.split('/');
                                 var urt = split.splice(5, split.length - 1);
                                 feed.path = 0 < 1 ? "" : (urt.length > 1 ? "/" : "") + urt.join("/");
-                                                
+
                                 var href = uri.split("/").splice(1).filter(n=>n.length > 0);
                                 var path = href.splice(4, href.length - 1)
                                 var json = await github.repos.contents(paths[0], paths[1], feed.path);
@@ -301,6 +294,8 @@ window.routes = function(uri, options) {
                                             //file.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
                                             file.querySelector('span').textContent = row.name;
                                             feed.insertAdjacentHTML('beforeend', file.outerHTML);
+                                            feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.nl(e.target);
+                                            console.log(paths[0] + '/' + paths[1], feed.path + row.name);
                                         }
                                         i++;
                                     } while (i < json.length - 1)
@@ -360,6 +355,7 @@ window.routes = function(uri, options) {
                                     file.querySelector('[placeholder="File"]').setAttribute('href', "/" + dirs.join('/'));
                                     file.querySelector('[placeholder="File"]').textContent = row.name;
                                     feed.insertAdjacentHTML('beforeend', file.outerHTML);
+                                    feed.lastElementChild.querySelector('span').onclick = ()=>editor.tree.nl(feed.path, row.name);
                                 }
                                 i++;
                             } while (i < json.length - 1)

@@ -1,4 +1,12 @@
 @media {
+    [css-display="block"] {
+        display: none;
+    }
+    
+    [css-display="flex"] {
+        display: flex;
+    }
+    
     [css-display="none"] {
         display: none;
     }

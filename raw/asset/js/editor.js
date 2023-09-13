@@ -21,7 +21,7 @@ window.editor.tree.cd = async function(dir) {
         path
     });
     var json = await github.repos.contents(paths[0], paths[1], path);
-    json.sort((i,o)=>i.type.localeCompare(o.type));
+    //json.sort((i,o)=>i.type.localeCompare(o.type));
     console.log(261, {
         json
     });
@@ -62,7 +62,7 @@ window.editor.tree.cd = async function(dir) {
                 //file.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
                 file.querySelector('span').textContent = row.name;
                 feed.insertAdjacentHTML('beforeend', file.outerHTML);
-                feed.lastElementChild.querySelector('span').onclick = ()=>editor.tree.cd(row.name);
+                feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.nl(e.target);
             }
             i++;
         } while (i < json.length - 1)
@@ -128,9 +128,54 @@ window.editor.tree.ls = async function(dir) {
                 //file.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
                 file.querySelector('span').textContent = row.name;
                 feed.insertAdjacentHTML('beforeend', file.outerHTML);
-                feed.lastElementChild.querySelector('span').onclick = ()=>editor.tree.cd(row.name);
+                feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.nl(e.target);
             }
             i++;
         } while (i < json.length - 1)
     }
+}
+window.editor.tree.nl = async function(target) {
+    console.log(138, {
+        target
+    })
+    var uri = window.location.pathname;
+    var paths = uri.split("/").filter(n=>n.length > 0);
+    var split = paths.splice(5, paths.length - 1).filter(n=>n.length > 0);
+    var repo = paths[0] + '/' + paths[1];
+    var feed = target.closest('#files-list');
+    var filename = target.closest('span').textContent;
+    var path = feed.path + "/" + filename;
+    var component = target.closest('component');
+    var code = component.querySelector('.sources-panel > section');
+    var cell = document.createElement('cell');
+    console.log(code,cell);
+    code.insertAdjacentHTML('beforeend', cell.outerHTML);
+    var tab = code.lastElementChid;
+    console.log(146, {
+        uri,
+        repo,
+        feed: feed.path,
+        filename,
+        path,
+        component,
+        code,
+        tab
+    });
+    Array.from(code.children).forEach(tab=>{
+        console.log(168, tab);
+        tab.removeAttribute('css-display', 'none');
+    }
+    );
+    code.lastElementChild.setAttribute('id', Crypto.uid.create(1));
+    code.lastElementChild.setAttribute('path', path);
+    //code.lastElementChild.setAttribute('css-display', 'flex');
+    CodeMirror(code.lastElementChild, {
+        lineNumbers: true,
+        lineWrapping: true,
+        htmlMode: true,
+        mode: 'xml',
+        styleActiveLine: true,
+        theme: 'abcdef',
+        matchBrackets: true
+    });
 }

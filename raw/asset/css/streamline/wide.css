@@ -84,7 +84,10 @@
 @media {    
     [component="wide"] .dev-tools {
         border-right: 1px solid #555;
+        display: flex;
+        flex-direction: column;
         height: 100%;
+        overflow: hidden;
         width: 960px;
     }
     
@@ -93,11 +96,13 @@
         color: #999;
         font-size: 13px;
         line-height: 23px;
+        height: 23px;
         width: 100%;
     }
 
     [component="wide"] .dev-tools > column {
-        height: 100%;
+        flex: 1;
+        height: calc(100% - 23px);
     }
 
     [component="wide"] .dev-tools .tab-sources {
@@ -200,6 +205,12 @@
         flex-direction: column;
         flex: 1;
         height: 100%;
+        overflow: hidden;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel button {
+        color: #999;
+        height: 16px;
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-panel text {
@@ -222,8 +233,56 @@
         padding: 0 10px;
     }
 
-    [component="wide"] .dev-tools .tab-sources .sources-panel > section {
+    [component="wide"] .dev-tools .tab-sources .sources-panel > column {
+        background: transparent;
+        flex: 1;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel > column > cell {
+        /* display: none; */
+        height: 100%;
+        overflow-x: hidden;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel > column > cell > div{
+        /* display: none; */
+        height: calc(100% - 181px);
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel > column > [css-display] {
+        background: transparent;
+        /* display:  flex; */
+        flex: 1;
+        height: 100%;
         width: 100%;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel > column > [css-display] .CodeMirror {
+        /* background: transparent; */
+        /* display:  flex; */
+        /* flex: 1; */
+        height: 100%;
+        /* width: 100%; */
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel > column > [css-display] div {
+        /* height: 100%; */
+        width: 100%;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel > section {
+        flex: 1;
+        height: calc(100% - 23px);
+        width: 100%;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel > section > cell {
+        height: 100%;
+        width: 100%;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel > section > cell > .CodeMirror {
+        height: 100%
     }
     
     [component="wide"] .dev-tools .tools-tabs {
@@ -237,5 +296,11 @@
     [component="wide"] .dev-tools .tools-tabs box:hover {
         background: #444;
         color: #fff;
+    }
+}
+
+@media {
+    [component="wide"] .dev-tools .tab-sources .sources-panel > column > .CodeMirror[css-display="flex"] {
+        height: 50%;
     }
 }
