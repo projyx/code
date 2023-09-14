@@ -221,7 +221,10 @@
         font-size: 13px;
         gap: 5px;
         height: 23px;
-        padding: 0 10px;
+        max-width: 120px;
+        padding: 0 22px 0 10px;
+        position: relative;
+        text-overflow: ellipsis;
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-panel text.active {
@@ -234,6 +237,15 @@
 
     [component="wide"] .dev-tools .tab-sources .sources-panel text > i con {
         --ggs: calc(2/3);
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel text i:last-child {
+        position: absolute;
+        right: 0;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-panel text:not(.active):not(:hover) i:last-child {
+        display: none;
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-panel > header {
