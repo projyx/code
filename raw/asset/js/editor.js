@@ -159,18 +159,35 @@ window.editor.tree.nl = async function(target) {
         tab.setAttribute('path', path);
         tabs.insertAdjacentHTML('beforeend', tab.outerHTML);
         tabs.lastElementChild.onclick = function(e) {
+            console.log(164, e.target);
             var target = e.target.closest('text');
-            var path = target.getAttribute('path');
-            Array.from(tabs.children).forEach(tab=>{
-                tab.classList.remove('active');
+            var close = e.target.closest('i:has(.icon-exit)');
+            console.log(165, close);
+
+            if (close) {
+
+                console.log(123);
+                close.closest('text').remove();
+                var text = close.closest('text');
+                var path = text.getAttribute('path');
+                var mirr = code.querySelector('cell[path="' + path + '"]');
+                mirr.remove();
+                
+            } else {
+
+                var path = target.getAttribute('path');
+                Array.from(tabs.children).forEach(tab=>{
+                    tab.classList.remove('active');
+                }
+                );
+                Array.from(code.children).forEach(tab=>{
+                    tab.removeAttribute('css-display', 'none');
+                }
+                );
+                tabs.querySelector('text[path="' + path + '"]').classList.add('active');
+                code.querySelector('cell[path="' + path + '"]').setAttribute('css-display', 'flex');
+
             }
-            );
-            Array.from(code.children).forEach(tab=>{
-                tab.removeAttribute('css-display', 'none');
-            }
-            );
-            tabs.querySelector('text[path="' + path + '"]').classList.add('active');
-            code.querySelector('cell[path="' + path + '"]').setAttribute('css-display', 'flex');
         }
         Array.from(tabs.children).forEach(tab=>{
             tab.classList.remove('active');
@@ -251,7 +268,7 @@ window.editor.tree.nl = async function(target) {
             tab
         });
         Array.from(code.children).forEach(tab=>{
-            tab.removeAttribute('css-display', 'none');
+            //tab.removeAttribute('css-display', 'none');
         }
         );
         code.querySelector('cell[path="' + path + '"]').setAttribute('css-display', 'flex');

@@ -302,7 +302,7 @@ window.routes = function(uri, options) {
                                             }
                                             );
                                             feed.lastElementChild.classList.add('active');
-                                            console.log(paths[0] + '/' + paths[1], feed.path + row.name);
+                                            //console.log(paths[0] + '/' + paths[1], feed.path + row.name);
                                         }
                                         i++;
                                     } while (i < json.length - 1)
