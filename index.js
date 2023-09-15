@@ -55,14 +55,16 @@ window.onload = async(event)=>{
             });
         } else {
             localStorage.removeItem('githubAccessToken');
-                Array.from(document.body.querySelectorAll(".avatar-image")).forEach(function(avatar) {
-                    avatar.innerHTML = "";
-                });
+            Array.from(document.body.querySelectorAll(".avatar-image")).forEach(function(avatar) {
+                avatar.innerHTML = "";
+            });
         }
         //dom.body.dataset.load = "ed";
     }
     );
     document.body.onclick = window.events.onclick.document;
+    
+    document.onkeydown = window.events.onkeydown;
 }
 
 window.onpopstate = (event)=>{

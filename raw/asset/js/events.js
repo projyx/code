@@ -61,4 +61,14 @@ window.events.onclick.exit = function(event) {
     rout.er(href);
 }
 
+window.events.onkeydown = function(e) {
+    if (e.ctrlKey) {
+        console.log(e);
+        if (e.keyCode === 83) {
+            //alert("Ctrl+s");
+            e.preventDefault();
+        }
+    }
+}
+
 window.events.onsubmit = {};
