@@ -291,7 +291,7 @@ github.database.trees = function(params, settings) {
 }
 
 github.orgs = {};
-github.orgs.members = async(org,username) => {
+github.orgs.members = async(org,username)=>{
     return new Promise(function(resolve, reject) {
         const url = github.endpoint + "/orgs/" + org + "/members/" + username;
         const a = data=>{
@@ -310,7 +310,7 @@ github.orgs.members = async(org,username) => {
         } : null;
         fetch(url, settings).then(a).catch(b);
     }
-    );    
+    );
 }
 github.orgs.repos = (org)=>{
     return new Promise(function(resolve, reject) {
@@ -384,7 +384,8 @@ github.raw.file = async(params)=>{
             } else {
                 return response.text()
             }
-        }).then((response)=>{
+        }
+        ).then((response)=>{
             resolve(response);
         }
         ).catch((e)=>{
@@ -396,6 +397,25 @@ github.raw.file = async(params)=>{
 }
 
 github.repos = {};
+github.repos.content = (params,settings)=>{
+    return new Promise(function(resolve, reject) {
+        const url = github.endpoint + "/repos/" + params.owner + "/" + params.repo + "/contents/" + params.path;
+        const a = data=>{
+            resolve(data);
+        }
+        const b = (error)=>{
+            console.log(error);
+            reject(error);
+        }
+        const accessToken = localStorage.githubAccessToken;
+        accessToken ? settings.headers = {
+            Accept: "application/vnd.github+json",
+            Authorization: "token " + accessToken
+        } : null;
+        request(url, settings).then(a).catch(b);
+    }
+    );
+}
 github.repos.contents = (owner,repo,path)=>{
     return new Promise(function(resolve, reject) {
         const url = github.endpoint + "/repos/" + owner + "/" + repo + "/contents/" + path;
@@ -412,7 +432,7 @@ github.repos.contents = (owner,repo,path)=>{
                 Accept: "application/vnd.github+json",
                 Authorization: "token " + accessToken
             }
-        } : null;
+        } : null;        
         request(url, settings).then(a).catch(b);
     }
     );

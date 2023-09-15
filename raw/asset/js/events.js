@@ -61,12 +61,41 @@ window.events.onclick.exit = function(event) {
     rout.er(href);
 }
 
-window.events.onkeydown = function(e) {
+window.events.onkeydown = async function(e) {
     if (e.ctrlKey) {
-        console.log(e);
         if (e.keyCode === 83) {
-            //alert("Ctrl+s");
             e.preventDefault();
+            if (confirm("Are you sure you want to save this file?")) {
+                var mirror = document.body.querySelector('cell[css-display="flex"]:has(.CodeMirror)');
+                var paths = window.location.pathname.split('/').filter(o=>o.length > 0);
+                var owner = paths[0];
+                var repo = paths[1];
+                var file = mirror.closest('component').querySelector('.sources-panel text[path].active').textContent;
+                var path = paths.splice(4, paths.length - 1).join("/") + file;
+                var params = {
+                    owner,
+                    repo,
+                    path
+                };
+                var name = "";
+                var email = "";
+                var commiter = {
+                    name,
+                    email
+                }
+                var code = mirror.cm.getValue();
+                var content = btoa(code);
+                var message = "Update file"
+                var settings = {
+                    body: JSON.stringify({
+                        content,
+                        message
+                    }),
+                    method: "PUT"
+                };
+                console.log(params, settings);
+                var req = await github.repos.content(params, settings)
+            }
         }
     }
 }
