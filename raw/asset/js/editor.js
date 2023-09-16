@@ -254,6 +254,10 @@ window.editor.tree.nl = async function(target) {
         });
         //console.log(158, content);
         code.lastElementChild.cm.setValue(content);
+        code.lastElementChild.cm.on("change", function(event) {
+            console.log(event);
+            editor.window.preview(event);
+        })
     } else {
         Array.from(tabs.children).forEach(tab=>{
             tab.classList.remove('active');
@@ -282,5 +286,20 @@ window.editor.tree.nl = async function(target) {
         }
         );
         code.querySelector('cell[path="' + path + '"]').setAttribute('css-display', 'flex');
+    }
+}
+
+editor.window = {};
+editor.window.preview = function(event) {
+    var mode = event.options.mode;
+    var tab = document.querySelector('.sources-panel text[path].active');
+    var path = tab.getAttribute('path');
+    var cm = event.doc.cm;
+    var content = cm.getValue();
+    if (event.options.mode === "text/css") {
+        console.log('editor.window.preview', {
+            path,
+            content
+        });
     }
 }

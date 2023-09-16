@@ -267,7 +267,7 @@ async function wIDE(paths) {
                 var json = await github.repos.contents({
                     owner: paths[0],
                     repo: paths[1],
-                    path: uri.pathname.split('/').filter(o => o.length > 0).join('/')
+                    path: uri.pathname.split('/').filter(o=>o.length > 0).join('/')
                 });
                 var text = atob(json.content);
                 var blob = getBlobURL(text, 'text/javascript');
@@ -322,9 +322,7 @@ async function wIDE(paths) {
             <script>${js}</script>
             ${elem}
           </head>
-          <body>
-            ${body.innerHTML}
-          </body>
+          ${body.outerHTML}
         </html>
     `;
 
