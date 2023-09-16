@@ -257,7 +257,11 @@ window.routes = function(uri, options) {
 
                                 var href = uri.split("/").splice(1).filter(n=>n.length > 0);
                                 var path = href.splice(4, href.length - 1)
-                                var json = await github.repos.contents(paths[0], paths[1], feed.path);
+                                var json = await github.repos.contents({
+                                    owner: paths[0],
+                                    repo: paths[1],
+                                    path: feed.path
+                                });
                                 json.sort((i,o)=>i.type.localeCompare(o.type));
                                 console.log(261, {
                                     json,
@@ -334,7 +338,11 @@ window.routes = function(uri, options) {
 
                         var href = uri.split("/").splice(1).filter(n=>n.length > 0);
                         var path = href.splice(4, href.length - 1)
-                        var json = await github.repos.contents(paths[0], paths[1], path.join('/'));
+                        var json = await github.repos.contents({
+                            owner: paths[0],
+                            repo: paths[1],
+                            path: path.join('/')
+                        });
                         console.log(258, {
                             json,
                             path

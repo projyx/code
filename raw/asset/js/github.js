@@ -366,14 +366,21 @@ github.raw.blob = async(params)=>{
     );
 }
 github.raw.file = async(params)=>{
+    var url = "https://api.github.com/repos/" + params.owner + "/" + params.repo + "/contents" + params.resource;
+    var settings = {
+        cache: "no-store",
+        headers: {
+            'If-None-Match': ''
+        }
+    };
+    const accessToken = localStorage.githubAccessToken;
+    if(accessToken) {
+        settings.headers.Accept = "application/vnd.github.raw",
+        settings.headers.Authorization = "token " + accessToken        
+    };
+    console.log(url, settings);
     return new Promise((resolve,reject)=>{
-        fetch("https://api.github.com/repos/" + params.owner + "/" + params.repo + "/contents" + params.resource, {
-            cache: "reload",
-            headers: {
-                Accept: "application/vnd.github.raw",
-                Authorization: "token " + localStorage.githubAccessToken
-            }
-        }).then(async(response)=>{
+        fetch(url, settings).then(async(response)=>{
             if (response.status === 404) {
                 var res = await response.json();
                 var json = {
@@ -397,7 +404,8 @@ github.raw.file = async(params)=>{
 }
 
 github.repos = {};
-github.repos.content = (params,settings)=>{
+github.repos.contents = (params,settings)=>{
+    settings ? null : settings = {};
     return new Promise(function(resolve, reject) {
         const url = github.endpoint + "/repos/" + params.owner + "/" + params.repo + "/contents/" + params.path;
         const a = data=>{
@@ -412,27 +420,22 @@ github.repos.content = (params,settings)=>{
             Accept: "application/vnd.github+json",
             Authorization: "token " + accessToken
         } : null;
-        request(url, settings).then(a).catch(b);
-    }
-    );
-}
-github.repos.contents = (owner,repo,path)=>{
-    return new Promise(function(resolve, reject) {
-        const url = github.endpoint + "/repos/" + owner + "/" + repo + "/contents/" + path;
-        const a = data=>{
-            resolve(data);
-        }
-        const b = (error)=>{
-            console.log(error);
-            reject(error);
-        }
-        const accessToken = localStorage.githubAccessToken;
-        const settings = accessToken ? {
-            headers: {
-                Accept: "application/vnd.github+json",
-                Authorization: "token " + accessToken
+        if (settings) {
+            if (settings.headers) {
+                settings.headers['If-None-Match'] = "";
+            } else {
+                settings.headers = {
+                    'If-None-Match': ''
+                };
             }
-        } : null;        
+        } else {
+            settings = {
+                headers: {
+                    'If-None-Match': ''
+                }
+            };
+        }
+        console.log(url, settings);
         request(url, settings).then(a).catch(b);
     }
     );

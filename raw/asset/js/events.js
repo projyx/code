@@ -65,37 +65,40 @@ window.events.onkeydown = async function(e) {
     if (e.ctrlKey) {
         if (e.keyCode === 83) {
             e.preventDefault();
-            if (confirm("Are you sure you want to save this file?")) {
-                var mirror = document.body.querySelector('cell[css-display="flex"]:has(.CodeMirror)');
-                var paths = window.location.pathname.split('/').filter(o=>o.length > 0);
-                var owner = paths[0];
-                var repo = paths[1];
-                var file = mirror.closest('component').querySelector('.sources-panel text[path].active').textContent;
-                var path = paths.splice(4, paths.length - 1).join("/") + file;
-                var params = {
-                    owner,
-                    repo,
-                    path
-                };
-                var name = "";
-                var email = "";
-                var commiter = {
-                    name,
-                    email
-                }
-                var code = mirror.cm.getValue();
-                var content = btoa(code);
-                var message = "Update file"
-                var settings = {
-                    body: JSON.stringify({
-                        content,
-                        message
-                    }),
-                    method: "PUT"
-                };
-                console.log(params, settings);
-                var req = await github.repos.content(params, settings)
+            //if (confirm("Are you sure you want to save this file?")) {
+            var mirror = document.body.querySelector('cell[css-display="flex"]:has(.CodeMirror)');
+            var filepath = document.body.querySelector('.sources-panel text.active').getAttribute('path').split('/').filter(o=>o.length > 0);
+            var paths = window.location.pathname.split('/').filter(o=>o.length > 0);
+            var owner = paths[0];
+            var repo = paths[1];
+            var file = mirror.closest('component').querySelector('.sources-panel text[path].active').textContent;
+            var path = filepath.join("/");
+            var params = {
+                owner,
+                repo,
+                path
+            };
+            var name = "";
+            var email = "";
+            var commiter = {
+                name,
+                email
             }
+            var code = mirror.cm.getValue();
+            var content = btoa(code);
+            var message = "Update file"
+            var sha = mirror.closest('component').querySelector('.sources-panel text[path].active').getAttribute('sha');
+            var settings = {
+                body: JSON.stringify({
+                    content,
+                    message,
+                    sha
+                }),
+                method: "PUT"
+            };
+            console.log(96, params, settings);
+            var req = await github.repos.contents(params, settings)
+            //}
         }
     }
 }

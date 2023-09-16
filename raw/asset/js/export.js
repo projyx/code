@@ -263,7 +263,12 @@ async function wIDE(paths) {
             if (0 < 1) {
                 var uri = new URL(link.href);
                 var path = uri.pathname;
-                var json = await github.repos.contents(paths[0], paths[1], path);
+                console.log(path);
+                var json = await github.repos.contents({
+                    owner: paths[0],
+                    repo: paths[1],
+                    path: uri.pathname.split('/').filter(o => o.length > 0).join('/')
+                });
                 var text = atob(json.content);
                 var blob = getBlobURL(text, 'text/javascript');
                 var elem = `<link rel="stylesheet" type="text/css" href="${blob}" />`
@@ -284,7 +289,11 @@ async function wIDE(paths) {
                 if (script.src.startsWith("http")) {
                     var uri = new URL(script.src);
                     var path = uri.pathname;
-                    var json = await github.repos.contents(paths[0], paths[1], path);
+                    var json = await github.repos.contents({
+                        owner: paths[0],
+                        repo: paths[1],
+                        path: path
+                    });
                     var text = atob(json.content);
                     var blob = getBlobURL(text, 'text/javascript');
                     var elem = `<script src="${blob}" data-src="${script.src}">${atob('PC9zY3JpcHQ+')}`;
@@ -357,7 +366,7 @@ function iFrameReady(iFrame, fn) {
         if (elem.addEventListener) {
             return elem.addEventListener(event, fn);
         } else {
-            return elem.attachEvent("on" + event, function () {
+            return elem.attachEvent("on" + event, function() {
                 return fn.call(elem, window.event);
             });
         }

@@ -20,7 +20,11 @@ window.editor.tree.cd = async function(dir) {
         href,
         path
     });
-    var json = await github.repos.contents(paths[0], paths[1], path);
+    var json = await github.repos.contents({
+        owner: paths[0],
+        repo: paths[1],
+        path: path
+    });
     //json.sort((i,o)=>i.type.localeCompare(o.type));
     console.log(261, {
         json
@@ -154,9 +158,16 @@ window.editor.tree.nl = async function(target) {
     var code = component.querySelector('.sources-panel > section');
     console.log(path);
     if (!code.querySelector('cell[path="' + path + '"]')) {
+        var res = await github.repos.contents({
+            owner: owner,
+            repo: repo,
+            path: path
+        })
+        var sha = res.sha;
         var tab = tabs.nextElementSibling.content.firstElementChild.cloneNode(true);
         tab.querySelector('[placeholder="file.ext"]').textContent = filename;
         tab.setAttribute('path', path);
+        tab.setAttribute('sha', sha);
         tabs.insertAdjacentHTML('beforeend', tab.outerHTML);
         tabs.lastElementChild.onclick = function(e) {
             console.log(164, e.target);
@@ -172,7 +183,7 @@ window.editor.tree.nl = async function(target) {
                 var path = text.getAttribute('path');
                 var mirr = code.querySelector('cell[path="' + path + '"]');
                 mirr.remove();
-                
+
             } else {
 
                 var path = target.getAttribute('path');
@@ -267,8 +278,7 @@ window.editor.tree.nl = async function(target) {
             code,
             tab
         });
-        Array.from(code.children).forEach(tab=>{
-            //tab.removeAttribute('css-display', 'none');
+        Array.from(code.children).forEach(tab=>{//tab.removeAttribute('css-display', 'none');
         }
         );
         code.querySelector('cell[path="' + path + '"]').setAttribute('css-display', 'flex');
