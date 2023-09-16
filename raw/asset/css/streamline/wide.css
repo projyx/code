@@ -11,6 +11,7 @@
 
 @media {    
     [component="wide"] .live-preview {
+        border-left: 1px solid #555;
         flex: 1;
         height: 100%;
     }
