@@ -255,7 +255,6 @@ window.editor.tree.nl = async function(target) {
         //console.log(158, content);
         code.lastElementChild.cm.setValue(content);
         code.lastElementChild.cm.on("change", function(event) {
-            console.log(event);
             editor.window.preview(event);
         })
     } else {
@@ -292,14 +291,26 @@ window.editor.tree.nl = async function(target) {
 editor.window = {};
 editor.window.preview = function(event) {
     var mode = event.options.mode;
-    var tab = document.querySelector('.sources-panel text[path].active');
-    var path = tab.getAttribute('path');
     var cm = event.doc.cm;
     var content = cm.getValue();
-    if (event.options.mode === "text/css") {
+    var tab = document.querySelector('.sources-panel text[path].active');
+    var iframe = tab.closest('component').querySelector('iframe');
+    var path = tab.getAttribute('path');
+    console.log(event, {
+        iframe
+    });
+    
+    if (mode === "text/css") {
+        var link = iframe.contentWindow.document.head.querySelector('link[data-src="' + path + '"]');
+        var src = link.dataset.src;
+        var blob = getBlobURL(content, mode);
         console.log('editor.window.preview', {
+            blob,
+            link,
+            src,
             path,
-            content
+            content,
         });
+        link.href = blob;
     }
 }

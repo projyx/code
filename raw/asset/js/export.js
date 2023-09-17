@@ -87,7 +87,7 @@ async function pvw(e) {
                 var json = await github.repos.contents(owner, repo, path);
                 var text = atob(json.content);
                 var blob = getBlobURL(text, 'text/javascript');
-                var elem = `<link rel="stylesheet" type="text/css" href="${blob}" />`
+                var elem = `<link data-src="${link.href}" rel="stylesheet" type="text/css" href="${blob}" />`
                 //console.log(path, {json,text,blob});
                 l.push(elem)
                 //console.log(164, l);
@@ -188,7 +188,7 @@ async function pvw(e) {
 
   `;
 
-    0 > 1 ? console.log(211, dom.iframe.code, dom.iframe.code.head, {
+    0 < 1 ? console.log(211, dom.iframe.code, dom.iframe.code.head, {
         html,
         src,
         head,
@@ -271,7 +271,7 @@ async function wIDE(paths) {
                 });
                 var text = atob(json.content);
                 var blob = getBlobURL(text, 'text/javascript');
-                var elem = `<link rel="stylesheet" type="text/css" href="${blob}" />`
+                var elem = `<link data-src="${uri.pathname}" rel="stylesheet" type="text/css" href="${blob}" />`
                 //console.log(path, {json,text,blob});
                 l.push(elem)
                 //console.log(164, l);
