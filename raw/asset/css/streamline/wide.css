@@ -156,7 +156,7 @@
         height: 100%;
         width: 300px;
     }
-
+    
     [component="wide"] .dev-tools .tab-sources > section {
         display: flex;
         flex: 1;

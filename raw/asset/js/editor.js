@@ -290,13 +290,14 @@ window.editor.tree.nl = async function(target) {
 
 editor.window = {};
 editor.window.preview = function(event) {
+    console.log(293, 'editor.window.preview', event);
     var mode = event.options.mode;
     var cm = event.doc.cm;
     var content = cm.getValue();
     var tab = document.querySelector('.sources-panel text[path].active');
     var iframe = tab.closest('component').querySelector('iframe');
     var path = tab.getAttribute('path');
-    console.log(event, {
+    console.log(300, 'editor.window.preview', {
         iframe
     });
     
@@ -304,7 +305,7 @@ editor.window.preview = function(event) {
         var link = iframe.contentWindow.document.head.querySelector('link[data-src="' + path + '"]');
         var src = link.dataset.src;
         var blob = getBlobURL(content, mode);
-        console.log('editor.window.preview', {
+        console.log('editor.window.preview text/css', {
             blob,
             link,
             src,

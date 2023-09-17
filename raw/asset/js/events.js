@@ -65,19 +65,25 @@ window.events.onkeydown = async function(e) {
     if (e.ctrlKey) {
         if (e.keyCode === 83) {
             e.preventDefault();
-            //if (confirm("Are you sure you want to save this file?")) {
             var mirror = document.body.querySelector('cell[css-display="flex"]:has(.CodeMirror)');
             var filepath = document.body.querySelector('.sources-panel text.active').getAttribute('path').split('/').filter(o=>o.length > 0);
             var paths = window.location.pathname.split('/').filter(o=>o.length > 0);
             var owner = paths[0];
             var repo = paths[1];
-            var file = mirror.closest('component').querySelector('.sources-panel text[path].active').textContent;
+            var file = filepath[filepath.length - 1];
+            var exts = file.split('.');
+            var ext = exts[exts.length - 1];
             var path = filepath.join("/");
             var params = {
                 owner,
                 repo,
                 path
             };
+            console.log(81, {
+                file,
+                ext
+            }, params);
+
             var name = "";
             var email = "";
             var commiter = {
@@ -97,8 +103,16 @@ window.events.onkeydown = async function(e) {
                 method: "PUT"
             };
             console.log(96, params, settings);
-            var req = await github.repos.contents(params, settings)
-            //}
+            //var req = await github.repos.contents(params, settings)
+
+            if (ext === "css") {//alert("CSS file saved");                
+            }
+
+            if (ext === "html") {
+                var event = mirror.cm;
+                console.log(event);
+                editor.window.preview(event);
+            }
         }
     }
 }
