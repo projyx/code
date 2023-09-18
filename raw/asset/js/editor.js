@@ -90,7 +90,11 @@ window.editor.tree.ls = async function(dir) {
         href,
         path
     });
-    var json = await github.repos.contents(paths[0], paths[1], path);
+    var json = await github.repos.contents({
+        owner: paths[0],
+        repo: paths[1],
+        path: path
+    });
     json.sort((i,o)=>i.type.localeCompare(o.type));
     console.log(261, {
         json
@@ -298,9 +302,10 @@ editor.window.preview = function(event) {
     var iframe = tab.closest('component').querySelector('iframe');
     var path = tab.getAttribute('path');
     console.log(300, 'editor.window.preview', {
-        iframe
+        iframe,
+        event
     });
-    
+
     if (mode === "text/css") {
         var link = iframe.contentWindow.document.head.querySelector('link[data-src="' + path + '"]');
         var src = link.dataset.src;
