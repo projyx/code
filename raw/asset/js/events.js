@@ -132,6 +132,32 @@ window.events.onkeydown = async function(e) {
                     //}
                 }
             }
+
+            if (ext === "js") {
+                var event = mirror.cm;
+                console.log(138, event);
+
+                var mode = event.options.mode;
+                var cm = event.doc.cm;
+                var content = cm.getValue();
+                var tab = document.querySelector('.sources-panel text[path].active');
+                var iframe = tab.closest('component').querySelector('iframe');
+                var path = tab.getAttribute('path');
+
+                if (mode === "text/javascript") {
+                    var blob = getBlobURL(content, mode);
+                    console.log('editor.window.preview text/html', {
+                        path,
+                        content,
+                    });
+                    //if (path === "/index.html") {
+                    var uri = window.location.pathname.split('/').filter(o=>o.length > 0);
+                    var paths = uri.splice(4, uri.length - 1);
+                    console.log(paths);
+                    wIDE(paths);
+                    //}
+                }
+            }
         }
     }
 }
