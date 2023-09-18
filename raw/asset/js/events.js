@@ -103,7 +103,7 @@ window.events.onkeydown = async function(e) {
                 method: "PUT"
             };
             console.log(96, params, settings);
-            //var req = await github.repos.contents(params, settings)
+            var req = await github.repos.contents(params, settings)
 
             if (ext === "css") {//alert("CSS file saved");                
             }
