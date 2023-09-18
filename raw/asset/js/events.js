@@ -61,6 +61,11 @@ window.events.onclick.exit = function(event) {
     rout.er(href);
 }
 
+window.events.oncontextmenu = {}
+window.events.oncontextmenu.filesystem = async function(event) {
+    event.preventDefault();
+}
+
 window.events.onkeydown = async function(e) {
     if (e.ctrlKey) {
         if (e.keyCode === 83) {

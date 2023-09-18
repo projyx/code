@@ -113,6 +113,7 @@
 
     [component="wide"] .dev-tools .tab-sources .sources-files {
         color: #999;
+        flex: 1;
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-files > column > text {
@@ -153,6 +154,7 @@
     
     [component="wide"] .dev-tools .tab-sources > aside {
         border-right: 1px solid #555;
+        display: flex;
         height: 100%;
         width: 300px;
     }
