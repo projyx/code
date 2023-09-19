@@ -62,7 +62,8 @@ window.events.onclick.exit = function(event) {
 }
 
 window.events.oncontextmenu = {}
-window.events.oncontextmenu.filesystem = async function(event) {
+window.events.oncontextmenu.wIDE = async function(event) {
+
     var target = event.target
     var component = event.target.closest('component');
 
@@ -73,7 +74,6 @@ window.events.oncontextmenu.filesystem = async function(event) {
     var context = null;
     var files = target.closest('#files-list');
     if (files) {
-
         var text = target.closest('text');
         var dir = text.querySelector('span[placeholder="dir"]');
         var file = text.querySelector('span[placeholder="file"]');
@@ -84,7 +84,7 @@ window.events.oncontextmenu.filesystem = async function(event) {
         }
         template.style.top = event.clientY + 'px';
         template.style.left = event.clientX + 'px';
-        files.closest('aside').insertAdjacentHTML('beforebegin', template.outerHTML)
+        files.closest('aside').insertAdjacentHTML('beforebegin', template.outerHTML);
         console.log(74, text);
     }
 
