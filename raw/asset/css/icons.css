@@ -537,6 +537,36 @@
 }
 
 @media {
+    .icon-reload {
+        text-decoration: none;
+    }
+
+    .icon-reload {
+        height: 14px;
+        width: 14px;
+        border-radius: 50px;
+        display: block;
+        border: 2px solid #8d8d8d;
+        position: relative;
+        margin: 0;
+        transform: rotate(23deg);
+    }
+
+    .icon-reload:before {
+        content: '▶';
+        display: block;
+        line-height: 16px;
+        margin: auto;
+        position: absolute;
+        top: calc((0% - 16px)/2);
+        right: 1%;
+        color: #8d8d8d;
+        font-size: 12px;
+        text-shadow: 5px 3px #292a2d;
+    }
+}
+
+@media {
     .icon-search {
         box-sizing: border-box;
         position: relative;
