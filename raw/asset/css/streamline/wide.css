@@ -91,7 +91,6 @@
     }
     
     [component="wide"] .address-bar .bar-history {
-        border-bottom: 1px solid #555;
         height: 100%;
         width: 126px;
     }
@@ -204,6 +203,38 @@
     [component="wide"] .dev-tools .tab-sources {
         display: flex;
         height: 100%;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .context-menu {
+        font-size: 13px;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .context-menu {
+        font-size: 13px;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .context-menu > column {
+        gap: 5px 10px;
+        line-height: 22px;
+        padding: 10px 10px;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .context-menu > column:not(:last-child) {
+        border-bottom: 1px solid #555
+    }
+
+    [component="wide"] .dev-tools .tab-sources .context-menu.popup-dir {
+        background-color: #292a2d;
+        border: 1px solid #555;
+        position: absolute;
+        z-index: 12345;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .context-menu.popup-file {
+        background-color: #292a2d;
+        border: 1px solid #555;
+        position: absolute;
+        z-index: 123;
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-files {

@@ -63,6 +63,36 @@ window.events.onclick.exit = function(event) {
 
 window.events.oncontextmenu = {}
 window.events.oncontextmenu.filesystem = async function(event) {
+    var target = event.target
+    var component = event.target.closest('component');
+
+    Array.from(component.querySelectorAll('.context-menu')).forEach(function(o) {
+        o.remove();
+    });
+
+    var context = null;
+    var files = target.closest('#files-list');
+    if (files) {
+
+        var text = target.closest('text');
+        var dir = text.querySelector('span[placeholder="dir"]');
+        var file = text.querySelector('span[placeholder="file"]');
+        if (dir) {
+            var template = component.querySelectorAll('template')[1].content.firstElementChild.cloneNode(true);
+        } else if (file) {
+            var template = component.querySelectorAll('template')[2].content.firstElementChild.cloneNode(true);
+        }
+        template.style.top = event.clientY + 'px';
+        template.style.left = event.clientX + 'px';
+        files.closest('aside').insertAdjacentHTML('beforebegin', template.outerHTML)
+        console.log(74, text);
+    }
+
+    console.log(68, 'events.oncontextmenu.filesystem', event, {
+        component,
+        template
+    });
+
     event.preventDefault();
 }
 
