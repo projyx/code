@@ -60,6 +60,46 @@ window.events.onclick.exit = function(event) {
     console.log(42, href);
     rout.er(href);
 }
+window.events.onclick.rm = async function(event) {
+    console.log(64, 'events.onclick.rm', event);
+
+    var target = event.target;
+    var menu = target.closest('.modal');
+    var component = event.target.closest('component');
+    var paths = window.location.pathname.split('/').filter(o=>o.length > 0);
+
+    console.log(71, 'events.onclick.rm', menu, menu.selection);
+
+    var owner = paths[0];
+    var repo = paths[1];
+    var path = menu.selection.getAttribute('path');
+    var sha = menu.selection.getAttribute('sha');
+
+    console.log(71, 'events.onclick.rm', {
+        owner,
+        repo,
+        path
+    });
+
+    menu.remove();
+
+    try {
+        0 < 1 ? await github.repos.contents({
+            owner,
+            repo,
+            path
+        }, {
+            body: JSON.stringify({
+                message: "Delete file",
+                sha: sha
+            }),
+            method: 'DELETE'
+        }) : null;
+        menu.selection.remove();
+    } catch (e) {
+        console.log(101, e);
+    }
+}
 
 window.events.oncontextmenu = {}
 window.events.oncontextmenu.wIDE = async function(event) {
@@ -85,6 +125,8 @@ window.events.oncontextmenu.wIDE = async function(event) {
         template.style.top = event.clientY + 'px';
         template.style.left = event.clientX + 'px';
         files.closest('aside').insertAdjacentHTML('beforebegin', template.outerHTML);
+        var menu = files.closest('aside').previousElementSibling;
+        menu.selection = text;
         console.log(74, text);
     }
 

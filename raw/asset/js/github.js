@@ -376,8 +376,8 @@ github.raw.file = async(params)=>{
     const accessToken = localStorage.githubAccessToken;
     if(accessToken) {
         settings.headers.Accept = "application/vnd.github.raw",
-        settings.headers.Authorization = "token " + accessToken        
-    };
+        settings.headers.Authorization = "token " + accessToken
+    }
     console.log(url, settings);
     return new Promise((resolve,reject)=>{
         fetch(url, settings).then(async(response)=>{
@@ -451,11 +451,9 @@ github.repos.repo = (owner,repo)=>{
             reject(error);
         }
         const accessToken = localStorage.githubAccessToken;
-        const settings = accessToken ? {
-            headers: {
-                Accept: "application/vnd.github+json",
-                Authorization: "token " + accessToken
-            }
+        accessToken ? settings.headers = {
+            Accept: "application/vnd.github+json",
+            Authorization: "token " + accessToken
         } : null;
         request(url, settings).then(a).catch(b);
     }

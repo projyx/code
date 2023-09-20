@@ -288,6 +288,8 @@ window.routes = function(uri, options) {
                                             var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["wide", "main", row.name]);
                                             //folder.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
                                             folder.querySelector('span').textContent = row.name;
+                                            folder.setAttribute('path', row.path);
+                                            folder.setAttribute('sha', row.sha);
                                             feed.insertAdjacentHTML('beforeend', folder.outerHTML);
                                             feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.cd(e.target.closest('text').querySelector('span').textContent);
                                             feed.lastElementChild.classList.add('active');
@@ -298,6 +300,8 @@ window.routes = function(uri, options) {
                                             var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["wide", "main", row.name]);
                                             //file.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
                                             file.querySelector('span').textContent = row.name;
+                                            file.setAttribute('path', row.path);
+                                            file.setAttribute('sha', row.sha);
                                             feed.insertAdjacentHTML('beforeend', file.outerHTML);
                                             feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.nl(e.target);
                                             Array.from(feed.children).forEach(tab=>{
