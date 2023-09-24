@@ -291,7 +291,8 @@ github.database.trees = function(params, settings) {
 }
 
 github.orgs = {};
-github.orgs.members = async(org,username)=>{
+github.orgs.members = async(org,username,settings)=>{
+    settings ? null : settings = {};
     return new Promise(function(resolve, reject) {
         const url = github.endpoint + "/orgs/" + org + "/members/" + username;
         const a = data=>{
@@ -312,7 +313,8 @@ github.orgs.members = async(org,username)=>{
     }
     );
 }
-github.orgs.repos = (org)=>{
+github.orgs.repos = (org,settings)=>{
+    settings ? null : settings = {};
     return new Promise(function(resolve, reject) {
         const url = github.endpoint + "/orgs/" + org + "/repos?type=all";
         const a = data=>{
@@ -336,6 +338,7 @@ github.orgs.repos = (org)=>{
 
 github.raw = {};
 github.raw.blob = async(params)=>{
+    settings ? null : settings = {};
     return new Promise((resolve,reject)=>{
         fetch("https://api.github.com/repos/" + params.owner + "/" + params.repo + "/contents" + params.resource, {
             cache: "reload",
@@ -440,7 +443,8 @@ github.repos.contents = (params,settings)=>{
     }
     );
 }
-github.repos.repo = (owner,repo)=>{
+github.repos.repo = (owner,repo,settings)=>{
+    settings ? null : settings = {};
     return new Promise(function(resolve, reject) {
         const url = github.endpoint + "/repos/" + owner + "/" + repo;
         const a = data=>{
@@ -455,13 +459,29 @@ github.repos.repo = (owner,repo)=>{
             Accept: "application/vnd.github+json",
             Authorization: "token " + accessToken
         } : null;
+        if (settings) {
+            if (settings.headers) {
+                settings.headers['If-None-Match'] = "";
+            } else {
+                settings.headers = {
+                    'If-None-Match': ''
+                };
+            }
+        } else {
+            settings = {
+                headers: {
+                    'If-None-Match': ''
+                }
+            };
+        }
         request(url, settings).then(a).catch(b);
     }
     );
 }
 
 github.user = {};
-github.user.repos = ()=>{
+github.user.repos = (params,settings)=>{
+    settings ? null : settings = {};
     return new Promise(function(resolve, reject) {
         const url = github.endpoint + "/user/repos";
         const a = data=>{
@@ -472,17 +492,31 @@ github.user.repos = ()=>{
             reject(error);
         }
         const accessToken = localStorage.githubAccessToken;
-        const settings = accessToken ? {
-            headers: {
-                Accept: "application/vnd.github+json",
-                Authorization: "token " + accessToken
-            }
+        accessToken ? settings.headers = {
+            Accept: "application/vnd.github+json",
+            Authorization: "token " + accessToken
         } : null;
+        if (settings) {
+            if (settings.headers) {
+                settings.headers['If-None-Match'] = "";
+            } else {
+                settings.headers = {
+                    'If-None-Match': ''
+                };
+            }
+        } else {
+            settings = {
+                headers: {
+                    'If-None-Match': ''
+                }
+            };
+        }
         request(url, settings).then(a).catch(b);
     }
     );
 }
-github.user.self = function(username) {
+github.user.self = function(usernam,settings) {
+    settings ? null : settings = {};
     return new Promise((resolve,reject)=>{
         const url = github.endpoint + "/user";
         const a = data=>{
@@ -505,7 +539,8 @@ github.user.self = function(username) {
 }
 
 github.users = {};
-github.users.events = (username)=>{
+github.users.events = (username,settings)=>{
+    settings ? null : settings = {};
     return new Promise(function(resolve, reject) {
         const url = github.endpoint + "/users/" + username + "/events";
         const a = data=>{
@@ -526,9 +561,10 @@ github.users.events = (username)=>{
     }
     );
 }
-github.users.repos = (username)=>{
+github.users.repos = (username,settings)=>{
+    settings ? null : settings = {};
     return new Promise(function(resolve, reject) {
-        const url = github.endpoint + "/users/" + username + "/repos?type=all";
+        const url = github.endpoint + "/users/" + username + "/repos";
         const a = data=>{
             resolve(data);
         }
@@ -537,17 +573,31 @@ github.users.repos = (username)=>{
             reject(error);
         }
         const accessToken = localStorage.githubAccessToken;
-        const settings = accessToken ? {
-            headers: {
-                Accept: "application/vnd.github+json",
-                Authorization: "token " + accessToken
-            }
+        accessToken ? settings.headers = {
+            Accept: "application/vnd.github+json",
+            Authorization: "token " + accessToken
         } : null;
+        if (settings) {
+            if (settings.headers) {
+                settings.headers['If-None-Match'] = "";
+            } else {
+                settings.headers = {
+                    'If-None-Match': ''
+                };
+            }
+        } else {
+            settings = {
+                headers: {
+                    'If-None-Match': ''
+                }
+            };
+        }
         request(url, settings).then(a).catch(b);
     }
     );
 }
-github.users.user = function(username) {
+github.users.user = function(username,settings) {
+    settings ? null : settings = {};
     return new Promise((resolve,reject)=>{
         const url = github.endpoint + "/users/" + username;
         const a = data=>{

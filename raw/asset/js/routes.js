@@ -186,7 +186,7 @@ window.routes = function(uri, options) {
                                 console.log("routes.view tree");
 
                                 var json = await github.repos.repo(paths[0], paths[1]);
-                                0 > 1 ? console.log(258, {
+                                0 < 1 ? console.log(258, {
                                     json
                                 }) : null;
                                 var img = document.createElement('img');
@@ -204,7 +204,13 @@ window.routes = function(uri, options) {
                                     href,
                                     path
                                 }) : null;
-                                var json = await github.repos.contents(paths[0], paths[1], path.join('/'));
+                                var json = await github.repos.contents({
+                                    owner: paths[0],
+                                    repo: paths[1],
+                                    path: path.join('/')
+                                }, {
+                                    cache: 'reload'
+                                });
                                 console.log(258, {
                                     json,
                                     path
@@ -247,6 +253,31 @@ window.routes = function(uri, options) {
                             }
                         } else if (paths[2] === "wide") {
                             console.log("wide");
+
+                            var pathed = uri.split('/').filter(o=>o.length > 0);
+                            var pathname = '/' + pathed.splice(4, pathed.length - 1).join('/');
+
+                            var address = {
+                                protocol: window.location.protocol + '//',
+                                subdomain: paths[1],
+                                domain: paths[0],
+                                tld: 'tld',
+                                pathname: pathname
+                            }
+                            console.log(262, address);
+                            var secure = window.isSecureContext;
+                            component.querySelector('[name="security"]').setAttribute('secure', secure)
+                            var icon = component.querySelector('[name="security"]').querySelector('.icon');
+                            icon.classList.remove('icon-lock', 'icon-locked');
+                            icon.classList.add('icon-lock' + (secure ? 'ed' : ''));
+                            secure ? null : component.querySelector('span').textContent = 'Not secure';
+
+                            component.querySelector('[name="protocol"]').textContent = address.protocol;
+                            component.querySelector('[name="subdomain"]').textContent = address.subdomain;
+                            component.querySelector('[name="domain"]').textContent = address.domain;
+                            component.querySelector('[name="tld"]').textContent = address.tld;
+                            component.querySelector('[name="pathname"]').textContent = address.pathname;
+
                             if (paths.length > 3) {
                                 var feed = component.querySelector("#files-list");
                                 var template = feed.nextElementSibling;
@@ -278,6 +309,16 @@ window.routes = function(uri, options) {
                                         feed.insertAdjacentHTML('beforeend', ls.outerHTML);
                                         feed.lastElementChild.querySelector('span').onclick = ()=>editor.tree.ls("/" + dirs.join('/'));
                                     }
+
+                                    var folder = template.content.children[1].cloneNode(true);
+                                    //folder.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
+                                    folder.querySelector('span').textContent = paths[1];
+                                    folder.setAttribute('path', '');
+                                    folder.removeAttribute('data-before');
+                                    //folder.setAttribute('sha', row.sha);
+                                    feed.insertAdjacentHTML('beforeend', folder.outerHTML);
+                                    feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.cd(e.target.closest('text').querySelector('span').textContent);
+                                    feed.lastElementChild.classList.add('active');
 
                                     var i = 0;
                                     do {
@@ -327,18 +368,22 @@ window.routes = function(uri, options) {
                     } else {
                         console.log("routes.view repository");
 
-                        var json = await github.repos.repo(paths[0], paths[1]);
-                        console.log(258, {
-                            json
-                        });
-                        var img = document.createElement('img');
-                        img.src = json.owner.avatar_url;
-                        component.querySelector('avi').innerHTML = img.outerHTML;
-                        component.querySelector('[placeholder="owner"]').setAttribute("href", '/' + json.owner.login);
-                        component.querySelector('[placeholder="owner"]').textContent = json.owner.login;
-                        component.querySelector('[placeholder="repo"]').setAttribute("href", '/' + json.owner.login + "/" + paths[1]);
-                        component.querySelector('[placeholder="repo"]').textContent = json.name;
-                        component.querySelector('.info-repo button').textContent = json.private ? 'Private' : 'Public';
+                        if (0 < 1) {
+                            var json = await github.repos.repo(paths[0], paths[1], {
+                                cache: "reload"
+                            });
+                            console.log(258, {
+                                json
+                            });
+                            var img = document.createElement('img');
+                            img.src = json.owner.avatar_url;
+                            component.querySelector('avi').innerHTML = img.outerHTML;
+                            component.querySelector('[placeholder="owner"]').setAttribute("href", '/' + json.owner.login);
+                            component.querySelector('[placeholder="owner"]').textContent = json.owner.login;
+                            component.querySelector('[placeholder="repo"]').setAttribute("href", '/' + json.owner.login + "/" + paths[1]);
+                            component.querySelector('[placeholder="repo"]').textContent = json.name;
+                            component.querySelector('.info-repo button').textContent = json.private ? 'Private' : 'Public';
+                        }
 
                         var href = uri.split("/").splice(1).filter(n=>n.length > 0);
                         var path = href.splice(4, href.length - 1)
@@ -346,6 +391,8 @@ window.routes = function(uri, options) {
                             owner: paths[0],
                             repo: paths[1],
                             path: path.join('/')
+                        }, {
+                            cache: 'reload'
                         });
                         console.log(258, {
                             json,
@@ -383,7 +430,9 @@ window.routes = function(uri, options) {
                 } else {
                     console.log("routes.view user");
 
-                    var json = await github.users.user(sub);
+                    var json = await github.users.user(sub, {
+                        cache: "reload"
+                    });
                     console.log(286, {
                         json
                     })
@@ -420,7 +469,8 @@ window.routes = function(uri, options) {
                     }
                     console.log(291, {
                         json
-                    })
+                    });
+
                     var feed = document.getElementById('user-repositories');
                     var template = feed.nextElementSibling;
                     feed.innerHTML = "";

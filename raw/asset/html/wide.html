@@ -28,9 +28,21 @@
         <card class="bar-search">
             <form>
                 <box class="search-box">
-                    <section>
-                        <input>
-                    </section>
+                    <row>
+                        <text name="security">
+                            <ico>
+                                <n class="icon"></n>
+                            </ico>
+                            <span></span>
+                        </text>
+                        <text name="protocol"></text>
+                        <text name="subdomain"></text>
+                        <span>.</span>
+                        <text name="domain"></text>
+                        <span>.</span>
+                        <text name="tld"></text>
+                        <text name="pathname"></text>
+                    </row>
                 </box>
             </form>
         </card>
@@ -91,11 +103,11 @@
                     </header>
                     <column id="files-list"></column>
                     <template>
-                        <text>
+                        <text data-before="&#x25b6;">
                             <i>
                                 <con class="icon-folder"></con>
                             </i>
-                            <span>...</span>
+                            <span placeholder="dir">...</span>
                         </text>
                         <text data-before="&#9654;">
                             <i>
@@ -107,7 +119,7 @@
                             <i>
                                 <con class="icon-file"></con>
                             </i>
-                            <span placeholder="file"></span>
+                            <span onfocusout="event.target.removeAttribute('contenteditable')" placeholder="file"></span>
                         </text>
                     </template>
                     <template>
@@ -119,7 +131,7 @@
                                 <text>Search in folder</text>
                             </column>
                             <column>
-                                <text>New file</text>
+                                <text onclick="events.onclick.touch(event)">New file</text>
                                 <text>Exclude folder</text>
                                 <text>Add folder to workspace</text>
                             </column>
@@ -131,7 +143,7 @@
                                 <text>Open in GitHub</text>
                             </column>
                             <column>
-                                <text>Rename...</text>
+                                <text onclick="events.onclick.mv(event)">Rename...</text>
                                 <text>Make a copy...</text>
                                 <text onclick="events.onclick.rm(event)">Delete</text>
                             </column>

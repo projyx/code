@@ -25,7 +25,7 @@ window.editor.tree.cd = async function(dir) {
         repo: paths[1],
         path: path
     });
-    //json.sort((i,o)=>i.type.localeCompare(o.type));
+    json.sort((i,o)=>i.type.localeCompare(o.type));
     console.log(261, {
         json
     });
@@ -41,8 +41,23 @@ window.editor.tree.cd = async function(dir) {
         if (urx.length > 0) {
             var ls = template.content.children[0].cloneNode(true);
             var dirs = urx.length > 2 && urx.length < 5 ? [urx[0], urx[1]] : urx.splice(0, urx.length - 1);
-            console.log(275, dirs, urx);
+            var ptsd = path.split('/').filter(o=>o.length > 0);
+            console.log(275, dirs, urx, path.split('/'));
             //ls.setAttribute('href', "/" + dirs.join('/'));
+            ls.setAttribute('path', ptsd.join('/'));
+            ls.querySelector('span').textContent = ptsd[ptsd.length - 2] ? ptsd[ptsd.length - 2] : "/";
+            feed.insertAdjacentHTML('beforeend', ls.outerHTML);
+            feed.lastElementChild.querySelector('span').onclick = ()=>editor.tree.ls(row.name);
+        }
+        
+        if (urx.length > 0) {
+            var ls = template.content.children[0].cloneNode(true);
+            var dirs = urx.length > 2 && urx.length < 5 ? [urx[0], urx[1]] : urx.splice(0, urx.length - 1);
+            var ptsd = path.split('/').filter(o=>o.length > 0);
+            console.log(275, dirs, urx, path.split('/'));
+            //ls.setAttribute('href', "/" + dirs.join('/'));
+            ls.setAttribute('path', ptsd.join('/'));
+            ls.querySelector('span').textContent = ptsd[ptsd.length - 1] ? ptsd[ptsd.length - 1] : "/";
             feed.insertAdjacentHTML('beforeend', ls.outerHTML);
             feed.lastElementChild.querySelector('span').onclick = ()=>editor.tree.ls(row.name);
         }
@@ -55,6 +70,7 @@ window.editor.tree.cd = async function(dir) {
                 var folder = template.content.children[1].cloneNode(true);
                 var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["wide", "main", row.name]);
                 //folder.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
+                folder.setAttribute('path', row.path);
                 folder.querySelector('span').textContent = row.name;
                 feed.insertAdjacentHTML('beforeend', folder.outerHTML);
                 feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.cd(e.target.closest('text').querySelector('span').textContent);
@@ -64,12 +80,14 @@ window.editor.tree.cd = async function(dir) {
                 var file = template.content.children[2].cloneNode(true);
                 var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["wide", "main", row.name]);
                 //file.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
+                file.setAttribute('path', row.path);
+                file.setAttribute('sha', row.sha);
                 file.querySelector('span').textContent = row.name;
                 feed.insertAdjacentHTML('beforeend', file.outerHTML);
                 feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.nl(e.target);
             }
             i++;
-        } while (i < json.length - 1)
+        } while (i < json.length)
     }
 }
 window.editor.tree.ls = async function(dir) {
@@ -105,6 +123,18 @@ window.editor.tree.ls = async function(dir) {
     var split = uri.split('/');
     var urt = split.splice(5, split.length - 1);
     feed.path = path;
+
+    if (path === "") {
+        var folder = template.content.children[1].cloneNode(true);
+        //folder.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
+        folder.querySelector('span').textContent = paths[1];
+        folder.removeAttribute('data-before');
+        //folder.setAttribute('sha', row.sha);
+        feed.insertAdjacentHTML('beforeend', folder.outerHTML);
+        feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.cd(e.target.closest('text').querySelector('span').textContent);
+        feed.lastElementChild.classList.add('active');
+    }
+
     if (json.length > 0) {
         var urx = feed.path.split('/').splice(1);
         console.log(274, urx);
@@ -113,6 +143,8 @@ window.editor.tree.ls = async function(dir) {
             var dirs = urx.length > 2 && urx.length < 5 ? [urx[0], urx[1]] : urx.splice(0, urx.length - 1);
             console.log(275, dirs, urx);
             //ls.setAttribute('href', "/" + dirs.join('/'));
+            ls.setAttribute('path', "/" + dirs.join('/'));
+            ls.querySelector('span').textContent = dirs[dirs.length - 1] ? dirs[dirs.length - 1] : "/";
             feed.insertAdjacentHTML('beforeend', ls.outerHTML);
             feed.lastElementChild.querySelector('span').onclick = ()=>editor.tree.ls(row.name);
         }
@@ -125,6 +157,7 @@ window.editor.tree.ls = async function(dir) {
                 var folder = template.content.children[1].cloneNode(true);
                 var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["wide", "main", row.name]);
                 //folder.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
+                folder.setAttribute('path', row.path);
                 folder.querySelector('span').textContent = row.name;
                 feed.insertAdjacentHTML('beforeend', folder.outerHTML);
                 feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.cd(e.target.closest('text').querySelector('span').textContent);
@@ -134,6 +167,7 @@ window.editor.tree.ls = async function(dir) {
                 var file = template.content.children[2].cloneNode(true);
                 var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["wide", "main", row.name]);
                 //file.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
+                file.setAttribute('path', row.path);
                 file.querySelector('span').textContent = row.name;
                 feed.insertAdjacentHTML('beforeend', file.outerHTML);
                 feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.nl(e.target);

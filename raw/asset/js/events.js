@@ -25,6 +25,11 @@ window.events.onclick.document = async function(event) {
     var target = event.target;
     var elem = target;
 
+    Array.from(document.querySelectorAll('.modal')).forEach(elem=>{
+        elem.remove();
+    }
+    );
+
     Array.from(document.querySelectorAll('[drop="down"]')).forEach(elem=>{
         elem.nextElementSibling.setAttribute('css-display', 'none');
     }
@@ -59,6 +64,24 @@ window.events.onclick.exit = function(event) {
     var href = "/" + (paths.length > 0 ? paths.join("/") : "");
     console.log(42, href);
     rout.er(href);
+}
+window.events.onclick.mv = async function(event) {
+    var target = event.target;
+    var menu = target.closest('.context-menu');
+    var selection = menu.selection;
+    console.log(725, {
+        target,
+        menu,
+        selection
+    });
+    selection.querySelector('span').setAttribute('contenteditable', true);
+    selection.querySelector('span').focus();
+
+    var range = document.createRange();
+    range.selectNodeContents(selection.querySelector('span'));
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
 }
 window.events.onclick.rm = async function(event) {
     console.log(64, 'events.onclick.rm', event);
@@ -100,6 +123,97 @@ window.events.onclick.rm = async function(event) {
         console.log(101, e);
     }
 }
+window.events.onclick.touch = async function(event) {
+    var target = event.target;
+    var component = event.target.closest('component');
+    var menu = target.closest('.context-menu');
+    console.log(112, menu);
+    var selection = menu.selection;
+    var files = selection.closest('#files-list');
+
+    console.log(109, 'events.onclick.touch', event, {
+        target,
+        component,
+        menu,
+        selection,
+        files
+    });
+
+    var paths = window.location.pathname.split('/').filter(o=>o.length > 0);
+    var owner = paths[0];
+    var repo = paths[1];
+    console.log(132, {
+        paths,
+        owner,
+        repo,
+        path
+    });
+
+    var dir = 0 < 1 ? await github.repos.contents({
+        owner: owner,
+        repo: repo,
+        path: (selection.getAttribute('path') ? selection.getAttribute('path') : '')
+    }) : [];
+    var NewFiles = dir.filter(o=>o.name.startsWith('NewFile'))
+    console.log(158, NewFiles);
+    var i = 0;
+    var prev = 0;
+    while (i < NewFiles.length + 1) {
+        var o = NewFiles[i];
+        if (o) {
+            var int = o.name.split('NewFile')[1] ? parseInt(o.name.split('NewFile')[1]) : 0;
+            var id = i > 0 ? i : '';
+            console.log(160, 2, 'NewFile' + id, int, id);
+            if(int > 0 && NewFiles.filter(o => o.name === 'NewFile' + id).length === 0) {
+                console.log(166, id);
+                break;
+            }
+        } else {
+            var id = i;
+            console.log(160, 7, 'NewFile' + id, int, id);
+            if(i > 0 && NewFiles.filter(o => o.name === 'NewFile' + id).length === 0) {
+                break;
+            }
+        }
+        i++;
+    }
+    var NewFile = 'NewFile' + id;
+
+    console.log(158, {
+        dir,
+        NewFiles,
+        NewFile,
+    });
+
+    var template = component.querySelectorAll('template')[0].content.children[2].cloneNode(true);
+    template.querySelector('span').setAttribute('contenteditable', true);
+    files.insertAdjacentHTML('beforeend', template.outerHTML);
+    files.lastElementChild.querySelector('span').focus();
+    files.lastElementChild.querySelector('span').textContent = NewFile;
+
+    
+    var path = (selection.getAttribute('path') ? selection.getAttribute('path') : '') + (selection.getAttribute('path') ? '/' : '') + NewFile;
+
+    var range = document.createRange();
+    range.selectNodeContents(files.lastElementChild.querySelector('span'));
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+
+    console.log(136, template);
+
+    var put = 0 < 1 ? await github.repos.contents({
+        owner: owner,
+        repo: repo,
+        path: path
+    }, {
+        body: JSON.stringify({
+            content: "",
+            message: "Create NewFile"
+        }),
+        method: "PUT"
+    }) : null;
+}
 
 window.events.oncontextmenu = {}
 window.events.oncontextmenu.wIDE = async function(event) {
@@ -122,6 +236,7 @@ window.events.oncontextmenu.wIDE = async function(event) {
         } else if (file) {
             var template = component.querySelectorAll('template')[2].content.firstElementChild.cloneNode(true);
         }
+        console.log(component, component.querySelectorAll('template'), template);
         template.style.top = event.clientY + 'px';
         template.style.left = event.clientX + 'px';
         files.closest('aside').insertAdjacentHTML('beforebegin', template.outerHTML);

@@ -148,6 +148,45 @@
         width: 100%;
     }
 
+    [component="wide"] .address-bar .bar-search .search-box > row > * {
+        align-items: center;
+        background: transparent;
+        border: 0;
+        display: flex;
+        justify-content: center;
+        line-height: 34px;
+        margin: 0;
+    }
+
+    [component="wide"] .address-bar .bar-search .search-box > row > [name="security"] ico {
+        align-items: center;
+        display: flex;
+        height: 34px;
+        justify-content: center;
+        width: 34px;
+    }
+
+    [component="wide"] .address-bar .bar-search .search-box > row > [name="security"] ico n {
+        --ggs: calc(2/3);
+    }
+
+    [component="wide"] .address-bar .bar-search .search-box > row > [name="security"][secure="true"] {
+        color: #32cd32
+    }
+
+    [component="wide"] .address-bar .bar-search .search-box > row > [name="security"][secure="true"] ~ [name="protocol"] {
+        color: #32cd32
+    }
+
+    [component="wide"] .address-bar .bar-search .search-box > row > [name="security"][secure="false"] {
+        color: #ff3b30;
+    }
+
+    [component="wide"] .address-bar .bar-search .search-box > row > [name="security"][secure="false"] ~ [name="protocol"] {
+        color: #ff3b30;
+        text-decoration: line-through;
+    }
+
     [component="wide"] .address-bar .bar-search .search-box input {
         background: transparent;
         border: 0;
@@ -251,7 +290,7 @@
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-files > column > text[data-before]:before {
-        opacity: 0;
+        /* opacity: 0; */
         text-align: center;
         width: 14px;
     }
