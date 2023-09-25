@@ -176,6 +176,9 @@ window.editor.tree.ls = async function(dir) {
         } while (i < json.length - 1)
     }
 }
+window.editor.tree.mv = async function(target) {
+    
+}
 window.editor.tree.nl = async function(target) {
     console.log(138, {
         target

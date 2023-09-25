@@ -74,6 +74,9 @@ window.events.onclick.mv = async function(event) {
         menu,
         selection
     });
+    selection.querySelector('span').addEventListener("focusout", window.events.onfocusout.mv, {
+        once: true
+    });
     selection.querySelector('span').setAttribute('contenteditable', true);
     selection.querySelector('span').focus();
 
@@ -164,14 +167,14 @@ window.events.onclick.touch = async function(event) {
             var int = o.name.split('NewFile')[1] ? parseInt(o.name.split('NewFile')[1]) : 0;
             var id = i > 0 ? i : '';
             console.log(160, 2, 'NewFile' + id, int, id);
-            if(int > 0 && NewFiles.filter(o => o.name === 'NewFile' + id).length === 0) {
+            if (int > 0 && NewFiles.filter(o=>o.name === 'NewFile' + id).length === 0) {
                 console.log(166, id);
                 break;
             }
         } else {
             var id = i;
             console.log(160, 7, 'NewFile' + id, int, id);
-            if(i > 0 && NewFiles.filter(o => o.name === 'NewFile' + id).length === 0) {
+            if (i > 0 && NewFiles.filter(o=>o.name === 'NewFile' + id).length === 0) {
                 break;
             }
         }
@@ -190,8 +193,10 @@ window.events.onclick.touch = async function(event) {
     files.insertAdjacentHTML('beforeend', template.outerHTML);
     files.lastElementChild.querySelector('span').focus();
     files.lastElementChild.querySelector('span').textContent = NewFile;
+    files.lastElementChild.querySelector('span').addEventListener("focusout", window.events.onfocusout.touch, {
+        once: true
+    });
 
-    
     var path = (selection.getAttribute('path') ? selection.getAttribute('path') : '') + (selection.getAttribute('path') ? '/' : '') + NewFile;
 
     var range = document.createRange();
@@ -201,18 +206,6 @@ window.events.onclick.touch = async function(event) {
     sel.addRange(range);
 
     console.log(136, template);
-
-    var put = 0 < 1 ? await github.repos.contents({
-        owner: owner,
-        repo: repo,
-        path: path
-    }, {
-        body: JSON.stringify({
-            content: "",
-            message: "Create NewFile"
-        }),
-        method: "PUT"
-    }) : null;
 }
 
 window.events.oncontextmenu = {}
@@ -251,6 +244,61 @@ window.events.oncontextmenu.wIDE = async function(event) {
     });
 
     event.preventDefault();
+}
+
+window.events.onfocusout = {};
+window.events.onfocusout.mv = async function(e) {
+    console.log(263, 'events.onfocusout.mv', e);
+    var target = e.target;
+    target.removeAttribute('contenteditable');
+    try {
+        var paths = window.location.pathname.split('/').filter(o=>o.length > 0);
+        var owner = paths[0];
+        var repo = paths[1];
+        var message = "Rename file";
+        0 > 1 ? await github.repos.push({
+            message,
+            owner,
+            repo
+        }, [{
+            content: str1,
+            path: "raw/media/media.json"
+        }]) : null;
+    } catch (e) {
+        console.log(101, e);
+    }
+}
+window.events.onfocusout.touch = async function(e) {
+    console.log(263, 'events.onfocusout.touch', e);
+    var target = e.target;
+    var file = target.textContent;
+    target.removeAttribute('contenteditable');
+    try {
+        var paths = window.location.pathname.split('/').filter(o=>o.length > 0);
+        var owner = paths[0];
+        var repo = paths[1];
+        var dir = target.closest('#files-list').path;
+        var path = dir + (dir === "" ? '' : '/') + file;
+        console.log(280, {
+            dir,
+            owner,
+            repo,
+            path,
+        });
+        var put = 0 < 1 ? await github.repos.contents({
+            owner: owner,
+            repo: repo,
+            path: path
+        }, {
+            body: JSON.stringify({
+                content: "",
+                message: "Create File"
+            }),
+            method: "PUT"
+        }) : null;
+    } catch (e) {
+        console.log(277, e);
+    }
 }
 
 window.events.onkeydown = async function(e) {

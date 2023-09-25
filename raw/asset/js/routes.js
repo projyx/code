@@ -354,7 +354,7 @@ window.routes = function(uri, options) {
                                             //console.log(paths[0] + '/' + paths[1], feed.path + row.name);
                                         }
                                         i++;
-                                    } while (i < json.length - 1)
+                                    } while (i < json.length)
                                 }
                                 wIDE(paths);
                             }
