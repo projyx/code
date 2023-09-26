@@ -4,7 +4,7 @@ github.repos.push = async(params,array)=>{
         array
     });
 
-    var user = await github.users.user();
+    //var user = await github.users.user();
     var message = params.message;
     var owner = params.owner;
     var repo = params.repo;
@@ -45,13 +45,22 @@ github.repos.push = async(params,array)=>{
                 }
                 );
             }
+            var sha = null;
+            console.log(49, {row, res});
+            if(row && row.sha) {
+                sha = row.sha;
+            } else {
+                if(res && res.sha) {
+                    sha = res && res.sha ? res.sha : ""
+                }
+            }
             console.log(1076, row);
             tree[b] = {
                 content: row.content,
                 path: row.path,
                 mode: "100644",
                 type: "blob",
-                sha: res && res.sha ? res.sha : ""
+                sha: sha
             };
             b++;
         } while (b < array.length)
@@ -142,10 +151,10 @@ github.repos.push = async(params,array)=>{
                     // && rp.has(tp);
                     //0 < 1 ? console.log(1177, trt.path) : null;
                     if (row.content === null || here) {
-                        0 > 1 ? console.log(1177, rp.has(tp), {
-                            rp,
-                            tp
-                        }, row, trt.path) : null;
+                        //0 > 1 ? console.log(1177, rp.has(tp), {
+                            //rp,
+                            //tp
+                        //}, row, trt.path) : null;
                         0 > 1 ? tree = tree.filter(r=>{
                             if (row.path === r.path) {//console.log(row.path, r.path);
                             }
@@ -172,7 +181,8 @@ github.repos.push = async(params,array)=>{
         tree.filter(row=>{
             var rp = row.path.split('/').filter(o=>o.length > 0);
             //console.log(1238, tp, row.path);
-            if (rp.has(tp)) {
+            var every = tp.every(v=>rp.includes(v));
+            if (every) {
                 console.log(1240, i, row);
                 treex.push(row.path);
                 //delete row.content;

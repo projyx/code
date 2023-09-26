@@ -250,22 +250,53 @@ window.events.onfocusout = {};
 window.events.onfocusout.mv = async function(e) {
     console.log(263, 'events.onfocusout.mv', e);
     var target = e.target;
+    var file = target.closest('text').getAttribute('path');
+    var name = target.textContent;
     target.removeAttribute('contenteditable');
-    try {
-        var paths = window.location.pathname.split('/').filter(o=>o.length > 0);
-        var owner = paths[0];
-        var repo = paths[1];
-        var message = "Rename file";
-        0 > 1 ? await github.repos.push({
-            message,
-            owner,
-            repo
-        }, [{
-            content: str1,
-            path: "raw/media/media.json"
-        }]) : null;
-    } catch (e) {
-        console.log(101, e);
+    if (file === name) {
+        console.log("Same name");
+    } else {
+        try {
+            var paths = window.location.pathname.split('/').filter(o=>o.length > 0);
+            var owner = paths[0];
+            var repo = paths[1];
+            var message = "Rename file";
+            var dir = target.closest('#files-list').path;
+            var path = dir + (dir === "" ? '' : '/') + file;
+            var content = await github.raw.file({
+                owner: owner,
+                repo: repo,
+                resource: dir + (dir === "" ? '/' : '') + file
+            });
+            var meta = await github.repos.contents({
+                owner: owner,
+                repo: repo,
+                path: dir + (dir === "" ? '/' : '') + file
+            });
+            var sha = meta.sha;
+            console.log(280, {
+                message,
+                meta,
+                owner,
+                repo,
+                content,
+                path,
+            });
+            0 < 1 ? await github.repos.push({
+                message,
+                owner,
+                repo
+            }, [{
+                content: null,
+                path: dir + (dir === "" ? '' : '/') + file
+            }, {
+                content,
+                path: dir + (dir === "" ? '' : '/') + name,
+                sha: sha
+            }]) : null;
+        } catch (e) {
+            console.log(101, e);
+        }
     }
 }
 window.events.onfocusout.touch = async function(e) {
@@ -280,7 +311,6 @@ window.events.onfocusout.touch = async function(e) {
         var dir = target.closest('#files-list').path;
         var path = dir + (dir === "" ? '' : '/') + file;
         console.log(280, {
-            dir,
             owner,
             repo,
             path,
