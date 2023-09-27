@@ -194,7 +194,8 @@ window.editor.tree.nl = async function(target) {
     var fullname = owner + '/' + paths[1];
     var feed = target.closest('#files-list');
     var filename = target.closest('span').textContent;
-    var path = feed.path + "/" + filename;
+    var dir = target.closest('column').previousElementSibling.getAttribute('path');
+    var path = dir+ "/" + filename;
     var ext = filename.split('.')[filename.split('.').length - 1];
     var component = target.closest('component');
 
@@ -258,7 +259,7 @@ window.editor.tree.nl = async function(target) {
         console.log(146, {
             uri,
             repo,
-            feed: feed.path,
+            feed: path,
             filename,
             path,
             ext,

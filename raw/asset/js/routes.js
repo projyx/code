@@ -421,6 +421,7 @@ window.routes = function(uri, options) {
                                             file.setAttribute('sha', obj.sha);
                                             file.querySelector('span').textContent = path;
                                             clmnp.insertAdjacentHTML('beforeend', file.outerHTML);
+                                            clmnp.lastElementChild.onclick = (e)=>editor.tree.nl(e.target);
                                             0 > 1 ? console.log(354, 'trees.tree', {
                                                 file,
                                                 obj
