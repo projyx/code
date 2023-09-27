@@ -364,7 +364,7 @@ window.routes = function(uri, options) {
                                         var dir2 = rted2.filter(i=>i < rted2.lenggth - 1);
                                         var rted1l = rted1.length;
                                         var rted2l = rted2.length;
-                                        console.log(327, dir1, dir2, rted1.length, rted2.length);
+                                        //console.log(327, dir1, dir2, rted1.length, rted2.length);
                                         if (i.type === "file" && rted1.length === 1 && rted1.length > rted2.length)
                                             return 1;
                                         if (i.type === "file")
@@ -421,10 +421,10 @@ window.routes = function(uri, options) {
                                             file.setAttribute('sha', obj.sha);
                                             file.querySelector('span').textContent = path;
                                             clmnp.insertAdjacentHTML('beforeend', file.outerHTML);
-                                            console.log(354, 'trees.tree', {
+                                            0 > 1 ? console.log(354, 'trees.tree', {
                                                 file,
                                                 obj
-                                            });
+                                            }) : null;
                                         }
                                     })
                                 }
@@ -475,7 +475,7 @@ window.routes = function(uri, options) {
                                     var i = 0;
                                     do {
                                         var row = json[i];
-                                        console.log(283, i, feed, row.type);
+                                        //console.log(283, i, feed, row.type);
                                         if (row.type === "dir") {
                                             var folder = template.content.children[1].cloneNode(true);
                                             var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["wide", "main", row.name]);

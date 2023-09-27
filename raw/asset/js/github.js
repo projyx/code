@@ -438,7 +438,7 @@ github.repos.contents = (params,settings)=>{
                 }
             };
         }
-        console.log(url, settings);
+        //console.log(url, settings);
         request(url, settings).then(a).catch(b);
     }
     );

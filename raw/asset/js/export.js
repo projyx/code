@@ -263,7 +263,7 @@ async function wIDE(paths) {
             if (0 < 1) {
                 var uri = new URL(link.href);
                 var path = uri.pathname;
-                console.log(path);
+                //console.log(path);
                 var json = await github.repos.contents({
                     owner: paths[0],
                     repo: paths[1],
@@ -313,9 +313,11 @@ async function wIDE(paths) {
     var blob = getBlobURL(text, 'text/javascript');
     var elem = `<script src="${blob}">${atob('PC9zY3JpcHQ+')}`;
 
+    var base = window.location.origin;
     const src = `
         <html>
           <head>
+            <base href="${base}"></base>
             ${l.join(" ")}
             ${s.join(" ")}
             <style>${css}</style>
@@ -330,15 +332,21 @@ async function wIDE(paths) {
     editor.src = getBlobURL(src, 'text/html');
     iFrameReady(editor, function() {
         var contentWindow = editor.contentWindow;
-        contentWindow.location.origin = "blob:" + contentWindow.location.origin;
-        
         var pushState = contentWindow.history.pushState;
         contentWindow.history.pushState = function() {
-            if(contentWindow.location.protocol === "blob:") {
-                var state = null;
+            if (contentWindow.location.protocol === "blob:") {
                 var unused = null;
-                var url = (0 < 1 ? 'blob:' : '') + contentWindow.location.origin + arguments[2];
-                console.log(state, unused, url);
+                var blob = (0 < 1 ? 'blob:' : '') + contentWindow.location.origin;
+                var uri = new URL(contentWindow.location.origin + arguments[2],contentWindow.location.origin);
+                var url = blob + "/" + uri.pathname.split("/").filter((n,o)=>n.length > 0).splice(1).join('/');
+                var state = url;
+                console.log(339, arguments, {
+                    state,
+                    unused,
+                    url
+                }, uri);
+                //var state = "/" + boot.splice(4, boot.length - 1).join("/");
+
                 arguments = [state, unused, url];
             }
             console.log(344, 'editor.iframe.pushState', contentWindow.history, contentWindow.location, arguments);
@@ -348,12 +356,12 @@ async function wIDE(paths) {
         contentWindow.onpopstate = function(e) {
             console.log(342, 'editor.contentWindow.onpopstate', e);
         }
-        
         const boot = url.pathname.split("/").splice(1).filter(n=>n.length > 0);
         var state = "/" + boot.splice(4, boot.length - 1).join("/");
-        //doc.body.querySelector('boot').setAttribute('route', load);
-        //document.getElementById('preview-editor').contentWindow.history.pushState(state, null, state);
-        console.log(339, "Iframe domcontentloaded", boot, window.location.href, contentWindow.location, state);
+        console.log(356, state);
+        //doc.body.querySelector('boot').setAttribute('route', state);
+        document.getElementById('preview-editor').contentWindow.history.pushState(state, null, state);
+        console.log(360, "Iframe domcontentloaded", boot, window.location.href, contentWindow.location, state);
     })
 }
 
@@ -406,6 +414,7 @@ function iFrameReady(iFrame, fn) {
             timer = setTimeout(checkLoaded, 1);
         }
     }
+
     checkLoaded();
 }
 
