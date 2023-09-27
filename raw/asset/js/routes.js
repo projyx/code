@@ -279,12 +279,128 @@ window.routes = function(uri, options) {
                             component.querySelector('[name="pathname"]').textContent = address.pathname;
 
                             if (paths.length > 3) {
+                                var owner = paths[0];
+                                var repo = paths[1];
+                                var branch = paths[3];
+                                var ref = "heads/" + branch;
+
+                                //FILE TREE
+                                if (0 < 1) {
+                                    var refs = await github.database.references({
+                                        owner,
+                                        repo,
+                                        branch,
+                                        ref
+                                    });
+                                    console.log(293, {
+                                        refs
+                                    });
+                                    var sha = refs.object.sha;
+                                    console.log(297, {
+                                        sha
+                                    });
+                                    var recursive = true;
+                                    var params = {
+                                        owner,
+                                        repo,
+                                        branch,
+                                        sha,
+                                        //recursive
+                                    };
+                                    var trees = await github.database.trees(params);
+                                    console.log(307, {
+                                        trees
+                                    });
+                                    var tab = document.getElementById('sources-files');
+                                    var tree = document.getElementById('file-trees');
+                                    var template = tab.querySelector('template');
+
+                                    var folder = template.content.children[1].cloneNode(true);
+                                    folder.querySelector('span').textContent = paths[0];
+                                    tree.insertAdjacentHTML('beforeend', folder.outerHTML);
+                                    var el = tree.lastElementChild;
+                                    el.onclick = (e)=>editor.tree.cd(e.target.closest('text'));
+                                    console.log(322, 'trees.tree', {
+                                        folder,
+                                    });
+
+                                    var wrap = document.createElement('column');
+                                    el.insertAdjacentHTML('afterend', wrap.outerHTML);
+                                    var clmnu = el.nextElementSibling;
+
+                                    var folder = template.content.children[1].cloneNode(true);
+                                    folder.querySelector('span').textContent = paths[1];
+                                    clmnu.insertAdjacentHTML('beforeend', folder.outerHTML);
+                                    clmnu.lastElementChild.onclick = (e)=>editor.tree.cd(e.target.closest('text'));
+                                    console.log(322, 'trees.tree', {
+                                        folder,
+                                    });
+
+                                    var wrap = document.createElement('column');
+                                    var el = clmnu.lastElementChild;
+                                    el.insertAdjacentHTML('afterend', wrap.outerHTML);
+                                    var clmnp = el.nextElementSibling;
+
+                                    var files = trees.tree;
+                                    files.sort((i,o)=>{
+                                        var path1 = i.path;
+                                        var path2 = o.path;
+                                        var type1 = i.type;
+                                        var type2 = o.type;
+                                        var rted1 = rout.ed(path1);
+                                        var rted2 = rout.ed(path2);
+                                        var dir1 = rted1.filter(i=>i < rted2.lenggth - 1);
+                                        var dir2 = rted2.filter(i=>i < rted2.lenggth - 1);
+                                        var rted1l = rted1.length;
+                                        var rted2l = rted2.length;
+                                        console.log(327, dir1, dir2, rted1.length, rted2.length);
+                                        if (i.type === "blob" && rted1.length === 1 && rted1.length > rted2.length)
+                                            return 1;
+                                        if (i.type === "blob")
+                                            return 1;
+                                        if (!path1.localeCompare(path2))
+                                            return -1;
+                                        if (i.type === "tree")
+                                            return -1;
+                                        //if (rted1.length > rted2.length)
+                                        //return 1;
+                                        return 0;
+                                    }
+                                    );
+                                    files.forEach(function(obj) {
+                                        var path = obj.path;
+                                        var type = obj.type;
+                                        if (type === "tree") {
+                                            var folder = template.content.children[1].cloneNode(true);
+                                            folder.setAttribute('path', path);
+                                            folder.querySelector('span').textContent = path;
+                                            clmnp.insertAdjacentHTML('beforeend', folder.outerHTML);
+                                            clmnp.lastElementChild.onclick = (e)=>editor.tree.cd(e.target.closest('text'));
+                                            console.log(345, 'trees.tree', {
+                                                folder,
+                                                obj
+                                            });
+                                        }
+                                        if (type === "blob") {
+                                            var file = template.content.children[2].cloneNode(true);
+                                            file.querySelector('span').textContent = path;
+                                            clmnp.insertAdjacentHTML('beforeend', file.outerHTML);
+                                            console.log(354, 'trees.tree', {
+                                                file,
+                                                obj
+                                            });
+                                        }
+                                    })
+                                }
+
+                                var filetrees = component.querySelector("#file-trees");
                                 var feed = component.querySelector("#files-list");
                                 var template = feed.nextElementSibling;
                                 feed.innerHTML = "";
                                 var split = uri.split('/');
                                 var urt = split.splice(5, split.length - 1);
                                 feed.path = 0 < 1 ? "" : (urt.length > 1 ? "/" : "") + urt.join("/");
+                                filetrees.path = 0 < 1 ? "" : (urt.length > 1 ? "/" : "") + urt.join("/");
 
                                 var href = uri.split("/").splice(1).filter(n=>n.length > 0);
                                 var path = href.splice(4, href.length - 1)

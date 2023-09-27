@@ -279,9 +279,29 @@
     [component="wide"] .dev-tools .tab-sources .sources-files {
         color: #999;
         flex: 1;
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
+        width: 100%;
     }
 
-    [component="wide"] .dev-tools .tab-sources .sources-files > column > text {
+    [component="wide"] .dev-tools .tab-sources .sources-files #file-trees {
+        border-bottom: 1px solid #555;
+        flex: 1;
+        height: calc(100% - 50px);
+        overflow: auto;
+        /* display: none; */
+         /* Safari */
+         /* IE 10 and IE 11 */
+        flex: 1; /* Standard syntax */
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-files #file-trees column {
+        padding-left: 20px;
+        align-items: flex-start;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-files > column text {
         align-items: center;
         display: flex;
         font-size: 12px;
@@ -289,31 +309,31 @@
         padding: 0px 10px;
     }
 
-    [component="wide"] .dev-tools .tab-sources .sources-files > column > text[data-before]:before {
+    [component="wide"] .dev-tools .tab-sources .sources-files > column text[data-before]:before {
         /* opacity: 0; */
         text-align: center;
         width: 14px;
     }
 
-    [component="wide"] .dev-tools .tab-sources .sources-files > column > text:has(.icon-file):before {
+    [component="wide"] .dev-tools .tab-sources .sources-files > column text:has(.icon-file):before {
         content: '';
         text-align: center;
         width: 14px;
     }
 
-    [component="wide"] .dev-tools .tab-sources .sources-files > column > text:has(.icon-file) {
+    [component="wide"] .dev-tools .tab-sources .sources-files > column text:has(.icon-file) {
     }
 
-    [component="wide"] .dev-tools .tab-sources .sources-files > column > text i {
+    [component="wide"] .dev-tools .tab-sources .sources-files > column text i {
         height: 18px;
         width: 24px;
     }
 
-    [component="wide"] .dev-tools .tab-sources .sources-files > column > text .icon-folder {
+    [component="wide"] .dev-tools .tab-sources .sources-files > column text .icon-folder {
         --ggs: calc(2/3);
     }
 
-    [component="wide"] .dev-tools .tab-sources .sources-files > column > text .icon-file {
+    [component="wide"] .dev-tools .tab-sources .sources-files > column text .icon-file {
         --ggs: calc(2/3);
     }
     

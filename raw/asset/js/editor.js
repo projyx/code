@@ -1,93 +1,94 @@
 window.editor = {};
 
 window.editor.tree = {};
-window.editor.tree.cd = async function(dir) {
-    const feed = document.getElementById('files-list');
-    console.log(5, 'editor.tree.cd', dir, feed.path);
+window.editor.tree.cd = async function(el) {
+    var dir = el.querySelector('span').textContent;
+    const feed = document.getElementById('file-trees');
+    console.log(5, 'editor.tree.cd', el, dir, feed.path);
 
-    var fp = feed.path.split("/").filter(n=>n.length > 0);
-    var fref = fp.splice(0, fp.length - 1).filter(n=>n.length > 0);
-    var uri = window.location.pathname;
-    var paths = uri.split("/").splice(1).filter(n=>n.length > 0);
-    var split = feed.path.split("/").filter(n=>n.length > 0);
-    var href = split.splice(5, split.length - 1).filter(n=>n.length > 0);
-    var path = feed.path + (dir ? "/" + dir : "");
-    console.log(12, 'editor.tree.cd', {
-        dir,
-        feed: feed.path,
-        fp,
-        fref,
-        href,
-        path
-    });
-    var json = await github.repos.contents({
-        owner: paths[0],
-        repo: paths[1],
-        path: path
-    });
-    json.sort((i,o)=>i.type.localeCompare(o.type));
-    console.log(261, {
-        json
-    });
+    var wrap = document.createElement('column');
+    var clmn = el.nextElementSibling;
 
-    var template = feed.nextElementSibling;
-    feed.innerHTML = "";
-    var split = uri.split('/');
-    var urt = split.splice(5, split.length - 1);
-    feed.path = path;
-    if (json.length > 0) {
-        var urx = feed.path.split('/').splice(1);
-        console.log(274, urx);
-        if (urx.length > 0) {
-            var ls = template.content.children[0].cloneNode(true);
-            var dirs = urx.length > 2 && urx.length < 5 ? [urx[0], urx[1]] : urx.splice(0, urx.length - 1);
-            var ptsd = path.split('/').filter(o=>o.length > 0);
-            console.log(275, dirs, urx, path.split('/'));
-            //ls.setAttribute('href', "/" + dirs.join('/'));
-            ls.setAttribute('path', ptsd.join('/'));
-            ls.querySelector('span').textContent = ptsd[ptsd.length - 2] ? ptsd[ptsd.length - 2] : "/";
-            feed.insertAdjacentHTML('beforeend', ls.outerHTML);
-            feed.lastElementChild.querySelector('span').onclick = ()=>editor.tree.ls(row.name);
+    console.log(101, clmn);
+    if (!clmn || clmn.tagName.toLowerCase() !== "column") {
+        el.insertAdjacentHTML('afterend', wrap.outerHTML);
+
+        var clmn = el.nextElementSibling;
+        var fp = feed.path.split("/").filter(n=>n.length > 0);
+        var fref = fp.splice(0, fp.length - 1).filter(n=>n.length > 0);
+        var uri = window.location.pathname;
+        var paths = uri.split("/").splice(1).filter(n=>n.length > 0);
+        var split = feed.path.split("/").filter(n=>n.length > 0);
+        var href = split.splice(5, split.length - 1).filter(n=>n.length > 0);
+        var path = clmn.previousElementSibling.getAttribute('path');
+        console.log(110, clmn);
+
+        console.log(12, 'editor.tree.cd', {
+            clmn: clmn.previousElementSibling,
+            dir,
+            feed: feed.path,
+            fp,
+            fref,
+            href,
+            path
+        });
+        var json = await github.repos.contents({
+            owner: paths[0],
+            repo: paths[1],
+            path: path
+        });
+        json.sort((i,o)=>i.type.localeCompare(o.type));
+        console.log(261, {
+            json
+        });
+
+        var template = feed.parentNode.querySelector('template');
+        //feed.innerHTML = "";
+        var split = uri.split('/');
+        var urt = split.splice(5, split.length - 1);
+        feed.path = path;
+        if (json.length > 0) {
+            var urx = feed.path.split('/').splice(1);
+            console.log(274, urx);
+
+            var i = 0;
+            do {
+                var row = json[i];
+                console.log(283, i, feed, row.type);
+                if (row.type === "dir") {
+                    var folder = template.content.children[1].cloneNode(true);
+                    var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["wide", "main", row.name]);
+                    //folder.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
+                    folder.setAttribute('path', row.path);
+                    folder.querySelector('span').textContent = row.name;
+                    clmn.insertAdjacentHTML('beforeend', folder.outerHTML);
+                    clmn.lastElementChild.onclick = (e)=>editor.tree.cd(e.target.closest('text'));
+                    //console.log(290, feed, folder.outerHTML);
+                }
+                if (row.type === "file") {
+                    var file = template.content.children[2].cloneNode(true);
+                    var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["wide", "main", row.name]);
+                    //file.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
+                    file.setAttribute('path', row.path);
+                    file.setAttribute('sha', row.sha);
+                    file.querySelector('span').textContent = row.name;
+                    clmn.insertAdjacentHTML('beforeend', file.outerHTML);
+                    clmn.lastElementChild.onclick = (e)=>editor.tree.nl(e.target);
+                }
+                i++;
+            } while (i < json.length)
         }
-        
-        if (urx.length > 0) {
-            var ls = template.content.children[0].cloneNode(true);
-            var dirs = urx.length > 2 && urx.length < 5 ? [urx[0], urx[1]] : urx.splice(0, urx.length - 1);
-            var ptsd = path.split('/').filter(o=>o.length > 0);
-            console.log(275, dirs, urx, path.split('/'));
-            //ls.setAttribute('href', "/" + dirs.join('/'));
-            ls.setAttribute('path', ptsd.join('/'));
-            ls.querySelector('span').textContent = ptsd[ptsd.length - 1] ? ptsd[ptsd.length - 1] : "/";
-            feed.insertAdjacentHTML('beforeend', ls.outerHTML);
-            feed.lastElementChild.querySelector('span').onclick = ()=>editor.tree.ls(row.name);
-        }
+    }
 
-        var i = 0;
-        do {
-            var row = json[i];
-            console.log(283, i, feed, row.type);
-            if (row.type === "dir") {
-                var folder = template.content.children[1].cloneNode(true);
-                var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["wide", "main", row.name]);
-                //folder.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
-                folder.setAttribute('path', row.path);
-                folder.querySelector('span').textContent = row.name;
-                feed.insertAdjacentHTML('beforeend', folder.outerHTML);
-                feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.cd(e.target.closest('text').querySelector('span').textContent);
-                //console.log(290, feed, folder.outerHTML);
-            }
-            if (row.type === "file") {
-                var file = template.content.children[2].cloneNode(true);
-                var dirs = paths.length > 4 ? paths.concat([row.name]) : [paths[0], paths[1]].concat(["wide", "main", row.name]);
-                //file.querySelector('span').setAttribute('href', "/" + dirs.join('/'));
-                file.setAttribute('path', row.path);
-                file.setAttribute('sha', row.sha);
-                file.querySelector('span').textContent = row.name;
-                feed.insertAdjacentHTML('beforeend', file.outerHTML);
-                feed.lastElementChild.querySelector('span').onclick = (e)=>editor.tree.nl(e.target);
-            }
-            i++;
-        } while (i < json.length)
+    var clmn = el.nextElementSibling;
+    if (clmn.style.display) {
+        if (clmn.style.display === "none") {
+            clmn.style.display = "flex";
+        } else {
+            clmn.style.display = "none";
+        }
+    } else {
+        clmn.style.display = "flex";
     }
 }
 window.editor.tree.ls = async function(dir) {
@@ -176,9 +177,7 @@ window.editor.tree.ls = async function(dir) {
         } while (i < json.length - 1)
     }
 }
-window.editor.tree.mv = async function(target) {
-    
-}
+window.editor.tree.mv = async function(target) {}
 window.editor.tree.nl = async function(target) {
     console.log(138, {
         target

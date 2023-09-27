@@ -219,7 +219,7 @@ window.events.oncontextmenu.wIDE = async function(event) {
     });
 
     var context = null;
-    var files = target.closest('#files-list');
+    var files = target.closest('#file-trees');
     if (files) {
         var text = target.closest('text');
         var dir = text.querySelector('span[placeholder="dir"]');
