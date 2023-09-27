@@ -329,14 +329,31 @@ async function wIDE(paths) {
     const editor = document.getElementById('preview-editor');
     editor.src = getBlobURL(src, 'text/html');
     iFrameReady(editor, function() {
+        var contentWindow = editor.contentWindow;
+        contentWindow.location.origin = "blob:" + contentWindow.location.origin;
+        
+        var pushState = contentWindow.history.pushState;
+        contentWindow.history.pushState = function() {
+            if(contentWindow.location.protocol === "blob:") {
+                var state = null;
+                var unused = null;
+                var url = (0 < 1 ? 'blob:' : '') + contentWindow.location.origin + arguments[2];
+                console.log(state, unused, url);
+                arguments = [state, unused, url];
+            }
+            console.log(344, 'editor.iframe.pushState', contentWindow.history, contentWindow.location, arguments);
+            pushState.apply(contentWindow.history, arguments);
+            console.log(346, 'editor.iframe.pushState', contentWindow.history, contentWindow.location, arguments);
+        }
+        contentWindow.onpopstate = function(e) {
+            console.log(342, 'editor.contentWindow.onpopstate', e);
+        }
+        
         const boot = url.pathname.split("/").splice(1).filter(n=>n.length > 0);
-        var load = "/" + boot.splice(4, boot.length - 1).join("/");
+        var state = "/" + boot.splice(4, boot.length - 1).join("/");
         //doc.body.querySelector('boot').setAttribute('route', load);
-        console.log(328, load, boot, window.location.href);
-
-        const state = 'blob:' + editor.contentWindow.location.origin + load;
-        document.getElementById('preview-editor').contentWindow.history.pushState(state, null, state);
-        console.log("Iframe domcontentloaded", editor.contentWindow.location, state);
+        //document.getElementById('preview-editor').contentWindow.history.pushState(state, null, state);
+        console.log(339, "Iframe domcontentloaded", boot, window.location.href, contentWindow.location, state);
     })
 }
 
