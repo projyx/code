@@ -132,7 +132,7 @@ window.events.onclick.touch = async function(event) {
     var menu = target.closest('.context-menu');
     console.log(112, menu);
     var selection = menu.selection;
-    var files = selection.closest('#files-list');
+    var files = selection.nextElementSibling;
 
     console.log(109, 'events.onclick.touch', event, {
         target,
@@ -308,7 +308,8 @@ window.events.onfocusout.touch = async function(e) {
         var paths = window.location.pathname.split('/').filter(o=>o.length > 0);
         var owner = paths[0];
         var repo = paths[1];
-        var dir = target.closest('#files-list').path;
+        var folder = target.closest('column').previousElementSibling;
+        var dir = folder.getAttribute('path') ? folder.getAttribute('path') : "";
         var path = dir + (dir === "" ? '' : '/') + file;
         console.log(280, {
             owner,

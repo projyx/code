@@ -308,6 +308,16 @@ window.routes = function(uri, options) {
                                         //recursive
                                     };
                                     var trees = await github.database.trees(params);
+                                    var filetrees = component.querySelector("#file-trees");
+                                    var trees = await github.repos.contents({
+                                        owner,
+                                        repo,
+                                        path: 0 < 1 ? "" : (urt.length > 1 ? "/" : "") + urt.join("/")
+                                    }, {
+                                        headers: {
+                                            'If-None-Match': ''
+                                        }
+                                    });
                                     console.log(307, {
                                         trees
                                     });
@@ -329,6 +339,7 @@ window.routes = function(uri, options) {
                                     var clmnu = el.nextElementSibling;
 
                                     var folder = template.content.children[1].cloneNode(true);
+                                    folder.setAttribute('path', "")
                                     folder.querySelector('span').textContent = paths[1];
                                     clmnu.insertAdjacentHTML('beforeend', folder.outerHTML);
                                     clmnu.lastElementChild.onclick = (e)=>editor.tree.cd(e.target.closest('text'));
@@ -341,8 +352,31 @@ window.routes = function(uri, options) {
                                     el.insertAdjacentHTML('afterend', wrap.outerHTML);
                                     var clmnp = el.nextElementSibling;
 
-                                    var files = trees.tree;
-                                    files.sort((i,o)=>{
+                                    var files = trees.tree ? trees.tree : trees;
+                                    0 < 1 ? files.sort((i,o)=>{
+                                        var path1 = i.path;
+                                        var path2 = o.path;
+                                        var type1 = i.type;
+                                        var type2 = o.type;
+                                        var rted1 = rout.ed(path1);
+                                        var rted2 = rout.ed(path2);
+                                        var dir1 = rted1.filter(i=>i < rted2.lenggth - 1);
+                                        var dir2 = rted2.filter(i=>i < rted2.lenggth - 1);
+                                        var rted1l = rted1.length;
+                                        var rted2l = rted2.length;
+                                        console.log(327, dir1, dir2, rted1.length, rted2.length);
+                                        if (i.type === "file" && rted1.length === 1 && rted1.length > rted2.length)
+                                            return 1;
+                                        if (i.type === "file")
+                                            return 1;
+                                        if (!path1.localeCompare(path2))
+                                            return -1;
+                                        if (i.type === "dir")
+                                            return -1;
+                                        //if (rted1.length > rted2.length)
+                                        //return 1;
+                                        return 0;                                                            
+                                    }) : files.sort((i,o)=>{
                                         var path1 = i.path;
                                         var path2 = o.path;
                                         var type1 = i.type;
@@ -370,7 +404,7 @@ window.routes = function(uri, options) {
                                     files.forEach(function(obj) {
                                         var path = obj.path;
                                         var type = obj.type;
-                                        if (type === "tree") {
+                                        if (type === "dir" || type === "tree") {
                                             var folder = template.content.children[1].cloneNode(true);
                                             folder.setAttribute('path', path);
                                             folder.querySelector('span').textContent = path;
@@ -381,8 +415,10 @@ window.routes = function(uri, options) {
                                                 obj
                                             });
                                         }
-                                        if (type === "blob") {
+                                        if (type === "file" || type === "blob") {
                                             var file = template.content.children[2].cloneNode(true);
+                                            file.setAttribute('path', obj.path);
+                                            file.setAttribute('sha', obj.sha);
                                             file.querySelector('span').textContent = path;
                                             clmnp.insertAdjacentHTML('beforeend', file.outerHTML);
                                             console.log(354, 'trees.tree', {

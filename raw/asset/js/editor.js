@@ -36,6 +36,10 @@ window.editor.tree.cd = async function(el) {
             owner: paths[0],
             repo: paths[1],
             path: path
+        }, {
+            headers: {
+                'If-None-Match': ''
+            }
         });
         json.sort((i,o)=>i.type.localeCompare(o.type));
         console.log(261, {
