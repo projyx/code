@@ -337,8 +337,9 @@ async function wIDE(paths) {
             var unused = null;
             var blob = (0 < 1 ? 'blob:' : '') + contentWindow.location.origin;
             var uri = new URL(contentWindow.location.origin + arguments[2],contentWindow.location.origin);
-            var dir = "/" + window.top.location.pathname.split("/").filter((n,o)=>n.length > 0).splice(0, 4).join('/');
-            var addr = "/" + uri.pathname.split("/").filter((n,o)=>n.length > 0).splice(1).join('/');
+            var pth = window.top.location.pathname.split("/").filter((n,o)=>n.length > 0);
+            var dir = "/" + pth.splice(0, 4).join('/');
+            var addr = "/" + uri.pathname.split("/").filter((n,o)=>n.length > 0).join('/');
             if (contentWindow.location.protocol === "blob:") {
                 var url = blob + "/" + addr;
                 var state = url;
@@ -351,9 +352,9 @@ async function wIDE(paths) {
                 arguments = [state, unused, url];
             }
             var url = dir + addr; 
-            console.log(352, 'editor.state', 'editor.iframe.pushState', { path, history: contentWindow.history, location: contentWindow.location, arguments, dir, addr});
+            console.log(352, 'editor.state', 'editor.iframe.pushState', { path, history: contentWindow.history, location: contentWindow.location, arguments, url, addr});
             pushState.apply(contentWindow.history, arguments);
-            console.log(354, 'editor.state', 'editor.iframe.pushState', { path, history: contentWindow.history, location: contentWindow.location, arguments, dir, addr });
+            console.log(354, 'editor.state', 'editor.iframe.pushState', { path, history: contentWindow.history, location: contentWindow.location, arguments, url, addr });
             window.top.history.replaceState(state, unused, url);
         }
         var replaceState = contentWindow.history.replaceState;
@@ -361,7 +362,6 @@ async function wIDE(paths) {
             var unused = null;
             var blob = (0 < 1 ? 'blob:' : '') + contentWindow.location.origin;
             var uri = new URL(contentWindow.location.origin + arguments[2],contentWindow.location.origin);
-            var dir = "/" + window.top.location.pathname.split("/").filter((n,o)=>n.length > 0).splice(0, 4).join('/');
             var addr = "/" + uri.pathname.split("/").filter((n,o)=>n.length > 0).splice(1).join('/');
             if (contentWindow.location.protocol === "blob:") {
                 var url = blob + addr;
@@ -375,20 +375,21 @@ async function wIDE(paths) {
 
                 arguments = [state, unused, url];
             }
-            var url = dir + addr; 
-            console.log(376, 'editor.state', 'editor.iframe.replaceState', { history: contentWindow.history, location: contentWindow.location, arguments, dir, addr});
+            var pth = window.top.location.pathname.split("/").filter((n,o)=>n.length > 0);
+            var url = "/" + pth.splice(0, pth.length).join('/');
+            console.log(376, 'editor.state', 'editor.iframe.replaceState', { history: contentWindow.history, location: contentWindow.location, arguments, url, addr});
             replaceState.apply(contentWindow.history, arguments);
-            console.log(378, 'editor.state', 'editor.iframe.replaceState', { history: contentWindow.history, location: contentWindow.location, arguments, dir, addr });
+            console.log(378, 'editor.state', 'editor.iframe.replaceState', { history: contentWindow.history, location: contentWindow.location, arguments, url, addr });
             window.top.history.replaceState(state, unused, url);
         }
         contentWindow.onpopstate = function(e) {
             console.log(342, 'editor.contentWindow.onpopstate', e);
         }
         const boot = url.pathname.split("/").splice(1).filter(n=>n.length > 0);
-        var state = "/" + boot.splice(4, boot.length - 1).join("/");
+        var state = "/" + boot.splice(4, boot.length).join("/");
         console.log(356, state);
-        //doc.body.querySelector('boot').setAttribute('route', state);
-        document.getElementById('preview-editor').contentWindow.history.replaceState(state, null, state);
+        contentWindow.document.body.querySelector('boot').setAttribute('route', state);
+        document.getElementById('preview-editor').contentWindow.history.pushState(state, null, state);
         console.log(360, "Iframe domcontentloaded", boot, window.location.href, contentWindow.location, state);
     })
 }
