@@ -232,6 +232,9 @@
         line-height: 23px;
         height: 23px;
         width: 100%;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
     [component="wide"] .dev-tools > column {

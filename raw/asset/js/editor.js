@@ -1,5 +1,34 @@
 window.editor = {};
 
+window.editor.tools = {};
+window.editor.tools.tool = async function(event) {
+    var target = event.target;
+    var box = target.closest('box');
+    if (box) {
+        var index = Array.from(box.parentNode.children).indexOf(box);
+        var tabs = box.closest('header').nextElementSibling;
+        var tab = tabs.children[index];
+        console.log(5, {
+            box,
+            event,
+            index,
+            tab,
+            target
+        });
+        if(tab) {
+            var pages = Array.from(tabs.children);
+            pages.forEach(page => {
+                page.style.display = "none";
+            });
+            tab.style.display = "flex";
+            console.log(20, {
+                pages, 
+                tab
+            });
+        }
+    }
+}
+
 window.editor.tree = {};
 window.editor.tree.cd = async function(el) {
     var dir = el.querySelector('span').textContent;
@@ -195,7 +224,7 @@ window.editor.tree.nl = async function(target) {
     var feed = target.closest('#files-list');
     var filename = target.closest('span').textContent;
     var dir = target.closest('column').previousElementSibling.getAttribute('path');
-    var path = dir+ "/" + filename;
+    var path = dir + "/" + filename;
     var ext = filename.split('.')[filename.split('.').length - 1];
     var component = target.closest('component');
 
