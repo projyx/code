@@ -329,6 +329,7 @@ async function wIDE(paths) {
     `;
 
     const editor = document.getElementById('preview-editor');
+    var component = editor.closest('component');
     editor.src = getBlobURL(src, 'text/html');
     iFrameReady(editor, function() {
         var contentWindow = editor.contentWindow;
@@ -351,7 +352,10 @@ async function wIDE(paths) {
                 var state = "/" + boot.splice(4, boot.length - 1).join("/");
                 arguments = [state, unused, url];
             }
-            var url = dir + addr; 
+            var url = dir + addr;
+            var bar = component.querySelector('.search-box');
+            console.log(385, uri);
+            bar.querySelector('[name="pathname"]').textContent = uri.pathname;
             console.log(352, 'editor.state', 'editor.iframe.pushState', { path, history: contentWindow.history, location: contentWindow.location, arguments, url, addr});
             pushState.apply(contentWindow.history, arguments);
             console.log(354, 'editor.state', 'editor.iframe.pushState', { path, history: contentWindow.history, location: contentWindow.location, arguments, url, addr });
@@ -362,6 +366,7 @@ async function wIDE(paths) {
             var unused = null;
             var blob = (0 < 1 ? 'blob:' : '') + contentWindow.location.origin;
             var uri = new URL(contentWindow.location.origin + arguments[2],contentWindow.location.origin);
+            bar.querySelector('[name="pathname"]').textContent = url;
             var addr = "/" + uri.pathname.split("/").filter((n,o)=>n.length > 0).splice(1).join('/');
             if (contentWindow.location.protocol === "blob:") {
                 var url = blob + addr;
@@ -377,6 +382,9 @@ async function wIDE(paths) {
             }
             var pth = window.top.location.pathname.split("/").filter((n,o)=>n.length > 0);
             var url = "/" + pth.splice(0, pth.length).join('/');
+            var bar = component.querySelector('.search-box');
+            console.log(385, uri);
+            bar.querySelector('[name="pathname"]').textContent = uri.pathname;
             console.log(376, 'editor.state', 'editor.iframe.replaceState', { history: contentWindow.history, location: contentWindow.location, arguments, url, addr});
             replaceState.apply(contentWindow.history, arguments);
             console.log(378, 'editor.state', 'editor.iframe.replaceState', { history: contentWindow.history, location: contentWindow.location, arguments, url, addr });
