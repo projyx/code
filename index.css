@@ -4,6 +4,10 @@
         margin: 0;
     }
 
+    body.dragging iframe {
+        pointer-events: none;
+    }
+
     form {
         margin: 0;
     }
@@ -54,21 +58,21 @@
     [data-before]::before {
         content: attr(data-before)
     }
-    
+
     [placeholder]:not(input):empty:before {
         content: attr(placeholder);
         opacity: 0.5;
     }
 }
 
-@media {    
+@media {
     component, .component {
         display: flex;
         flex-direction: column;
         width: 100%;
         min-height: 100%;
     }
-    
+
     [component]:not(.active) {
         display: none;
     }

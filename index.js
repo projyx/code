@@ -65,6 +65,8 @@ window.onload = async(event)=>{
     document.body.onclick = window.events.onclick.document;
     
     document.onkeydown = window.events.onkeydown;
+
+    window.dom = {};
 }
 
 window.onpopstate = (event)=>{

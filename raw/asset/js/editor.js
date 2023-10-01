@@ -15,14 +15,15 @@ window.editor.tools.tool = async function(event) {
             tab,
             target
         });
-        if(tab) {
+        if (tab) {
             var pages = Array.from(tabs.children);
-            pages.forEach(page => {
+            pages.forEach(page=>{
                 page.style.display = "none";
-            });
+            }
+            );
             tab.style.display = "flex";
             console.log(20, {
-                pages, 
+                pages,
                 tab
             });
         }

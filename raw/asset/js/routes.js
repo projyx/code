@@ -279,6 +279,29 @@ window.routes = function(uri, options) {
                             component.querySelector('[name="pathname"]').textContent = address.pathname;
 
                             if (paths.length > 3) {
+
+                                let m_pos;
+                                window.dom.web_tools = component.querySelector('.dev-tools');
+                                var resizer = component.querySelector('line#resizer');
+                                function resize(e) {
+                                    const dx = (m_pos - e.x) * -1;
+                                    m_pos = e.x;
+                                    dom.web_tools.style.width = (parseInt(getComputedStyle(dom.web_tools, '').width) + dx) + "px";
+                                    //console.log({m_pos,x:e.x},dx);
+                                }
+                                resizer.addEventListener("mousedown", function(e) {
+                                    //console.log(e.offsetX);
+                                    if (e.offsetX < resizer.clientWidth) {
+                                        m_pos = e.x;
+                                        document.body.classList.add('dragging');
+                                        document.addEventListener("mousemove", resize, false);
+                                    }
+                                }, false);
+                                resizer.addEventListener("mouseup", function() {
+                                    document.body.classList.remove('dragging');
+                                    document.removeEventListener("mousemove", resize, false);
+                                }, false);
+
                                 var owner = paths[0];
                                 var repo = paths[1];
                                 var branch = paths[3];
@@ -375,8 +398,9 @@ window.routes = function(uri, options) {
                                             return -1;
                                         //if (rted1.length > rted2.length)
                                         //return 1;
-                                        return 0;                                                            
-                                    }) : files.sort((i,o)=>{
+                                        return 0;
+                                    }
+                                    ) : files.sort((i,o)=>{
                                         var path1 = i.path;
                                         var path2 = o.path;
                                         var type1 = i.type;
