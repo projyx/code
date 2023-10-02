@@ -242,9 +242,13 @@
         height: calc(100% - 23px);
     }
 
+    [component="wide"] .dev-tools .tools-tab {
+        display: none;
+        height: 100%;
+    }
+
     [component="wide"] .dev-tools .tab-sources {
         display: flex;
-        height: 100%;
     }
 
     [component="wide"] .dev-tools .tab-sources .context-menu {
@@ -289,7 +293,7 @@
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-files #file-trees {
-        border-bottom: 1px solid #555;
+        /* border-bottom: 1px solid #555; */
         flex: 1;
         height: calc(100% - 50px);
         overflow: auto;
@@ -302,6 +306,10 @@
     [component="wide"] .dev-tools .tab-sources .sources-files #file-trees column {
         padding-left: 20px;
         align-items: flex-start;
+    }
+
+    [component="wide"] .dev-tools .tab-sources .sources-files #file-list {
+        display: none;
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-files > column text {
@@ -322,9 +330,6 @@
         content: '';
         text-align: center;
         width: 14px;
-    }
-
-    [component="wide"] .dev-tools .tab-sources .sources-files > column text:has(.icon-file) {
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-files > column text i {
@@ -516,6 +521,84 @@
     [component="wide"] .dev-tools .tools-tabs box:hover {
         background: #444;
         color: #fff;
+    }
+}
+
+@media {    
+    [component="wide"] .dev-tools .tab-console > aside {
+        border-right: 1px solid #555;
+        display: flex;
+        height: 100%;
+        width: 300px;
+    }
+    
+    [component="wide"] .dev-tools .tab-console .console-filters > column text {
+        align-items: center;
+        display: flex;
+        font-size: 12px;
+        gap: 5px;
+        height: 22px;
+        padding: 0px 10px;
+    }
+
+    [component="wide"] .dev-tools .tab-console .console-filters > column text[data-before]:before {
+        /* opacity: 0; */
+        text-align: center;
+        width: 14px;
+    }
+
+    [component="wide"] .dev-tools .tab-console .console-filters > column text:has(.icon-file):before {
+        content: '';
+        text-align: center;
+        width: 14px;
+    }
+
+    [component="wide"] .dev-tools .tab-console .console-filters > column text:has(.icon-file) {
+    }
+
+    [component="wide"] .dev-tools .tab-console .console-filters > column text i {
+        height: 18px;
+        width: 24px;
+    }
+
+    [component="wide"] .dev-tools .tab-console .console-filters > column text i:has(.icon-warn) {
+        /* height: 100%; */
+        /* width: 100%; */
+        border-bottom: 1px solid #fff;
+        position: relative;
+        scale: calc(2/3);
+    }
+
+    [component="wide"] .dev-tools .tab-console .console-filters > column text i:has(.icon-warn):before {
+        content: '';
+        display: block;
+        border: 1px solid;
+        height: 20px;
+        left: 0;
+        bottom: 0;
+        position: absolute;
+        transform: rotate(33deg);
+        transform-origin: bottom;
+    }
+
+    [component="wide"] .dev-tools .tab-console .console-filters > column text i:has(.icon-warn):after {
+        content: '';
+        display: block;
+        border: 1px solid;
+        height: 20px;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        transform: rotate(-33deg);
+        transform-origin: bottom;
+    }
+
+    [component="wide"] .dev-tools .tab-console .console-filters > column text .icon-folder {
+        --ggs: calc(2/3);
+    }
+
+    [component="wide"] .dev-tools .tab-console .console-filters > column text .icon-file {
+        --ggs: calc(2/3);
     }
 }
 

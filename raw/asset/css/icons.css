@@ -186,6 +186,37 @@
 }
 
 @media {
+    .icon-close {
+        box-sizing: border-box;
+        position: relative;
+        display: block;
+        transform: scale(var(--ggs,1));
+        width: 22px;
+        height: 22px;
+        border: 2px solid;
+        border-radius: 40px
+    }
+
+    .icon-close::after, .icon-close::before {
+        content: "";
+        display: block;
+        box-sizing: border-box;
+        position: absolute;
+        width: 12px;
+        height: 2px;
+        background: currentColor;
+        transform: rotate(45deg);
+        border-radius: 5px;
+        top: 8px;
+        left: 3px
+    }
+
+    .icon-close::after {
+        transform: rotate(-45deg)
+    }
+}
+
+@media {
     .icon-code-slash {
         display: block;
         position: relative;
@@ -251,6 +282,46 @@
     .icon-config::after {
         bottom: -7px;
         right: -4px
+    }
+}
+
+@media {
+    .icon-debug {
+        box-sizing: border-box;
+        position: relative;
+        display: block;
+        transform: scale(var(--ggs,1));
+        width: 12px;
+        height: 18px;
+        border: 2px solid;
+        border-radius: 22px
+    }
+
+    .icon-debug::after, .icon-debug::before {
+        content: "";
+        display: block;
+        box-sizing: border-box;
+        position: absolute
+    }
+
+    .icon-debug::before {
+        width: 8px;
+        height: 4px;
+        border: 2px solid;
+        top: -4px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-top: 0
+    }
+
+    .icon-debug::after {
+        background: currentColor;
+        width: 4px;
+        height: 2px;
+        border-radius: 5px;
+        top: 4px;
+        left: 2px;
+        box-shadow: 0 4px 0, -6px -2px 0, -6px 2px 0, -6px 6px 0, 6px -2px 0, 6px 2px 0, 6px 6px 0
     }
 }
 
@@ -481,6 +552,70 @@
         border-radius: 100%;
         left: -1px;
         top: -1px
+    }
+}
+
+@media {
+    .icon-info {
+        box-sizing: border-box;
+        position: relative;
+        display: block;
+        transform: scale(var(--ggs,1));
+        width: 20px;
+        height: 20px;
+        border: 2px solid;
+        border-radius: 40px
+    }
+
+    .icon-info::after, .icon-info::before {
+        content: "";
+        display: block;
+        box-sizing: border-box;
+        position: absolute;
+        border-radius: 3px;
+        width: 2px;
+        background: currentColor;
+        left: 7px
+    }
+
+    .icon-info::after {
+        bottom: 2px;
+        height: 8px
+    }
+
+    .icon-info::before {
+        height: 2px;
+        top: 2px
+    }
+}
+
+@media {
+    .icon-list {
+        transform: scale(var(--ggs,1))
+    }
+
+    .icon-list, .icon-list::after, .icon-list::before {
+        box-sizing: border-box;
+        position: relative;
+        display: block;
+        width: 10px;
+        height: 2px;
+        border-left: 6px double;
+        border-right: 4px solid
+    }
+
+    .icon-list::after, .icon-list::before {
+        content: "";
+        position: absolute;
+        left: -6px
+    }
+
+    .icon-list::after {
+        bottom: 4px
+    }
+
+    .icon-list::before {
+        top: 4px
     }
 }
 
@@ -786,5 +921,79 @@
         background: currentColor;
         left: 5px;
         bottom: 3px
+    }
+}
+
+@media {
+    .icon-user {
+        display: block;
+        transform: scale(var(--ggs,1));
+        box-sizing: border-box;
+        width: 12px;
+        height: 18px
+    }
+
+    .icon-user::after, .icon-user::before {
+        content: "";
+        display: block;
+        box-sizing: border-box;
+        position: absolute;
+        border: 2px solid
+    }
+
+    .icon-user::before {
+        width: 8px;
+        height: 8px;
+        border-radius: 30px;
+        top: 0;
+        left: 2px
+    }
+
+    .icon-user::after {
+        width: 12px;
+        height: 9px;
+        border-bottom: 0;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        top: 9px
+    }
+}
+
+
+@media {
+    .icon-warn {
+        align-items: center;
+        box-sizing: border-box;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        transform: scale(var(--ggs,1));
+        width: 20px;
+        height: 20px;
+        top: 4px;
+        /* border: 2px solid; */
+        /* border-radius: 40px; */
+    }
+
+    .icon-warn::after, .icon-warn::before {
+        content: "";
+        display: block;
+        box-sizing: border-box;
+        /* position: absolute; */
+        border-radius: 3px;
+        width: 2px;
+        background: currentColor;
+        left: 7px
+    }
+
+    .icon-warn::after {
+        bottom: 2px;
+        height: 8px
+    }
+
+    .icon-warn::before {
+        height: 2px;
+        top: 2px
     }
 }

@@ -222,20 +222,22 @@ window.events.oncontextmenu.wIDE = async function(event) {
     var files = target.closest('#file-trees');
     if (files) {
         var text = target.closest('text');
-        var dir = text.querySelector('span[placeholder="dir"]');
-        var file = text.querySelector('span[placeholder="file"]');
-        if (dir) {
-            var template = component.querySelectorAll('template')[1].content.firstElementChild.cloneNode(true);
-        } else if (file) {
-            var template = component.querySelectorAll('template')[2].content.firstElementChild.cloneNode(true);
+        if (text) {
+            var dir = text.querySelector('span[placeholder="dir"]');
+            var file = text.querySelector('span[placeholder="file"]');
+            if (dir) {
+                var template = component.querySelectorAll('template')[1].content.firstElementChild.cloneNode(true);
+            } else if (file) {
+                var template = component.querySelectorAll('template')[2].content.firstElementChild.cloneNode(true);
+            }
+            console.log(component, component.querySelectorAll('template'), template);
+            template.style.top = event.clientY + 'px';
+            template.style.left = event.clientX + 'px';
+            files.closest('aside').insertAdjacentHTML('beforebegin', template.outerHTML);
+            var menu = files.closest('aside').previousElementSibling;
+            menu.selection = text;
+            console.log(74, text);
         }
-        console.log(component, component.querySelectorAll('template'), template);
-        template.style.top = event.clientY + 'px';
-        template.style.left = event.clientX + 'px';
-        files.closest('aside').insertAdjacentHTML('beforebegin', template.outerHTML);
-        var menu = files.closest('aside').previousElementSibling;
-        menu.selection = text;
-        console.log(74, text);
     }
 
     console.log(68, 'events.oncontextmenu.filesystem', event, {
