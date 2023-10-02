@@ -533,6 +533,13 @@ window.routes = function(uri, options) {
                                         i++;
                                     } while (i < json.length)
                                 }
+
+                                var consolelog = console.log;
+                                console.log = function(txt) {
+                                    consolelog(539, 'console.log', txt);
+                                    consolelog.apply(console, arguments);
+                                }
+
                                 wIDE(paths);
                             }
                         } else {
