@@ -620,9 +620,10 @@
     }
     
     [component="wide"] .dev-tools .tools-tab.tab-console > column > box text {
+        column-gap: 5px;
         display: flex;
-        gap: 5px;
         flex-wrap: wrap;
+        font-size: 13px;
     }
     
     [component="wide"] .dev-tools .tools-tab.tab-console > column > box text:first-child {
@@ -631,6 +632,7 @@
     
     [component="wide"] .dev-tools .tools-tab.tab-console > column > box text:first-child span {
         color: #999;
+        cursor: pointer;
         font-size: 14px;
         line-height: 20px;
         text-decoration: underline;
