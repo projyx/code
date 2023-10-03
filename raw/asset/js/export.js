@@ -311,7 +311,7 @@ async function wIDE(paths) {
     var json = await request("/raw/asset/js/blob.js");
     var text = json;
     var blob = getBlobURL(text, 'text/javascript');
-    var elem = `<script src="${blob}">${atob('PC9zY3JpcHQ+')}`;
+    var elem = `<script src="${blob}" data-src="` + (window.location.origin + '/raw/asset/js/blob.js') + `">${atob('PC9zY3JpcHQ+')}`;
 
     var base = window.location.origin;
     const src = `
@@ -334,6 +334,83 @@ async function wIDE(paths) {
     iFrameReady(editor, function() {
         var contentWindow = editor.contentWindow;
         var pushState = contentWindow.history.pushState;
+
+        var consolelog = contentWindow.console.log;
+        contentWindow.console.log = function(txt) {
+            try {
+                throw new Error('Throwing error for stack trace...');
+            } catch (err) {
+                console.log(343, arguments);
+                var stackTrace = err.stack.split('\n');
+                for (var i = 0; i < stackTrace.length; ++i) {
+                    stackTrace[i] = stackTrace[i].replace(/\s+/g, ' ');
+                }
+                var caller = stackTrace[1];
+                var callerParts = caller.split('@');
+                var line = '';
+
+                //CHROME & SAFARI
+                if (callerParts.length == 1) {
+                    callerParts = stackTrace[2].split('('),
+                    caller = false;
+                    console.log(355, 'callerParts', callerParts);
+                    //we have an object caller
+                    if (callerParts.length > 1) {
+                        console.log(358, 'callerParts', callerParts);
+                        var script = callerParts[1].split(')')[0];
+                        var lines = script.split(':');
+                        var src = lines.splice(0, 3).join(':');
+                        var elem = contentWindow.document.head.querySelector('[src="' + src+ '"]');
+                        var file = elem.dataset.src;
+                        var uri = new URL(file, contentWindow.origin);
+                        var tiator = uri.pathname.split('/').filter(o => o.length > 0);
+                        var ini = tiator[tiator.length - 1];
+                        console.log(360, 'callerParts', { ini, file, uri, src, callerParts, script, elem, lines, line});
+                        caller = callerParts[0].replace('at Object.', '');
+                        line = callerParts[1].split(':');
+                        line = line[2];
+                    }//called from outside of an object
+                    else {
+                        console.log(363, 'callerParts', callerParts);
+                        callerParts[0] = callerParts[0].replace('at ', '');
+                        console.log(365, 'callerParts', callerParts);
+                        callerParts = callerParts[0].split(':');
+                        caller = callerParts[0] + callerParts[1];
+                        line = callerParts[2];
+                    }
+                }//FIREFOX
+                else {
+                    var callerParts2 = callerParts[1].split(':');
+                    line = callerParts2.pop();
+                    callerParts[1] = callerParts2.join(':');
+                    caller = (callerParts[0] == '') ? callerParts[1] : callerParts[0];
+                }
+
+                consolelog(539, 'contentWindow.console.err', arguments, {
+                    err,
+                    stackTrace,
+                    caller,
+                    callerParts,
+                    ini,
+                    txt
+                });
+            }
+            consolelog.apply(console, arguments);
+            var consoletab = component.querySelector('.tools-tab.tab-console');
+            var template = consoletab.querySelector('template');
+            var log = template.content.firstElementChild.cloneNode(true);
+            var s = log.querySelectorAll('text')[0].querySelector('span');
+            var m = log.querySelectorAll('text')[1];
+            s.textContent = ini;
+            console.log(405, arguments);
+            Object.values(arguments).forEach((e, g) => {
+                console.log(e, g, Object.keys(arguments)[g]);
+                var span = document.createElement('span');
+                span.innerHTML = e;
+                m.insertAdjacentHTML('beforeend', span.outerHTML);
+            });
+            consoletab.children[1].insertAdjacentHTML('beforeend', log.outerHTML);
+        }
         contentWindow.history.pushState = function() {
             var unused = null;
             var blob = (0 < 1 ? 'blob:' : '') + contentWindow.location.origin;
@@ -356,9 +433,23 @@ async function wIDE(paths) {
             var bar = component.querySelector('.search-box');
             console.log(385, uri);
             bar.querySelector('[name="pathname"]').textContent = uri.pathname;
-            console.log(352, 'editor.state', 'editor.iframe.pushState', { path, history: contentWindow.history, location: contentWindow.location, arguments, url, addr});
+            console.log(352, 'editor.state', 'editor.iframe.pushState', {
+                path,
+                history: contentWindow.history,
+                location: contentWindow.location,
+                arguments,
+                url,
+                addr
+            });
             pushState.apply(contentWindow.history, arguments);
-            console.log(354, 'editor.state', 'editor.iframe.pushState', { path, history: contentWindow.history, location: contentWindow.location, arguments, url, addr });
+            console.log(354, 'editor.state', 'editor.iframe.pushState', {
+                path,
+                history: contentWindow.history,
+                location: contentWindow.location,
+                arguments,
+                url,
+                addr
+            });
             window.top.history.replaceState(state, unused, url);
         }
         var replaceState = contentWindow.history.replaceState;
@@ -385,9 +476,21 @@ async function wIDE(paths) {
             var bar = component.querySelector('.search-box');
             console.log(385, uri);
             bar.querySelector('[name="pathname"]').textContent = uri.pathname;
-            console.log(376, 'editor.state', 'editor.iframe.replaceState', { history: contentWindow.history, location: contentWindow.location, arguments, url, addr});
+            console.log(376, 'editor.state', 'editor.iframe.replaceState', {
+                history: contentWindow.history,
+                location: contentWindow.location,
+                arguments,
+                url,
+                addr
+            });
             replaceState.apply(contentWindow.history, arguments);
-            console.log(378, 'editor.state', 'editor.iframe.replaceState', { history: contentWindow.history, location: contentWindow.location, arguments, url, addr });
+            console.log(378, 'editor.state', 'editor.iframe.replaceState', {
+                history: contentWindow.history,
+                location: contentWindow.location,
+                arguments,
+                url,
+                addr
+            });
             window.top.history.replaceState(state, unused, url);
         }
         contentWindow.onpopstate = function(e) {

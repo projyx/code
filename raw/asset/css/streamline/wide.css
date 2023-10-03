@@ -604,6 +604,40 @@
 }
 
 @media {
+    [component="wide"] .dev-tools .tools-tab.tab-console > column {
+        flex: 1;
+        flex-direction: column;
+    }
+    
+    [component="wide"] .dev-tools .tools-tab.tab-console > column > box {
+        border-bottom: 1px solid #555;
+        min-height: 20px;
+        padding: 0 20px;
+    }
+    
+    [component="wide"] .dev-tools .tools-tab.tab-console > column > box > section {
+        display: block;
+    }
+    
+    [component="wide"] .dev-tools .tools-tab.tab-console > column > box text {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+    
+    [component="wide"] .dev-tools .tools-tab.tab-console > column > box text:first-child {
+        float: right;
+    }
+    
+    [component="wide"] .dev-tools .tools-tab.tab-console > column > box text:first-child span {
+        color: #999;
+        font-size: 14px;
+        line-height: 20px;
+        text-decoration: underline;
+    }
+}
+
+@media {
     [component="wide"] .dev-tools .tab-sources .sources-panel > column > .CodeMirror[css-display="flex"] {
         height: 50%;
     }
