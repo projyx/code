@@ -603,6 +603,7 @@
     }
 }
 
+/*CONSOLE*/
 @media {
     [component="wide"] .dev-tools .tools-tab.tab-console > column {
         flex: 1;
@@ -639,6 +640,41 @@
     }
 }
 
+/*ELEMENTS*/
+@media {
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        height: 100%;
+        overflow-x: hidden;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element {
+        display: flex;
+        flex-direction: column;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element section:empty {
+        display: none;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section {
+        display: flex;
+        /* flex: 1; */
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding-left: 20px;
+    }
+    
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside {
+        border-left: 1px solid #555;
+        height: 100%;
+        width: 240px;
+    }
+}
+
+/*CODEMIRROR*/
 @media {
     [component="wide"] .dev-tools .tab-sources .sources-panel > column > .CodeMirror[css-display="flex"] {
         height: 50%;

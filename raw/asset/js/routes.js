@@ -280,6 +280,10 @@ window.routes = function(uri, options) {
 
                             if (paths.length > 3) {
 
+                                var preview = component.querySelector('iframe');
+                                var contentWindow = preview.contentWindow;
+
+                                //CONSOLE
                                 let m_pos;
                                 window.dom.web_tools = component.querySelector('.dev-tools');
                                 var resizer = component.querySelector('line#resizer');
@@ -302,12 +306,11 @@ window.routes = function(uri, options) {
                                     document.removeEventListener("mousemove", resize, false);
                                 }, false);
 
+                                //FILETREE
                                 var owner = paths[0];
                                 var repo = paths[1];
                                 var branch = paths[3];
                                 var ref = "heads/" + branch;
-
-                                //FILE TREE
                                 if (0 < 1) {
                                     var refs = await github.database.references({
                                         owner,
@@ -533,7 +536,12 @@ window.routes = function(uri, options) {
                                         i++;
                                     } while (i < json.length)
                                 }
-                                wIDE(paths);
+                                var contentWindow = await wIDE(paths);
+                                //console.log(540, contentWindow);
+
+                                //DOMTREE
+                                console.log(component, contentWindow);
+                                domTree(component, contentWindow);
                             }
                         } else {
                             status = 400;
