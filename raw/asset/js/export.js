@@ -463,6 +463,8 @@ async function wIDE(paths) {
                     addr
                 });
                 window.top.history.replaceState(state, unused, url);
+
+                resolve ? resolve(contentWindow) : null;
             }
             var replaceState = contentWindow.history.replaceState;
             contentWindow.history.replaceState = function() {
@@ -514,8 +516,6 @@ async function wIDE(paths) {
             contentWindow.document.body.querySelector('boot').setAttribute('route', state);
             document.getElementById('preview-editor').contentWindow.history.pushState(state, null, state);
             console.log(360, "Iframe domcontentloaded", boot, window.location.href, contentWindow.location, state);
-
-            resolve(contentWindow);
         })
     }
     )
@@ -586,7 +586,15 @@ function domTree(component, contentWindow) {
         elements.push(element);
         var box = template.cloneNode(true);
         var tagName = element.tagName.toLowerCase();
-        box.querySelector('header').textContent = "<" + tagName + ">";
+        var attributes = [];
+        console.log(590, element.attributes.length, element);
+        if (element.attributes.length > 0) {
+            console.log(592, element.attributes);
+            for (const attr of element.attributes) {
+                attributes.push(attr.name + "='" + attr.value + "'")
+            }
+        }
+        box.querySelector('header').textContent = "<" + tagName + " " + attributes.join(" ") + ">";
         if (!["base", "link", "meta"].includes(tagName)) {
             box.querySelector('footer').textContent = "</" + tagName + ">";
         }
@@ -671,6 +679,14 @@ function domTree(component, contentWindow) {
         section.closest('box').setAttribute('dom', i);
         i++;
     } while (element);
+    Array.from(document.querySelectorAll('[dom]')).forEach((el)=>{
+        el.removeAttribute('dom');
+    }
+    )
+    Array.from(contentWindow.document.querySelectorAll('[dom]')).forEach((el)=>{
+        el.removeAttribute('dom');
+    }
+    )
 }
 
 window.Crypto = crypt = cx = {
