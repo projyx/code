@@ -585,8 +585,11 @@ function domTree(component, contentWindow) {
     do {
         elements.push(element);
         var box = template.cloneNode(true);
-        box.querySelector('header').textContent = "<" + element.tagName + ">";
-        box.querySelector('footer').textContent = "</" + element.tagName + ">";
+        var tagName = element.tagName.toLowerCase();
+        box.querySelector('header').textContent = "<" + tagName + ">";
+        if (!["base", "link", "meta"].includes(tagName)) {
+            box.querySelector('footer').textContent = "</" + tagName + ">";
+        }
 
         var previous = elements[i - 1];
         element.setAttribute('dom', i);
