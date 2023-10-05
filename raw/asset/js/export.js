@@ -642,7 +642,7 @@ function domTree(component, contentWindow) {
         element.setAttribute('dom', i);
         //console.log(548, 'wIDE.elements.loop(element)', element);
         if (element.firstElementChild && parent === previous) {
-            console.log(550, 'wIDE.elements.loop(element)', {
+            0 > 1 ? console.log(550, 'wIDE.elements.loop(element)', {
                 i,
                 element,
                 firstElementChild: element.firstElementChild,
@@ -650,7 +650,7 @@ function domTree(component, contentWindow) {
                 element,
                 parent: element.parentNode,
                 previous
-            });
+            }) : null;
             element = element.firstElementChild;
             section.insertAdjacentHTML('beforeend', box.outerHTML);
             section = section.lastElementChild.querySelector('header:has(+ section) + section')
@@ -689,7 +689,7 @@ function domTree(component, contentWindow) {
                         section = section.closest('box[dom]').nextElementSibling.querySelector('header:has(+ section) + section')
                     }
                 }
-                0 < 1 ? console.log(558, 'wIDE.elements.loop(next)', {
+                0 > 1 ? console.log(558, 'wIDE.elements.loop(next)', {
                     i,
                     which,
                     element,
