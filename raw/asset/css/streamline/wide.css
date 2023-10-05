@@ -9,7 +9,7 @@
     }
 }
 
-@media {    
+@media {
     [component="wide"] .live-preview {
         border-left: 1px solid #555;
         flex: 1;
@@ -17,7 +17,7 @@
     }
 }
 
-@media {    
+@media {
     [component="wide"] line {
         /* background: #555555; */
         /* cursor: ew-resize; */
@@ -26,7 +26,7 @@
     }
 }
 
-@media {    
+@media {
     .header-wide {
         background: #292a2d;
         border-bottom: 1px solid #555;
@@ -37,18 +37,19 @@
         width: 100%;
         z-index: 12345;
     }
+
     .header-wide > row {
         align-items: center;
         display: flex;
         flex: 1;
         height: 100%;
     }
-    
+
     .header-wide .shell-brand .brand-image > section {
         align-items: center;
         justify-content: center;
     }
-    
+
     .header-wide .shell-brand .brand-image i {
         align-items: center;
         display: flex;
@@ -57,20 +58,20 @@
         margin-left: auto;
         width: 30px;
     }
-    
+
     .header-wide .shell-authenticate {
         height: 30px;
         margin-left: auto;
         width: 30px;
     }
-    
+
     .header-wide .shell-authenticate .authenticate-avatar avi {
         border-radius: 50%;
         height: 30px;
         overflow: hidden;
         width: 30px;
     }
-    
+
     .header-wide .shell-authenticate .authenticate-avatar avi:empty {
         border: 1px solid #555;
         box-sizing: border-box;
@@ -89,12 +90,12 @@
         height: 42px;
         width: 100%;
     }
-    
+
     [component="wide"] .address-bar .bar-history {
         height: 100%;
         width: 126px;
     }
-    
+
     [component="wide"] .address-bar .bar-history box {
         align-items: center;
         display: flex;
@@ -102,11 +103,11 @@
         justify-content: center;
         width: 42px;
     }
-    
+
     [component="wide"] .address-bar .bar-history .history-back {
         opacity: 0.5;
     }
-    
+
     [component="wide"] .address-bar .bar-history .history-forward {
         opacity: 0.5;
     }
@@ -123,7 +124,7 @@
         flex: 1;
         justify-content: center;
     }
-    
+
     [component="wide"] .address-bar .bar-search box {
         align-items: center;
         /* border-radius: 50px; */
@@ -140,7 +141,7 @@
         height: 34px;
         margin: 0;
         width: 100%;
-    }    
+    }
 
     [component="wide"] .address-bar .bar-search .search-box > * {
         border: 0;
@@ -215,7 +216,7 @@
     }
 }
 
-@media {    
+@media {
     [component="wide"] .dev-tools {
         border-right: 1px solid #555;
         display: flex;
@@ -224,7 +225,7 @@
         overflow: hidden;
         width: 960px;
     }
-    
+
     [component="wide"] .dev-tools > header {
         border-bottom: 1px solid #555;
         color: #999;
@@ -286,9 +287,12 @@
     [component="wide"] .dev-tools .tab-sources .sources-files {
         color: #999;
         flex: 1;
-        -webkit-user-select: none; /* Safari */
-        -ms-user-select: none; /* IE 10 and IE 11 */
-        user-select: none; /* Standard syntax */
+        -webkit-user-select: none;
+        /* Safari */
+        -ms-user-select: none;
+        /* IE 10 and IE 11 */
+        user-select: none;
+        /* Standard syntax */
         width: 100%;
     }
 
@@ -298,9 +302,10 @@
         height: calc(100% - 50px);
         overflow: auto;
         /* display: none; */
-         /* Safari */
-         /* IE 10 and IE 11 */
-        flex: 1; /* Standard syntax */
+        /* Safari */
+        /* IE 10 and IE 11 */
+        flex: 1;
+        /* Standard syntax */
     }
 
     [component="wide"] .dev-tools .tab-sources .sources-files #file-trees column {
@@ -344,14 +349,14 @@
     [component="wide"] .dev-tools .tab-sources .sources-files > column text .icon-file {
         --ggs: calc(2/3);
     }
-    
+
     [component="wide"] .dev-tools .tab-sources > aside {
         border-right: 1px solid #555;
         display: flex;
         height: 100%;
         width: 300px;
     }
-    
+
     [component="wide"] .dev-tools .tab-sources > section {
         display: flex;
         flex: 1;
@@ -464,7 +469,7 @@
         overflow-x: hidden;
     }
 
-    [component="wide"] .dev-tools .tab-sources .sources-panel > column > cell > div{
+    [component="wide"] .dev-tools .tab-sources .sources-panel > column > cell > div {
         /* display: none; */
         height: calc(100% - 181px);
     }
@@ -509,22 +514,22 @@
         height: 100%;
         width: 100%;
     }
-    
+
     [component="wide"] .dev-tools .tools-tabs {
         width: 100%;
     }
-    
+
     [component="wide"] .dev-tools .tools-tabs box {
         padding: 0 10px;
     }
-    
+
     [component="wide"] .dev-tools .tools-tabs box:hover {
         background: #444;
         color: #fff;
     }
 }
 
-@media {    
+@media {
     [component="wide"] .dev-tools .tab-console > aside {
         border-right: 1px solid #555;
         display: flex;
@@ -532,7 +537,7 @@
         width: 200px;
         flex-direction: column;
     }
-    
+
     [component="wide"] .dev-tools .tab-console .console-filters > column text {
         align-items: center;
         display: flex;
@@ -609,28 +614,28 @@
         flex: 1;
         flex-direction: column;
     }
-    
+
     [component="wide"] .dev-tools .tools-tab.tab-console > column > box {
         border-bottom: 1px solid #555;
         min-height: 20px;
         padding: 0 20px;
     }
-    
+
     [component="wide"] .dev-tools .tools-tab.tab-console > column > box > section {
         display: block;
     }
-    
+
     [component="wide"] .dev-tools .tools-tab.tab-console > column > box text {
         column-gap: 5px;
         display: flex;
         flex-wrap: wrap;
         font-size: 13px;
     }
-    
+
     [component="wide"] .dev-tools .tools-tab.tab-console > column > box text:first-child {
         float: right;
     }
-    
+
     [component="wide"] .dev-tools .tools-tab.tab-console > column > box text:first-child span {
         color: #999;
         cursor: pointer;
@@ -650,14 +655,56 @@
         font-size: 12px;
         height: 100%;
         overflow-x: hidden;
-        -webkit-user-select: none; /* Safari */
-        -ms-user-select: none; /* IE 10 and IE 11 */
-        user-select: none; /* Standard syntax */
+        /* padding: 0 10px; */
+        -webkit-user-select: none;
+        /* Safari */
+        -ms-user-select: none;
+        /* IE 10 and IE 11 */
+        user-select: none;
+        /* Standard syntax */
     }
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element {
         display: flex;
         flex-direction: column;
+        position: relative;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element {
+        display: block;
+        flex-direction: row;
+        flex-wrap: wrap;
+        font-size: 0;
+        white-space: nowrap;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > * {
+        display: inline;
+        font-size: 12px;
+        white-space: break-spaces;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > header:before, [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > footer:before {
+        background: transparent;
+        content: '';
+        display: block;
+        height: 100%;
+        left: -100vw;
+        position: absolute;
+        width: 200vw;
+        z-index: 1;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element:has(> header:hover) > header:hover:after, [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section:not(:empty) + footer:hover:after {
+        background: #374151;
+        content: '';
+        display: block;
+        height: 100%;
+        left: -100vw;
+        position: absolute;
+        top: 0;
+        width: 200vw;
+        z-index: -1;
     }
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element section:empty {
@@ -666,12 +713,23 @@
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section {
         display: flex;
+        display: block;
         /* flex: 1; */
-        flex-direction: column;
-        flex-wrap: wrap;
+        /* flex-direction: column; */
+        /* flex-wrap: wrap; */
         padding-left: 20px;
     }
-    
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > :not(section) {
+        position: relative;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section box > :not(section) {
+        padding-left: 0px;
+        position: relative;
+        width: 100%;
+    }
+
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside {
         border-left: 1px solid #555;
         height: 100%;
