@@ -245,7 +245,7 @@ window.events.oncontextmenu.wIDE = async function(event) {
         template
     });
 
-    event.preventDefault();
+    //event.preventDefault();
 }
 
 window.events.onfocusout = {};

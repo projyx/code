@@ -714,6 +714,7 @@ function domTree(component, contentWindow) {
             } else {
                 element = null;
             }
+            var line = section.closest('box');
         }
         section.closest('box').setAttribute('dom', i);
         i++;

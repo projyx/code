@@ -1,5 +1,30 @@
 window.editor = {};
 
+window.editor.elements = {};
+window.editor.elements.select = function(event) {
+    var target = event.target;
+    var component = target.closest('component');
+    var editor = component.querySelector('iframe');
+    var contentWindow = editor.contentWindow;
+    var select = target.closest('box.element > *');
+    var element = select.closest('box.element');
+    var elements = document.querySelectorAll('box.element');
+    var startTag = document.querySelectorAll('box.element > header');
+    var index = Array.from(startTag).indexOf(element.firstElementChild);
+    var doc = contentWindow.document;
+    var nodes = doc.querySelectorAll('*:not(component *)');
+    var node = nodes[index];
+    console.log(5, 'editor.elements.select', {
+        target,
+        index,
+        select,
+        element,
+        elements,
+        nodes,
+        node
+    });    
+}
+
 window.editor.tools = {};
 window.editor.tools.tool = async function(event) {
     var target = event.target;
