@@ -646,8 +646,13 @@
         display: flex;
         flex: 1;
         flex-direction: column;
+        font-family: consolas,lucida console,courier new,monospace;
+        font-size: 12px;
         height: 100%;
         overflow-x: hidden;
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
     }
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element {

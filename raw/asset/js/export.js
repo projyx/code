@@ -583,22 +583,61 @@ function domTree(component, contentWindow) {
     var elements = [];
     var i = 0;
     do {
+        //VARIABLES
         elements.push(element);
         var box = template.cloneNode(true);
         var tagName = element.tagName.toLowerCase();
         var attributes = [];
         console.log(590, element.attributes.length, element);
+
+        //MANIPULATE
+        var innerHTML = "";
+        var leftAngleBracket = document.createElement('span');
+        leftAngleBracket.style.color = "#5db0d7";
+        leftAngleBracket.textContent = "<";
+        var startTag = document.createElement('span');
+        startTag.style.color = "#5db0d7";
+        startTag.textContent = tagName;
+        innerHTML += leftAngleBracket.outerHTML;
+        innerHTML += startTag.outerHTML;
         if (element.attributes.length > 0) {
             console.log(592, element.attributes);
             for (const attr of element.attributes) {
-                attributes.push(attr.name + "='" + attr.value + "'")
+                var attribute = document.createElement('span');
+                attribute.style.color = "#9bbbdc";
+                attribute.textContent = attr.name;
+                var equalSign = document.createElement('span');
+                equalSign.style.color = "#5db0d7";
+                equalSign.textContent = "=";
+                var leftQuote = document.createElement('span');
+                leftQuote.style.color = "#5db0d7";
+                leftQuote.textContent = '"';
+                var value = document.createElement('span');
+                value.style.color = "#f29766";
+                value.textContent = attr.value
+                var rightQuote = document.createElement('span');
+                rightQuote.style.color = "#5db0d7";
+                rightQuote.textContent = '"';
+                var outerHTML = attribute.outerHTML + equalSign.outerHTML + leftQuote.outerHTML + value.outerHTML + rightQuote.outerHTML;
+                attributes.push(outerHTML);
             }
         }
-        box.querySelector('header').textContent = "<" + tagName + " " + attributes.join(" ") + ">";
+        innerHTML += (attributes.length > 0 ? " " : "") + attributes.join(" ");
+        var rightAngleBracket = document.createElement('span');
+        rightAngleBracket.style.color = "#5db0d7";
+        rightAngleBracket.textContent = ">";
+        innerHTML += rightAngleBracket.outerHTML;
+        //console.log(615, innerHTML);
+        box.querySelector('header').innerHTML = innerHTML;
         if (!["base", "link", "meta"].includes(tagName)) {
-            box.querySelector('footer').textContent = "</" + tagName + ">";
+            //box.querySelector('footer').textContent = "</" + tagName + ">";
+            var endTag = document.createElement('span');
+            endTag.style.color = "#5db0d7";
+            endTag.textContent = "</" + tagName + ">";
+            box.querySelector('footer').innerHTML = endTag.outerHTML;
         }
 
+        //REDECLARE
         var previous = elements[i - 1];
         element.setAttribute('dom', i);
         //console.log(548, 'wIDE.elements.loop(element)', element);
