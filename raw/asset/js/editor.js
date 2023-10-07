@@ -14,15 +14,39 @@ window.editor.elements.select = function(event) {
     var doc = contentWindow.document;
     var nodes = doc.querySelectorAll('*:not(component *)');
     var node = nodes[index];
-    console.log(5, 'editor.elements.select', {
+    console.log(5, 'editor.elements.select variables', {
         target,
-        index,
-        select,
-        element,
-        elements,
-        nodes,
         node
-    });    
+    });
+
+    var stylesheets = doc.styleSheets;
+    var styles = getComputedStyle(node);
+    console.log(5, 'editor.elements.select styles', {
+        stylesheets,
+        styles
+    });
+    if (stylesheets.length > 0) {
+        var i = 0
+        do {
+            var stylesheet = stylesheets[i];
+            var rules = stylesheet.rules;
+            console.log(32, 'editor.elements.select select', {
+                stylesheet,
+                rules
+            });
+
+            console.log(38, Object.keys(rules));
+            var ii = 0;
+            do {
+                var rule = Object.values(rules)[ii];
+                var cssRules = rule && rule.cssRules ? rule.cssRules : null;
+                console.log(42, ii, 'editor.elements.select select rule', rule, cssRules);
+                ii++;
+            } while (ii < Object.keys(rules).length);
+            
+            i++;
+        } while (i < stylesheets.length);
+    }
 }
 
 window.editor.tools = {};

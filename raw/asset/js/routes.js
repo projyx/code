@@ -252,7 +252,7 @@ window.routes = function(uri, options) {
                                 }
                             }
                         } else if (paths[2] === "wide") {
-                            console.log("wide");
+                            console.log(255, "wide", paths);
 
                             var pathed = uri.split('/').filter(o=>o.length > 0);
                             var pathname = '/' + pathed.splice(4, pathed.length - 1).join('/');
@@ -279,6 +279,7 @@ window.routes = function(uri, options) {
                             component.querySelector('[name="pathname"]').textContent = address.pathname;
 
                             if (paths.length > 3) {
+                                console.log(255, "wide", paths);
 
                                 var preview = component.querySelector('iframe');
                                 var contentWindow = preview.contentWindow;
@@ -554,6 +555,7 @@ window.routes = function(uri, options) {
                         console.log("routes.view repository");
 
                         if (0 < 1) {
+                            console.log(paths);
                             var json = await github.repos.repo(paths[0], paths[1], {
                                 cache: "reload"
                             });
