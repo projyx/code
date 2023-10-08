@@ -12,7 +12,7 @@ window.editor.elements.select = function(event) {
     var startTag = document.querySelectorAll('box.element > header');
     var index = Array.from(startTag).indexOf(element.firstElementChild);
     var doc = contentWindow.document;
-    var nodes = doc.querySelectorAll('*:not(component *)');
+    var nodes = doc.querySelectorAll('*');
     var node = nodes[index];
     console.log(5, 'editor.elements.select variables', {
         target,
@@ -41,9 +41,26 @@ window.editor.elements.select = function(event) {
                 var rule = Object.values(rules)[ii];
                 var cssRules = rule && rule.cssRules ? rule.cssRules : null;
                 console.log(42, ii, 'editor.elements.select select rule', rule, cssRules);
+                var iii = 0;
+                if (cssRules && cssRules.length > 0) {
+                    do {
+                        var cssRule = cssRules[iii];
+                        var selectorText = cssRule.selectorText;
+                        var matches = node.matches(selectorText);
+                        if (matches) {
+                            console.log(49, {
+                                cssRule,
+                                matches,
+                                node,
+                                selectorText
+                            });
+                        }
+                        iii++;
+                    } while (iii < cssRules.length)
+                }
                 ii++;
             } while (ii < Object.keys(rules).length);
-            
+
             i++;
         } while (i < stylesheets.length);
     }

@@ -1294,7 +1294,7 @@ async function wIDE(paths) {
             var state = "/" + boot.splice(4, boot.length).join("/");
             console.log(356, state);
             contentWindow.document.body.querySelector('boot').setAttribute('route', state);
-                    //contentWindow.location.href = uri.origin + uri.pathname;
+            //contentWindow.location.href = uri.origin + uri.pathname;
             //document.getElementById('preview-editor').contentWindow.history.pushState(state, null, state);
             console.log(360, "Iframe domcontentloaded", boot, window.location.href, contentWindow.location, state);
         })
@@ -1510,22 +1510,22 @@ function domTree(component, contentWindow) {
     )
 }
 
-function cssRules(selector, attribute) {
+function cssRules(doc) {
     var value;
-
-    [].some.call(document.styleSheets, function(sheet) {
+    [].some.call(doc.styleSheets, function(sheet) {
         return [].some.call(sheet.rules, function(rule) {
-            if (selector === rule.selectorText) {
+            if (rule.selectorText) {
                 return [].some.call(rule.style, function(style) {
                     if (attribute === style) {
                         value = rule.style.getPropertyValue(attribute);
                         return true;
                     }
-
                     return false;
                 });
+            } else {
+                var rules = rule.cssRules;
+                console.log(1518, rule, rules);
             }
-
             return false;
         });
     });
