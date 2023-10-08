@@ -719,9 +719,10 @@ function domTree(component, contentWindow) {
             } else {
                 element = null;
             }
-            var line = section.closest('box');
+            //var line = section.closest('box');
         }
         section.closest('box').setAttribute('dom', i);
+        console.log(725, element);
         i++;
     } while (element);
     Array.from(document.querySelectorAll('[dom]')).forEach((el)=>{

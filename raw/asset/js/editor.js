@@ -26,6 +26,8 @@ window.editor.elements.select = function(event) {
         styles
     });
     if (stylesheets.length > 0) {
+        var aside = component.querySelector('.tools-tab.tab-elements aside');
+        aside.innerHTML = "";
         var i = 0
         do {
             var stylesheet = stylesheets[i];
@@ -54,6 +56,10 @@ window.editor.elements.select = function(event) {
                                 node,
                                 selectorText
                             });
+                            var template = aside.nextElementSibling.content.firstElementChild.cloneNode(true);
+                            template.querySelector('header').textContent = selectorText + " {";
+                            template.querySelector('footer').textContent = "}";
+                            aside.insertAdjacentHTML('beforeend', template.outerHTML);
                         }
                         iii++;
                     } while (iii < cssRules.length)
