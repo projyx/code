@@ -32,32 +32,41 @@ window.editor.elements.select = function(event) {
         do {
             var stylesheet = stylesheets[i];
             var rules = stylesheet.rules;
-            console.log(32, 'editor.elements.select select', {
+            0 > 1 ? console.log(32, 'editor.elements.select select', {
                 stylesheet,
                 rules
-            });
-
-            console.log(38, Object.keys(rules));
+            }) : null;
+            //console.log(38, Object.keys(rules));
             var ii = 0;
             do {
                 var rule = Object.values(rules)[ii];
                 var cssRules = rule && rule.cssRules ? rule.cssRules : null;
                 console.log(42, ii, 'editor.elements.select select rule', rule, cssRules);
-                var iii = 0;
                 if (cssRules && cssRules.length > 0) {
+                    var iii = 0;
                     do {
                         var cssRule = cssRules[iii];
                         var selectorText = cssRule.selectorText;
                         var matches = node.matches(selectorText);
                         if (matches) {
+                            var styleMap = cssRule.styleMap;
                             console.log(49, {
                                 cssRule,
                                 matches,
                                 node,
-                                selectorText
+                                selectorText,
+                                styleMap
                             });
                             var template = aside.nextElementSibling.content.firstElementChild.cloneNode(true);
                             template.querySelector('header').textContent = selectorText + " {";
+                            var stylesList = template.querySelector('column');
+                            for (const [prop,val] of styleMap) {
+                                const propertyValue = template.querySelector('template').content.firstElementChild.cloneNode(true)
+                                propertyValue.querySelector('.property').textContent = prop;
+                                propertyValue.querySelector('.value').textContent = val;
+                                stylesList.appendChild(propertyValue);
+                                stylesList.appendChild(propertyValue);
+                            }
                             template.querySelector('footer').textContent = "}";
                             aside.insertAdjacentHTML('beforeend', template.outerHTML);
                         }

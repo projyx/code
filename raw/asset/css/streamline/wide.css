@@ -732,6 +732,7 @@
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside {
         border-left: 1px solid #555;
+        font-size: 14px;
         height: 100%;
         width: 240px;
     }
@@ -740,6 +741,26 @@
         border-bottom: 1px solid #555;
         display: flex;
         flex-direction: column;
+        padding: 4px;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > * {
+        display: inline-flex;
+    }
+    
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .property {
+        color: #3eb5eb;
+        margin-left: 20px;
+    }
+    
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .value {
+        margin-left: 5px;
     }
 }
 

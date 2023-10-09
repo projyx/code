@@ -430,18 +430,25 @@ async function wIDE(paths) {
                 var pth = window.top.location.pathname.split("/").filter((n,o)=>n.length > 0);
                 var dir = "/" + pth.splice(0, 4).join('/');
                 var addr = "/" + uri.pathname.split("/").filter((n,o)=>n.length > 0).join('/');
+
+
+                var blob = (0 < 1 ? 'blob:' : '') + contentWindow.location.origin;
+                var uri = new URL(contentWindow.location.origin + arguments[2],contentWindow.location.origin);
+                //bar.querySelector('[name="pathname"]').textContent = url;
+                var addr = "/" + uri.pathname.split("/").filter((n,o)=>n.length > 0).splice(1).join('/');
                 if (contentWindow.location.protocol === "blob:") {
-                    var url = blob + (0 > 1 ? "/" : "") + addr;
+                    var url = blob + addr;
                     var state = url;
                     console.log(339, arguments, {
                         state,
                         unused,
                         url
                     }, uri);
-                    var state = "/" + boot.splice(4, boot.length - 1).join("/");
-                    arguments = [uri.pathname, unused, uri.pathname];
-                    //contentWindow.location.href = uri.origin + uri.pathname;
+                    //var state = "/" + boot.splice(4, boot.length - 1).join("/");
+
+                    arguments = [state, unused, url];
                 }
+                
                 var url = dir + addr;
                 var bar = component.querySelector('.search-box');
                 console.log(385, {
@@ -479,7 +486,7 @@ async function wIDE(paths) {
                 var unused = null;
                 var blob = (0 < 1 ? 'blob:' : '') + contentWindow.location.origin;
                 var uri = new URL(contentWindow.location.origin + arguments[2],contentWindow.location.origin);
-                bar.querySelector('[name="pathname"]').textContent = url;
+                //bar.querySelector('[name="pathname"]').textContent = url;
                 var addr = "/" + uri.pathname.split("/").filter((n,o)=>n.length > 0).splice(1).join('/');
                 if (contentWindow.location.protocol === "blob:") {
                     var url = blob + addr;
@@ -523,7 +530,7 @@ async function wIDE(paths) {
             console.log(356, state);
             contentWindow.document.body.querySelector('boot').setAttribute('route', state);
             //contentWindow.location.href = uri.origin + uri.pathname;
-            //document.getElementById('preview-editor').contentWindow.history.pushState(state, null, state);
+            //document.getElementById('preview-editor').contentWindow.history.replaceState(state, null, state);
             console.log(360, "Iframe domcontentloaded", boot, window.location.href, contentWindow.location, state);
         })
     }
