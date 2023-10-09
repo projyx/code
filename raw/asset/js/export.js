@@ -431,7 +431,6 @@ async function wIDE(paths) {
                 var dir = "/" + pth.splice(0, 4).join('/');
                 var addr = "/" + uri.pathname.split("/").filter((n,o)=>n.length > 0).join('/');
 
-
                 var blob = (0 < 1 ? 'blob:' : '') + contentWindow.location.origin;
                 var uri = new URL(contentWindow.location.origin + arguments[2],contentWindow.location.origin);
                 //bar.querySelector('[name="pathname"]').textContent = url;
@@ -448,7 +447,7 @@ async function wIDE(paths) {
 
                     arguments = [state, unused, url];
                 }
-                
+
                 var url = dir + addr;
                 var bar = component.querySelector('.search-box');
                 console.log(385, {
@@ -535,6 +534,26 @@ async function wIDE(paths) {
         })
     }
     )
+}
+
+function parseCSSText(cssText) {
+    var cssTxt = cssText.replace(/\/\*(.|\s)*?\*\//g, " ").replace(/\s+/g, " ");
+    var style = {}
+      , [,ruleName,rule] = cssTxt.match(/ ?(.*?) ?{([^}]*)}/) || [, , cssTxt];
+    var cssToJs = s=>s.replace(/\W+\w/g, match=>match.slice(-1).toUpperCase());
+    var properties = rule.split(";").map(o=>o.split(":").map(x=>x && x.trim()));
+    for (var [property,value] of properties)
+        style[cssToJs(property)] = value;
+    style = Object.entries(style).filter(([key,value])=>value !== undefined).reduce((obj,[key,value])=>{
+        obj[key] = value;
+        return obj;
+    }
+    , {});
+    return {
+        cssText,
+        ruleName,
+        style
+    };
 }
 
 // This function ONLY works for iFrames of the same origin as their parent

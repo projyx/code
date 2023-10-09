@@ -50,23 +50,28 @@ window.editor.elements.select = function(event) {
                         var matches = node.matches(selectorText);
                         if (matches) {
                             var styleMap = cssRule.styleMap;
+                            var cssObject = parseCSSText(cssRule.cssText);
                             console.log(49, {
                                 cssRule,
                                 matches,
                                 node,
                                 selectorText,
-                                styleMap
+                                styleMap,
+                                cssObject
                             });
                             var template = aside.nextElementSibling.content.firstElementChild.cloneNode(true);
                             template.querySelector('header').textContent = selectorText + " {";
                             var stylesList = template.querySelector('column');
-                            for (const [prop,val] of styleMap) {
+                            Object.keys(cssObject.style).forEach((prop, index) => {
+                                prop = prop.replace(/[A-Z]/g, m => "-" + m.toLowerCase());
+                                val = Object.values(cssObject.style)[index];
+                                console.log(66, {prop, val});
                                 const propertyValue = template.querySelector('template').content.firstElementChild.cloneNode(true)
                                 propertyValue.querySelector('.property').textContent = prop;
                                 propertyValue.querySelector('.value').textContent = val;
                                 stylesList.appendChild(propertyValue);
                                 stylesList.appendChild(propertyValue);
-                            }
+                            });
                             template.querySelector('footer').textContent = "}";
                             aside.insertAdjacentHTML('beforeend', template.outerHTML);
                         }
