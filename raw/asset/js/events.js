@@ -86,6 +86,7 @@ window.events.onclick.mv = async function(event) {
     sel.removeAllRanges();
     sel.addRange(range);
 }
+
 window.events.onclick.rm = async function(event) {
     console.log(64, 'events.onclick.rm', event);
 

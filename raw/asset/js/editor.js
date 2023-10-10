@@ -1,6 +1,46 @@
 window.editor = {};
 
 window.editor.elements = {};
+window.editor.elements.styles = async function(event) {
+    var target = event.target;
+    var prop = target.closest('.property');
+    var val = target.closest('.value');
+    var property = prop ? prop.textContent : null;
+    var value = val ? val.textContent : null;
+    var element = null;
+    console.log(8, 'editor.elements.styles', {
+        target,
+        property,
+        value,
+        prop,
+        val
+    });
+    Array.from(target.closest('aside').querySelectorAll("[contenteditable]")).forEach(function(element) {
+        element.removeAttribute('contenteditable');
+    });
+    if (prop) {
+        prop.setAttribute("contenteditable", true);
+        prop.focus();
+        element = prop;
+    } else if (val) {
+        val.setAttribute("contenteditable", true);
+        val.focus();
+        element = val;
+    }
+    if (prop || val) {
+        if (document.body.createTextRange) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(element);
+            range.select();
+        } else if (window.getSelection) {
+            var selection = window.getSelection();
+            var range = document.createRange();
+            range.selectNodeContents(element);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    }
+}
 window.editor.elements.select = function(event) {
     var target = event.target;
     var component = target.closest('component');
@@ -18,6 +58,11 @@ window.editor.elements.select = function(event) {
         target,
         node
     });
+
+    Array.from(target.closest('component').querySelectorAll('.tools-tab.tab-elements .selected')).forEach(function(el) {
+        el.classList.remove('selected');
+    });
+    target.classList.add('selected');
 
     var stylesheets = doc.styleSheets;
     var styles = getComputedStyle(node);
@@ -62,16 +107,20 @@ window.editor.elements.select = function(event) {
                             var template = aside.nextElementSibling.content.firstElementChild.cloneNode(true);
                             template.querySelector('header').textContent = selectorText + " {";
                             var stylesList = template.querySelector('column');
-                            Object.keys(cssObject.style).forEach((prop, index) => {
-                                prop = prop.replace(/[A-Z]/g, m => "-" + m.toLowerCase());
+                            Object.keys(cssObject.style).forEach((prop,index)=>{
+                                prop = prop.replace(/[A-Z]/g, m=>"-" + m.toLowerCase());
                                 val = Object.values(cssObject.style)[index];
-                                console.log(66, {prop, val});
+                                console.log(66, {
+                                    prop,
+                                    val
+                                });
                                 const propertyValue = template.querySelector('template').content.firstElementChild.cloneNode(true)
                                 propertyValue.querySelector('.property').textContent = prop;
                                 propertyValue.querySelector('.value').textContent = val;
                                 stylesList.appendChild(propertyValue);
                                 stylesList.appendChild(propertyValue);
-                            });
+                            }
+                            );
                             template.querySelector('footer').textContent = "}";
                             aside.insertAdjacentHTML('beforeend', template.outerHTML);
                         }

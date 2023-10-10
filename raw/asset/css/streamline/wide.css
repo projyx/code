@@ -695,8 +695,19 @@
         z-index: 1;
     }
 
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > header.selected:before, [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > footer.selected:before {
+        background: #5b5b5b;
+        content: '';
+        display: block;
+        height: 100%;
+        left: -100vw;
+        position: absolute;
+        width: 200vw;
+        z-index: -1;
+    }
+
     [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element:has(> header:hover) > header:hover:after, [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section:not(:empty) + footer:hover:after {
-        background: #374151;
+        background: #4f5050;
         content: '';
         display: block;
         height: 100%;
@@ -744,6 +755,12 @@
         padding: 4px;
     }
 
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box [contenteditable]:focus {
+        outline: none;
+        border: 1px solid #777;
+        color: white;
+    }
+
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text {
         display: flex;
         flex-direction: row;
@@ -759,8 +776,13 @@
         margin-left: 20px;
     }
     
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .property + span {
+        color: #35b4fb;
+        padding-right: 5px;
+    }
+    
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .value {
-        margin-left: 5px;
+        /* margin-left: 5px; */
     }
 }
 

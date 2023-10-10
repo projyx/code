@@ -476,7 +476,7 @@ async function wIDE(paths) {
                     addr
                 });
                 window.top.history.replaceState(state, unused, url);
-                domTree(component, contentWindow);
+                domBuilder(component, contentWindow);
 
                 resolve ? resolve(contentWindow) : null;
             }
@@ -609,7 +609,7 @@ function iFrameReady(iFrame, fn) {
     checkLoaded();
 }
 
-function domTree(component, contentWindow) {
+function domBuilder(component, contentWindow) {
     var tab = component.querySelector('.tab')
     var element = contentWindow.document.querySelector("html");
     var domtree = component.querySelector('.tools-tab.tab-elements').firstElementChild;
@@ -696,9 +696,9 @@ function domTree(component, contentWindow) {
             console.log(558, 'wIDE.elements.loop(element)', {
                 element,
                 next,
-                firstElementChild: element.firstElementChild
+                firstElementChild
             });
-            if (next || element.firstElementChild) {
+            if (next || firstElementChild) {
                 next ? next = next.nextElementSibling : null;
                 var parent = element.parentNode;
                 var previous = elements[i - 1];
@@ -718,25 +718,15 @@ function domTree(component, contentWindow) {
                 } else {
                     which = 2;
                     if (previous !== element.previousElementChild) {
+                        which = "2.5";
                         domtree.querySelector('[dom="' + parseInt(parent.getAttribute('dom')) + '"] > section').insertAdjacentHTML('beforeend', box.outerHTML);
-                        section = domtree.querySelector('[dom="' + parseInt(parent.getAttribute('dom')) + '"] > section').lastElementChild.querySelector('header:has(+ section) + section')
+                        section = domtree.querySelector('[dom="' + parseInt(parent.getAttribute('dom')) + '"] > section').lastElementChild.querySelector('header:has(+ section) + section');
                     } else {
+                        which = "2.8";
                         section.closest('box').insertAdjacentHTML('afterend', box.outerHTML);
-                        section = section.closest('box[dom]').nextElementSibling.querySelector('header:has(+ section) + section')
+                        section = section.closest('box[dom]').nextElementSibling.querySelector('header:has(+ section) + section');
                     }
                 }
-                0 > 1 ? console.log(558, 'wIDE.elements.loop(next)', {
-                    i,
-                    which,
-                    element,
-                    next,
-                    firstElementChild,
-                    parent,
-                    parentId: parseInt(parent.getAttribute('dom')),
-                    previous,
-                    insert: domtree.querySelector('[dom="' + parseInt(parent.getAttribute('dom')) + '"]'),
-                    section
-                }) : null;
                 if (next) {
                     if (firstElementChild) {
                         element = firstElementChild;
@@ -745,9 +735,15 @@ function domTree(component, contentWindow) {
                         element = next;
                     }
                 } else {
-                    element = element.firstElementChild;
+                    if (firstElementChild) {
+                        element = element.firstElementChild;
+                    } else {
+                        element = element;
+                    }
                 }
             } else {
+                section.closest('box').insertAdjacentHTML('afterend', box.outerHTML);
+                section = section.closest('box[dom]').nextElementSibling.querySelector('header:has(+ section) + section');
                 element = null;
             }
             var line = section.closest('box');

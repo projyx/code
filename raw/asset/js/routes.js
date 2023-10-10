@@ -542,7 +542,7 @@ window.routes = function(uri, options) {
 
                                 //DOMTREE
                                 console.log(component, contentWindow);
-                                domTree(component, contentWindow);
+                                //domBuilder(component, contentWindow);
                             }
                         } else {
                             status = 400;
