@@ -315,10 +315,12 @@ async function wIDE(paths) {
         var elem = `<script src="${blob}" data-src="` + (window.location.origin + '/raw/asset/js/blob.js') + `">${atob('PC9zY3JpcHQ+')}`;
 
         var base = window.location.origin;
+        var link = window.location.protocol + `//` + window.location.host + `/raw/asset/css/webtools.css`;
         const src = `
         <html>
           <head>
             <base href="${base}"></base>
+            <link rel="stylesheet" type="text/css" href="${link}" />
             ${l.join(" ")}
             ${s.join(" ")}
             <style>${css}</style>
@@ -327,7 +329,7 @@ async function wIDE(paths) {
           </head>
           ${body.outerHTML}
         </html>
-    `;
+        `;
 
         const editor = document.getElementById('preview-editor');
         var component = editor.closest('component');
@@ -621,6 +623,7 @@ function domBuilder(component, contentWindow) {
     do {
         //VARIABLES
         elements.push(element);
+        //var elem = element;
         var box = template.cloneNode(true);
         var tagName = element.tagName.toLowerCase();
         var attributes = [];
@@ -689,7 +692,12 @@ function domBuilder(component, contentWindow) {
             }) : null;
             element = element.firstElementChild;
             section.insertAdjacentHTML('beforeend', box.outerHTML);
-            section = section.lastElementChild.querySelector('header:has(+ section) + section')
+            section = section.lastElementChild.querySelector('header:has(+ section) + section');
+            console.log(693, 'section.onmouseover', {
+                box: section.closest('box'),
+                element
+            });
+            section.closest('box').node = element;
         } else {
             var next = element.closest('[dom]:has(+ :not([dom]))');
             var firstElementChild = element.firstElementChild;
@@ -715,16 +723,32 @@ function domBuilder(component, contentWindow) {
                     which = 1;
                     section.insertAdjacentHTML('beforeend', box.outerHTML);
                     section = section.lastElementChild.querySelector('header:has(+ section) + section')
+                    console.log(718, 'section.onmouseover', {
+                        box: section.closest('box'),
+                        element
+                    });
+                    section.closest('box').node = element;
                 } else {
                     which = 2;
                     if (previous !== element.previousElementChild) {
                         which = "2.5";
                         domtree.querySelector('[dom="' + parseInt(parent.getAttribute('dom')) + '"] > section').insertAdjacentHTML('beforeend', box.outerHTML);
                         section = domtree.querySelector('[dom="' + parseInt(parent.getAttribute('dom')) + '"] > section').lastElementChild.querySelector('header:has(+ section) + section');
+                        console.log(726, 'section.onmouseover', {
+                            box: section.closest('box'),
+                            element
+                        });
+                        section.closest('box').node = element;
                     } else {
                         which = "2.8";
                         section.closest('box').insertAdjacentHTML('afterend', box.outerHTML);
+                        section.closest('box').node = element;
                         section = section.closest('box[dom]').nextElementSibling.querySelector('header:has(+ section) + section');
+                        console.log(736, 'section.onmouseover', {
+                            box: section.closest('box'),
+                            element
+                        });
+                        section.closest('box').node = element;
                     }
                 }
                 if (next) {
@@ -744,6 +768,11 @@ function domBuilder(component, contentWindow) {
             } else {
                 section.closest('box').insertAdjacentHTML('afterend', box.outerHTML);
                 section = section.closest('box[dom]').nextElementSibling.querySelector('header:has(+ section) + section');
+                console.log(773, 'section.onmouseover', {
+                    box: section.closest('box'),
+                    element
+                });
+                section.closest('box').node = element;
                 element = null;
             }
             var line = section.closest('box');

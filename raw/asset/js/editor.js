@@ -1,24 +1,129 @@
 window.editor = {};
 
 window.editor.elements = {};
+window.editor.elements.onmouseout = async function(event) {
+    var target = event.target;
+    var box = target.closest('box');
+    console.log(box);
+    if (box) {
+        console.log(node);
+        var node = box.node;
+        if (node) {
+            var component = target.closest('component');
+            var editor = component.querySelector('iframe');
+            var contentWindow = editor.contentWindow;
+            var doc = contentWindow.document;
+            doc.querySelectorAll("div:has(+ body)").forEach(function(el) {
+                el.remove();
+            });
+        }
+    }
+}
+window.editor.elements.onmouseover = async function(event) {
+    var target = event.target;
+    var doc = target.ownerDocument;
+    var component = target.closest('component');
+    var editor = component.querySelector('iframe');
+    var contentWindow = editor.contentWindow;
+    var select = target.closest('box.element > *');
+    var element = target.closest('box.element');
+    //var elements = document.querySelectorAll('box.element');
+    //var startTag = document.querySelectorAll('box.element > header');
+    //var index = Array.from(startTag).indexOf(element.firstElementChild);
+    //var nodes = doc.querySelectorAll('*');
+    var node = element && element.node ? element.node : null;
+    if (node) {
+        var doc = contentWindow.document;
+        doc.querySelectorAll("div:has(+ body)").forEach(function(el) {
+            el.remove();
+        })
+        var el = doc.createElement("div");
+        doc.querySelector("body").insertAdjacentHTML('beforebegin', el.outerHTML);
+        const host = doc.querySelector("div:has(+ body)");
+        const shadow = host.attachShadow({
+            mode: "open"
+        });
+        var borderLeft = node.borderLeft;
+        var borderTop = node.borderTop;
+        var borderRight = node.borderRight;
+        var borderBottom = node.borderBottom;
+        
+        var offsetLeft = node.offsetLeft;
+        var offsetTop = node.offsetTop;
+        
+        var height = node.clientHeight;
+        var width = node.clientWidth;
+        
+        var overlay = doc.createElement('custom-element');
+        overlay.className = "overlay";
+        overlay.id = "overlay";
+        overlay.style.position = "absolute";
+        
+        overlay.style.borderTop = borderTop + "px solid orange";
+        overlay.style.borderLeft = borderLeft + "px solid orange";
+        overlay.style.borderRight = borderRight + "px solid orange";
+        overlay.style.borderBottom = borderBottom + "px solid orange";
+        
+        overlay.style.left = offsetLeft + "px";
+        overlay.style.top = offsetTop + "px";
+        
+        overlay.style.height = height + "px";
+        overlay.style.width = width + "px";
+        
+        style = `<style>custom-element {
+            background-color: #2797fcad;
+        }</style>`;
+        shadow.innerHTML = style + overlay.outerHTML;
+        console.log(23, {
+            host,
+            node,
+            style: node.style,
+            styler: {
+                height: node.style.clientHeight,
+                left: node.style.offsetLeft,
+                width: node.style.clientWidth,
+                top: node.style.offsetTop
+            },
+            styles: {
+                borderLeft,
+                borderTop,
+                borderRight,
+                borderBottom,
+                
+                offsetLeft,
+                offsetTop,
+                
+                height,
+                width
+            },
+            shadow
+        });
+    }
+}
 window.editor.elements.styles = async function(event) {
     var target = event.target;
+    var className = target.closest('box > header > span:first-child');
     var prop = target.closest('.property');
     var val = target.closest('.value');
     var property = prop ? prop.textContent : null;
     var value = val ? val.textContent : null;
     var element = null;
-    console.log(8, 'editor.elements.styles', {
+    0 > 1 ? console.log(8, 'editor.elements.styles', {
+        className,
         target,
         property,
         value,
         prop,
         val
-    });
+    }) : null;
     Array.from(target.closest('aside').querySelectorAll("[contenteditable]")).forEach(function(element) {
         element.removeAttribute('contenteditable');
     });
-    if (prop) {
+    if (className) {
+        className.setAttribute("contenteditable", true);
+        className.focus();
+        element = className;
+    } else if (prop) {
         prop.setAttribute("contenteditable", true);
         prop.focus();
         element = prop;
@@ -27,7 +132,7 @@ window.editor.elements.styles = async function(event) {
         val.focus();
         element = val;
     }
-    if (prop || val) {
+    if (className || prop || val) {
         if (document.body.createTextRange) {
             var range = document.body.createTextRange();
             range.moveToElementText(element);
@@ -105,7 +210,7 @@ window.editor.elements.select = function(event) {
                                 cssObject
                             });
                             var template = aside.nextElementSibling.content.firstElementChild.cloneNode(true);
-                            template.querySelector('header').textContent = selectorText + " {";
+                            template.querySelector('header').innerHTML = '<span>' + selectorText + '</span> <span>{</span>';
                             var stylesList = template.querySelector('column');
                             Object.keys(cssObject.style).forEach((prop,index)=>{
                                 prop = prop.replace(/[A-Z]/g, m=>"-" + m.toLowerCase());
