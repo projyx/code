@@ -97,10 +97,11 @@ window.editor.elements.onmouseover = async function(event) {
 window.editor.elements.property = async function(event) {
     var keyCode = event.keyCode;
     var type = event.type;
-    console.log(106, event, keyCode);
+    //console.log(106, event, keyCode);
 
     if (type === "keydown") {
         if (keyCode === 9) {
+            //TAB
             event.preventDefault();
         }
     }
@@ -108,74 +109,91 @@ window.editor.elements.property = async function(event) {
 window.editor.elements.styles = function(event) {
     var target = event.target;
     var box = target.closest('box');
-    console.log(110, {
+    console.log(110, event.type, {
         box,
         target
-    }, event.type);
+    }, event);
 
-    if (box) {
-
-        var children = box.parentNode.children;
-        var index = Array.from(children).indexOf(box) === children.length - 1;
-        var last = index < children.length - 1;
-        var className = target.closest('box > header > span:first-child');
-
-        if (box && event.type === "mousedown") {
-            var dsp = box.querySelector('span.property:focus');
-            var dsv = box.querySelector('span.value:focus');
-            console.log(112,  113, {
-                dsp,
-                dsv
-            }, event.type);
-            if ((dsp && dsp.textContent === "") || (dsv && dsv.textContent === "") || (dsp && dsv && (dsp.textContent !== "" && dsv.textContent === "")) || (dsp && !dsv && (dsp.textContent !== "")) || (dsp && dsv && (dsp.textContent === "" && dsv.textContent !== "")) || (!dsp && dsv && (dsv.textContent !== ""))) {                
-                var focus = dsp || dsv;
-                if (focus.closest('box').deselection === false || !focus.closest('box').deselection) {
-                    focus.closest('box').deselection = true;
-                }
-                console.log(120, 'deselection', {
-                    focus
-                });
-                focus.blur();
-                focus && focus.closest('text') ? focus.closest('text').remove() : null;
-            }
-        }
-
+    if ((["mouseup", "mousedown"].includes(event.type) && event.which === 1) || (event.type === "focusout")) {
         if (box) {
-            console.log(127, box.deselection);
-        }
 
-        if (box && event.type === "mouseup" && (box.deselection === false || !box.deselection)) {
             var children = box.parentNode.children;
-            var index = Array.from(box.parentNode.children).indexOf(box);
-            var header = target.closest('box > header');
+            var index = Array.from(children).indexOf(box);
+            var last = index === children.length - 1;
             var className = target.closest('box > header > span:first-child');
-            var prop = target.closest('.property');
-            var val = target.closest('.value');
-            var property = prop ? prop.textContent : null;
-            var value = val ? val.textContent : null;
-            var element = null;
-            0 < 1 ? console.log(8, 'editor.elements.styles', {
-                index,
-                box,
-                box: box.parentNode,
-                children,
-                className,
-                target,
-                property,
-                value,
-                prop,
-                val
-            }) : null;
-            Array.from(target.closest('aside').querySelectorAll("[contenteditable]")).forEach(function(element) {
-                element.removeAttribute('contenteditable');
-            });
-            if (Array.from(children).indexOf(box) === children.length - 1) {
+            console.log(123, event.type);
+            //box.nulled = null;
+
+            if (box && ["focusout", "mouseup"].includes(event.type)) {
+                var dsp = box.querySelector('span.property');
+                var dsv = box.querySelector('span.value');
+                console.log(112, 113, {
+                    dsp,
+                    dsv
+                }, event.type);
+                if ((dsp && dsp.textContent === "") || (dsv && dsv.textContent === "") || (dsp && dsv && (dsp.textContent !== "" && dsv.textContent === "")) || (dsp && !dsv && (dsp.textContent !== "")) || (dsp && dsv && (dsp.textContent === "" && dsv.textContent !== "")) || (!dsp && dsv && (dsv.textContent !== ""))) {
+                    var focus = dsp || dsv;
+                    if (focus.closest('box').deselection === false || !focus.closest('box').deselection) {
+                        focus.closest('box').deselection = true;
+                    }
+                    console.log(120, 'deselection', {
+                        focus
+                    });
+                    focus.blur();
+                    focus && focus.closest('text') ? focus.closest('text').remove() : null;
+                }
+            }
+
+            if (event.type === "mousedown" && (box.unfocused === true || !box.unfocused)) {
+                box.nulled = false;
+                box.unfocused = false;
+            }
+            if (event.type === "focusout") {
+                box.nulled = true;
+                box.unfocused = true;
+            }
+
+            if (box) {
+                console.log(127, box.deselection, event.type, box.nulled);
+            }
+
+            if (box && ["mouseup"].includes(event.type) && (box.deselection === false || !box.deselection) && (box.nulled === false || !box.nulled)) {
+                var children = box.parentNode.children;
+                var index = Array.from(box.parentNode.children).indexOf(box);
+                var footer = target.closest('box > footer');
+                var header = target.closest('box > header');
+                var className = target.closest('box > header > span:first-child');
+                var prop = target.closest('.property');
+                var val = target.closest('.value');
+                var property = prop ? prop.textContent : null;
+                var value = val ? val.textContent : null;
+                var element = null;
+                0 < 1 ? console.log(8, 'editor.elements.styles', {
+                    index,
+                    box,
+                    box: box.parentNode,
+                    children,
+                    className,
+                    target,
+                    property,
+                    value,
+                    prop,
+                    val
+                }) : null;
+                Array.from(target.closest('aside').querySelectorAll("[contenteditable]")).forEach(function(element) {
+                    element.removeAttribute('contenteditable');
+                });
                 var insert = false;
                 if (target === box) {
                     console.log(130, 'editor.elements.styles select.selector', {
                         header
                     });
                     var insert = 'afterbegin';
+                } else if (target === footer) {
+                    console.log(130, 'editor.elements.styles select.selector', {
+                        footer
+                    });
+                    var insert = 'beforeend';
                 } else if (target === header) {
                     console.log(130, 'editor.elements.styles select.selector', {
                         header
@@ -188,70 +206,104 @@ window.editor.elements.styles = function(event) {
                     var insert = 'afterbegin';
                     var className = target.closest('box > header > span:first-child');
                 }
-                console.log(121, 'editor.elements.styles select.box', {
-                    index,
-                    insert,
-                    target,
-                    box
-                });
-                if (insert) {
-                    var template = target.closest('aside').nextElementSibling.content.firstElementChild.querySelector('template').content.firstElementChild.cloneNode(true);
-                    console.log(138, 'editor.elements.styles select.selector.create', {
+                if (Array.from(children).indexOf(box) === children.length - 1) {
+                    console.log(121, 'editor.elements.styles select.box', {
+                        index,
                         insert,
-                        template
+                        target,
+                        box
                     });
-                    if (["afterbegin", "beforeend"].includes(insert)) {
-                        var elementChild = null;
-                        insert === "afterbegin" ? elementChild = "firstElementChild" : null;
-                        insert === "beforeend" ? elementChild = "lastElementChild" : null;
-                        console.log(157, 'editor.elements.styles select', elementChild);
-                        box.querySelector('column').insertAdjacentHTML(insert, template.outerHTML);
-                        prop = box.querySelector('column')[elementChild].querySelector('span.property');
-                        prop.setAttribute("onfocusout", `window.editor.elements.deselect(event)`);
-                        select(box.querySelector('column')[elementChild].querySelector('span.property'));
+                    if (insert) {
+                        var template = target.closest('aside').nextElementSibling.content.firstElementChild.querySelector('template').content.firstElementChild.cloneNode(true);
+                        console.log(138, 'editor.elements.styles select.selector.create', {
+                            insert,
+                            template
+                        });
+                        if (["afterbegin", "beforeend"].includes(insert)) {
+                            var elementChild = null;
+                            insert === "afterbegin" ? elementChild = "firstElementChild" : null;
+                            insert === "beforeend" ? elementChild = "lastElementChild" : null;
+                            console.log(157, 'editor.elements.styles select', elementChild);
+                            box.querySelector('column').insertAdjacentHTML(insert, template.outerHTML);
+                            prop = box.querySelector('column')[elementChild].querySelector('span.property');
+                            //prop.setAttribute("onfocusout", `window.editor.elements.deselect(event)`);
+                            select(box.querySelector('column')[elementChild].querySelector('span.property'));
+                        }
+                    }
+                } else {
+                    var el;
+                    if (target.closest('span.property')) {
+                        el = target.closest('span.property')
+                    }
+                    if (target.closest('span.value')) {
+                        el = target.closest('span.value')
+                    }
+                    if (0 < 1 && insert) {
+                        var template = target.closest('aside').nextElementSibling.content.firstElementChild.querySelector('template').content.firstElementChild.cloneNode(true);
+                        console.log(138, 'editor.elements.styles select.selector.create', {
+                            insert,
+                            template
+                        });
+                        if (["afterbegin", "beforeend"].includes(insert)) {
+                            var elementChild = null;
+                            insert === "afterbegin" ? elementChild = "firstElementChild" : null;
+                            insert === "beforeend" ? elementChild = "lastElementChild" : null;
+                            console.log(157, 'editor.elements.styles select', elementChild);
+                            box.querySelector('column').insertAdjacentHTML(insert, template.outerHTML);
+                            prop = box.querySelector('column')[elementChild].querySelector('span.property');
+                            //prop.setAttribute("onfocusout", `window.editor.elements.deselect(event)`);
+                            select(box.querySelector('column')[elementChild].querySelector('span.property'));
+                        }
+                    } else {
+                        select(el);
                     }
                 }
-            } else {//select(el);
-            }
-            function select(el) {
-                console.log(175, 'editor.elements.styles select', {
-                    el,
-                    className,
-                    index,
-                    prop,
-                    val
-                });
-                if (className && last) {
-                    className.setAttribute("contenteditable", true);
-                    className.focus();
-                    element = className;
-                } else if (prop) {
-                    prop.setAttribute("contenteditable", true);
-                    prop.focus();
-                    element = prop;
-                } else if (val) {
-                    val.setAttribute("contenteditable", true);
-                    val.focus();
-                    element = val;
-                }
-                if (className || prop || val) {
-                    if (document.body.createTextRange) {
-                        var range = document.body.createTextRange();
-                        range.moveToElementText(el);
-                        range.select();
-                    } else if (window.getSelection) {
-                        var selection = window.getSelection();
-                        var range = document.createRange();
-                        range.selectNodeContents(el);
-                        selection.removeAllRanges();
-                        selection.addRange(range);
+                function select(el) {
+                    console.log(175, 'editor.elements.styles select', {
+                        el,
+                        className,
+                        index,
+                        last,
+                        prop,
+                        val
+                    });
+                    if (className && !last) {
+                        className.setAttribute("contenteditable", true);
+                        className.focus();
+                        element = className;
+                    } else if (prop) {
+                        prop.setAttribute("contenteditable", true);
+                        prop.focus();
+                        element = prop;
+                    } else if (val) {
+                        val.setAttribute("contenteditable", true);
+                        val.focus();
+                        element = val;
+                    }
+                    if (className || prop || val) {
+                        if (document.body.createTextRange) {
+                            var range = document.body.createTextRange();
+                            range.moveToElementText(el);
+                            range.select();
+                        } else if (window.getSelection) {
+                            var selection = window.getSelection();
+                            var range = document.createRange();
+                            range.selectNodeContents(el);
+                            selection.removeAllRanges();
+                            selection.addRange(range);
+                        }
                     }
                 }
             }
-        }
-        console.log(216, box.deselection);
-        if (box.deselection === true && event.type === "mouseup") {
-            box.deselection = false;
+            console.log(216, box.deselection);
+            if (box.deselection === true && ["focusout", "mouseup"].includes(event.type)) {
+                box.deselection = false;
+            }
+
+            if (event.type === "mouseup") {
+                box.nulled = false;
+                box.unfocused = false;
+            }
         }
     }
 }
