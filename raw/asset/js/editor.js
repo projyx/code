@@ -125,26 +125,33 @@ window.editor.elements.styles = function(event) {
             //box.nulled = null;
 
             if (box && ["focusout", "mouseup"].includes(event.type)) {
-                var dsp = target.closest('span.property') || box.querySelector('span.property');
-                var dsv = target.closest('span.value') || box.querySelector('span.value');
+                var dspx = target.closest('span.property');
+                var dsvx = target.closest('span.value');
+                var dsp = dsvx ? dsvx.parentNode.querySelector('span.property') : target.closest('span.property');
+                var dsv = dspx ? dspx.parentNode.querySelector('span.value') : target.closest('span.value');
+                dsp ? null : dsp = box.querySelector('span.property');
+                dsv ? null : dsv = box.querySelector('span.value');
                 console.log(112, 113, 120, {
                     dsp,
                     dsv
                 }, target, event.type);
                 var ep = (dsp && dsp.textContent === "");
                 var ev = (dsv && dsv.textContent === "");
-                var fpev = (dsp && dsv && (dsp.textContent !== "" && dsv.textContent === ""));
                 var epnv = (dsp && !dsv && (dsp.textContent !== ""));
-                var epfv = (dsp && dsv && (dsp.textContent === "" && dsv.textContent !== ""));
                 var npfv = (!dsp && dsv && (dsv.textContent !== ""));
+                var epfv = (dsp && dsv && (dsp.textContent === "" && dsv.textContent !== ""));
+                var fpev = (dsp && dsv && (dsp.textContent !== "" && dsv.textContent === ""));
                 console.log(114, 115, 120, {
+                    dsp,
+                    dsv
+                }, {
                     ep,
                     ev,
-                    fpev,
                     epnv,
+                    npfv,
                     epfv,
-                    npfv
-                }, target, event.type);
+                    fpev
+                }, event.type);
                 if (ep || ev || fpev || epnv || epfv || npfv) {
                     var focus = dsp || dsv;
                     if (focus.closest('box').deselection === false || !focus.closest('box').deselection) {
