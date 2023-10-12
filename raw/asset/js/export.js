@@ -316,11 +316,12 @@ async function wIDE(paths) {
 
         var base = window.location.origin;
         var link = window.location.protocol + `//` + window.location.host + `/raw/asset/css/webtools.css`;
+        var link = ``;
         const src = `
         <html>
           <head>
             <base href="${base}"></base>
-            <link rel="stylesheet" type="text/css" href="${link}" />
+            <!--<link rel="stylesheet" type="text/css" href="${link}" />-->
             ${l.join(" ")}
             ${s.join(" ")}
             <style>${css}</style>

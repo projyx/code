@@ -34,65 +34,65 @@ window.editor.elements.onmouseover = async function(event) {
     var node = element && element.node ? element.node : null;
     if (node) {
         var doc = contentWindow.document;
-        doc.querySelectorAll("div:has(+ body)").forEach(function(el) {
-            el.remove();
+        doc.querySelectorAll("div:has(+ body)").forEach(function(e) {
+            e.remove();
         })
+        
         var el = doc.createElement("div");
+        el.style.position = "relative";
+        el.style.zIndex = "132456789";
         doc.querySelector("body").insertAdjacentHTML('beforebegin', el.outerHTML);
+        
         const host = doc.querySelector("div:has(+ body)");
         const shadow = host.attachShadow({
             mode: "open"
         });
-        var borderLeft = node.borderLeft;
-        var borderTop = node.borderTop;
-        var borderRight = node.borderRight;
-        var borderBottom = node.borderBottom;
-        
+
+        var computed = getComputedStyle(node);
+        var borderLeftWidth = computed.getPropertyValue("border-left-width") ;
+        console.log(borderLeftWidth);
+        var borderTop = computed.getPropertyValue("border-left-width") + " solid orange";        
+        var borderLeft = computed.getPropertyValue("border-left-width") + " solid orange";        
+        var borderRight = computed.getPropertyValue("border-right-width") + " solid orange";        
+        var borderBottom = computed.getPropertyValue("border-bottom-width") + " solid orange";
         var offsetLeft = node.offsetLeft;
         var offsetTop = node.offsetTop;
-        
         var height = node.clientHeight;
         var width = node.clientWidth;
-        
+
         var overlay = doc.createElement('custom-element');
         overlay.className = "overlay";
         overlay.id = "overlay";
-        overlay.style.position = "absolute";
-        
-        overlay.style.borderTop = borderTop + "px solid orange";
-        overlay.style.borderLeft = borderLeft + "px solid orange";
-        overlay.style.borderRight = borderRight + "px solid orange";
-        overlay.style.borderBottom = borderBottom + "px solid orange";
-        
+        overlay.style.position = "fixed";
+        overlay.style.backgroundColor = "#2797fcad";
+        overlay.style.borderColor = "#de9757bf";
+        overlay.style.borderTop = borderTop;
+        overlay.style.borderLeft = borderLeft;
+        overlay.style.borderRight = borderRight;
+        overlay.style.borderBottom = borderBottom;
         overlay.style.left = offsetLeft + "px";
         overlay.style.top = offsetTop + "px";
-        
         overlay.style.height = height + "px";
         overlay.style.width = width + "px";
-        
+
         style = `<style>custom-element {
-            background-color: #2797fcad;
+            display: flex;
         }</style>`;
         shadow.innerHTML = style + overlay.outerHTML;
-        console.log(23, {
+
+        console.log(23, {            
+            computed,
             host,
             node,
             style: node.style,
-            styler: {
-                height: node.style.clientHeight,
-                left: node.style.offsetLeft,
-                width: node.style.clientWidth,
-                top: node.style.offsetTop
-            },
+            computed: node.computedStyleMap(),
             styles: {
                 borderLeft,
                 borderTop,
                 borderRight,
                 borderBottom,
-                
                 offsetLeft,
                 offsetTop,
-                
                 height,
                 width
             },
