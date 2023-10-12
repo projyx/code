@@ -37,7 +37,7 @@ window.rout.er = (href,params)=>{
                 //console.log(link, r, p);
             });
             link = "/" + r.join('/');
-            console.log(38, link, r);
+            //console.log(38, link, r);
         }
         pathname = link;
         paths = pathname.split("/").splice(1).filter(n=>n.length > 0);

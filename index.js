@@ -39,9 +39,9 @@ window.onload = async(event)=>{
     });
     firebase.auth().onAuthStateChanged(user=>{
         if (user) {
-            console.log(42, 'index.user', {
+            0 > 1 ? console.log(42, 'index.user', {
                 user
-            });
+            }) : null;
             github.user.self().then(function(user) {
                 //console.log(user);
                 var avatar_url = user.avatar_url;

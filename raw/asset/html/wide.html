@@ -252,14 +252,14 @@
                     <footer></footer>
                 </box>
             </template>
-            <aside onclick="window.editor.elements.styles(event)"></aside>
+            <aside onmousedown="window.editor.elements.styles(event)" onmouseup="window.editor.elements.styles(event)"></aside>
             <template>
                 <box>
                     <header></header>
                     <column></column>
                     <template>
                         <text>
-                            <span class="property"></span>
+                            <span class="property" onkeydown="window.editor.elements.property(event)" onkeyup="window.editor.elements.property(event)"></span>
                             <span>:</span>
                             <span class="value"></span>
                             <span>;</span>

@@ -743,6 +743,8 @@
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside {
         border-left: 1px solid #555;
+        display: flex;
+        flex-direction: column-reverse;
         font-size: 13px;
         height: 100%;
         width: 240px;
@@ -753,6 +755,10 @@
         display: flex;
         flex-direction: column;
         padding: 4px;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box:first-child {
+        margin-bottom: auto;
     }
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box [contenteditable]:focus {
@@ -766,21 +772,27 @@
         flex-direction: row;
         flex-wrap: wrap;
     }
-    
+
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > * {
         display: inline-flex;
     }
-    
+
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .property {
         color: #35b4fb;
         margin-left: 20px;
     }
-    
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .property:empty {
+        outline: none;
+        border: 1px solid #777;
+        min-width: 5px;
+    }
+
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .property + span {
         color: #35b4fb;
         padding-right: 5px;
     }
-    
+
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .value {
         /* margin-left: 5px; */
     }

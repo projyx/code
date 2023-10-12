@@ -252,7 +252,7 @@ window.routes = function(uri, options) {
                                 }
                             }
                         } else if (paths[2] === "wide") {
-                            console.log(255, "wide", paths);
+                            //console.log(255, "wide", paths);
 
                             var pathed = uri.split('/').filter(o=>o.length > 0);
                             var pathname = '/' + pathed.splice(4, pathed.length - 1).join('/');
@@ -264,7 +264,7 @@ window.routes = function(uri, options) {
                                 tld: 'tld',
                                 pathname: pathname
                             }
-                            console.log(262, address);
+                            //console.log(262, address);
                             var secure = window.isSecureContext;
                             component.querySelector('[name="security"]').setAttribute('secure', secure)
                             var icon = component.querySelector('[name="security"]').querySelector('.icon');
@@ -279,7 +279,7 @@ window.routes = function(uri, options) {
                             component.querySelector('[name="pathname"]').textContent = address.pathname;
 
                             if (paths.length > 3) {
-                                console.log(255, "wide", paths);
+                                //console.log(255, "wide", paths);
 
                                 var preview = component.querySelector('iframe');
                                 var contentWindow = preview.contentWindow;
@@ -319,13 +319,13 @@ window.routes = function(uri, options) {
                                         branch,
                                         ref
                                     });
-                                    console.log(293, {
+                                    0 > 1 ? console.log(293, {
                                         refs
-                                    });
+                                    }) : null;
                                     var sha = refs.object.sha;
-                                    console.log(297, {
+                                    0 > 1 ? console.log(297, {
                                         sha
-                                    });
+                                    }) : null;
                                     var recursive = true;
                                     var params = {
                                         owner,
@@ -345,9 +345,9 @@ window.routes = function(uri, options) {
                                             'If-None-Match': ''
                                         }
                                     });
-                                    console.log(307, {
+                                    0 > 1 ? console.log(307, {
                                         trees
-                                    });
+                                    }) : null;
                                     var tab = document.getElementById('sources-files');
                                     var tree = document.getElementById('file-trees');
                                     var template = tab.querySelector('template');
@@ -357,9 +357,9 @@ window.routes = function(uri, options) {
                                     tree.insertAdjacentHTML('beforeend', folder.outerHTML);
                                     var el = tree.lastElementChild;
                                     el.onclick = (e)=>editor.tree.cd(e.target.closest('text'));
-                                    console.log(322, 'trees.tree', {
+                                    0 > 1 ? console.log(322, 'trees.tree', {
                                         folder,
-                                    });
+                                    }) : null;
 
                                     var wrap = document.createElement('column');
                                     el.insertAdjacentHTML('afterend', wrap.outerHTML);
@@ -370,9 +370,9 @@ window.routes = function(uri, options) {
                                     folder.querySelector('span').textContent = paths[1];
                                     clmnu.insertAdjacentHTML('beforeend', folder.outerHTML);
                                     clmnu.lastElementChild.onclick = (e)=>editor.tree.cd(e.target.closest('text'));
-                                    console.log(322, 'trees.tree', {
+                                    0 > 1 ? console.log(322, 'trees.tree', {
                                         folder,
-                                    });
+                                    }) : null;
 
                                     var wrap = document.createElement('column');
                                     var el = clmnu.lastElementChild;
@@ -438,10 +438,10 @@ window.routes = function(uri, options) {
                                             folder.querySelector('span').textContent = path;
                                             clmnp.insertAdjacentHTML('beforeend', folder.outerHTML);
                                             clmnp.lastElementChild.onclick = (e)=>editor.tree.cd(e.target.closest('text'));
-                                            console.log(345, 'trees.tree', {
+                                            0 > 1 ? console.log(345, 'trees.tree', {
                                                 folder,
                                                 obj
-                                            });
+                                            }) : null;
                                         }
                                         if (type === "file" || type === "blob") {
                                             var file = template.content.children[2].cloneNode(true);
@@ -475,17 +475,17 @@ window.routes = function(uri, options) {
                                     path: feed.path
                                 });
                                 json.sort((i,o)=>i.type.localeCompare(o.type));
-                                console.log(261, {
+                                0 > 1 ? console.log(261, {
                                     json,
                                     path
-                                });
+                                }) : null;
                                 if (json.length > 0) {
                                     var urx = feed.path.split('/').splice(1);
-                                    console.log(274, urx);
+                                    //console.log(274, urx);
                                     if (urx.length > 0) {
                                         var ls = template.content.children[0].cloneNode(true);
                                         var dirs = urx.length > 2 && urx.length < 5 ? [urx[0], urx[1]] : urx.splice(0, urx.length - 1);
-                                        console.log(275, dirs, urx);
+                                        //console.log(275, dirs, urx);
                                         //ls.setAttribute('href', "/" + dirs.join('/'));
                                         feed.insertAdjacentHTML('beforeend', ls.outerHTML);
                                         feed.lastElementChild.querySelector('span').onclick = ()=>editor.tree.ls("/" + dirs.join('/'));
@@ -541,7 +541,7 @@ window.routes = function(uri, options) {
                                 //console.log(540, contentWindow);
 
                                 //DOMTREE
-                                console.log(component, contentWindow);
+                                //console.log(component, contentWindow);
                                 //domBuilder(component, contentWindow);
                             }
                         } else {

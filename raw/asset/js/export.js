@@ -226,27 +226,27 @@ async function wIDE(paths) {
         var ext = paths[paths.length - 1];
         ext.includes('.') ? ext.split('.')[1] : '';
 
-        console.log(231, {
+        0 > 1 ? console.log(231, {
             file,
             paths,
             pathname,
             ext
-        });
+        }) : null;
 
         var file = paths[paths.length - 1];
         var path = paths.splice(4, paths.length - 1);
         var resource = "index.html";
-        console.log(243, resource);
+        //console.log(243, resource);
 
         var html = await github.raw.file({
             owner: paths[0],
             repo: paths[1],
             resource: "/index.html"
         });
-        console.log(258, {
+        0 > 1 ? console.log(258, {
             html,
             path
-        });
+        }) : null;
         //var feed = component.querySelector("#code-base");
         const doc = new DOMParser().parseFromString(html, 'text/html');
         const head = doc.head;
@@ -344,7 +344,7 @@ async function wIDE(paths) {
                 try {
                     throw new Error('Throwing error for stack trace...');
                 } catch (err) {
-                    console.log(343, arguments);
+                    //console.log(343, arguments);
                     var stackTrace = err.stack.split('\n');
                     for (var i = 0; i < stackTrace.length; ++i) {
                         stackTrace[i] = stackTrace[i].replace(/\s+/g, ' ');
@@ -357,10 +357,10 @@ async function wIDE(paths) {
                     if (callerParts.length == 1) {
                         callerParts = stackTrace[2].split('('),
                         caller = false;
-                        console.log(355, 'callerParts', callerParts);
+                        //console.log(355, 'callerParts', callerParts);
                         //we have an object caller
                         if (callerParts.length > 1) {
-                            console.log(358, 'callerParts', callerParts);
+                            //console.log(358, 'callerParts', callerParts);
                             var script = callerParts[1].split(')')[0];
                             var lines = script.split(':');
                             var src = lines.splice(0, 3).join(':');
@@ -369,7 +369,7 @@ async function wIDE(paths) {
                             var uri = new URL(file,contentWindow.origin);
                             var tiator = uri.pathname.split('/').filter(o=>o.length > 0);
                             var ini = tiator[tiator.length - 1];
-                            console.log(360, 'callerParts', {
+                            0 > 1 ? console.log(360, 'callerParts', {
                                 ini,
                                 file,
                                 uri,
@@ -379,15 +379,15 @@ async function wIDE(paths) {
                                 elem,
                                 lines,
                                 line
-                            });
+                            }) : null;
                             caller = callerParts[0].replace('at Object.', '');
                             line = callerParts[1].split(':');
                             line = line[2];
                         }//called from outside of an object
                         else {
-                            console.log(363, 'callerParts', callerParts);
+                            //console.log(363, 'callerParts', callerParts);
                             callerParts[0] = callerParts[0].replace('at ', '');
-                            console.log(365, 'callerParts', callerParts);
+                            //console.log(365, 'callerParts', callerParts);
                             callerParts = callerParts[0].split(':');
                             caller = callerParts[0] + callerParts[1];
                             line = callerParts[2];
@@ -400,25 +400,25 @@ async function wIDE(paths) {
                         caller = (callerParts[0] == '') ? callerParts[1] : callerParts[0];
                     }
 
-                    consolelog(539, 'contentWindow.console.err', arguments, {
+                    0 > 1 ? consolelog(539, 'contentWindow.console.err', arguments, {
                         err,
                         stackTrace,
                         caller,
                         callerParts,
                         ini,
                         txt
-                    });
+                    }) : null;
                 }
-                consolelog.apply(console, arguments);
+                //consolelog.apply(console, arguments);
                 var consoletab = component.querySelector('.tools-tab.tab-console');
                 var template = consoletab.querySelector('template');
                 var log = template.content.firstElementChild.cloneNode(true);
                 var s = log.querySelectorAll('text')[0].querySelector('span');
                 var m = log.querySelectorAll('text')[1];
                 s.textContent = ini;
-                console.log(405, arguments);
+                //console.log(405, arguments);
                 Object.values(arguments).forEach((e,g)=>{
-                    console.log(e, g, Object.keys(arguments)[g]);
+                    //console.log(e, g, Object.keys(arguments)[g]);
                     var span = document.createElement('span');
                     span.innerHTML = e;
                     m.insertAdjacentHTML('beforeend', span.outerHTML);
@@ -441,11 +441,11 @@ async function wIDE(paths) {
                 if (contentWindow.location.protocol === "blob:") {
                     var url = blob + addr;
                     var state = url;
-                    console.log(339, arguments, {
+                    0 > 1 ? console.log(339, arguments, {
                         state,
                         unused,
                         url
-                    }, uri);
+                    }, uri) : null;
                     //var state = "/" + boot.splice(4, boot.length - 1).join("/");
 
                     arguments = [state, unused, url];
@@ -453,31 +453,31 @@ async function wIDE(paths) {
 
                 var url = dir + addr;
                 var bar = component.querySelector('.search-box');
-                console.log(385, {
+                0 > 1 ? console.log(385, {
                     uri,
                     dir,
                     addr,
                     blob,
                     arguments
-                });
+                }) : null;
                 bar.querySelector('[name="pathname"]').textContent = uri.pathname;
-                console.log(352, 'editor.state', 'editor.iframe.pushState', {
+                0 > 1 ? console.log(352, 'editor.state', 'editor.iframe.pushState', {
                     path,
                     history: contentWindow.history,
                     location: contentWindow.location,
                     arguments,
                     url,
                     addr
-                });
+                }) : null;
                 //pushState.apply(contentWindow.history, arguments);
-                console.log(354, 'editor.state', 'editor.iframe.pushState', {
+                0 > 1 ? console.log(354, 'editor.state', 'editor.iframe.pushState', {
                     path,
                     history: contentWindow.history,
                     location: contentWindow.location,
                     arguments,
                     url,
                     addr
-                });
+                }) : null;
                 window.top.history.replaceState(state, unused, url);
                 domBuilder(component, contentWindow);
 
@@ -493,11 +493,11 @@ async function wIDE(paths) {
                 if (contentWindow.location.protocol === "blob:") {
                     var url = blob + addr;
                     var state = url;
-                    console.log(339, arguments, {
+                    0 > 1 ? console.log(339, arguments, {
                         state,
                         unused,
                         url
-                    }, uri);
+                    }, uri) : null;
                     //var state = "/" + boot.splice(4, boot.length - 1).join("/");
 
                     arguments = [state, unused, url];
@@ -505,35 +505,35 @@ async function wIDE(paths) {
                 var pth = window.top.location.pathname.split("/").filter((n,o)=>n.length > 0);
                 var url = "/" + pth.splice(0, pth.length).join('/');
                 var bar = component.querySelector('.search-box');
-                console.log(385, uri);
+                //console.log(385, uri);
                 bar.querySelector('[name="pathname"]').textContent = uri.pathname;
-                console.log(376, 'editor.state', 'editor.iframe.replaceState', {
+                0 > 1 ? console.log(376, 'editor.state', 'editor.iframe.replaceState', {
                     history: contentWindow.history,
                     location: contentWindow.location,
                     arguments,
                     url,
                     addr
-                });
+                }) : null;
                 replaceState.apply(contentWindow.history, arguments);
-                console.log(378, 'editor.state', 'editor.iframe.replaceState', {
+                0 > 1 ? console.log(378, 'editor.state', 'editor.iframe.replaceState', {
                     history: contentWindow.history,
                     location: contentWindow.location,
                     arguments,
                     url,
                     addr
-                });
+                }) : null;
                 window.top.history.replaceState(state, unused, url);
             }
             contentWindow.onpopstate = function(e) {
-                console.log(342, 'editor.contentWindow.onpopstate', e);
+                //console.log(342, 'editor.contentWindow.onpopstate', e);
             }
             const boot = url.pathname.split("/").splice(1).filter(n=>n.length > 0);
             var state = "/" + boot.splice(4, boot.length).join("/");
-            console.log(356, state);
+            //console.log(356, state);
             contentWindow.document.body.querySelector('boot').setAttribute('route', state);
             //contentWindow.location.href = uri.origin + uri.pathname;
             //document.getElementById('preview-editor').contentWindow.history.replaceState(state, null, state);
-            console.log(360, "Iframe domcontentloaded", boot, window.location.href, contentWindow.location, state);
+            //console.log(360, "Iframe domcontentloaded", boot, window.location.href, contentWindow.location, state);
         })
     }
     )
@@ -628,7 +628,7 @@ function domBuilder(component, contentWindow) {
         var box = template.cloneNode(true);
         var tagName = element.tagName.toLowerCase();
         var attributes = [];
-        console.log(590, element.attributes.length, element);
+        //console.log(590, element.attributes.length, element);
 
         //MANIPULATE
         var innerHTML = "";
@@ -641,7 +641,7 @@ function domBuilder(component, contentWindow) {
         innerHTML += leftAngleBracket.outerHTML;
         innerHTML += startTag.outerHTML;
         if (element.attributes.length > 0) {
-            console.log(592, element.attributes);
+            //console.log(592, element.attributes);
             for (const attr of element.attributes) {
                 var attribute = document.createElement('span');
                 attribute.style.color = "#9bbbdc";
@@ -694,40 +694,40 @@ function domBuilder(component, contentWindow) {
             element = element.firstElementChild;
             section.insertAdjacentHTML('beforeend', box.outerHTML);
             section = section.lastElementChild.querySelector('header:has(+ section) + section');
-            console.log(693, 'section.onmouseover', {
+            0 > 1 ? console.log(693, 'section.onmouseover', {
                 box: section.closest('box'),
                 element
-            });
+            }) : null;
             section.closest('box').node = element;
         } else {
             var next = element.closest('[dom]:has(+ :not([dom]))');
             var firstElementChild = element.firstElementChild;
-            console.log(558, 'wIDE.elements.loop(element)', {
+            0 > 1 ? console.log(558, 'wIDE.elements.loop(element)', {
                 element,
                 next,
                 firstElementChild
-            });
+            }) : null;
             if (next || firstElementChild) {
                 next ? next = next.nextElementSibling : null;
                 var parent = element.parentNode;
                 var previous = elements[i - 1];
                 //console.log(562, 'What is the section?', section);
-                console.log(568, {
+                0 > 1 ? console.log(568, {
                     i,
                     elements,
                     element,
                     parent: element.parentNode,
                     previous
-                });
+                }) : null;
                 var which = null;
                 if (element.parentElement === elements[i - 1]) {
                     which = 1;
                     section.insertAdjacentHTML('beforeend', box.outerHTML);
                     section = section.lastElementChild.querySelector('header:has(+ section) + section')
-                    console.log(718, 'section.onmouseover', {
+                    0 > 1 ? console.log(718, 'section.onmouseover', {
                         box: section.closest('box'),
                         element
-                    });
+                    }) : null;
                     section.closest('box').node = element;
                 } else {
                     which = 2;
@@ -735,20 +735,20 @@ function domBuilder(component, contentWindow) {
                         which = "2.5";
                         domtree.querySelector('[dom="' + parseInt(parent.getAttribute('dom')) + '"] > section').insertAdjacentHTML('beforeend', box.outerHTML);
                         section = domtree.querySelector('[dom="' + parseInt(parent.getAttribute('dom')) + '"] > section').lastElementChild.querySelector('header:has(+ section) + section');
-                        console.log(726, 'section.onmouseover', {
+                        0 > 1 ? console.log(726, 'section.onmouseover', {
                             box: section.closest('box'),
                             element
-                        });
+                        }) : null;
                         section.closest('box').node = element;
                     } else {
                         which = "2.8";
                         section.closest('box').insertAdjacentHTML('afterend', box.outerHTML);
                         section.closest('box').node = element;
                         section = section.closest('box[dom]').nextElementSibling.querySelector('header:has(+ section) + section');
-                        console.log(736, 'section.onmouseover', {
+                        0 > 1 ? console.log(736, 'section.onmouseover', {
                             box: section.closest('box'),
                             element
-                        });
+                        }) : null;
                         section.closest('box').node = element;
                     }
                 }
@@ -769,10 +769,10 @@ function domBuilder(component, contentWindow) {
             } else {
                 section.closest('box').insertAdjacentHTML('afterend', box.outerHTML);
                 section = section.closest('box[dom]').nextElementSibling.querySelector('header:has(+ section) + section');
-                console.log(773, 'section.onmouseover', {
+                0 > 1 ? console.log(773, 'section.onmouseover', {
                     box: section.closest('box'),
                     element
-                });
+                }) : null;
                 section.closest('box').node = element;
                 element = null;
             }

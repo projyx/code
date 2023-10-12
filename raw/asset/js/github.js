@@ -381,7 +381,7 @@ github.raw.file = async(params)=>{
         settings.headers.Accept = "application/vnd.github.raw",
         settings.headers.Authorization = "token " + accessToken
     }
-    console.log(url, settings);
+    //console.log(url, settings);
     return new Promise((resolve,reject)=>{
         fetch(url, settings).then(async(response)=>{
             if (response.status === 404) {

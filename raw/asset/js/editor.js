@@ -4,9 +4,9 @@ window.editor.elements = {};
 window.editor.elements.onmouseout = async function(event) {
     var target = event.target;
     var box = target.closest('box');
-    console.log(box);
+    //console.log(box);
     if (box) {
-        console.log(node);
+        //console.log(node);
         var node = box.node;
         if (node) {
             var component = target.closest('component');
@@ -27,33 +27,27 @@ window.editor.elements.onmouseover = async function(event) {
     var contentWindow = editor.contentWindow;
     var select = target.closest('box.element > *');
     var element = target.closest('box.element');
-    //var elements = document.querySelectorAll('box.element');
-    //var startTag = document.querySelectorAll('box.element > header');
-    //var index = Array.from(startTag).indexOf(element.firstElementChild);
-    //var nodes = doc.querySelectorAll('*');
     var node = element && element.node ? element.node : null;
     if (node) {
         var doc = contentWindow.document;
         doc.querySelectorAll("div:has(+ body)").forEach(function(e) {
             e.remove();
         })
-        
+
         var el = doc.createElement("div");
         el.style.position = "relative";
         el.style.zIndex = "132456789";
         doc.querySelector("body").insertAdjacentHTML('beforebegin', el.outerHTML);
-        
+
         const host = doc.querySelector("div:has(+ body)");
         const shadow = host.attachShadow({
             mode: "open"
         });
 
         var computed = getComputedStyle(node);
-        var borderLeftWidth = computed.getPropertyValue("border-left-width") ;
-        console.log(borderLeftWidth);
-        var borderTop = computed.getPropertyValue("border-left-width") + " solid orange";        
-        var borderLeft = computed.getPropertyValue("border-left-width") + " solid orange";        
-        var borderRight = computed.getPropertyValue("border-right-width") + " solid orange";        
+        var borderTop = computed.getPropertyValue("border-left-width") + " solid orange";
+        var borderLeft = computed.getPropertyValue("border-left-width") + " solid orange";
+        var borderRight = computed.getPropertyValue("border-right-width") + " solid orange";
         var borderBottom = computed.getPropertyValue("border-bottom-width") + " solid orange";
         var offsetLeft = node.offsetLeft;
         var offsetTop = node.offsetTop;
@@ -80,7 +74,7 @@ window.editor.elements.onmouseover = async function(event) {
         }</style>`;
         shadow.innerHTML = style + overlay.outerHTML;
 
-        console.log(23, {            
+        0 > 1 ? console.log(23, {
             computed,
             host,
             node,
@@ -97,54 +91,173 @@ window.editor.elements.onmouseover = async function(event) {
                 width
             },
             shadow
-        });
+        }) : null;
     }
 }
-window.editor.elements.styles = async function(event) {
-    var target = event.target;
-    var className = target.closest('box > header > span:first-child');
-    var prop = target.closest('.property');
-    var val = target.closest('.value');
-    var property = prop ? prop.textContent : null;
-    var value = val ? val.textContent : null;
-    var element = null;
-    0 > 1 ? console.log(8, 'editor.elements.styles', {
-        className,
-        target,
-        property,
-        value,
-        prop,
-        val
-    }) : null;
-    Array.from(target.closest('aside').querySelectorAll("[contenteditable]")).forEach(function(element) {
-        element.removeAttribute('contenteditable');
-    });
-    if (className) {
-        className.setAttribute("contenteditable", true);
-        className.focus();
-        element = className;
-    } else if (prop) {
-        prop.setAttribute("contenteditable", true);
-        prop.focus();
-        element = prop;
-    } else if (val) {
-        val.setAttribute("contenteditable", true);
-        val.focus();
-        element = val;
-    }
-    if (className || prop || val) {
-        if (document.body.createTextRange) {
-            var range = document.body.createTextRange();
-            range.moveToElementText(element);
-            range.select();
-        } else if (window.getSelection) {
-            var selection = window.getSelection();
-            var range = document.createRange();
-            range.selectNodeContents(element);
-            selection.removeAllRanges();
-            selection.addRange(range);
+window.editor.elements.property = async function(event) {
+    var keyCode = event.keyCode;
+    var type = event.type;
+    console.log(106, event, keyCode);
+
+    if (type === "keydown") {
+        if (keyCode === 9) {
+            event.preventDefault();
         }
     }
+}
+window.editor.elements.styles = function(event) {
+    var target = event.target;
+    var box = target.closest('box');
+    console.log(110, {
+        box,
+        target
+    }, event.type);
+
+    if (box) {
+
+        var children = box.parentNode.children;
+        var index = Array.from(children).indexOf(box) === children.length - 1;
+        var last = index < children.length - 1;
+        var className = target.closest('box > header > span:first-child');
+
+        if (box && event.type === "mousedown") {
+            var dsp = box.querySelector('span.property:focus');
+            var dsv = box.querySelector('span.value:focus');
+            console.log(112,  113, {
+                dsp,
+                dsv
+            }, event.type);
+            if ((dsp && dsp.textContent === "") || (dsv && dsv.textContent === "") || (dsp && dsv && (dsp.textContent !== "" && dsv.textContent === "")) || (dsp && !dsv && (dsp.textContent !== "")) || (dsp && dsv && (dsp.textContent === "" && dsv.textContent !== "")) || (!dsp && dsv && (dsv.textContent !== ""))) {                
+                var focus = dsp || dsv;
+                if (focus.closest('box').deselection === false || !focus.closest('box').deselection) {
+                    focus.closest('box').deselection = true;
+                }
+                console.log(120, 'deselection', {
+                    focus
+                });
+                focus.blur();
+                focus && focus.closest('text') ? focus.closest('text').remove() : null;
+            }
+        }
+
+        if (box) {
+            console.log(127, box.deselection);
+        }
+
+        if (box && event.type === "mouseup" && (box.deselection === false || !box.deselection)) {
+            var children = box.parentNode.children;
+            var index = Array.from(box.parentNode.children).indexOf(box);
+            var header = target.closest('box > header');
+            var className = target.closest('box > header > span:first-child');
+            var prop = target.closest('.property');
+            var val = target.closest('.value');
+            var property = prop ? prop.textContent : null;
+            var value = val ? val.textContent : null;
+            var element = null;
+            0 < 1 ? console.log(8, 'editor.elements.styles', {
+                index,
+                box,
+                box: box.parentNode,
+                children,
+                className,
+                target,
+                property,
+                value,
+                prop,
+                val
+            }) : null;
+            Array.from(target.closest('aside').querySelectorAll("[contenteditable]")).forEach(function(element) {
+                element.removeAttribute('contenteditable');
+            });
+            if (Array.from(children).indexOf(box) === children.length - 1) {
+                var insert = false;
+                if (target === box) {
+                    console.log(130, 'editor.elements.styles select.selector', {
+                        header
+                    });
+                    var insert = 'afterbegin';
+                } else if (target === header) {
+                    console.log(130, 'editor.elements.styles select.selector', {
+                        header
+                    });
+                    var insert = 'afterbegin';
+                } else if (className) {
+                    console.log(130, 'editor.elements.styles select.selector', {
+                        className
+                    });
+                    var insert = 'afterbegin';
+                    var className = target.closest('box > header > span:first-child');
+                }
+                console.log(121, 'editor.elements.styles select.box', {
+                    index,
+                    insert,
+                    target,
+                    box
+                });
+                if (insert) {
+                    var template = target.closest('aside').nextElementSibling.content.firstElementChild.querySelector('template').content.firstElementChild.cloneNode(true);
+                    console.log(138, 'editor.elements.styles select.selector.create', {
+                        insert,
+                        template
+                    });
+                    if (["afterbegin", "beforeend"].includes(insert)) {
+                        var elementChild = null;
+                        insert === "afterbegin" ? elementChild = "firstElementChild" : null;
+                        insert === "beforeend" ? elementChild = "lastElementChild" : null;
+                        console.log(157, 'editor.elements.styles select', elementChild);
+                        box.querySelector('column').insertAdjacentHTML(insert, template.outerHTML);
+                        prop = box.querySelector('column')[elementChild].querySelector('span.property');
+                        prop.setAttribute("onfocusout", `window.editor.elements.deselect(event)`);
+                        select(box.querySelector('column')[elementChild].querySelector('span.property'));
+                    }
+                }
+            } else {//select(el);
+            }
+            function select(el) {
+                console.log(175, 'editor.elements.styles select', {
+                    el,
+                    className,
+                    index,
+                    prop,
+                    val
+                });
+                if (className && last) {
+                    className.setAttribute("contenteditable", true);
+                    className.focus();
+                    element = className;
+                } else if (prop) {
+                    prop.setAttribute("contenteditable", true);
+                    prop.focus();
+                    element = prop;
+                } else if (val) {
+                    val.setAttribute("contenteditable", true);
+                    val.focus();
+                    element = val;
+                }
+                if (className || prop || val) {
+                    if (document.body.createTextRange) {
+                        var range = document.body.createTextRange();
+                        range.moveToElementText(el);
+                        range.select();
+                    } else if (window.getSelection) {
+                        var selection = window.getSelection();
+                        var range = document.createRange();
+                        range.selectNodeContents(el);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    }
+                }
+            }
+        }
+        console.log(216, box.deselection);
+        if (box.deselection === true && event.type === "mouseup") {
+            box.deselection = false;
+        }
+    }
+}
+window.editor.elements.onkeyup = function(event) {
+    console.log(253, event.keyCode);
+    var target = event.target;
 }
 window.editor.elements.select = function(event) {
     var target = event.target;
@@ -157,8 +270,8 @@ window.editor.elements.select = function(event) {
     var startTag = document.querySelectorAll('box.element > header');
     var index = Array.from(startTag).indexOf(element.firstElementChild);
     var doc = contentWindow.document;
-    var nodes = doc.querySelectorAll('*');
-    var node = nodes[index];
+    var node = element && element.node ? element.node : null;
+
     console.log(5, 'editor.elements.select variables', {
         target,
         node
@@ -178,7 +291,8 @@ window.editor.elements.select = function(event) {
     if (stylesheets.length > 0) {
         var aside = component.querySelector('.tools-tab.tab-elements aside');
         aside.innerHTML = "";
-        var i = 0
+
+        var i = 0;
         do {
             var stylesheet = stylesheets[i];
             var rules = stylesheet.rules;
@@ -193,6 +307,7 @@ window.editor.elements.select = function(event) {
                 var cssRules = rule && rule.cssRules ? rule.cssRules : null;
                 console.log(42, ii, 'editor.elements.select select rule', rule, cssRules);
                 if (cssRules && cssRules.length > 0) {
+
                     var iii = 0;
                     do {
                         var cssRule = cssRules[iii];
@@ -237,6 +352,16 @@ window.editor.elements.select = function(event) {
 
             i++;
         } while (i < stylesheets.length);
+
+        var selectorText = "element.style";
+        console.log(49, {
+            node,
+            selectorText
+        });
+        var template = aside.nextElementSibling.content.firstElementChild.cloneNode(true);
+        template.querySelector('header').innerHTML = '<span style="color:#888">' + selectorText + '</span> <span>{</span>';
+        template.querySelector('footer').textContent = "}";
+        aside.insertAdjacentHTML('beforeend', template.outerHTML);
     }
 }
 
@@ -248,13 +373,13 @@ window.editor.tools.tool = async function(event) {
         var index = Array.from(box.parentNode.children).indexOf(box);
         var tabs = box.closest('header').nextElementSibling;
         var tab = tabs.children[index];
-        console.log(5, {
+        0 > 1 ? console.log(5, {
             box,
             event,
             index,
             tab,
             target
-        });
+        }) : null;
         if (tab) {
             var pages = Array.from(tabs.children);
             pages.forEach(page=>{
@@ -262,10 +387,10 @@ window.editor.tools.tool = async function(event) {
             }
             );
             tab.style.display = "flex";
-            console.log(20, {
+            0 > 1 ? console.log(20, {
                 pages,
                 tab
-            });
+            }) : null;
         }
     }
 }
