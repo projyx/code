@@ -312,7 +312,9 @@ window.editor.elements.styles = function(event) {
                             insert === "afterbegin" ? elementChild = "firstElementChild" : null;
                             insert === "beforeend" ? elementChild = "lastElementChild" : null;
                             console.log(157, 'editor.elements.styles select', elementChild);
-                            box.querySelector('column').insertAdjacentHTML(insert, template.outerHTML);
+                            if (!className) {
+                                box.querySelector('column').insertAdjacentHTML(insert, template.outerHTML);
+                            }
                             prop = box.querySelector('column')[elementChild].querySelector('span.property');
                             //prop.setAttribute("onfocusout", `window.editor.elements.deselect(event)`);
                             select(box.querySelector('column')[elementChild].querySelector('span.property'));
@@ -335,25 +337,29 @@ window.editor.elements.styles = function(event) {
                         className.focus();
                         element = className;
                     } else if (prop) {
-                        prop.setAttribute("contenteditable", true);
-                        prop.focus();
-                        element = prop;
+                        if ((!last && !className) || last) {
+                            prop.setAttribute("contenteditable", true);
+                            prop.focus();
+                            element = prop;
+                        }
                     } else if (val) {
                         val.setAttribute("contenteditable", true);
                         val.focus();
                         element = val;
                     }
                     if (className || prop || val) {
-                        if (document.body.createTextRange) {
-                            var range = document.body.createTextRange();
-                            range.moveToElementText(el);
-                            range.select();
-                        } else if (window.getSelection) {
-                            var selection = window.getSelection();
-                            var range = document.createRange();
-                            range.selectNodeContents(el);
-                            selection.removeAllRanges();
-                            selection.addRange(range);
+                        if ((!last && !className) || last) {
+                            if (document.body.createTextRange) {
+                                var range = document.body.createTextRange();
+                                range.moveToElementText(el);
+                                range.select();
+                            } else if (window.getSelection) {
+                                var selection = window.getSelection();
+                                var range = document.createRange();
+                                range.selectNodeContents(el);
+                                selection.removeAllRanges();
+                                selection.addRange(range);
+                            }
                         }
                     }
                 }
