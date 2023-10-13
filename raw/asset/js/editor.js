@@ -244,6 +244,11 @@ window.editor.elements.value = async function(event) {
                         selection.addRange(range);
                     }
                 }
+            } else {
+                var footer = target.closest('column').parentNode.lastElementChild;
+                console.log(248, footer);
+                triggerMouseEvent(footer, "mousedown");
+                triggerMouseEvent(footer, "mouseup");
             }
         }
     }
