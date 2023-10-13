@@ -45,10 +45,9 @@ window.editor.elements.onmouseover = async function(event) {
         });
 
         var viewportOffset = node.getBoundingClientRect();
-        var top = viewportOffset.top + "px";;
-        var left = viewportOffset.left + "px";;
-
-        var computed = getComputedStyle(node);
+        var top = viewportOffset.top + "px";
+        ;var left = viewportOffset.left + "px";
+        ;var computed = getComputedStyle(node);
         var boxSizing = computed.getPropertyValue("box-sizing");
         var borderTop = computed.getPropertyValue("border-left-width") + " solid orange";
         var borderLeft = computed.getPropertyValue("border-left-width") + " solid orange";
@@ -130,8 +129,6 @@ window.editor.elements.onmouseover = async function(event) {
                 paddingLeft,
                 paddingRight,
                 paddingBottom,
-                offsetLeft,
-                offsetTop,
                 height,
                 width
             },
@@ -304,7 +301,7 @@ window.editor.elements.styles = function(event) {
                     if (target.closest('span.value')) {
                         el = target.closest('span.value')
                     }
-                    if (0 < 1 && insert) {
+                    if (insert) {
                         var template = target.closest('aside').nextElementSibling.content.firstElementChild.querySelector('template').content.firstElementChild.cloneNode(true);
                         console.log(138, 'editor.elements.styles select.selector.create', {
                             insert,
@@ -321,7 +318,7 @@ window.editor.elements.styles = function(event) {
                             select(box.querySelector('column')[elementChild].querySelector('span.property'));
                         }
                     } else {
-                        select(el);
+                        select(el)
                     }
                 }
                 function select(el) {
