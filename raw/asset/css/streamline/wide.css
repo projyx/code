@@ -731,6 +731,10 @@
         padding-left: 20px;
     }
 
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section  box.element > section box.element > section {
+        /*display: none;*/
+    }
+
     [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > :not(section) {
         position: relative;
     }
