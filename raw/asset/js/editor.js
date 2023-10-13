@@ -44,29 +44,31 @@ window.editor.elements.onmouseover = async function(event) {
             mode: "open"
         });
 
+        var viewportOffset = node.getBoundingClientRect();
+        var top = viewportOffset.top + "px";;
+        var left = viewportOffset.left + "px";;
+
         var computed = getComputedStyle(node);
         var boxSizing = computed.getPropertyValue("box-sizing");
         var borderTop = computed.getPropertyValue("border-left-width") + " solid orange";
         var borderLeft = computed.getPropertyValue("border-left-width") + " solid orange";
         var borderRight = computed.getPropertyValue("border-right-width") + " solid orange";
-        var borderBottom = computed.getPropertyValue("border-bottom-width") + " solid orange";        
+        var borderBottom = computed.getPropertyValue("border-bottom-width") + " solid orange";
         var marginTop = computed.getPropertyValue("margin-top");
         var marginLeft = computed.getPropertyValue("margin-left");
         var marginRight = computed.getPropertyValue("margin-right");
-        var marginBottom = computed.getPropertyValue("margin-bottom");        
+        var marginBottom = computed.getPropertyValue("margin-bottom");
         var paddingTop = computed.getPropertyValue("padding-top");
         var paddingLeft = computed.getPropertyValue("padding-left");
         var paddingRight = computed.getPropertyValue("padding-right");
         var paddingBottom = computed.getPropertyValue("padding-bottom");
-        var offsetLeft = node.offsetLeft + "px";
-        var offsetTop = node.offsetTop + "px";
         var height = computed.getPropertyValue("height");
         var width = computed.getPropertyValue("width");
 
         var overlay = doc.createElement('custom-element');
         overlay.className = "overlay";
         overlay.id = "overlay";
-        overlay.style.position = "absolute";
+        overlay.style.position = "fixed";
         overlay.style.backgroundColor = "rgba(39, 151, 252, 0.38)";
         //overlay.style.borderColor = "#de9757bf";
         overlay.style.boxSizing = boxSizing;
@@ -74,11 +76,11 @@ window.editor.elements.onmouseover = async function(event) {
         overlay.style.paddingLeft = paddingLeft;
         overlay.style.paddingRight = paddingRight;
         overlay.style.paddingBottom = paddingBottom;
-        overlay.style.left = offsetLeft;
-        overlay.style.top = offsetTop;
         overlay.style.height = height;
         overlay.style.width = width;
-        
+        overlay.style.left = left;
+        overlay.style.top = top;
+
         var pad = doc.createElement('custom-padding');
         pad.style.boxSizing = boxSizing;
         pad.style.borderTop = paddingTop + " solid rgba(130, 211, 133, 0.63)";
@@ -90,7 +92,7 @@ window.editor.elements.onmouseover = async function(event) {
         pad.style.width = width;
         pad.style.height = height;
         overlay.appendChild(pad);
-        
+
         var margins = doc.createElement('custom-margins');
         margins.style.borderTop = marginTop + " solid rgba(222, 151, 87, 0.75)";
         margins.style.borderLeft = marginLeft + " solid rgba(222, 151, 87, 0.75)";
