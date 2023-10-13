@@ -771,6 +771,17 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+        position: relative;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text:hover:before {
+        content: '';
+        background-color: #444;
+        display: block;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
     }
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > * {

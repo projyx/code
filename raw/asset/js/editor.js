@@ -49,42 +49,55 @@ window.editor.elements.onmouseover = async function(event) {
         var borderLeft = computed.getPropertyValue("border-left-width") + " solid orange";
         var borderRight = computed.getPropertyValue("border-right-width") + " solid orange";
         var borderBottom = computed.getPropertyValue("border-bottom-width") + " solid orange";
-        var offsetLeft = node.offsetLeft;
-        var offsetTop = node.offsetTop;
-        var height = node.clientHeight;
-        var width = node.clientWidth;
+        var paddingTop = computed.getPropertyValue("padding-top");
+        var paddingLeft = computed.getPropertyValue("padding-left");
+        var paddingRight = computed.getPropertyValue("padding-right");
+        var paddingBottom = computed.getPropertyValue("padding-bottom");
+        var offsetLeft = node.offsetLeft + "px";
+        var offsetTop = node.offsetTop + "px";
+        var height = computed.getPropertyValue("height");
+        var width = computed.getPropertyValue("width");
 
         var overlay = doc.createElement('custom-element');
         overlay.className = "overlay";
         overlay.id = "overlay";
-        overlay.style.position = "fixed";
-        overlay.style.backgroundColor = "#2797fcad";
+        overlay.style.position = "absolute";
+        overlay.style.backgroundClip = "content-box";
+        overlay.style.backgroundColor = "rgba(39, 151, 252, 0.38)";
         overlay.style.borderColor = "#de9757bf";
         overlay.style.borderTop = borderTop;
         overlay.style.borderLeft = borderLeft;
         overlay.style.borderRight = borderRight;
         overlay.style.borderBottom = borderBottom;
-        overlay.style.left = offsetLeft + "px";
-        overlay.style.top = offsetTop + "px";
-        overlay.style.height = height + "px";
-        overlay.style.width = width + "px";
+        overlay.style.paddingTop = paddingTop;
+        overlay.style.paddingLeft = paddingLeft;
+        overlay.style.paddingRight = paddingRight;
+        overlay.style.paddingBottom = paddingBottom;
+        overlay.style.left = offsetLeft;
+        overlay.style.top = offsetTop;
+        overlay.style.height = height;
+        overlay.style.width = width;
 
         style = `<style>custom-element {
             display: flex;
         }</style>`;
         shadow.innerHTML = style + overlay.outerHTML;
 
-        0 > 1 ? console.log(23, {
+        0 < 1 ? console.log(23, {
             computed,
             host,
             node,
             style: node.style,
             computed: node.computedStyleMap(),
             styles: {
-                borderLeft,
                 borderTop,
+                borderLeft,
                 borderRight,
                 borderBottom,
+                paddingTop,
+                paddingLeft,
+                paddingRight,
+                paddingBottom,
                 offsetLeft,
                 offsetTop,
                 height,
