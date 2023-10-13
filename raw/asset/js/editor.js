@@ -104,6 +104,7 @@ window.editor.elements.onmouseover = async function(event) {
             display: flex;
             position: relative;
         } custom-padding {
+            box-sizing: content-box;
             position: absolute;
         } custom-margins {
             position: absolute;
