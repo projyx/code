@@ -136,6 +136,44 @@ window.editor.elements.onmouseover = async function(event) {
         }) : null;
     }
 }
+window.editor.elements.selector = async function(event) {
+    var keyCode = event.keyCode;
+    var target = event.target;
+    var type = event.type;
+    //console.log(106, event, keyCode);
+
+    if (type === "keydown") {
+        //TAB
+        if (keyCode === 9) {
+            event.preventDefault();
+            var declaration = target.parentNode.nextElementSibling;
+            console.log(186, {
+                declaration
+            });
+            if (declaration) {
+                var property = declaration.querySelector('.property');
+                console.log(188, {
+                    property
+                });
+                if (property) {
+                    target.removeAttribute('contenteditable');
+                    property.setAttribute('contenteditable', true);
+                    if (document.body.createTextRange) {
+                        var range = document.body.createTextRange();
+                        range.moveToElementText(property);
+                        range.select();
+                    } else if (window.getSelection) {
+                        var selection = window.getSelection();
+                        var range = document.createRange();
+                        range.selectNodeContents(property);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    }
+                }
+            }
+        }
+    }
+}
 window.editor.elements.property = async function(event) {
     var keyCode = event.keyCode;
     var target = event.target;
@@ -167,6 +205,44 @@ window.editor.elements.property = async function(event) {
                     }
                 } else {
                     target.blur();
+                }
+            }
+        }
+    }
+}
+window.editor.elements.value = async function(event) {
+    var keyCode = event.keyCode;
+    var target = event.target;
+    var type = event.type;
+    //console.log(106, event, keyCode);
+
+    if (type === "keydown") {
+        //TAB
+        if (keyCode === 9) {
+            event.preventDefault();
+            var declaration = target.parentNode.nextElementSibling;
+            console.log(186, {
+                declaration
+            });
+            if (declaration) {
+                var property = declaration.querySelector('.property');
+                console.log(188, {
+                    property
+                });
+                if (property) {
+                    target.removeAttribute('contenteditable');
+                    property.setAttribute('contenteditable', true);
+                    if (document.body.createTextRange) {
+                        var range = document.body.createTextRange();
+                        range.moveToElementText(property);
+                        range.select();
+                    } else if (window.getSelection) {
+                        var selection = window.getSelection();
+                        var range = document.createRange();
+                        range.selectNodeContents(property);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    }
                 }
             }
         }
@@ -470,7 +546,7 @@ window.editor.elements.select = function(event) {
                                 cssObject
                             });
                             var template = aside.nextElementSibling.content.firstElementChild.cloneNode(true);
-                            template.querySelector('header').innerHTML = '<span>' + selectorText + '</span> <span>{</span>';
+                            template.querySelector('header').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + selectorText + '</span> <span>{</span>';
                             var stylesList = template.querySelector('column');
                             Object.keys(cssObject.style).forEach((prop,index)=>{
                                 prop = prop.replace(/[A-Z]/g, m=>"-" + m.toLowerCase());
