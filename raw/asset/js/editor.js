@@ -45,6 +45,7 @@ window.editor.elements.onmouseover = async function(event) {
         });
 
         var computed = getComputedStyle(node);
+        var boxSizing = computed.getPropertyValue("box-sizing");
         var borderTop = computed.getPropertyValue("border-left-width") + " solid orange";
         var borderLeft = computed.getPropertyValue("border-left-width") + " solid orange";
         var borderRight = computed.getPropertyValue("border-right-width") + " solid orange";
@@ -68,6 +69,7 @@ window.editor.elements.onmouseover = async function(event) {
         overlay.style.position = "absolute";
         overlay.style.backgroundColor = "rgba(39, 151, 252, 0.38)";
         //overlay.style.borderColor = "#de9757bf";
+        overlay.style.boxSizing = boxSizing;
         overlay.style.paddingTop = paddingTop;
         overlay.style.paddingLeft = paddingLeft;
         overlay.style.paddingRight = paddingRight;
@@ -78,6 +80,7 @@ window.editor.elements.onmouseover = async function(event) {
         overlay.style.width = width;
         
         var pad = doc.createElement('custom-padding');
+        pad.style.boxSizing = boxSizing;
         pad.style.borderTop = paddingTop + " solid rgba(130, 211, 133, 0.63)";
         pad.style.borderLeft = paddingLeft + " solid rgba(130, 211, 133, 0.63)";
         pad.style.borderRight = paddingRight + " solid rgba(130, 211, 133, 0.63)";
@@ -104,7 +107,6 @@ window.editor.elements.onmouseover = async function(event) {
             display: flex;
             position: relative;
         } custom-padding {
-            box-sizing: content-box;
             position: absolute;
         } custom-margins {
             position: absolute;
