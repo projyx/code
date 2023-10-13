@@ -48,7 +48,11 @@ window.editor.elements.onmouseover = async function(event) {
         var borderTop = computed.getPropertyValue("border-left-width") + " solid orange";
         var borderLeft = computed.getPropertyValue("border-left-width") + " solid orange";
         var borderRight = computed.getPropertyValue("border-right-width") + " solid orange";
-        var borderBottom = computed.getPropertyValue("border-bottom-width") + " solid orange";
+        var borderBottom = computed.getPropertyValue("border-bottom-width") + " solid orange";        
+        var marginTop = computed.getPropertyValue("margin-top");
+        var marginLeft = computed.getPropertyValue("margin-left");
+        var marginRight = computed.getPropertyValue("margin-right");
+        var marginBottom = computed.getPropertyValue("margin-bottom");        
         var paddingTop = computed.getPropertyValue("padding-top");
         var paddingLeft = computed.getPropertyValue("padding-left");
         var paddingRight = computed.getPropertyValue("padding-right");
@@ -62,13 +66,8 @@ window.editor.elements.onmouseover = async function(event) {
         overlay.className = "overlay";
         overlay.id = "overlay";
         overlay.style.position = "absolute";
-        overlay.style.backgroundClip = "content-box";
         overlay.style.backgroundColor = "rgba(39, 151, 252, 0.38)";
-        overlay.style.borderColor = "#de9757bf";
-        overlay.style.borderTop = borderTop;
-        overlay.style.borderLeft = borderLeft;
-        overlay.style.borderRight = borderRight;
-        overlay.style.borderBottom = borderBottom;
+        //overlay.style.borderColor = "#de9757bf";
         overlay.style.paddingTop = paddingTop;
         overlay.style.paddingLeft = paddingLeft;
         overlay.style.paddingRight = paddingRight;
@@ -77,9 +76,37 @@ window.editor.elements.onmouseover = async function(event) {
         overlay.style.top = offsetTop;
         overlay.style.height = height;
         overlay.style.width = width;
+        
+        var pad = doc.createElement('custom-padding');
+        pad.style.borderTop = paddingTop + " solid rgba(130, 211, 133, 0.63)";
+        pad.style.borderLeft = paddingLeft + " solid rgba(130, 211, 133, 0.63)";
+        pad.style.borderRight = paddingRight + " solid rgba(130, 211, 133, 0.63)";
+        pad.style.borderBottom = paddingBottom + " solid rgba(130, 211, 133, 0.63)";
+        pad.style.top = 0;
+        pad.style.left = 0;
+        pad.style.width = width;
+        pad.style.height = height;
+        overlay.appendChild(pad);
+        
+        var margins = doc.createElement('custom-margins');
+        margins.style.borderTop = marginTop + " solid rgba(222, 151, 87, 0.75)";
+        margins.style.borderLeft = marginLeft + " solid rgba(222, 151, 87, 0.75)";
+        margins.style.borderRight = marginRight + " solid rgba(222, 151, 87, 0.75)";
+        margins.style.borderBottom = marginBottom + " solid rgba(222, 151, 87, 0.75)";
+        margins.style.top = "-" + marginTop;
+        margins.style.left = "-" + marginLeft;
+        margins.style.right = marginRight;
+        margins.style.width = "100%";
+        margins.style.height = height;
+        overlay.appendChild(margins);
 
         style = `<style>custom-element {
             display: flex;
+            position: relative;
+        } custom-padding {
+            position: absolute;
+        } custom-margins {
+            position: absolute;
         }</style>`;
         shadow.innerHTML = style + overlay.outerHTML;
 
