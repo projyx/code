@@ -138,13 +138,37 @@ window.editor.elements.onmouseover = async function(event) {
 }
 window.editor.elements.property = async function(event) {
     var keyCode = event.keyCode;
+    var target = event.target;
     var type = event.type;
     //console.log(106, event, keyCode);
 
     if (type === "keydown") {
+        //TAB
         if (keyCode === 9) {
-            //TAB
             event.preventDefault();
+            var value = target.parentNode.querySelector('.value');
+            if (value) {
+                console.log(151, {
+                    value
+                });
+                if (target.textContent.length > 0) {
+                    target.removeAttribute('contenteditable');
+                    value.setAttribute('contenteditable', true);
+                    if (document.body.createTextRange) {
+                        var range = document.body.createTextRange();
+                        range.moveToElementText(value);
+                        range.select();
+                    } else if (window.getSelection) {
+                        var selection = window.getSelection();
+                        var range = document.createRange();
+                        range.selectNodeContents(value);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    }
+                } else {
+                    target.blur();
+                }
+            }
         }
     }
 }
