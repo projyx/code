@@ -183,10 +183,21 @@ window.editor.elements.property = async function(event) {
     if (type === "keydown") {
         var text = target.closest('text');
         text.classList.add('focus');
+        console.log(186, {
+            keyCode,
+            target: target.textContent,
+            text
+        });
         //TAB
         if (keyCode === 9) {
             event.preventDefault();
             var value = target.parentNode.querySelector('.value');
+            text.classList.add('ed');
+            console.log(190, {
+                target: target.textContent,
+                text,
+                value
+            });
             if (value) {
                 console.log(151, {
                     target: target.textContent,
@@ -382,21 +393,31 @@ window.editor.elements.styles = function(event) {
                                 });
                                 if (dspx) {
                                     console.log(369, 'property.value dspx', {
+                                        text,
                                         dspx,
-                                        text: dsp.textcontent
+                                        dsp,
+                                        toxt: dsp.textContent,
+                                        dsvx,
+                                        dsv,
+                                        tuxt: dsv.textContent
                                     });
                                     if (dspx.textContent.length > 0) {
-                                        //text.remove();
-                                        console.log(381, 'value.focus', dspx);
+                                        console.log(381, 'value.focus', {
+                                            dspx,
+                                            dsvx
+                                        });
+                                        if (!text.classList.contains('ed')) {
+                                            text.remove();
+                                        }
                                         //dsv.setAttribute('contenteditable', true);
                                         //dsv.focus();
-                                        //text.remove();
                                     } else {
                                         text.remove();
                                     }
                                 } else if (dsvx) {
                                     console.log(369, 'property.value dsvx', dsvx);
-                                    if (dsvx.textContent === "") {//text.remove();
+                                    if (dsvx.textContent.length === 0) {
+                                        text.remove();
                                     }
                                 }
                             } else {
