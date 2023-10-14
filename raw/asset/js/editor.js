@@ -181,30 +181,89 @@ window.editor.elements.property = async function(event) {
     //console.log(106, event, keyCode);
 
     if (type === "keydown") {
+        var text = target.closest('text');
+        text.classList.add('focus');
         //TAB
         if (keyCode === 9) {
             event.preventDefault();
             var value = target.parentNode.querySelector('.value');
             if (value) {
                 console.log(151, {
+                    target: target.textContent,
+                    text,
                     value
                 });
-                if (target.textContent.length > 0) {
-                    target.removeAttribute('contenteditable');
-                    value.setAttribute('contenteditable', true);
-                    if (document.body.createTextRange) {
-                        var range = document.body.createTextRange();
-                        range.moveToElementText(value);
-                        range.select();
-                    } else if (window.getSelection) {
-                        var selection = window.getSelection();
-                        var range = document.createRange();
-                        range.selectNodeContents(value);
-                        selection.removeAllRanges();
-                        selection.addRange(range);
+                if (text.classList.contains('connected')) {
+
+                    //if(dsp.textContent.length === 0 || (dsp.textContent.length > 0 && dsv.textContent.length === 0)) {
+                    //text.remove();
+                    //}
+
+                    if (text.classList.contains('focus')) {
+
+                        value.setAttribute('contenteditable', true);
+                        value.focus();
+
+                    } else {
+
+                        target.removeAttribute('contenteditable');
+                        value.setAttribute('contenteditable', true);
+                        console.log(197, {
+                            value: value.textContent.length
+                        });
+                        if (value.textContent.length > 0) {
+                            if (document.body.createTextRange) {
+                                var range = document.body.createTextRange();
+                                range.moveToElementText(value);
+                                range.select();
+                            } else if (window.getSelection) {
+                                var selection = window.getSelection();
+                                var range = document.createRange();
+                                range.selectNodeContents(value);
+                                selection.removeAllRanges();
+                                selection.addRange(range);
+                            }
+                        } else {
+                            console.log(210, value, text);
+                            //value.focus();
+                        }
+
                     }
+
                 } else {
-                    target.blur();
+
+                    if (target.textContent.length > 0) {
+                        target.removeAttribute('contenteditable');
+                        value.setAttribute('contenteditable', true);
+                        console.log(197, {
+                            value: value.textContent.length
+                        });
+                        if (value.textContent.length > 0) {
+                            text.classList.add('focus');
+                            if (document.body.createTextRange) {
+                                var range = document.body.createTextRange();
+                                range.moveToElementText(value);
+                                range.select();
+                            } else if (window.getSelection) {
+                                var selection = window.getSelection();
+                                var range = document.createRange();
+                                range.selectNodeContents(value);
+                                selection.removeAllRanges();
+                                selection.addRange(range);
+                            }
+                        } else {
+                            console.log(210, value);
+                            text.classList.add('focus');
+                            value.focus();
+                        }
+                        console.log(206, {
+                            value
+                        });
+                    } else {//target.blur();
+                    }
+
+                    //focus && focus.closest('text') ? focus.closest('text').remove() : null;
+
                 }
             }
         }
@@ -301,14 +360,59 @@ window.editor.elements.styles = function(event) {
                 }, event.type);
                 if (ep || ev || fpev || epnv || epfv || npfv) {
                     var focus = dsp || dsv;
-                    if (focus.closest('box').deselection === false || !focus.closest('box').deselection) {
-                        focus.closest('box').deselection = true;
+                    if (focus) {
+                        if (focus.closest('box').deselection === false || !focus.closest('box').deselection) {
+                            focus.closest('box').deselection = true;
+                        }
+                        console.log(120, 'deselection', {
+                            focus
+                        });
+                        focus.blur();
+                        var text = focus.closest('text');
+                        console.log(362, 'select.focus', text, dsp.textContent.length, dsv.textContent.length);
+                        if (text.classList.contains('connected')) {
+                            //if (dsp.textContent.length === 0 || (dsp.textContent.length > 0 && dsv.textContent.length === 0)) {
+                            if (text.classList.contains('focus')) {
+                                console.log(365, 'select.focus', {
+                                    text,
+                                    dspx,
+                                    dsvx,
+                                    ptl: dsp.textContent.length,
+                                    vtl: dsv.textContent.length
+                                });
+                                if (dspx) {
+                                    console.log(369, 'property.value dspx', {
+                                        dspx,
+                                        text: dsp.textcontent
+                                    });
+                                    if (dspx.textContent.length > 0) {
+                                        //text.remove();
+                                        console.log(381, 'value.focus', dspx);
+                                        //dsv.setAttribute('contenteditable', true);
+                                        //dsv.focus();
+                                        //text.remove();
+                                    } else {
+                                        text.remove();
+                                    }
+                                } else if (dsvx) {
+                                    console.log(369, 'property.value dsvx', dsvx);
+                                    if (dsvx.textContent === "") {//text.remove();
+                                    }
+                                }
+                            } else {
+                                console.log(391, text);
+                                if (text.classList.contains('connected')) {
+                                    text.remove();
+                                } else {
+                                    text.remove();
+                                }
+                            }
+                            //}
+                            //focus && focus.closest('text') ? focus.closest('text').remove() : null;
+                        } else {
+                            focus && focus.closest('text') ? focus.closest('text').remove() : null;
+                        }
                     }
-                    console.log(120, 'deselection', {
-                        focus
-                    });
-                    focus.blur();
-                    focus && focus.closest('text') ? focus.closest('text').remove() : null;
                 }
             }
 
@@ -383,16 +487,14 @@ window.editor.elements.styles = function(event) {
                     });
                     if (insert) {
                         var template = target.closest('aside').nextElementSibling.content.firstElementChild.querySelector('template').content.firstElementChild.cloneNode(true);
-                        console.log(138, 'editor.elements.styles select.selector.create', {
-                            insert,
-                            template
-                        });
                         if (["afterbegin", "beforeend"].includes(insert)) {
                             var elementChild = null;
                             insert === "afterbegin" ? elementChild = "firstElementChild" : null;
                             insert === "beforeend" ? elementChild = "lastElementChild" : null;
                             console.log(157, 'editor.elements.styles select', elementChild);
                             box.querySelector('column').insertAdjacentHTML(insert, template.outerHTML);
+                            var text = box.querySelector('column')[elementChild];
+                            console.log(443, text);
                             prop = box.querySelector('column')[elementChild].querySelector('span.property');
                             //prop.setAttribute("onfocusout", `window.editor.elements.deselect(event)`);
                             select(box.querySelector('column')[elementChild].querySelector('span.property'));
@@ -408,10 +510,6 @@ window.editor.elements.styles = function(event) {
                     }
                     if (insert) {
                         var template = target.closest('aside').nextElementSibling.content.firstElementChild.querySelector('template').content.firstElementChild.cloneNode(true);
-                        console.log(138, 'editor.elements.styles select.selector.create', {
-                            insert,
-                            template
-                        });
                         if (["afterbegin", "beforeend"].includes(insert)) {
                             var elementChild = null;
                             insert === "afterbegin" ? elementChild = "firstElementChild" : null;
@@ -420,6 +518,8 @@ window.editor.elements.styles = function(event) {
                             if (!className) {
                                 box.querySelector('column').insertAdjacentHTML(insert, template.outerHTML);
                             }
+                            var text = box.querySelector('column')[elementChild];
+                            console.log(443, text);
                             prop = box.querySelector('column')[elementChild].querySelector('span.property');
                             //prop.setAttribute("onfocusout", `window.editor.elements.deselect(event)`);
                             select(box.querySelector('column')[elementChild].querySelector('span.property'));
@@ -561,6 +661,9 @@ window.editor.elements.select = function(event) {
                                     val
                                 });
                                 const propertyValue = template.querySelector('template').content.firstElementChild.cloneNode(true)
+                                propertyValue.classList.remove('connected');
+                                propertyValue.removeAttribute('connected');
+                                console.log(596, 'disconnect', propertyValue);
                                 propertyValue.querySelector('.property').textContent = prop;
                                 propertyValue.querySelector('.value').textContent = val;
                                 stylesList.appendChild(propertyValue);
