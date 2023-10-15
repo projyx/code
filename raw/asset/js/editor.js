@@ -590,11 +590,15 @@ window.editor.elements.styles = function(event) {
                     }
                 }
             }
-            console.log(216, box.deselection);
+            console.log(216, {
+                dsvx,
+                dspx
+            }, box.deselection);
             if (box.deselection === true && ["focusout", "mouseup"].includes(event.type)) {
                 box.deselection = false;
-                text.removeAttribute('class');
             }
+            
+            dsvx ? dsvx.closest('text').removeAttribute('class') : null;
 
             if (event.type === "mouseup") {
                 box.nulled = false;
