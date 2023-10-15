@@ -245,7 +245,7 @@
 
     [component="wide"] .dev-tools .tools-tab {
         display: none;
-        height: 100%;
+        /* height: 100%; */
     }
 
     [component="wide"] .dev-tools .tab-sources {
@@ -864,11 +864,7 @@
         transform: rotate(35deg);
     }
 
-    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box:not(:hover) > column > text > .declaration {
-        display: none;
-    }
-
-    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .declaration [type="checkbox"] {
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box:not(:hover) > column > text > .declaration:has([type="checkbox"]:checked + .checkbox) {
         display: none;
     }
 
