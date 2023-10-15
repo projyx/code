@@ -778,12 +778,25 @@
         flex-direction: row;
         flex-wrap: wrap;
         font-size: 13px;
-        height: 14px;
+        min-height: 14px;
         line-height: 14px;
         padding: 0 3px;
         position: relative;
         /* content: no-open-quote; */
         /* shape-outside: unset; */
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text:has([type="checkbox"]:not(:checked)) > :first-child ~ *:after {
+        content: '';
+        display: block;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        margin: auto;
+        position: absolute;
+        height: 0;
+        width: 100%;
+        border-top: 1px solid #fff;
     }
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text:hover:before {
@@ -806,6 +819,7 @@
         width: 13px;
         height: 13px;
         position: absolute;
+        top: 0;
     }
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text:not(.connected)  > .declaration [type="checkbox"] + .checkbox {
