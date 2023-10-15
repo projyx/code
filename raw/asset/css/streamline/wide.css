@@ -731,7 +731,7 @@
         padding-left: 20px;
     }
 
-    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section  box.element > section box.element > section {
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section box.element > section box.element > section {
         /*display: none;*/
     }
 
@@ -758,7 +758,7 @@
         border-bottom: 1px solid #555;
         display: flex;
         flex-direction: column;
-        padding: 4px;
+        /* padding: 4px; */
     }
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box:first-child {
@@ -772,10 +772,18 @@
     }
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text {
+        align-items: center;
+        box-sizing: border-box;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+        font-size: 13px;
+        height: 14px;
+        line-height: 14px;
+        padding: 0 3px;
         position: relative;
+        /* content: no-open-quote; */
+        /* shape-outside: unset; */
     }
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text:hover:before {
@@ -783,6 +791,7 @@
         background-color: #444;
         display: block;
         height: 100%;
+        left: 0;
         position: absolute;
         width: 100%;
         z-index: -1;
@@ -790,11 +799,68 @@
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > * {
         display: inline-flex;
+        position: relative;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .declaration {
+        width: 13px;
+        height: 13px;
+        position: absolute;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .declaration [type="checkbox"] + .checkbox {
+        background-color: #3b3b3b;
+        border: 1px solid #777;
+        border-radius: 2px;
+        box-sizing: border-box;
+        position: absolute;
+        left: 0;
+        top: 0px;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        height: 100%;
+        width: 100%;
+        /* display: flex; */
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .declaration [type="checkbox"]:checked + .checkbox {
+        background-color: #ffa500;
+        border: 1px solid orange;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .declaration [type="checkbox"]:checked + .checkbox:after {
+        content: '';
+        display: block;
+        position: absolute;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .declaration [type="checkbox"]:checked + .checkbox:after {
+        left: 0px;
+        top: 0px;
+        right: 0;
+        bottom: 0;
+        margin: auto auto 2px;
+        width: 3px;
+        height: 7px;
+        border: solid #292a2d;
+        border-width: 0 2px 2px 0;
+        -webkit-transform: rotate(35deg);
+        -ms-transform: rotate(35deg);
+        transform: rotate(35deg);
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box:not(:hover) > column > text > .declaration {
+        display: none;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .declaration [type="checkbox"] {
+        display: none;
     }
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .property {
         color: #35b4fb;
-        margin-left: 20px;
+        margin-left: 16px;
     }
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .property:empty {
