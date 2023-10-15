@@ -808,7 +808,7 @@
         position: absolute;
     }
 
-    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .declaration [type="checkbox"] + .checkbox {
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text:not(.connected)  > .declaration [type="checkbox"] + .checkbox {
         background-color: #3b3b3b;
         border: 1px solid #777;
         border-radius: 2px;
@@ -824,18 +824,18 @@
         /* display: flex; */
     }
 
-    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .declaration [type="checkbox"]:checked + .checkbox {
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text:not(.connected) > .declaration [type="checkbox"]:checked + .checkbox {
         background-color: #ffa500;
         border: 1px solid orange;
     }
 
-    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .declaration [type="checkbox"]:checked + .checkbox:after {
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text:not(.connected)  > .declaration [type="checkbox"]:checked + .checkbox:after {
         content: '';
         display: block;
         position: absolute;
     }
 
-    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text > .declaration [type="checkbox"]:checked + .checkbox:after {
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text:not(.connected)  > .declaration [type="checkbox"]:checked + .checkbox:after {
         left: 0px;
         top: 0px;
         right: 0;

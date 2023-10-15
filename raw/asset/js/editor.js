@@ -593,6 +593,7 @@ window.editor.elements.styles = function(event) {
             console.log(216, box.deselection);
             if (box.deselection === true && ["focusout", "mouseup"].includes(event.type)) {
                 box.deselection = false;
+                text.removeAttribute('class');
             }
 
             if (event.type === "mouseup") {
