@@ -823,7 +823,7 @@
         top: 0;
     }
 
-    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text:not(.connected)  > .declaration [type="checkbox"] + .checkbox {
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text  > .declaration [type="checkbox"] + .checkbox {
         background-color: #3b3b3b;
         border: 1px solid #777;
         border-radius: 2px;
@@ -866,6 +866,10 @@
     }
 
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box:not(:hover) > column > text > .declaration:has([type="checkbox"]:checked + .checkbox) {
+        display: none;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text.connected > .declaration {
         display: none;
     }
 
