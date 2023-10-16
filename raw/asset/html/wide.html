@@ -245,7 +245,8 @@
         <card class="tools-tab tab-elements">
             <section onclick="window.editor.elements.select(event)" onmouseout="window.editor.elements.onmouseout(event)" onmouseover="window.editor.elements.onmouseover(event)"></section>
             <template>
-                <box class="element">
+                <box class="element" html-entity="&#x25B6;">
+                    <fold html-entity="&#x25B6;" onclick="event.target.closest('box').classList.toggle('expand')"></fold>
                     <header></header>
                     <section></section>
                     <footer></footer>

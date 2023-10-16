@@ -679,9 +679,44 @@
         white-space: nowrap;
     }
 
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > fold {
+        color: #ddd;
+        display: block;
+        font-size: 9px;
+        height: 12px;
+        left: -12px;
+        margin: 1px;
+        position: absolute;
+        text-align: center;
+        width: 12px;
+        z-index: 123;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element:has(> section:empty) > fold {
+        display: none;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element:has(> section:empty) > section:empty {
+        display: none;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > fold:before {
+        color: #ddd;
+        content: attr(html-entity);
+        display: block;
+        font-size: 9px;
+        height: 12px;
+        margin: 1px;
+        position: absolute;
+        text-align: center;
+        width: 12px;
+        z-index: 123;
+    }
+
     [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > * {
         display: inline;
         font-size: 12px;
+        position: relative;
         white-space: break-spaces;
     }
 
@@ -729,18 +764,65 @@
         /* flex: 1; */
         /* flex-direction: column; */
         /* flex-wrap: wrap; */
+        padding-left: 0px;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section > box.element > section {
         padding-left: 20px;
     }
 
-    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section box.element > section box.element > section {
-        /*display: none;*/
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element.expand > section {
+        padding-left: 20px;
     }
 
-    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > :not(section) {
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element:not(.expand) > section {
+        /* padding-left: 0; */
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section box.element > section {
+        display: inline-block;
+        /* display: inline; */
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section box.element > section {
+        box-sizing: border-box;
+        margin: 0 2px;
+        /* padding-left: 0px; */
+        vertical-align: top;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section box.element.expand > section:not(:empty) {
+        display: block;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section box.element.expand > section:empty {
+        display: none;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section box.element:not(.expand):not(:has(> section:empty)) > section:before {
+        content: '...';
+        display: inline-block;
+        border: 1px solid #777;
+        border-radius: 50px;
+        box-sizing: border-box;
+        font-size: 7px;
+        font-weight: bolder;
+        height: 11px;
+        line-height: 7px;
+        text-align: center;
+        margin: 2px 0;
+        width: 14px;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section box.element:not(.expand) > section > * {
+        display: none;
+    }
+
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > :not(fold):not(section) {
         position: relative;
     }
 
-    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section box > :not(section) {
+    [component="wide"] .dev-tools .tools-tab.tab-elements > section box.element > section box > :not(fold):not(section) {
         padding-left: 0px;
         position: relative;
         width: 100%;
