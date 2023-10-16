@@ -789,6 +789,8 @@ function domBuilder(component, contentWindow) {
         el.removeAttribute('dom');
     }
     )
+    var body = domtree.firstElementChild.children[2].children[1];
+    body.classList.add('expand');
 }
 
 function cssRules(doc) {
