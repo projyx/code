@@ -337,7 +337,7 @@ window.editor.elements.styles = function(event) {
             var children = box.parentNode.children;
             var index = Array.from(children).indexOf(box);
             var last = index === children.length - 1;
-            var className = target.closest('box > header > span:first-child');
+            var className = target.closest('box > header > .slct > span:first-child');
             console.log(123, event.type);
             //box.nulled = null;
 
