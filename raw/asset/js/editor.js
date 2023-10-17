@@ -597,7 +597,7 @@ window.editor.elements.styles = function(event) {
             if (box.deselection === true && ["focusout", "mouseup"].includes(event.type)) {
                 box.deselection = false;
             }
-            
+
             dsvx ? dsvx.closest('text').removeAttribute('class') : null;
 
             if (event.type === "mouseup") {
@@ -646,17 +646,33 @@ window.editor.elements.select = function(event) {
 
         var i = 0;
         do {
-            var stylesheet = stylesheets[i];
+            var stylesheet = sheet = stylesheets[i];
             var rules = stylesheet.rules;
             0 > 1 ? console.log(32, 'editor.elements.select select', {
                 stylesheet,
                 rules
             }) : null;
             //console.log(38, Object.keys(rules));
+
+            var href = stylesheet.href;
+            var link = stylesheet.ownerNode;
+            var src = link.dataset.src;
+            var dirs = rout.ed(src);
+            var dir = dirs[dirs.length - 1];
+            console.log(666, 'stylesheet.sheet', {
+                styleSheet,
+                rules,
+                link,
+                href,
+                src,
+                dir
+            });
+
             var ii = 0;
             do {
                 var rule = Object.values(rules)[ii];
                 var cssRules = rule && rule.cssRules ? rule.cssRules : null;
+
                 console.log(42, ii, 'editor.elements.select select rule', rule, cssRules);
                 if (cssRules && cssRules.length > 0) {
 
@@ -668,6 +684,7 @@ window.editor.elements.select = function(event) {
                         if (matches) {
                             var styleMap = cssRule.styleMap;
                             var cssObject = parseCSSText(cssRule.cssText);
+
                             console.log(49, {
                                 cssRule,
                                 matches,
@@ -677,7 +694,9 @@ window.editor.elements.select = function(event) {
                                 cssObject
                             });
                             var template = aside.nextElementSibling.content.firstElementChild.cloneNode(true);
-                            template.querySelector('header').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + selectorText + '</span> <span>{</span>';
+                            //template.querySelector('header').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + selectorText + '</span> <span>{</span>';
+                            template.querySelector('header > .file').innerHTML = '<span>' + dir + '</span>';
+                            template.querySelector('header > .slct').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + selectorText + '</span> <span>{</span>';
                             var stylesList = template.querySelector('column');
                             Object.keys(cssObject.style).forEach((prop,index)=>{
                                 prop = prop.replace(/[A-Z]/g, m=>"-" + m.toLowerCase());
@@ -717,6 +736,8 @@ window.editor.elements.select = function(event) {
         template.querySelector('header').innerHTML = '<span style="color:#888">' + selectorText + '</span> <span>{</span>';
         template.querySelector('footer').textContent = "}";
         aside.insertAdjacentHTML('beforeend', template.outerHTML);
+
+        styleSheet(node)
     }
 }
 

@@ -255,7 +255,11 @@
             <aside onfocusout="window.editor.elements.styles(event)" onmousedown="window.editor.elements.styles(event)" onmouseup="window.editor.elements.styles(event)"></aside>
             <template>
                 <box>
-                    <header></header>
+                    <header>
+                        <div class="rule"></div>
+                        <div class="file"></div>
+                        <div class="slct" onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)"></div>
+                    </header>
                     <column></column>
                     <template>
                         <text class="connected">

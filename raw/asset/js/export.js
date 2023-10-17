@@ -324,8 +324,8 @@ async function wIDE(paths) {
             <!--<link rel="stylesheet" type="text/css" href="${link}" />-->
             ${l.join(" ")}
             ${s.join(" ")}
-            <style>${css}</style>
-            <script>${js}</script>
+            <!--<style>${css}</style>-->
+            <!--<script>${js}</script>-->
             ${elem}
           </head>
           ${body.outerHTML}
@@ -524,8 +524,7 @@ async function wIDE(paths) {
                 }) : null;
                 window.top.history.replaceState(state, unused, url);
             }
-            contentWindow.onpopstate = function(e) {
-                //console.log(342, 'editor.contentWindow.onpopstate', e);
+            contentWindow.onpopstate = function(e) {//console.log(342, 'editor.contentWindow.onpopstate', e);
             }
             const boot = url.pathname.split("/").splice(1).filter(n=>n.length > 0);
             var state = "/" + boot.splice(4, boot.length).join("/");
@@ -816,10 +815,48 @@ function cssRules(doc) {
     return value;
 }
 
-function triggerMouseEvent (node, eventType) {
-    var clickEvent = document.createEvent ('MouseEvents');
-    clickEvent.initEvent (eventType, true, true);
-    node.dispatchEvent (clickEvent);
+function styleSheet(node) {
+    var doc = node.ownerDocument;
+    console.log(820, 'stylesheet.variables', {
+        doc,
+        node
+    });
+    [].some.call(doc.styleSheets, function(sheet) {
+        var href = sheet.href;
+        var link = sheet.ownerNode;
+        var src = link.dataset.src;
+        var dirs = rout.ed(src);
+        var dir = dirs[dirs.length - 1];
+        console.log(820, 'stylesheet.sheet', {
+            sheet,
+            href,
+            src,
+            dir
+        });
+        return [].some.call(sheet.rules, function(rule) {
+            console.log(820, 'stylesheet.rules', rule);
+            if (rule.selectorText) {
+                return [].some.call(rule.style, function(style) {
+                    console.log(820, style);
+                    if (attribute === style) {
+                        value = rule.style.getPropertyValue(attribute);
+                        return true;
+                    }
+                    return false;
+                });
+            } else {
+                var rules = rule.cssRules;
+                console.log(1518, rule, rules);
+            }
+            return false;
+        });
+    });
+}
+
+function triggerMouseEvent(node, eventType) {
+    var clickEvent = document.createEvent('MouseEvents');
+    clickEvent.initEvent(eventType, true, true);
+    node.dispatchEvent(clickEvent);
 }
 
 window.Crypto = crypt = cx = {

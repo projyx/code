@@ -854,6 +854,11 @@
         color: white;
     }
 
+    [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > header > div.file span {
+        float: right;
+        text-decoration: underline;        
+    }
+
     [component="wide"] .dev-tools .tools-tab.tab-elements > aside > box > column > text {
         align-items: center;
         box-sizing: border-box;
