@@ -853,6 +853,17 @@ function styleSheet(node) {
     });
 }
 
+function isDescendant(parent, child) {
+     var node = child.parentNode;
+     while (node != null) {
+         if (node == parent) {
+             return true;
+         }
+         node = node.parentNode;
+     }
+     return false;
+}
+
 function triggerMouseEvent(node, eventType) {
     var clickEvent = document.createEvent('MouseEvents');
     clickEvent.initEvent(eventType, true, true);

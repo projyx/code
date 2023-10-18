@@ -467,6 +467,8 @@ window.editor.elements.styles = function(event) {
                     box: box.parentNode,
                     children,
                     className,
+                    header,
+                    footer,
                     target,
                     property,
                     value,
@@ -482,12 +484,12 @@ window.editor.elements.styles = function(event) {
                         header
                     });
                     var insert = 'afterbegin';
-                } else if (target === footer) {
+                } else if (isDescendant(footer, target) || footer === target) {
                     console.log(130, 'editor.elements.styles select.selector', {
                         footer
                     });
                     var insert = 'beforeend';
-                } else if (target === header) {
+                } else if (isDescendant(header, target) || header === target) {
                     console.log(130, 'editor.elements.styles select.selector', {
                         header
                     });
@@ -529,6 +531,7 @@ window.editor.elements.styles = function(event) {
                     if (target.closest('span.value')) {
                         el = target.closest('span.value')
                     }
+                    console.log(532, { el, insert });
                     if (insert) {
                         var template = target.closest('aside').nextElementSibling.content.firstElementChild.querySelector('template').content.firstElementChild.cloneNode(true);
                         if (["afterbegin", "beforeend"].includes(insert)) {
