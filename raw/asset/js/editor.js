@@ -453,9 +453,10 @@ window.editor.elements.styles = function(event) {
             if (box && ["mouseup"].includes(event.type) && (box.deselection === false || !box.deselection) && (box.nulled === false || !box.nulled)) {
                 var children = box.parentNode.children;
                 var index = Array.from(box.parentNode.children).indexOf(box);
+                var text = target.closest('box > column > text');
                 var footer = target.closest('box > footer');
                 var header = target.closest('box > header');
-                var className = target.closest('box > header > span:first-child');
+                var className = target.closest('box > header > .slct span:first-child');
                 var prop = target.closest('.property');
                 var val = target.closest('.value');
                 var property = prop ? prop.textContent : null;
@@ -500,6 +501,10 @@ window.editor.elements.styles = function(event) {
                     });
                     var insert = 'afterbegin';
                     var className = target.closest('box > header > span:first-child');
+                } else if(target === text) {
+                    console.log(130, 'editor.elements.styles select.selector', {
+                        text
+                    });                    
                 }
                 if (Array.from(children).indexOf(box) === children.length - 1) {
                     console.log(121, 'editor.elements.styles select.box', {
