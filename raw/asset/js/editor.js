@@ -479,6 +479,7 @@ window.editor.elements.styles = function(event) {
                 Array.from(target.closest('aside').querySelectorAll("[contenteditable]")).forEach(function(element) {
                     element.removeAttribute('contenteditable');
                 });
+                var elem = box.querySelector('column');
                 var insert = false;
                 if (target === box) {
                     console.log(130, 'editor.elements.styles select.selector', {
@@ -499,12 +500,14 @@ window.editor.elements.styles = function(event) {
                     console.log(130, 'editor.elements.styles select.selector', {
                         className
                     });
-                    var insert = 'afterbegin';
                     var className = target.closest('box > header > span:first-child');
-                } else if(target === text) {
+                } else if (target === text) {
+                    var insert = 'afterend';
+                    var elem = text;
                     console.log(130, 'editor.elements.styles select.selector', {
-                        text
-                    });                    
+                        insert,
+                        elem
+                    });
                 }
                 if (Array.from(children).indexOf(box) === children.length - 1) {
                     console.log(121, 'editor.elements.styles select.box', {
@@ -520,7 +523,7 @@ window.editor.elements.styles = function(event) {
                             insert === "afterbegin" ? elementChild = "firstElementChild" : null;
                             insert === "beforeend" ? elementChild = "lastElementChild" : null;
                             console.log(157, 'editor.elements.styles select', elementChild);
-                            box.querySelector('column').insertAdjacentHTML(insert, template.outerHTML);
+                            elem.insertAdjacentHTML(insert, template.outerHTML);
                             var text = box.querySelector('column')[elementChild];
                             console.log(443, text);
                             prop = box.querySelector('column')[elementChild].querySelector('span.property');
@@ -536,22 +539,30 @@ window.editor.elements.styles = function(event) {
                     if (target.closest('span.value')) {
                         el = target.closest('span.value')
                     }
-                    console.log(532, { el, insert });
+                    console.log(532, {
+                        el,
+                        insert
+                    });
                     if (insert) {
                         var template = target.closest('aside').nextElementSibling.content.firstElementChild.querySelector('template').content.firstElementChild.cloneNode(true);
-                        if (["afterbegin", "beforeend"].includes(insert)) {
+                        if (["afterbegin", "afterend", "beforeend"].includes(insert)) {
                             var elementChild = null;
                             insert === "afterbegin" ? elementChild = "firstElementChild" : null;
                             insert === "beforeend" ? elementChild = "lastElementChild" : null;
+                            insert === "afterend" ? elementChild = "lastElementChild" : null;
                             console.log(157, 'editor.elements.styles select', elementChild);
                             if (!className) {
-                                box.querySelector('column').insertAdjacentHTML(insert, template.outerHTML);
+                                elem.insertAdjacentHTML(insert, template.outerHTML);
                             }
                             var text = box.querySelector('column')[elementChild];
                             console.log(443, text);
-                            prop = box.querySelector('column')[elementChild].querySelector('span.property');
+                            if (insert === "afterend") {
+                                prop = target.closest('text').nextElementSibling.querySelector('span.property');
+                            } else {
+                                prop = box.querySelector('column')[elementChild].querySelector('span.property');
+                            }
                             //prop.setAttribute("onfocusout", `window.editor.elements.deselect(event)`);
-                            select(box.querySelector('column')[elementChild].querySelector('span.property'));
+                            select(prop);
                         }
                     } else {
                         select(el)
