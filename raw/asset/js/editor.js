@@ -518,17 +518,26 @@ window.editor.elements.styles = function(event) {
                     });
                     if (insert) {
                         var template = target.closest('aside').nextElementSibling.content.firstElementChild.querySelector('template').content.firstElementChild.cloneNode(true);
-                        if (["afterbegin", "beforeend"].includes(insert)) {
+                        if (["afterbegin", "afterend", "beforeend"].includes(insert)) {
                             var elementChild = null;
                             insert === "afterbegin" ? elementChild = "firstElementChild" : null;
                             insert === "beforeend" ? elementChild = "lastElementChild" : null;
+                            insert === "afterend" ? elementChild = "lastElementChild" : null;
                             console.log(157, 'editor.elements.styles select', elementChild);
-                            elem.insertAdjacentHTML(insert, template.outerHTML);
+                            if (insert === "afterend") {
+                                elem.insertAdjacentHTML(insert, template.outerHTML);
+                            } else {
+                                elem.insertAdjacentHTML(insert, template.outerHTML);
+                            }
                             var text = box.querySelector('column')[elementChild];
                             console.log(443, text);
-                            prop = box.querySelector('column')[elementChild].querySelector('span.property');
+                            if (insert === "afterend") {
+                                prop = target.closest('text').nextElementSibling.querySelector('span.property');
+                            } else {
+                                prop = box.querySelector('column')[elementChild].querySelector('span.property');
+                            }
                             //prop.setAttribute("onfocusout", `window.editor.elements.deselect(event)`);
-                            select(box.querySelector('column')[elementChild].querySelector('span.property'));
+                            select(prop);
                         }
                     }
                 } else {
