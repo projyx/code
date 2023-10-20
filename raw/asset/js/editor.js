@@ -621,7 +621,7 @@ window.editor.elements.styles = function(event) {
             console.log(216, {
                 dsvx,
                 dspx
-            }, box.deselection);
+            }, box.deselection, target.closest('span.property') );
             if (box.deselection === true && ["focusout", "mouseup"].includes(event.type)) {
                 box.deselection = false;
             }
@@ -631,6 +631,12 @@ window.editor.elements.styles = function(event) {
             if (event.type === "mouseup") {
                 box.nulled = false;
                 box.unfocused = false;
+
+                if((target.closest('span.property') || target.closest('span.value')) && (target.closest('span.property') !== el || target.closest('span.value') !== el)) {
+                    console.log(636, 'focus else');       
+                    var node = target.closest('span.property') || target.closest('span.value');
+                    triggerMouseEvent(node, 'click')
+                }
             }
         }
     }
