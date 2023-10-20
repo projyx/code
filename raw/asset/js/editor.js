@@ -338,7 +338,7 @@ window.editor.elements.styles = function(event) {
             var index = Array.from(children).indexOf(box);
             var last = index === children.length - 1;
             var className = target.closest('box > header > .slct > span:first-child');
-            console.log(123, event.type);
+            //console.log(123, event.type);
             //box.nulled = null;
 
             if (box && ["focusout", "mouseup"].includes(event.type)) {
@@ -380,7 +380,7 @@ window.editor.elements.styles = function(event) {
                         });
                         focus.blur();
                         var text = focus.closest('text');
-                        console.log(362, 'select.focus', text, dsp.textContent.length, dsv.textContent.length);
+                        //console.log(362, 'select.focus', text, dsp.textContent.length, dsv.textContent.length);
                         if (text.classList.contains('connected')) {
                             //if (dsp.textContent.length === 0 || (dsp.textContent.length > 0 && dsv.textContent.length === 0)) {
                             if (text.classList.contains('focus')) {
@@ -415,13 +415,13 @@ window.editor.elements.styles = function(event) {
                                         text.remove();
                                     }
                                 } else if (dsvx) {
-                                    console.log(369, 'property.value dsvx', dsvx);
+                                    //console.log(369, 'property.value dsvx', dsvx);
                                     if (dsvx.textContent.length === 0) {
                                         text.remove();
                                     }
                                 }
                             } else {
-                                console.log(391, text);
+                                //console.log(391, text);
                                 if (text.classList.contains('connected')) {
                                     text.remove();
                                 } else {
@@ -447,7 +447,7 @@ window.editor.elements.styles = function(event) {
             }
 
             if (box) {
-                console.log(127, box.deselection, event.type, box.nulled);
+                //console.log(127, box.deselection, event.type, box.nulled);
             }
 
             if (box && ["mouseup"].includes(event.type) && (box.deselection === false || !box.deselection) && (box.nulled === false || !box.nulled)) {
@@ -462,7 +462,7 @@ window.editor.elements.styles = function(event) {
                 var property = prop ? prop.textContent : null;
                 var value = val ? val.textContent : null;
                 var element = null;
-                0 < 1 ? console.log(8, 'editor.elements.styles', {
+                0 > 1 ? console.log(8, 'editor.elements.styles', {
                     index,
                     box,
                     box: box.parentNode,
@@ -510,12 +510,12 @@ window.editor.elements.styles = function(event) {
                     });
                 }
                 if (Array.from(children).indexOf(box) === children.length - 1) {
-                    console.log(121, 'editor.elements.styles select.box', {
+                    0 > 1 ? console.log(121, 'editor.elements.styles select.box', {
                         index,
                         insert,
                         target,
                         box
-                    });
+                    }) : null;
                     if (insert) {
                         var template = target.closest('aside').nextElementSibling.content.firstElementChild.querySelector('template').content.firstElementChild.cloneNode(true);
                         if (["afterbegin", "afterend", "beforeend"].includes(insert)) {
@@ -523,14 +523,14 @@ window.editor.elements.styles = function(event) {
                             insert === "afterbegin" ? elementChild = "firstElementChild" : null;
                             insert === "beforeend" ? elementChild = "lastElementChild" : null;
                             insert === "afterend" ? elementChild = "lastElementChild" : null;
-                            console.log(157, 'editor.elements.styles select', elementChild);
+                            //console.log(157, 'editor.elements.styles select', elementChild);
                             if (insert === "afterend") {
                                 elem.insertAdjacentHTML(insert, template.outerHTML);
                             } else {
                                 elem.insertAdjacentHTML(insert, template.outerHTML);
                             }
                             var text = box.querySelector('column')[elementChild];
-                            console.log(443, text);
+                            //console.log(443, text);
                             if (insert === "afterend") {
                                 prop = target.closest('text').nextElementSibling.querySelector('span.property');
                             } else {
@@ -578,14 +578,14 @@ window.editor.elements.styles = function(event) {
                     }
                 }
                 function select(el) {
-                    console.log(175, 'editor.elements.styles select', {
+                    0 > 1 ? console.log(175, 'editor.elements.styles select', {
                         el,
                         className,
                         index,
                         last,
                         prop,
                         val
-                    });
+                    }) : null;
                     if (className && !last) {
                         className.setAttribute("contenteditable", true);
                         className.focus();
