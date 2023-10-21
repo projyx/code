@@ -446,8 +446,7 @@ window.editor.elements.styles = function(event) {
                 box.unfocused = true;
             }
 
-            if (box) {
-                //console.log(127, box.deselection, event.type, box.nulled);
+            if (box) {//console.log(127, box.deselection, event.type, box.nulled);
             }
 
             if (box && ["mouseup"].includes(event.type) && (box.deselection === false || !box.deselection) && (box.nulled === false || !box.nulled)) {
@@ -621,7 +620,7 @@ window.editor.elements.styles = function(event) {
             console.log(216, {
                 dsvx,
                 dspx
-            }, box.deselection, target.closest('span.property') );
+            }, box.deselection, target.closest('span.property'));
             if (box.deselection === true && ["focusout", "mouseup"].includes(event.type)) {
                 box.deselection = false;
             }
@@ -631,11 +630,14 @@ window.editor.elements.styles = function(event) {
             if (event.type === "mouseup") {
                 box.nulled = false;
                 box.unfocused = false;
-
-                if((target.closest('span.property') || target.closest('span.value')) && (target.closest('span.property') !== el || target.closest('span.value') !== el)) {
-                    console.log(636, 'focus else');       
+                if ((target.closest('span.property') || target.closest('span.value')) && (target.closest('span.property') !== el || target.closest('span.value') !== el)) {
                     var node = target.closest('span.property') || target.closest('span.value');
-                    triggerMouseEvent(node, 'click')
+                    console.log(636, 'focus else', {
+                        target,
+                        node
+                    });
+                    //triggerMouseEvent(node, "mousedown");
+                    //triggerMouseEvent(node, "mouseup");
                 }
             }
         }
@@ -644,6 +646,112 @@ window.editor.elements.styles = function(event) {
 window.editor.elements.onkeyup = function(event) {
     console.log(253, event.keyCode);
     var target = event.target;
+}
+window.editor.elements.selecting = function(event) {
+    var target = event.target;
+    var component = target.closest('component');
+    var editor = component.querySelector('iframe');
+    var contentWindow = editor.contentWindow;
+    var select = target.closest('box.element > *');
+    var element = select.closest('box.element');
+    var elements = document.querySelectorAll('box.element');
+    var startTag = document.querySelectorAll('box.element > header');
+    var index = Array.from(startTag).indexOf(element.firstElementChild);
+    var doc = contentWindow.document;
+    var node = element && element.node ? element.node : null;
+
+    console.log(5, 'editor.elements.select variables', {
+        target,
+        node
+    });
+
+    Array.from(target.closest('component').querySelectorAll('.tools-tab.tab-elements .selected')).forEach(function(el) {
+        el.classList.remove('selected');
+    });
+    target.classList.add('selected');
+
+    var stylesheets = doc.styleSheets;
+    var styles = getComputedStyle(node);
+    console.log(5, 'editor.elements.select styles', {
+        stylesheets,
+        styles
+    });
+    if (stylesheets.length > 0) {
+        console.log(680, 'editor.elements.select', {
+            stylesheets
+        });
+        var s = 0;
+        var rule = stylesheets[s];
+        var css = {};
+        do {
+            var stylesheet = stylesheets[s];
+            var cssRules = stylesheet.cssRules;
+            var mediaRule = cssRules.MEDIA_RULE;
+            console.log(690, {
+                stylesheet,
+                cssRules,
+                mediaRule
+            });
+            var ss = 0;
+            do {
+                var cssRule = cssRules[ss];
+                var sss = 0;
+                console.log(699, cssRule);
+                if (cssRule) {
+                    do {
+                        var style = cssRule.cssRules[sss].style;
+                        var type = cssRule.type;
+                        var ownerNode = cssRule.parentStyleSheet.ownerNode;
+                        0 < 1 ? console.log(707, {
+                            cssRule,
+                            cssRules,
+                            ownerNode
+                        }) : null;
+                        if (ownerNode) {
+                            var src = ownerNode.dataset.src;
+                            css[src] ? null : css[src] = [];
+                            0 < 1 ? console.log(707, {
+                                css
+                            }) : null;
+
+                            //STYLERULE
+                            if (type === 1) {
+                                var obj = {
+                                    cssRules,
+                                    mediaRule,
+                                    stylesheet,
+                                    src
+                                };
+                                console.log(sss, 698, 698.1, type, 'stylesheet.stylerule', obj);
+                                css[src].push(obj);
+                            }
+
+                            //MEDIARULE
+                            if (type === 4) {
+                                var obj = {
+                                    cssRules,
+                                    mediaRule,
+                                    stylesheet
+                                };
+                                console.log(sss, 698, 698.2, type, 'stylesheet.mediarule', obj);
+                                if (css[src]) {
+                                    css[src].push(obj);
+                                } else {
+                                    css[src] = [];
+                                }
+                            }
+                        }
+
+                        sss++;
+                    } while (sss < cssRule.length);
+                }
+                //css.push(obj);
+                ss++;
+            } while (ss < cssRules.length);
+            s++;
+        } while (s < stylesheets.length);
+        console.log('739', css);
+    }
 }
 window.editor.elements.select = function(event) {
     var target = event.target;
