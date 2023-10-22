@@ -701,6 +701,7 @@ window.editor.elements.selecting = function(event) {
                 template.insertAdjacentHTML('beforeend', sheet.outerHTML);
             }
             var ss = 0;
+            var list = stylesheet.cssRules;
             do {
                 var cssRule = cssRules[ss];
                 var sss = 0;
@@ -744,8 +745,13 @@ window.editor.elements.selecting = function(event) {
                             }
                         }
 
+                        console.log(748, 'lastRule', src, sss, { cssRules: cssRule.cssRules, length: cssRule.cssRules.length });
+                        if (ss === cssRules.length - 1 && sss === cssRule.cssRules.length - 1) {
+                            console.log(749, 'lastRule', src, sss, { cssRule, rules: cssRule.cssRules, rule: cssRule.cssRules[sss] });
+                        }
+
                         sss++;
-                    } while (sss < cssRule.length);
+                    } while (sss < cssRule.cssRules.length);
                 }
                 //css.push(obj);
                 ss++;
@@ -755,7 +761,10 @@ window.editor.elements.selecting = function(event) {
         } while (s < stylesheets.length);
         document.head.querySelector('css') ? document.head.querySelector('css').remove() : null;
         document.head.insertAdjacentHTML('beforeend', template.outerHTML);
-        console.log('739', css);
+        console.log('739', {
+            css,
+            stylesheets
+        });
     }
 }
 window.editor.elements.select = function(event) {
