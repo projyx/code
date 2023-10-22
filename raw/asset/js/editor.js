@@ -708,46 +708,55 @@ window.editor.elements.selecting = function(event) {
                 console.log(699, cssRule);
                 //RULE
                 if (cssRule) {
+                    var type = cssRule.type;
+                    var ownerNode = cssRule.parentStyleSheet.ownerNode;
+                    if (ownerNode) {
+                        var list = cssRule.cssRules;
+                        var src = ownerNode.dataset.src;
+                        css[src] ? null : css[src] = [];
+                        0 < 1 ? console.log(714, {
+                            css,
+                            list
+                        }) : null;
+
+                        //STYLERULE:1
+                        if (type === 1) {
+                            var obj = "";
+                        }
+                        //MEDIARULE:4
+                        if (type === 4) {
+                            var obj = {}
+                        }
+                        console.log(sss, 698, 698.2, type, 'stylesheet.mediarule', obj);
+                        if (css[src]) {
+                            var lastRule = 0 > 1;
+                            if (lastRule) {//var irule = ;
+                            }
+                            css[src].push(obj);
+                        } else {
+                            css[src] = [];
+                        }
+                    }
                     do {
                         var style = cssRule.cssRules[sss].style;
-                        var type = cssRule.type;
-                        var ownerNode = cssRule.parentStyleSheet.ownerNode;
                         0 < 1 ? console.log(707, {
                             cssRule,
                             cssRules,
                             ownerNode
                         }) : null;
-                        if (ownerNode) {
-                            var list = cssRule.cssRules;
-                            var src = ownerNode.dataset.src;
-                            css[src] ? null : css[src] = [];
-                            0 < 1 ? console.log(714, {
-                                css,
-                                list
-                            }) : null;
 
-                            //STYLERULE:1
-                            if (type === 1) {
-                                var obj = "";
-                            }
-                            //MEDIARULE:4
-                            if (type === 4) {
-                                var obj = {}
-                            }
-                            console.log(sss, 698, 698.2, type, 'stylesheet.mediarule', obj);
-                            if (css[src]) {
-                                var lastRule = 0 > 1;
-                                if (lastRule) {//var irule = ;
-                                }
-                                css[src].push(obj);
-                            } else {
-                                css[src] = [];
-                            }
-                        }
-
-                        console.log(748, 'lastRule', src, sss, { cssRules: cssRule.cssRules, length: cssRule.cssRules.length });
+                        console.log(748, 'lastRule', src, sss, {
+                            cssRules: cssRule.cssRules,
+                            length: cssRule.cssRules.length
+                        });
                         if (ss === cssRules.length - 1 && sss === cssRule.cssRules.length - 1) {
-                            console.log(749, 'lastRule', src, sss, { cssRule, rules: cssRule.cssRules, rule: cssRule.cssRules[sss] });
+                            var csr = css[src];
+                            console.log(749, 'lastRule', src, sss, {
+                                css,
+                                cssRule,
+                                rules: cssRule.cssRules,
+                                rule: cssRule.cssRules[sss]
+                            });
                         }
 
                         sss++;
