@@ -683,6 +683,8 @@ window.editor.elements.selecting = function(event) {
         var s = 0;
         var rule = stylesheets[s];
         var css = {};
+        var template = document.createElement('css');
+        //SHEET
         do {
             var stylesheet = stylesheets[s];
             var cssRules = stylesheet.cssRules;
@@ -692,11 +694,18 @@ window.editor.elements.selecting = function(event) {
                 cssRules,
                 mediaRule
             });
+            var sheet = document.createElement("sheet");
+            if (stylesheet.href) {
+                sheet.setAttribute("href", stylesheet.href);
+                sheet.setAttribute("src", stylesheet.ownerNode.dataset.src);
+                template.insertAdjacentHTML('beforeend', sheet.outerHTML);
+            }
             var ss = 0;
             do {
                 var cssRule = cssRules[ss];
                 var sss = 0;
                 console.log(699, cssRule);
+                //RULE
                 if (cssRule) {
                     do {
                         var style = cssRule.cssRules[sss].style;
@@ -708,37 +717,30 @@ window.editor.elements.selecting = function(event) {
                             ownerNode
                         }) : null;
                         if (ownerNode) {
+                            var list = cssRule.cssRules;
                             var src = ownerNode.dataset.src;
                             css[src] ? null : css[src] = [];
-                            0 < 1 ? console.log(707, {
-                                css
+                            0 < 1 ? console.log(714, {
+                                css,
+                                list
                             }) : null;
 
-                            //STYLERULE
+                            //STYLERULE:1
                             if (type === 1) {
-                                var obj = {
-                                    cssRules,
-                                    mediaRule,
-                                    stylesheet,
-                                    src
-                                };
-                                console.log(sss, 698, 698.1, type, 'stylesheet.stylerule', obj);
-                                css[src].push(obj);
+                                var obj = "";
                             }
-
-                            //MEDIARULE
+                            //MEDIARULE:4
                             if (type === 4) {
-                                var obj = {
-                                    cssRules,
-                                    mediaRule,
-                                    stylesheet
-                                };
-                                console.log(sss, 698, 698.2, type, 'stylesheet.mediarule', obj);
-                                if (css[src]) {
-                                    css[src].push(obj);
-                                } else {
-                                    css[src] = [];
+                                var obj = {}
+                            }
+                            console.log(sss, 698, 698.2, type, 'stylesheet.mediarule', obj);
+                            if (css[src]) {
+                                var lastRule = 0 > 1;
+                                if (lastRule) {//var irule = ;
                                 }
+                                css[src].push(obj);
+                            } else {
+                                css[src] = [];
                             }
                         }
 
@@ -748,8 +750,11 @@ window.editor.elements.selecting = function(event) {
                 //css.push(obj);
                 ss++;
             } while (ss < cssRules.length);
+
             s++;
         } while (s < stylesheets.length);
+        document.head.querySelector('css') ? document.head.querySelector('css').remove() : null;
+        document.head.insertAdjacentHTML('beforeend', template.outerHTML);
         console.log('739', css);
     }
 }
