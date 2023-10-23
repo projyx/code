@@ -700,8 +700,11 @@ window.editor.elements.selecting = function(event) {
                 sheet.setAttribute("src", stylesheet.ownerNode.dataset.src);
                 template.insertAdjacentHTML('beforeend', sheet.outerHTML);
             }
+            list = template.lastElementChild;
+            var next = template.lastElementChild;
             var ss = 0;
-            var list = stylesheet.cssRules;
+            var ii = 0;
+            //var list = stylesheet.cssRules;
             do {
                 var cssRule = cssRules[ss];
                 var sss = 0;
@@ -711,7 +714,7 @@ window.editor.elements.selecting = function(event) {
                     var type = cssRule.type;
                     var ownerNode = cssRule.parentStyleSheet.ownerNode;
                     if (ownerNode) {
-                        var list = cssRule.cssRules;
+                        //var list = cssRule.cssRules;
                         var src = ownerNode.dataset.src;
                         css[src] ? null : css[src] = [];
                         0 < 1 ? console.log(714, {
@@ -722,19 +725,23 @@ window.editor.elements.selecting = function(event) {
                         //STYLERULE:1
                         if (type === 1) {
                             var obj = "";
+                            next.insertAdjacentHTML('beforeend', '<rule css="style"></rule>');
+                            list = next.lastElementChild;
                         }
                         //MEDIARULE:4
                         if (type === 4) {
                             var obj = {}
+                            next.insertAdjacentHTML('beforeend', '<rule css="media"></rule>');
+                            list = next.lastElementChild;
+                            list.setAttribute("dom", ii++);
                         }
                         console.log(sss, 698, 698.2, type, 'stylesheet.mediarule', obj);
                         if (css[src]) {
                             var lastRule = 0 > 1;
                             if (lastRule) {//var irule = ;
                             }
+                            
                             css[src].push(obj);
-                        } else {
-                            css[src] = [];
                         }
                     }
                     do {
@@ -749,14 +756,25 @@ window.editor.elements.selecting = function(event) {
                             cssRules: cssRule.cssRules,
                             length: cssRule.cssRules.length
                         });
+                        ///list[sss] ? Object.keys(css[src]) = list[sss] : null;
                         if (ss === cssRules.length - 1 && sss === cssRule.cssRules.length - 1) {
                             var csr = css[src];
-                            console.log(749, 'lastRule', src, sss, {
+                            var more = document.head.querySelector('css').querySelector('rule[css="media"][dom]:empty');
+                            more.removeAttribute('dom');
+                            more ? next = more : next = null;
+                            var what = list.closest(':has(~ [dom="true"]) ~ [dom="true"]');
+                            console.log(749, 'lastRule', { sss, src }, {
+                                csr,
                                 css,
                                 cssRule,
                                 rules: cssRule.cssRules,
                                 rule: cssRule.cssRules[sss]
+                            }, {
+                                what,
+                                list,
+                                next
                             });
+                            //list = document.querySelector('css')
                         }
 
                         sss++;
