@@ -684,6 +684,9 @@ window.editor.elements.selecting = function(event) {
         var rule = stylesheets[s];
         var css = {};
         var template = document.createElement('css');
+        document.head.querySelector('css') ? document.head.querySelector('css').remove() : null;
+        document.head.insertAdjacentHTML('beforeend', template.outerHTML);
+        template = document.head.querySelector('css');
         //SHEET
         do {
             var stylesheet = stylesheets[s];
@@ -708,12 +711,15 @@ window.editor.elements.selecting = function(event) {
             do {
                 var cssRule = cssRules[ss];
                 var sss = 0;
-                console.log(699, cssRule);
+                console.log(699, {
+                    cssRule,
+                    list
+                });
                 //RULE
                 if (cssRule) {
                     var type = cssRule.type;
                     var ownerNode = cssRule.parentStyleSheet.ownerNode;
-                    if (ownerNode) {
+                    if (list || ownerNode) {
                         //var list = cssRule.cssRules;
                         var src = ownerNode.dataset.src;
                         css[src] ? null : css[src] = [];
@@ -723,16 +729,23 @@ window.editor.elements.selecting = function(event) {
                         }) : null;
 
                         //STYLERULE:1
+                        0 < 1 ? console.log(729, type, {
+                            css,
+                            src
+                        }, {
+                            css,
+                            list
+                        }) : null;
                         if (type === 1) {
                             var obj = "";
                             next.insertAdjacentHTML('beforeend', '<rule css="style"></rule>');
-                            list = next.lastElementChild;
+                            list = next.lastElementChild ? next.lastElementChild : list.closest(':has(~ [dom]) ~ [dom]');
                         }
                         //MEDIARULE:4
                         if (type === 4) {
-                            var obj = {}
+                            var obj = []
                             next.insertAdjacentHTML('beforeend', '<rule css="media"></rule>');
-                            list = next.lastElementChild;
+                            list = next.lastElementChild ? next.lastElementChild : list.closest(':has(~ [dom]) ~ [dom]');
                             list.setAttribute("dom", ii++);
                         }
                         console.log(sss, 698, 698.2, type, 'stylesheet.mediarule', obj);
@@ -740,7 +753,7 @@ window.editor.elements.selecting = function(event) {
                             var lastRule = 0 > 1;
                             if (lastRule) {//var irule = ;
                             }
-                            
+
                             css[src].push(obj);
                         }
                     }
@@ -757,24 +770,130 @@ window.editor.elements.selecting = function(event) {
                             length: cssRule.cssRules.length
                         });
                         ///list[sss] ? Object.keys(css[src]) = list[sss] : null;
-                        if (ss === cssRules.length - 1 && sss === cssRule.cssRules.length - 1) {
+                        if (ss === cssRules.length - 1) {
                             var csr = css[src];
                             var more = document.head.querySelector('css').querySelector('rule[css="media"][dom]:empty');
-                            more.removeAttribute('dom');
-                            more ? next = more : next = null;
-                            var what = list.closest(':has(~ [dom="true"]) ~ [dom="true"]');
-                            console.log(749, 'lastRule', { sss, src }, {
+                            if (sss === cssRule.cssRules.length - 1) {
+                                if (list && list instanceof HTMLElement) {
+                                    var what = list.closest(':has(~ [dom]) ~ [dom]');
+                                    console.log(749, 749.1, 'lastRule', {
+                                        sss,
+                                        src
+                                    }, {
+                                        csr,
+                                        css,
+                                        cssRule,
+                                        rules: cssRule.cssRules,
+                                        rule: cssRule.cssRules[sss]
+                                    }, {
+                                        more: more ? [more, more.outerHTML] : null,
+                                        what: what ? [what, what.outerHTML] : null,
+                                        list: list ? [list, list.outerHTML] : null,
+                                        next: next ? [next, next.outerHTML] : null
+                                    });
+                                    more.removeAttribute('dom');
+                                    //more ? next = more : next = null;
+                                    //list.querySelector(' ')
+                                    list = list.parentNode;
+                                    //.querySelector(':has(> rule[css="media"][dom]:empty) ~ rule[css="media"][dom]:empty')
+                                }
+                            }
+                            console.log(749, 749.2, 'lastRule', {
+                                sss,
+                                src
+                            }, {
                                 csr,
                                 css,
                                 cssRule,
                                 rules: cssRule.cssRules,
                                 rule: cssRule.cssRules[sss]
                             }, {
-                                what,
-                                list,
-                                next
+                                more: more ? [more, more.outerHTML] : null,
+                                what: what ? [what, what.outerHTML] : null,
+                                list: list ? [list, list.outerHTML] : null,
+                                next: next ? [next, next.outerHTML] : null
                             });
+                            //list = list.parentNode.firstElementChild('')
                             //list = document.querySelector('css')
+                        } else {
+                            var dommie = list && list instanceof HTMLElement ? list.closest(':has(~ [dom]) ~ [dom]') : null;
+                            list = dommie ? dommie : null;
+                            if (list) {
+                                type = cssRule.cssRules[sss].type === 1 ? 'style' : '';
+                                type = type ? type : cssRule.cssRules[sss].type === 4 ? 'media' : '';
+                                var cssObject = parseCSSText(cssRule.cssRules[sss].cssText);
+                                var selector = cssRule.cssRules[sss].selectorText;
+
+                                var declaration = '';
+                                if (type === "style") {
+                                    declaration = '{';
+                                    //template.querySelector('header').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + selectorText + '</span> <span>{</span>';
+                                    Object.keys(cssObject.style).forEach((prop,index)=>{
+                                        prop = prop.replace(/[A-Z]/g, m=>"-" + m.toLowerCase());
+                                        val = Object.values(cssObject.style)[index];
+                                        console.log(66, {
+                                            prop,
+                                            val
+                                        });
+                                        declaration += prop + ':' + val + ';';
+                                    }
+                                    );
+                                    declaration += '}';
+                                }
+                                list.insertAdjacentHTML('beforeend', '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '>' + declaration + '</rule>');
+                                console.log(807, 807.1, {
+                                    list,
+                                    dommie,
+                                    cssObject
+                                }, cssRule.cssRules[sss], list instanceof HTMLElement)
+                            } else {
+                                type = cssRule.cssRules[sss].type === 1 ? 'style' : '';
+                                type = type ? type : cssRule.cssRules[sss].type === 4 ? 'media' : '';
+                                var cssObject = parseCSSText(cssRule.cssRules[sss].cssText);
+                                var selector = cssRule.cssRules[sss].selectorText;
+
+                                var declaration = '';
+                                if (type === "style") {
+                                    declaration = '{';
+                                    //template.querySelector('header').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + selectorText + '</span> <span>{</span>';
+                                    Object.keys(cssObject.style).forEach((prop,index)=>{
+                                        prop = prop.replace(/[A-Z]/g, m=>"-" + m.toLowerCase());
+                                        val = Object.values(cssObject.style)[index];
+                                        console.log(66, {
+                                            prop,
+                                            val
+                                        });
+                                        declaration += prop + ':' + val + ';';
+                                    }
+                                    );
+                                    declaration += '}';
+                                }
+                                if (type === "media") {
+                                    var cr = cssRule.cssRules[sss];
+                                    var list = document.head.querySelector('css').querySelector('rule[css="media"][dom]:empty');
+                                    console.log(872, {
+                                        list,
+                                        cr
+                                    });
+                                    Array.from(cr.cssRules).forEach((a,b)=>{
+                                        console.log(872, a, b);
+                                        var t = a.type === 1 ? "style" : "";
+                                        t = t ? t : a.type === 4 ? "media" : "";
+                                        list.insertAdjacentHTML('beforeend', '<rule css="' + t + '"' + (a.selectorText ? ' selector=\"' + a.selectorText + '\"' : '') + '>' + JSON.strinify(parseCSSText(a.cssText).style) + '</rule>');
+                                    }
+                                    );
+                                    cssRule.cssRules = cr.cssRules;
+                                    sss = -1;
+                                    //forEach() 
+                                    //declaration.push(obj);
+                                }
+                                //list.insertAdjacentHTML('beforeend', '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '>' + declaration + '</rule>');                          
+                                console.log(807, 807.2, {
+                                    list,
+                                    dommie,
+                                    cssObject
+                                }, cssRule.cssRules[sss], list instanceof HTMLElement)
+                            }
                         }
 
                         sss++;
@@ -786,8 +905,6 @@ window.editor.elements.selecting = function(event) {
 
             s++;
         } while (s < stylesheets.length);
-        document.head.querySelector('css') ? document.head.querySelector('css').remove() : null;
-        document.head.insertAdjacentHTML('beforeend', template.outerHTML);
         console.log('739', {
             css,
             stylesheets
