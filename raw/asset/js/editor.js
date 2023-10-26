@@ -877,9 +877,9 @@ window.editor.elements.selecting = function(event) {
                                     if (cr) {
                                         var m = cr.cssRules;
                                         var r = 0;
-                                        console.log(873, '880 loop', {
+                                        0 > 1 ? console.log(873, '880 loop', {
                                             m
-                                        });
+                                        }) : null;
                                         do {
                                             console.log(875, {
                                                 mr: m[r],
@@ -890,14 +890,15 @@ window.editor.elements.selecting = function(event) {
                                                 root,
                                                 cr,
                                                 rules: cssRule.cssRules
-                                            });                                            
+                                            });
+                                            root.mr = m[r];
                                             var t = m[r].type === 1 ? 'style' : '';
                                             t = t ? t : m[r].type === 4 ? 'media' : '';
                                             //list.insertAdjacentHTML('beforeend', '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '  id="' + Crypto.uid.create(1) + '">' + declaration + '</rule>');
                                             if (t === "media" || t === "style") {
                                                 cms = cms ? cms.cssRules[r] : null;
-                                                if(m[r]) {
-                                                    var declaration = JSON.stringify(parseCSSText(m[r].cssText).style);     
+                                                if (m[r]) {
+                                                    var declaration = JSON.stringify(parseCSSText(m[r].cssText).style);
                                                     var selector = unescape(parseCSSText(m[r].cssText).ruleName);
                                                 }
                                                 root.insertAdjacentHTML('beforeend', `<rule css="${t}"` + (selector ? ' selector="' + selector + '"' : '') + ` id="${Crypto.uid.create(1)}">${declaration}</rule>`);
