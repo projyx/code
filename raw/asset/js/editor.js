@@ -863,7 +863,10 @@ window.editor.elements.selecting = function(event) {
                             var edon = (list ? list : ee.getAttribute('css') === 'media' ? elur[elur.length - 1] : elur[elur.length - 1].parentNode);
                             edon.insertAdjacentHTML('beforeend', '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '  id="' + Crypto.uid.create(1) + '">' + declaration + '</rule>');
                             edon.lastElementChild.mr = cssRule.cssRules[sss];
+                            cssRule.cssRules[sss].type === 1 ? edon.lastElementChild.setAttribute('class', selector) : null;
+                            cssRule.cssRules[sss].type === 4 ? edon.lastElementChild.setAttribute('condition', cssRule.cssRules[sss].conditionText) : null;
                             console.log(807, 807.1, {
+                                rule: cssRule.cssRules[sss],
                                 list,
                                 sheet,
                                 dommie,
@@ -967,6 +970,7 @@ window.editor.elements.selecting = function(event) {
                                     t = t ? t : a.type === 4 ? "media" : "";
                                     if (list) {
                                         list.insertAdjacentHTML('beforeend', '<rule css="' + t + '"' + (a.selectorText ? ' selector=\"' + a.selectorText + '\"' : '') + '>' + JSON.stringify(parseCSSText(a.cssText).style) + '</rule>');
+                                        list.lastElementChild.setAttribute('class', a.selectorText)
                                     }
                                 }
                                 );
@@ -997,6 +1001,20 @@ window.editor.elements.selecting = function(event) {
             css,
             stylesheets
         });
+    }
+
+    if (document.head.querySelector('css')) {
+        var css = document.head.querySelector('css');
+        var rules = css.querySelectorAll('rule[css="style"]');
+        Array.from(rules).forEach(function(rule, b) {
+            var type = rule.getAttribute('css');
+            var parent = rule.parentNode;
+            console.log(1005, {
+                parent,
+                rule,
+                type
+            });
+        })
     }
 }
 window.editor.elements.select = function(event) {
