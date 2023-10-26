@@ -1006,6 +1006,8 @@ window.editor.elements.selecting = function(event) {
     if (document.head.querySelector('css')) {
         var css = document.head.querySelector('css');
         var rules = css.querySelectorAll('rule[css="style"]');
+        var aside = component.querySelector('.tools-tab.tab-elements').querySelector('aside');
+        aside.innerHTML = "";
         Array.from(rules).forEach(function(rule, b) {
             var mr = rule.mr;
             var type = rule.getAttribute('css');
@@ -1027,7 +1029,6 @@ window.editor.elements.selecting = function(event) {
                     rule,
                     type
                 });
-                var aside = component.querySelector('.tools-tab.tab-elements').querySelector('aside');
                 var template = aside.nextElementSibling.content.firstElementChild.cloneNode(true);
                 //template.querySelector('header').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + selectorText + '</span> <span>{</span>';
                 template.querySelector('header > .file').innerHTML = '<span>' + dir + '</span>';
