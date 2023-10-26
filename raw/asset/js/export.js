@@ -529,7 +529,12 @@ async function wIDE(paths) {
             const boot = url.pathname.split("/").splice(1).filter(n=>n.length > 0);
             var state = "/" + boot.splice(4, boot.length).join("/");
             //console.log(356, state);
-            contentWindow.document.body.querySelector('boot').setAttribute('route', state);
+            if(contentWindow.document.body.querySelector('boot')) {
+                contentWindow.document.body.querySelector('boot').setAttribute('route', state);
+            } else {
+                var el = document.createElement('boot');
+                document.body.insertAdjacentHTML('afterbegin', el.outerHTML)
+            }
             //contentWindow.location.href = uri.origin + uri.pathname;
             //document.getElementById('preview-editor').contentWindow.history.replaceState(state, null, state);
             //console.log(360, "Iframe domcontentloaded", boot, window.location.href, contentWindow.location, state);
