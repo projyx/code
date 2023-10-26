@@ -835,7 +835,7 @@ window.editor.elements.selecting = function(event) {
                         //console.log(834.1, list ? list.outerHTML : null);
                         var dommie = list && list instanceof HTMLElement ? list.closest(':has(~ [dom]) ~ [dom]') : null;
                         list = dommie ? dommie : document.querySelector('css').querySelector('rule[dom]');
-                        console.log(834.2, sheet, list ? list.outerHTML : null);
+                        //console.log(834.2, sheet, list ? list.outerHTML : null);
                         if (list || !list) {
                             type = cssRule.cssRules[sss].type === 1 ? 'style' : '';
                             type = type ? type : cssRule.cssRules[sss].type === 4 ? 'media' : '';
@@ -858,15 +858,19 @@ window.editor.elements.selecting = function(event) {
                                 );
                                 declaration += '}';
                             }
-                            (list ? list : sheet).insertAdjacentHTML('beforeend', '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '  id="' + Crypto.uid.create(1) + '">' + declaration + '</rule>');
+                            var elur = document.querySelector('css').querySelectorAll('rule');
+                            var edon = (list ? list : elur[elur.length - 1].parentNode);
+                            edon.insertAdjacentHTML('beforeend', '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '  id="' + Crypto.uid.create(1) + '">' + declaration + '</rule>');
+                            edon.lastElementChild.mr = cssRule.cssRules[sss];
                             console.log(807, 807.1, {
                                 list,
+                                sheet,
                                 dommie,
                                 cssObject
                             }, cssRule.cssRules[sss], list instanceof HTMLElement);
                             if (type === "media") {
                                 var cms = cssRule.cssRules[sss];
-                                loops((list ? list : sheet).lastElementChild, cms);
+                                loops(edon.lastElementChild, cms);
                                 function loops(root, cr, z, y) {
                                     console.log(869, {
                                         root,
@@ -901,7 +905,8 @@ window.editor.elements.selecting = function(event) {
                                                     var declaration = JSON.stringify(parseCSSText(m[r].cssText).style);
                                                     var selector = unescape(parseCSSText(m[r].cssText).ruleName);
                                                 }
-                                                root.insertAdjacentHTML('beforeend', `<rule css="${t}"` + (selector ? ' selector="' + selector + '"' : '') + ` id="${Crypto.uid.create(1)}">${declaration}</rule>`);
+                                                root.insertAdjacentHTML('beforeend', `<rule css="${t}" id="${Crypto.uid.create(1)}">${declaration}</rule>`);
+                                                selector ? root.lastElementChild.setAttribute('selector', selector) : null;
                                                 root.lastElementChild.setAttribute('recursive', true);
                                                 root.lastElementChild.mr = m[r];
                                                 if (m && m[r].cssRules.length > 0) {
