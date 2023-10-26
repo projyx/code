@@ -1007,13 +1007,52 @@ window.editor.elements.selecting = function(event) {
         var css = document.head.querySelector('css');
         var rules = css.querySelectorAll('rule[css="style"]');
         Array.from(rules).forEach(function(rule, b) {
+            var mr = rule.mr;
             var type = rule.getAttribute('css');
             var parent = rule.parentNode;
-            console.log(1005, {
-                parent,
-                rule,
-                type
-            });
+            var matches = element.node.matches(mr.selectorText);
+            if (matches) {
+                var href = stylesheet.href;
+                var link = stylesheet.ownerNode;
+                var src = link.dataset.src;
+                var dirs = rout.ed(src);
+                var dir = dirs[dirs.length - 1];
+                console.log(1005, {
+                    matches,
+                    node: element.node,
+                    selectorText: mr.selectorText,
+                    dir,
+                    mr,
+                    parent,
+                    rule,
+                    type
+                });
+                var aside = component.querySelector('.tools-tab.tab-elements').querySelector('aside');
+                var template = aside.nextElementSibling.content.firstElementChild.cloneNode(true);
+                //template.querySelector('header').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + selectorText + '</span> <span>{</span>';
+                template.querySelector('header > .file').innerHTML = '<span>' + dir + '</span>';
+                template.querySelector('header > .slct').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + mr.selectorText + '</span> <span>{</span>';
+                var stylesList = template.querySelector('column');
+                Object.keys(cssObject.style).forEach((prop,index)=>{
+                    prop = prop.replace(/[A-Z]/g, m=>"-" + m.toLowerCase());
+                    val = Object.values(cssObject.style)[index];
+                    console.log(66, {
+                        prop,
+                        val
+                    });
+                    const propertyValue = template.querySelector('template').content.firstElementChild.cloneNode(true)
+                    propertyValue.classList.remove('connected');
+                    propertyValue.removeAttribute('connected');
+                    console.log(596, 'disconnect', propertyValue);
+                    propertyValue.querySelector('.property').textContent = prop;
+                    propertyValue.querySelector('.value').textContent = val;
+                    stylesList.appendChild(propertyValue);
+                    stylesList.appendChild(propertyValue);
+                }
+                );
+                template.querySelector('footer').textContent = "}";
+                aside.insertAdjacentHTML('beforeend', template.outerHTML);
+            }
         })
     }
 }
