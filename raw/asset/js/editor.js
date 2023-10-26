@@ -859,7 +859,8 @@ window.editor.elements.selecting = function(event) {
                                 declaration += '}';
                             }
                             var elur = document.querySelector('css').querySelectorAll('rule');
-                            var edon = (list ? list : elur[elur.length - 1].parentNode);
+                            var ee = elur[elur.length - 1].children.length > 0 ? elur[elur.length - 1] : elur[elur.length - 1];
+                            var edon = (list ? list : ee.getAttribute('css') === 'media' ? elur[elur.length - 1] : elur[elur.length - 1].parentNode);
                             edon.insertAdjacentHTML('beforeend', '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '  id="' + Crypto.uid.create(1) + '">' + declaration + '</rule>');
                             edon.lastElementChild.mr = cssRule.cssRules[sss];
                             console.log(807, 807.1, {
