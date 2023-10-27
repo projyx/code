@@ -1014,6 +1014,7 @@ window.editor.elements.selecting = function(event) {
             var parent = rule.parentNode;
             var matches = element.node.matches(mr.selectorText);
             if (matches) {
+                var cssObject = parseCSSText(mr.cssText);
                 var href = stylesheet.href;
                 var link = stylesheet.ownerNode;
                 var src = link.dataset.src;

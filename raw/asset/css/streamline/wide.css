@@ -834,6 +834,7 @@
         flex-direction: column-reverse;
         font-size: 13px;
         height: 100%;
+        overflow-x: hidden;
         width: 240px;
     }
 
