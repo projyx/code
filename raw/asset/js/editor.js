@@ -911,12 +911,17 @@ window.editor.elements.selecting = function(event) {
                                                 }
                                                 root.insertAdjacentHTML('beforeend', `<rule css="${t}" id="${Crypto.uid.create(1)}">${declaration}</rule>`);
                                                 selector ? root.lastElementChild.setAttribute('selector', selector) : null;
-                                                root.lastElementChild.setAttribute('recursive', true);
+                                                t === "media" ? root.lastElementChild.setAttribute('recursive', true) : null;
                                                 root.lastElementChild.mr = m[r];
                                                 if (m && m[r].cssRules.length > 0) {
-                                                    loops(root.lastElementChild, m[r], 'recursed=true', parseCSSText(cms.cssText));
+                                                    if (t === "media") {
+                                                        rl = root.lastElementChild;
+                                                    } else {
+                                                        rl = root;
+                                                    }
+                                                    loops(rl, m[r], 'recursed=true', parseCSSText(cms.cssText));
                                                 }
-                                                console.log(876, 'media.type.recursion', root.lastElementChild.outerHTML)
+                                                console.log(876, 'media.type.recursion', t, root.lastElementChild.outerHTML, m[r])
                                                 //m = cms;
                                             }
                                             r++;
@@ -1008,11 +1013,80 @@ window.editor.elements.selecting = function(event) {
         var rules = css.querySelectorAll('rule[css="style"]');
         var aside = component.querySelector('.tools-tab.tab-elements').querySelector('aside');
         aside.innerHTML = "";
+        var conditions = [];
         Array.from(rules).forEach(function(rule, b) {
             var mr = rule.mr;
             var type = rule.getAttribute('css');
             var parent = rule.parentNode;
-            var matches = element.node.matches(mr.selectorText);
+            var ancestors = getParents(rule, '[condition][css="media"]');
+            var i = 0;
+            ancestors.forEach((el)=>{
+                conditions[i] = el.getAttribute('condition');
+                i++;
+            }
+            )
+            conditions = conditions.filter(n=>n && n.length > 0);
+            if (conditions.length > 0) {
+                console.log(1023, 'conditions', conditions);
+                if (conditions.length > 1) {
+                    var mm = [];
+                    conditions.forEach((condition,index)=>{
+                        var matchMedia = contentWindow.matchMedia(condition).matches;
+                        var matches = element.node.matches(rule.mr.selectorText);
+                        mm[index] = {
+                            rule,
+                            mr,
+                            condition,
+                            matchMedia,
+                            matches,
+                            node: element.node,
+                            element
+                        };
+                    }
+                    )
+                    console.log(1033, 'mm', {
+                        mm,
+                        mr,
+                        conditions
+                    })
+                } else {
+                    var matchMedia = contentWindow.matchMedia(conditions[0]);
+                    var matches = element.node.matches(mr.selectorText);
+                    var matched = matchMedia && matches;
+                    var mm = [];
+                    matched ? mm.push({
+                        matched,
+                        matchMedia,
+                        matches,
+                        node: element.node,
+                        element
+                    }) : null;
+                }
+            } else {
+                var matches = element.node.matches(mr.selectorText);
+                matched = true;
+            }
+
+            (mm && mm.length > 0) && matched ? console.log(1051, {
+                mm,
+                matchMedia: matchMedia.matches,
+                matched,
+                matches,
+                conditions
+            }) : null;
+
+            var matchex = [];
+            conditions.forEach((a,b)=>{
+                var bool = contentWindow.matchMedia(a).matches;
+                matchex.push(bool);
+            }
+            )
+            var matcher = checker(matchex.filter(n=>n));
+            console.log(1078, {
+                conditions,
+                matcher
+            });
+
             if (matches) {
                 var cssObject = parseCSSText(mr.cssText);
                 var href = stylesheet.href;
@@ -1021,6 +1095,10 @@ window.editor.elements.selecting = function(event) {
                 var dirs = rout.ed(src);
                 var dir = dirs[dirs.length - 1];
                 console.log(1005, {
+                    ancestors,
+                    conditions,
+                    matchex,
+                    matcher,
                     matches,
                     node: element.node,
                     selectorText: mr.selectorText,
@@ -1030,30 +1108,58 @@ window.editor.elements.selecting = function(event) {
                     rule,
                     type
                 });
-                var template = aside.nextElementSibling.content.firstElementChild.cloneNode(true);
-                //template.querySelector('header').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + selectorText + '</span> <span>{</span>';
-                template.querySelector('header > .file').innerHTML = '<span>' + dir + '</span>';
-                template.querySelector('header > .slct').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + mr.selectorText + '</span> <span>{</span>';
-                var stylesList = template.querySelector('column');
-                Object.keys(cssObject.style).forEach((prop,index)=>{
-                    prop = prop.replace(/[A-Z]/g, m=>"-" + m.toLowerCase());
-                    val = Object.values(cssObject.style)[index];
-                    console.log(66, {
-                        prop,
-                        val
-                    });
-                    const propertyValue = template.querySelector('template').content.firstElementChild.cloneNode(true)
-                    propertyValue.classList.remove('connected');
-                    propertyValue.removeAttribute('connected');
-                    console.log(596, 'disconnect', propertyValue);
-                    propertyValue.querySelector('.property').textContent = prop;
-                    propertyValue.querySelector('.value').textContent = val;
-                    stylesList.appendChild(propertyValue);
-                    stylesList.appendChild(propertyValue);
+                var ww = [];
+                var nope = false;
+                var ruleHTML = "";
+                conditions.length > 0 ? ruleHTML += '<span style="color:#aaa;font-family:monospace;">@media</span> ' : '';
+                conditions.forEach((a,b)=>{
+                    var matchMedia = contentWindow.matchMedia(a);
+                    var bool = matchMedia && element.node.matches(mr.selectorText);
+                    if (matchMedia.matches) {
+                        ww.push(bool);
+                        console.log(1065, {
+                            a,
+                            selectorText: mr.selectorText,
+                            match: element.node.matches(mr.selectorText),
+                            matchMedia: matchMedia.matches,
+                            element,
+                            node: element.node
+                        });
+                        ruleHTML += '<span>' + a + '</span>';
+                    } else {
+                        nope = true;
+                    }
                 }
-                );
-                template.querySelector('footer').textContent = "}";
-                aside.insertAdjacentHTML('beforeend', template.outerHTML);
+                )
+
+                if (nope === false) {
+                    var template = aside.nextElementSibling.content.firstElementChild.cloneNode(true);
+                    //template.querySelector('header').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + selectorText + '</span> <span>{</span>';
+                    var ww = [];
+                    template.querySelector('header > .rule').innerHTML = ruleHTML;
+                    template.querySelector('header > .file').innerHTML = '<span>' + dir + '</span>';
+                    template.querySelector('header > .slct').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + mr.selectorText + '</span> <span>{</span>';
+                    var stylesList = template.querySelector('column');
+                    Object.keys(cssObject.style).forEach((prop,index)=>{
+                        prop = prop.replace(/[A-Z]/g, m=>"-" + m.toLowerCase());
+                        val = Object.values(cssObject.style)[index];
+                        console.log(66, {
+                            prop,
+                            val
+                        });
+                        const propertyValue = template.querySelector('template').content.firstElementChild.cloneNode(true)
+                        propertyValue.classList.remove('connected');
+                        propertyValue.removeAttribute('connected');
+                        console.log(596, 'disconnect', propertyValue);
+                        propertyValue.querySelector('.property').textContent = prop;
+                        propertyValue.querySelector('.value').textContent = val;
+                        stylesList.appendChild(propertyValue);
+                        stylesList.appendChild(propertyValue);
+                    }
+                    );
+                    template.querySelector('footer').textContent = "}";
+                    aside.insertAdjacentHTML('beforeend', template.outerHTML);
+                }
             }
         })
     }
