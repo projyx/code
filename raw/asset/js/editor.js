@@ -1162,6 +1162,11 @@ window.editor.elements.selecting = function(event) {
                 }
             }
         })
+        
+        var template = aside.nextElementSibling.content.firstElementChild.cloneNode(true);
+        template.querySelector('header').innerHTML = '<span style="color:#888">element.style</span> <span>{</span>';
+        template.querySelector('footer').textContent = "}";
+        aside.insertAdjacentHTML('beforeend', template.outerHTML);
     }
 }
 window.editor.elements.select = function(event) {
