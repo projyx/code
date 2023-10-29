@@ -641,6 +641,32 @@ window.editor.elements.styles = function(event) {
                 }
             }
         }
+
+        if (event.type === "focusout") {
+            var target = event.target;
+            var type = event.type;
+            var box = target.closest('box');
+            var span = box.querySelector('header > .file > span');
+            var src = span.getAttribute('src');
+            var href = span.getAttribute('href');            
+            var stylesheets = document.getElementById('preview-editor').contentWindow.document.styleSheets;
+            var sheets = Array.from(stylesheets).filter(o => o.href === href);
+            
+            console.log(645, 'declick', {
+                target,
+                type,
+                src,
+                href
+            }, {
+                stylesheets,
+                sheets
+            });
+
+            sheets.forEach(sheet => {
+                //const stylesheet = new CSSStyleSheet();
+                //stylesheet.replaceSync("body { font-size: 1.4em; } p { color: red; }");                
+            })
+        }
     }
 }
 window.editor.elements.onkeyup = function(event) {
@@ -1090,7 +1116,7 @@ window.editor.elements.selecting = function(event) {
             if (matches) {
                 var cssObject = parseCSSText(mr.cssText);
                 var href = stylesheet.href;
-                var link = stylesheet.ownerNode;
+                var link = mr.parentStyleSheet.ownerNode;
                 var src = link.dataset.src;
                 var dirs = rout.ed(src);
                 var dir = dirs[dirs.length - 1];
@@ -1137,7 +1163,7 @@ window.editor.elements.selecting = function(event) {
                     //template.querySelector('header').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + selectorText + '</span> <span>{</span>';
                     var ww = [];
                     template.querySelector('header > .rule').innerHTML = ruleHTML;
-                    template.querySelector('header > .file').innerHTML = '<span>' + dir + '</span>';
+                    template.querySelector('header > .file').innerHTML = '<span href="' + link.getAttribute('href') + '" src="' + link.dataset.src + '">' + dir + '</span>';
                     template.querySelector('header > .slct').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + mr.selectorText + '</span> <span>{</span>';
                     var stylesList = template.querySelector('column');
                     Object.keys(cssObject.style).forEach((prop,index)=>{
@@ -1162,7 +1188,7 @@ window.editor.elements.selecting = function(event) {
                 }
             }
         })
-        
+
         var template = aside.nextElementSibling.content.firstElementChild.cloneNode(true);
         template.querySelector('header').innerHTML = '<span style="color:#888">element.style</span> <span>{</span>';
         template.querySelector('footer').textContent = "}";
