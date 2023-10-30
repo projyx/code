@@ -676,13 +676,14 @@ window.editor.elements.styles = function(event) {
                 var css = box.querySelector('header > .slct > span').textContent + " { " + html.join('; ') + " }";
 
                 // get stylesheet(s)
+                var stylesheets = document.getElementById('preview-editor').contentWindow.document.styleSheets;
                 var sheets = null;
                 if (!sheets)
-                    sheets = [...document.styleSheets];
+                    sheets = [...stylesheets];
                 else if (sheets.sup) {
                     // sheets is a string
                     let absoluteURL = new URL(sheets,document.baseURI).href;
-                    sheets = [...document.styleSheets].filter(i=>i.href == absoluteURL);
+                    sheets = [...stylesheets].filter(i=>i.href == absoluteURL);
                 } else {
                     sheets = [sheets];
                 }
@@ -698,8 +699,8 @@ window.editor.elements.styles = function(event) {
                 });
                 //sheets.forEach(sheet=>{
                 //sheet.replaceSync(css).then((a,b)=>{
-                css = `@media screen { .component-home { display: flex; flex-direction: column; gap: 10px; padding-bottom: 0px; } }`;
-                sheet.insertRule(css);
+                css = `.component-home .home-people .people-user { display: flex; width: calc((100% - 220px) / 12); }`;
+                sheet.addRule("body", "background: black !important;", 1);
                 console.log(688, 'sheet.insertRule', {css,target})
                 //}
                 //);
