@@ -646,26 +646,65 @@ window.editor.elements.styles = function(event) {
             var target = event.target;
             var type = event.type;
             var box = target.closest('box');
-            var span = box.querySelector('header > .file > span');
-            var src = span.getAttribute('src');
-            var href = span.getAttribute('href');            
-            var stylesheets = document.getElementById('preview-editor').contentWindow.document.styleSheets;
-            var sheets = Array.from(stylesheets).filter(o => o.href === href);
-            
-            console.log(645, 'declick', {
-                target,
-                type,
-                src,
-                href
-            }, {
-                stylesheets,
-                sheets
-            });
+            if (box && target.closest('.value')) {
+                var col = box.querySelector('column');
+                var span = box.querySelector('header > .file > span');
+                var src = span.getAttribute('src');
+                var href = span.getAttribute('href');
+                var stylesheets = document.getElementById('preview-editor').contentWindow.document.styleSheets;
+                //var sheets = Array.from(stylesheets).filter(o=>o.href === href);
+                //var sheets = document.getElementById('preview-editor').contentWindow.document.querySelectorAll('link[href][rel="stylesheet"]');
+                box.setAttribute('data-href', href);
+                box.setAttribute('data-src', src);
 
-            sheets.forEach(sheet => {
-                //const stylesheet = new CSSStyleSheet();
-                //stylesheet.replaceSync("body { font-size: 1.4em; } p { color: red; }");                
-            })
+                console.log(645, 'declick', {
+                    target,
+                    type,
+                    src,
+                    href
+                });
+
+                var html = [];
+                var cc = Array.from(col.children);
+                cc.length > 0 ? cc.forEach(el=>{
+                    console.log(669, {
+                        cc
+                    });
+                    html.push(el.querySelector('.property').textContent + ":" + el.querySelector('.value').textContent);
+                }
+                ) : null;
+                var css = box.querySelector('header > .slct > span').textContent + " { " + html.join('; ') + " }";
+
+                // get stylesheet(s)
+                var sheets = null;
+                if (!sheets)
+                    sheets = [...document.styleSheets];
+                else if (sheets.sup) {
+                    // sheets is a string
+                    let absoluteURL = new URL(sheets,document.baseURI).href;
+                    sheets = [...document.styleSheets].filter(i=>i.href == absoluteURL);
+                } else {
+                    sheets = [sheets];
+                }
+                // sheets is a stylesheet
+                var sheet = sheets[0].ownerNode.sheet;
+
+                console.log(668, {
+                    box,
+                    css,
+                    rule: box.rule,
+                    sheets,
+                    sheet
+                });
+                //sheets.forEach(sheet=>{
+                //sheet.replaceSync(css).then((a,b)=>{
+                css = `@media screen { .component-home { display: flex; flex-direction: column; gap: 10px; padding-bottom: 0px; } }`;
+                sheet.insertRule(css);
+                console.log(688, 'sheet.insertRule', {css,target})
+                //}
+                //);
+                //})
+            }
         }
     }
 }
@@ -775,6 +814,7 @@ window.editor.elements.selecting = function(event) {
                         if (type === 4) {
                             var obj = []
                             next.insertAdjacentHTML('beforeend', '<rule css="media" dom="' + ii + '" uid="' + Crypto.uid.create(1) + '"></rule>');
+                            next.lastElementChild.mr = obj;
                             console.log(752.1, {
                                 next: next.outerHTML,
                                 list: list.outerHTML,
@@ -1184,7 +1224,9 @@ window.editor.elements.selecting = function(event) {
                     }
                     );
                     template.querySelector('footer').textContent = "}";
+                    console.log(1206, mr);
                     aside.insertAdjacentHTML('beforeend', template.outerHTML);
+                    aside.lastElementChild.rule = mr;
                 }
             }
         })
