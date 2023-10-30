@@ -699,9 +699,9 @@ window.editor.elements.styles = function(event) {
                 });
                 //sheets.forEach(sheet=>{
                 //sheet.replaceSync(css).then((a,b)=>{
-                css = `.component-home .home-people .people-user { display: flex; width: calc((100% - 220px) / 12); }`;
-                sheet.addRule("body", "background: black !important;", 1);
-                console.log(688, 'sheet.insertRule', {css,target})
+                cssText = `.component-home .home-people .people-user { display: flex; width: calc((100% - 220px) / 12); }`;
+                sheet.addRule(box.rule.selectorText, parseCSSText(css).cssText.split('{')[1].split('}')[0], 1);
+                console.log(688, 'sheet.insertRule', {selectorText: box.rule.selectorText, cssText: parseCSSText(css)}, {css,rule:box.rule,target})
                 //}
                 //);
                 //})
