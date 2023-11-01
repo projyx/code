@@ -700,8 +700,15 @@ window.editor.elements.styles = function(event) {
                 //sheets.forEach(sheet=>{
                 //sheet.replaceSync(css).then((a,b)=>{
                 cssText = `.component-home .home-people .people-user { display: flex; width: calc((100% - 220px) / 12); }`;
-                sheet.addRule(box.rule.selectorText, parseCSSText(css).cssText.split('{')[1].split('}')[0], 1);
-                console.log(688, 'sheet.insertRule', {selectorText: box.rule.selectorText, cssText: parseCSSText(css)}, {css,rule:box.rule,target})
+                //sheet.addRule(box.rule.selectorText, parseCSSText(css).cssText.split('{')[1].split('}')[0], 1);
+                console.log(688, 'sheet.insertRule', {
+                    selectorText: box.rule.selectorText,
+                    cssText: parseCSSText(css)
+                }, {
+                    css,
+                    rule: box.rule,
+                    target
+                })
                 //}
                 //);
                 //})
@@ -814,6 +821,9 @@ window.editor.elements.selecting = function(event) {
                         //MEDIARULE:4
                         if (type === 4) {
                             var obj = []
+                            console.log(817, {
+                                next
+                            });
                             next.insertAdjacentHTML('beforeend', '<rule css="media" dom="' + ii + '" uid="' + Crypto.uid.create(1) + '"></rule>');
                             next.lastElementChild.mr = obj;
                             console.log(752.1, {
@@ -976,10 +986,15 @@ window.editor.elements.selecting = function(event) {
                                                     var declaration = JSON.stringify(parseCSSText(m[r].cssText).style);
                                                     var selector = unescape(parseCSSText(m[r].cssText).ruleName);
                                                 }
-                                                root.insertAdjacentHTML('beforeend', `<rule css="${t}" id="${Crypto.uid.create(1)}">${declaration}</rule>`);
-                                                selector ? root.lastElementChild.setAttribute('selector', selector) : null;
-                                                t === "media" ? root.lastElementChild.setAttribute('recursive', true) : null;
-                                                root.lastElementChild.mr = m[r];
+                                                console.log(982, {
+                                                    root
+                                                });
+                                                if (0 < 1) {
+                                                    root.insertAdjacentHTML('beforeend', `<rule css="${t}" id="${Crypto.uid.create(1)}">${declaration}</rule>`);
+                                                    selector ? root.lastElementChild.setAttribute('selector', selector) : null;
+                                                    t === "media" ? root.lastElementChild.setAttribute('recursive', true) : null;
+                                                    root.lastElementChild.mr = m[r];
+                                                }
                                                 if (m && m[r].cssRules.length > 0) {
                                                     if (t === "media") {
                                                         rl = root.lastElementChild;
@@ -987,8 +1002,8 @@ window.editor.elements.selecting = function(event) {
                                                         rl = root;
                                                     }
                                                     loops(rl, m[r], 'recursed=true', parseCSSText(cms.cssText));
+                                                    console.log(876, 'media.type.recursion', t, root.lastElementChild.outerHTML, m[r], rl)
                                                 }
-                                                console.log(876, 'media.type.recursion', t, root.lastElementChild.outerHTML, m[r])
                                                 //m = cms;
                                             }
                                             r++;
@@ -1046,7 +1061,7 @@ window.editor.elements.selecting = function(event) {
                                     }
                                 }
                                 );
-                                cssRule.cssRules = cr.cssRules;
+                                //cssRule.cssRules = cr.cssRules;
                                 //sss = -1;
                                 //forEach() 
                                 //declaration.push(obj);
