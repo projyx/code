@@ -651,13 +651,30 @@ window.editor.elements.styles = function(event) {
                 var span = box.querySelector('header > .file > span');
                 var src = span.getAttribute('src');
                 var href = span.getAttribute('href');
+                var node = box.node;
                 var stylesheets = document.getElementById('preview-editor').contentWindow.document.styleSheets;
                 //var sheets = Array.from(stylesheets).filter(o=>o.href === href);
                 //var sheets = document.getElementById('preview-editor').contentWindow.document.querySelectorAll('link[href][rel="stylesheet"]');
                 box.setAttribute('data-href', href);
                 box.setAttribute('data-src', src);
+                var selector = box.node.getAttribute('selector');
+                var rules = '';
+                rules += '{ ';
+                Array.from(box.querySelector('column').children).forEach(function(el) {
+                    rules += el.querySelector('.property').textContent + ': ' + el.querySelector('.value').textContent + '; ';
+                })
+                rules += '}';
+                var cssText = selector + ' ' + rules;
+                var parse = parseCSSText(cssText);
+                box.node.textContent = rules;
 
                 console.log(645, 'declick', {
+                    parse,
+                    box,
+                    node: box.node,
+                    rule: box.rule,
+                    rules,
+                    cssText,
                     target,
                     type,
                     src,
@@ -706,9 +723,10 @@ window.editor.elements.styles = function(event) {
                     cssText: parseCSSText(css)
                 }, {
                     css,
+                    box: box,
                     rule: box.rule,
                     target
-                })
+                });
                 //}
                 //);
                 //})
@@ -966,7 +984,7 @@ window.editor.elements.selecting = function(event) {
                                             m
                                         }) : null;
                                         do {
-                                            console.log(875, {
+                                            console.log(875, m[r].type, {
                                                 mr: m[r],
                                                 m,
                                                 cms,
@@ -987,13 +1005,16 @@ window.editor.elements.selecting = function(event) {
                                                     var selector = unescape(parseCSSText(m[r].cssText).ruleName);
                                                 }
                                                 console.log(982, {
-                                                    root
+                                                    mr: m[r],
+                                                    root,
+                                                    t
                                                 });
                                                 if (0 < 1) {
                                                     root.insertAdjacentHTML('beforeend', `<rule css="${t}" id="${Crypto.uid.create(1)}">${declaration}</rule>`);
                                                     selector ? root.lastElementChild.setAttribute('selector', selector) : null;
                                                     t === "media" ? root.lastElementChild.setAttribute('recursive', true) : null;
                                                     root.lastElementChild.mr = m[r];
+                                                    root.lastElementChild.setAttribute('selector', m[r].selectorText);
                                                 }
                                                 if (m && m[r].cssRules.length > 0) {
                                                     if (t === "media") {
@@ -1240,8 +1261,11 @@ window.editor.elements.selecting = function(event) {
                     }
                     );
                     template.querySelector('footer').textContent = "}";
-                    console.log(1206, mr);
+                    var cssom = document.querySelector('css');
+                    var node = cssom.querySelector('[selector="' + mr.selectorText + '"]');
+                    console.log(1206, {mr, cssom, node});
                     aside.insertAdjacentHTML('beforeend', template.outerHTML);
+                    aside.lastElementChild.node = node;
                     aside.lastElementChild.rule = mr;
                 }
             }
