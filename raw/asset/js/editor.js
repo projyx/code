@@ -828,8 +828,8 @@ window.editor.elements.selecting = function(event) {
                             css,
                             src
                         }, {
-                            css,
-                            list
+                            list,
+                            next
                         }) : null;
                         if (type === 1) {
                             var obj = "";
@@ -954,13 +954,58 @@ window.editor.elements.selecting = function(event) {
                                 declaration += '}';
                             }
                             var elur = document.querySelector('css').querySelectorAll('rule');
+                            var lure = elur[elur.length - 1];
                             var ee = elur[elur.length - 1].children.length > 0 ? elur[elur.length - 1] : elur[elur.length - 1];
-                            var edon = (list ? list : ee.getAttribute('css') === 'media' ? elur[elur.length - 1] : elur[elur.length - 1].parentNode);
-                            edon.insertAdjacentHTML('beforeend', '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '  id="' + Crypto.uid.create(1) + '">' + declaration + '</rule>');
-                            edon.lastElementChild.mr = cssRule.cssRules[sss];
-                            cssRule.cssRules[sss].type === 1 ? edon.lastElementChild.setAttribute('class', selector) : null;
-                            cssRule.cssRules[sss].type === 4 ? edon.lastElementChild.setAttribute('condition', cssRule.cssRules[sss].conditionText) : null;
+                            var eee = elur.length > 0;
+                            var edon = list ? list : (cssRule.cssRules[sss].type === 4 ? elur[elur.length - 1] : elur[elur.length - 1].parentNode);
+                            var ifit = cond ? 'nextElementSibling' : 'lastElementChild';
+                            cssRule.cssRules[sss].type === 1 ? type = "style" : null;
+                            cssRule.cssRules[sss].type === 4 ? type = "media" : null;
+                            var cond = type === "media" && !list;
+                            console.log(961, {
+                                cond,
+                                type
+                            }, {
+                                elur,
+                                edon,
+                                lure
+                            }, {
+                                ee,
+                                eee,
+                                eel: ee.length
+                            }, edon[ifit], ifit);
+                            where = cond ? 'afterend' : 'beforeend';
+                            edon.insertAdjacentHTML(where, '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '  id="' + Crypto.uid.create(1) + '">' + declaration + '</rule>');
+                            var elur = document.querySelector('css').querySelectorAll('rule');
+                            var elur = document.querySelector('css').querySelectorAll('rule');
+                            var eee = elur.length > 0;
+                            var ifit = cond ? 'nextElementSibling' : 'lastElementChild';
+                            var lure = elur[elur.length - 1];
+                            console.log(964, {
+                                type
+                            }, {
+                                elur,
+                                edon,
+                                last: edon.lastElementChild
+                            }, {
+                                ee,
+                                eee,
+                                eel: ee.length
+                            }, {
+                                edonifit: edon[ifit],
+                                ifit
+                            });
+                            lure.mr = cssRule.cssRules[sss];
+                            cssRule.cssRules[sss].type === 1 ? lure.setAttribute('class', selector) : null;
+                            cssRule.cssRules[sss].type === 4 ? lure.setAttribute('condition', cssRule.cssRules[sss].conditionText) : null;
+                            var cms = cssRule.cssRules[sss];
                             console.log(807, 807.1, {
+                                type,
+                                cms
+                            }, {
+                                ee: ee.getAttribute('css'),
+                                list,
+                                edon,
                                 rule: cssRule.cssRules[sss],
                                 list,
                                 sheet,
@@ -968,10 +1013,12 @@ window.editor.elements.selecting = function(event) {
                                 cssObject
                             }, cssRule.cssRules[sss], list instanceof HTMLElement);
                             if (type === "media") {
-                                var cms = cssRule.cssRules[sss];
-                                loops(edon.lastElementChild, cms);
-                                function loops(root, cr, z, y) {
+                                loops(edon, cms);
+                                function loops(edo, cr, z, y) {
+                                    var root = edo.lastElementChild;
+                                    root ? null : root = edo;
                                     console.log(869, {
+                                        edo,
                                         root,
                                         cr,
                                         z,
@@ -980,55 +1027,64 @@ window.editor.elements.selecting = function(event) {
                                     if (cr) {
                                         var m = cr.cssRules;
                                         var r = 0;
-                                        0 > 1 ? console.log(873, '880 loop', {
+                                        0 < 1 ? console.log(873, '880 loop', {
                                             m
                                         }) : null;
-                                        do {
-                                            console.log(875, m[r].type, {
-                                                mr: m[r],
-                                                m,
-                                                cms,
-                                                z,
-                                                y,
-                                                root,
-                                                cr,
-                                                rules: cssRule.cssRules
-                                            });
-                                            root.mr = m[r];
-                                            var t = m[r].type === 1 ? 'style' : '';
-                                            t = t ? t : m[r].type === 4 ? 'media' : '';
-                                            //list.insertAdjacentHTML('beforeend', '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '  id="' + Crypto.uid.create(1) + '">' + declaration + '</rule>');
-                                            if (t === "media" || t === "style") {
-                                                cms = cms ? cms.cssRules[r] : null;
-                                                if (m[r]) {
-                                                    var declaration = JSON.stringify(parseCSSText(m[r].cssText).style);
-                                                    var selector = unescape(parseCSSText(m[r].cssText).ruleName);
-                                                }
-                                                console.log(982, {
+                                        if (m.length > 0) {
+                                            do {
+                                                var t = m[r].type === 1 ? 'style' : '';
+                                                t = t ? t : m[r].type === 4 ? 'media' : '';
+                                                console.log(875, m[r].type, {
+                                                    t,
                                                     mr: m[r],
+                                                    m,
+                                                    cms,
+                                                    z,
+                                                    y,
                                                     root,
-                                                    t
+                                                    cr,
+                                                    rules: cssRule.cssRules
                                                 });
-                                                if (0 < 1) {
-                                                    root.insertAdjacentHTML('beforeend', `<rule css="${t}" id="${Crypto.uid.create(1)}">${declaration}</rule>`);
-                                                    selector ? root.lastElementChild.setAttribute('selector', selector) : null;
-                                                    t === "media" ? root.lastElementChild.setAttribute('recursive', true) : null;
-                                                    root.lastElementChild.mr = m[r];
-                                                    root.lastElementChild.setAttribute('selector', m[r].selectorText);
-                                                }
-                                                if (m && m[r].cssRules.length > 0) {
-                                                    if (t === "media") {
-                                                        rl = root.lastElementChild;
-                                                    } else {
-                                                        rl = root;
+                                                root.mr = m[r];
+                                                //list.insertAdjacentHTML('beforeend', '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '  id="' + Crypto.uid.create(1) + '">' + declaration + '</rule>');
+                                                if (t === "media" || t === "style") {
+                                                    cms = cms ? cms.cssRules[r] : null;
+                                                    if (m[r]) {
+                                                        var declaration = JSON.stringify(parseCSSText(m[r].cssText).style);
+                                                        var selector = unescape(parseCSSText(m[r].cssText).ruleName);
                                                     }
-                                                    loops(rl, m[r], 'recursed=true', parseCSSText(cms.cssText));
-                                                    console.log(876, 'media.type.recursion', t, root.lastElementChild.outerHTML, m[r], rl)
+                                                    console.log(982, {
+                                                        length: m[r].cssRules.length,
+                                                        mr: m[r],
+                                                        root,
+                                                        t,
+                                                        rule: cssRule.cssRules[sss]
+                                                    });
+                                                    if (0 < 1) {
+                                                        console.log(1059, {
+                                                            root,
+                                                            selector
+                                                        });
+                                                        root.insertAdjacentHTML('beforeend', `<rule css="${t}" id="${Crypto.uid.create(1)}">${declaration}</rule>`);
+                                                        selector ? root.lastElementChild.setAttribute('selector', selector) : null;
+                                                        t === "media" ? root.lastElementChild.setAttribute('recursive', true) : null;
+                                                        root.lastElementChild.mr = m[r];
+                                                        root.lastElementChild.setAttribute('selector', m[r].selectorText);
+                                                    }
+                                                    if (m && m[r].cssRules.length > 0) {
+                                                        if (t === "media") {
+                                                            rl = root.lastElementChild;
+                                                        } else {
+                                                            rl = root;
+                                                        }
+                                                        loops(rl, m[r], 'recursed=true', parseCSSText(cms.cssText));
+                                                        console.log(876, 'media.type.recursion', t, root.lastElementChild.outerHTML, m[r], rl)
+                                                    }
+                                                    //m = cms;
                                                 }
-                                                //m = cms;
-                                            }
-                                            r++;
-                                        } while (r < m.length);
+                                                r++;
+                                            } while (r < m.length);
+                                        }
                                     }
                                 }
                                 //list = list.lastElementChild;
@@ -1263,7 +1319,11 @@ window.editor.elements.selecting = function(event) {
                     template.querySelector('footer').textContent = "}";
                     var cssom = document.querySelector('css');
                     var node = cssom.querySelector('[selector="' + mr.selectorText + '"]');
-                    console.log(1206, {mr, cssom, node});
+                    console.log(1206, {
+                        mr,
+                        cssom,
+                        node
+                    });
                     aside.insertAdjacentHTML('beforeend', template.outerHTML);
                     aside.lastElementChild.node = node;
                     aside.lastElementChild.rule = mr;
