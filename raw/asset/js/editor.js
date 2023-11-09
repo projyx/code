@@ -958,14 +958,26 @@ window.editor.elements.selecting = function(event) {
                             var lure = elur[elur.length - 1];
                             var ee = elur[elur.length - 1].children.length > 0 ? elur[elur.length - 1] : elur[elur.length - 1];
                             var eee = elur.length > 0;
+
+                            cssRule.cssRules[sss].type === 1 ? type = "style" : null;
+                            cssRule.cssRules[sss].type === 4 ? type = "media" : null;
+                            var cond = type === "media" && !list;
+                            where = cond ? 'afterend' : 'beforeend';
+
                             if (list) {
                                 var edon = list;
                             } else {
                                 var last = elur[elur.length - 1];
                                 if (cssRule.cssRules[sss].type === 4 && last.parentNode.getAttribute('condition') === cssRule.cssRules[sss].parentRule.conditionText) {
                                     var edon = last;
-                                } else if (cssRule.cssRules[sss].type === 1 && last.parentNode.getAttribute('condition') !== cssRule.cssRules[sss].parentRule.conditionText && last.parentNode.parentNode.closest('sheet')) {
+                                } else if (cssRule.cssRules[sss].type === 1 && last.parentNode.getAttribute('condition') && last.parentNode.getAttribute('condition') !== cssRule.cssRules[sss].parentRule.conditionText && last.parentNode.parentNode.closest('sheet')) {
                                     var edon = last.parentNode.parentNode;
+                                } else if (cssRule.cssRules[sss].type === 1 && !last.parentNode.getAttribute('condition')) {
+                                    if(last.innerHTML === "") {
+                                        var edon = last;
+                                    } else {
+                                        var edon = last.parentNode;
+                                    }
                                 } else {
                                     var edon = last.parentNode;
                                 }
@@ -985,10 +997,6 @@ window.editor.elements.selecting = function(event) {
                                 }
                             }
                             var ifit = cond ? 'nextElementSibling' : 'lastElementChild';
-                            cssRule.cssRules[sss].type === 1 ? type = "style" : null;
-                            cssRule.cssRules[sss].type === 4 ? type = "media" : null;
-                            var cond = type === "media" && !list;
-                            where = cond ? 'afterend' : 'beforeend';
                             console.log(961, {
                                 cond,
                                 type,
