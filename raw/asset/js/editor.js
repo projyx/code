@@ -962,19 +962,26 @@ window.editor.elements.selecting = function(event) {
                                 var edon = list;
                             } else {
                                 var last = elur[elur.length - 1];
-                                if (cssRule.cssRules[sss].type === 4) {
+                                if (cssRule.cssRules[sss].type === 4 && last.parentNode.getAttribute('condition') === cssRule.cssRules[sss].parentRule.conditionText) {
+                                    var edon = last;
+                                } else if (cssRule.cssRules[sss].type === 1 && last.parentNode.getAttribute('condition') !== cssRule.cssRules[sss].parentRule.conditionText && last.parentNode.parentNode.closest('sheet')) {
+                                    var edon = last.parentNode.parentNode;
+                                } else {
+                                    var edon = last.parentNode;
+                                }
+                                if (cssRule.cssRules[sss].type === 4 || cssRule.cssRules[sss].type === 1) {
                                     console.log({
+                                        edon,
+                                        ct: cssRule.cssRules[sss].type
+                                    }, {
                                         last,
                                         pn: last.parentNode
                                     }, {
                                         lc: last.parentNode.getAttribute('condition'),
                                         pc: cssRule.cssRules[sss].parentRule.conditionText
+                                    }, {
+                                        st: cssRule.cssRules[sss].selectorText
                                     });
-                                }
-                                if (cssRule.cssRules[sss].type === 4 && last.parentNode.getAttribute('condition') === cssRule.cssRules[sss].parentRule.conditionText) {
-                                    var edon = last;
-                                } else {
-                                    var edon = last.parentNode;
                                 }
                             }
                             var ifit = cond ? 'nextElementSibling' : 'lastElementChild';
