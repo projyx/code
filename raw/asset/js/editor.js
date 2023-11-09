@@ -844,6 +844,7 @@ window.editor.elements.selecting = function(event) {
                             });
                             next.insertAdjacentHTML('beforeend', '<rule css="media" dom="' + ii + '" uid="' + Crypto.uid.create(1) + '"></rule>');
                             next.lastElementChild.mr = obj;
+                            next.lastElementChild.setAttribute('condition', cssRule.conditionText);
                             console.log(752.1, {
                                 next: next.outerHTML,
                                 list: list.outerHTML,
@@ -957,24 +958,45 @@ window.editor.elements.selecting = function(event) {
                             var lure = elur[elur.length - 1];
                             var ee = elur[elur.length - 1].children.length > 0 ? elur[elur.length - 1] : elur[elur.length - 1];
                             var eee = elur.length > 0;
-                            var edon = list ? list : (cssRule.cssRules[sss].type === 4 ? elur[elur.length - 1] : elur[elur.length - 1].parentNode);
+                            if (list) {
+                                var edon = list;
+                            } else {
+                                var last = elur[elur.length - 1];
+                                if (cssRule.cssRules[sss].type === 4) {
+                                    console.log({
+                                        last,
+                                        pn: last.parentNode
+                                    }, {
+                                        lc: last.parentNode.getAttribute('condition'),
+                                        pc: cssRule.cssRules[sss].parentRule.conditionText
+                                    });
+                                }
+                                if (cssRule.cssRules[sss].type === 4 && last.parentNode.getAttribute('condition') === cssRule.cssRules[sss].parentRule.conditionText) {
+                                    var edon = last;
+                                } else {
+                                    var edon = last.parentNode;
+                                }
+                            }
                             var ifit = cond ? 'nextElementSibling' : 'lastElementChild';
                             cssRule.cssRules[sss].type === 1 ? type = "style" : null;
                             cssRule.cssRules[sss].type === 4 ? type = "media" : null;
                             var cond = type === "media" && !list;
+                            where = cond ? 'afterend' : 'beforeend';
                             console.log(961, {
                                 cond,
-                                type
+                                type,
+                                where,
+                                text: cssRule.cssRules[sss].selectorText || cssRule.cssRules[sss].conditionText
                             }, {
                                 elur,
                                 edon,
-                                lure
+                                lure,
+                                sss: cssRule.cssRules[sss]
                             }, {
                                 ee,
                                 eee,
                                 eel: ee.length
-                            }, edon[ifit], ifit);
-                            where = cond ? 'afterend' : 'beforeend';
+                            });
                             edon.insertAdjacentHTML(where, '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '  id="' + Crypto.uid.create(1) + '">' + declaration + '</rule>');
                             var elur = document.querySelector('css').querySelectorAll('rule');
                             var elur = document.querySelector('css').querySelectorAll('rule');
@@ -1015,9 +1037,16 @@ window.editor.elements.selecting = function(event) {
                             if (type === "media") {
                                 loops(edon, cms);
                                 function loops(edo, cr, z, y) {
-                                    var root = edo.lastElementChild;
+                                    var root = edo.lastElementChild && edo.lastElementChild.innerHTML === "" ? edo.lastElementChild : edo.nextElementSibling;
+                                    console.log(869, 869.1, {
+                                        edo,
+                                        root,
+                                        cr,
+                                        z,
+                                        cms
+                                    });
                                     root ? null : root = edo;
-                                    console.log(869, {
+                                    console.log(869, 869.2, {
                                         edo,
                                         root,
                                         cr,
