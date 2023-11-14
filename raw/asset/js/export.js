@@ -255,6 +255,10 @@ async function wIDE(paths) {
         const scripts = head.querySelectorAll("script");
         const srcs = body.querySelectorAll("[src]");
 
+        const editor = document.getElementById('preview-editor');
+        var contentWindow = editor.contentWindow;
+        var component = editor.closest('component');
+
         var l = [];
         if (0 < 1 && styles.length > 0) {
             var i = 0;
@@ -270,12 +274,16 @@ async function wIDE(paths) {
                         repo: paths[1],
                         path: uri.pathname.split('/').filter(o=>o.length > 0).join('/')
                     });
+
                     var text = atob(json.content);
                     var blob = getBlobURL(text, 'text/javascript');
                     var elem = `<link data-src="${uri.pathname}" rel="stylesheet" type="text/css" href="${blob}" />`
                     //console.log(path, {json,text,blob});
                     l.push(elem)
-                    //console.log(164, l);
+                    //console.log(164, l);            
+                    const myStyleSheet = new contentWindow.CSSStyleSheet();
+                    myStyleSheet.replace(text);
+                    contentWindow.document.styleSheets.push(myStyleSheet);
                 }
                 i++;
             } while (i < styles.length);
@@ -331,12 +339,8 @@ async function wIDE(paths) {
           ${body.outerHTML}
         </html>
         `;
-
-        const editor = document.getElementById('preview-editor');
-        var component = editor.closest('component');
-        editor.src = getBlobURL(src, 'text/html');
-        iFrameReady(editor, function() {
-            var contentWindow = editor.contentWindow;
+        editor.src = getBlobURL(src, 'text/html');        
+        iFrameReady(editor, function() {            
             var pushState = contentWindow.history.pushState;
 
             var consolelog = contentWindow.console.log;
@@ -529,7 +533,7 @@ async function wIDE(paths) {
             const boot = url.pathname.split("/").splice(1).filter(n=>n.length > 0);
             var state = "/" + boot.splice(4, boot.length).join("/");
             //console.log(356, state);
-            if(contentWindow.document.body.querySelector('boot')) {
+            if (contentWindow.document.body.querySelector('boot')) {
                 contentWindow.document.body.querySelector('boot').setAttribute('route', state);
             } else {
                 var el = document.createElement('boot');
@@ -859,14 +863,14 @@ function styleSheet(node) {
 }
 
 function isDescendant(parent, child) {
-     var node = child.parentNode;
-     while (node != null) {
-         if (node == parent) {
-             return true;
-         }
-         node = node.parentNode;
-     }
-     return false;
+    var node = child.parentNode;
+    while (node != null) {
+        if (node == parent) {
+            return true;
+        }
+        node = node.parentNode;
+    }
+    return false;
 }
 
 function triggerMouseEvent(node, eventType) {
@@ -876,43 +880,38 @@ function triggerMouseEvent(node, eventType) {
 }
 
 function checker(arr) {
-    return arr.length > 0 ? arr.every(v => v === true) : false;
+    return arr.length > 0 ? arr.every(v=>v === true) : false;
 }
 
-var getParents = function (elem, selector) {
+var getParents = function(elem, selector) {
 
-	// Element.matches() polyfill
-	if (!Element.prototype.matches) {
-		Element.prototype.matches =
-			Element.prototype.matchesSelector ||
-			Element.prototype.mozMatchesSelector ||
-			Element.prototype.msMatchesSelector ||
-			Element.prototype.oMatchesSelector ||
-			Element.prototype.webkitMatchesSelector ||
-			function(s) {
-				var matches = (this.document || this.ownerDocument).querySelectorAll(s),
-					i = matches.length;
-				while (--i >= 0 && matches.item(i) !== this) {}
-				return i > -1;
-			};
-	}
+    // Element.matches() polyfill
+    if (!Element.prototype.matches) {
+        Element.prototype.matches = Element.prototype.matchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.msMatchesSelector || Element.prototype.oMatchesSelector || Element.prototype.webkitMatchesSelector || function(s) {
+            var matches = (this.document || this.ownerDocument).querySelectorAll(s)
+              , i = matches.length;
+            while (--i >= 0 && matches.item(i) !== this) {}
+            return i > -1;
+        }
+        ;
+    }
 
-	// Set up a parent array
-	var parents = [];
+    // Set up a parent array
+    var parents = [];
 
-	// Push each parent element to the array
-	for ( ; elem && elem !== document; elem = elem.parentNode ) {
-		if (selector) {
-			if (elem.matches(selector)) {
-				parents.push(elem);
-			}
-			continue;
-		}
-		parents.push(elem);
-	}
+    // Push each parent element to the array
+    for (; elem && elem !== document; elem = elem.parentNode) {
+        if (selector) {
+            if (elem.matches(selector)) {
+                parents.push(elem);
+            }
+            continue;
+        }
+        parents.push(elem);
+    }
 
-	// Return our parent array
-	return parents;
+    // Return our parent array
+    return parents;
 
 };
 

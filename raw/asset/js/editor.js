@@ -658,8 +658,8 @@ window.editor.elements.styles = function(event) {
                 box.setAttribute('data-href', href);
                 box.setAttribute('data-src', src);
                 var selector = box.node.getAttribute('selector');
-                var rules = '';
-                rules += '{ ';
+                var rules = selector;
+                rules += ' { ';
                 Array.from(box.querySelector('column').children).forEach(function(el) {
                     rules += el.querySelector('.property').textContent + ': ' + el.querySelector('.value').textContent + '; ';
                 })
@@ -694,18 +694,44 @@ window.editor.elements.styles = function(event) {
 
                 // get stylesheet(s)
                 var stylesheets = document.getElementById('preview-editor').contentWindow.document.styleSheets;
-                var sheets = null;
+                window.sheets = window.sheets ? window.sheets : null;
                 if (!sheets)
-                    sheets = [...stylesheets];
-                else if (sheets.sup) {
+                    window.sheets = [...stylesheets];
+                else if (window.sheets.sup) {
                     // sheets is a string
-                    let absoluteURL = new URL(sheets,document.baseURI).href;
-                    sheets = [...stylesheets].filter(i=>i.href == absoluteURL);
+                    let absoluteURL = new URL(window.sheets,document.baseURI).href;
+                    window.sheets = [...stylesheets].filter(i=>i.href == absoluteURL);
                 } else {
-                    sheets = [sheets];
+                    window.sheets = window.sheets; //[window.sheets];
                 }
-                // sheets is a stylesheet
-                var sheet = sheets[0].ownerNode.sheet;
+                // sheets is a stylesheet                
+                var sheet = window.sheets.filter(checkSheet)[0];
+                function checkSheet(s) {
+                    if(s.href && !s.parentStyleSheet) {
+                        if(s.href === box.rule.parentStyleSheet.ownerNode.href) {
+                            return true;
+                        }
+                        if(s.href === box.rule.href) {
+                            return true;
+                        }
+                    }
+                    if(!s.href && s.parentStyleSheet.ownerNode.href) {
+                        if(s.parentStyleSheet.ownerNode.href === box.rule.parentStyleSheet.ownerNode.href) {
+                            return true;
+                        }
+                        if(s.parentStyleSheet.ownerNode.href === box.rule.href) {
+                            return true;
+                        }
+                    }
+                }
+                var parse = parseCSSText(css);
+
+                console.log(709, {
+                    box,
+                    css,
+                    rule: box.rule,
+                    sheets
+                });
 
                 console.log(668, {
                     box,
@@ -715,12 +741,12 @@ window.editor.elements.styles = function(event) {
                     sheet
                 });
                 //sheets.forEach(sheet=>{
-                //sheet.replaceSync(css).then((a,b)=>{
-                cssText = `.component-home .home-people .people-user { display: flex; width: calc((100% - 220px) / 12); }`;
+                sheet.insertRule(parse.cssText, sheet.cssRules.length - 1);
+                //cssText = `.component-home .home-people .people-user { display: flex; width: calc((100% - 220px) / 12); }`;
                 //sheet.addRule(box.rule.selectorText, parseCSSText(css).cssText.split('{')[1].split('}')[0], 1);
-                console.log(688, 'sheet.insertRule', {
+                console.log(688, 'sheet.insertRule', sheet, {
                     selectorText: box.rule.selectorText,
-                    cssText: parseCSSText(css)
+                    cssText: parse
                 }, {
                     css,
                     box: box,
@@ -767,6 +793,8 @@ window.editor.elements.selecting = function(event) {
         stylesheets,
         styles
     });
+
+    //CSS ELEMENT
     if (stylesheets.length > 0) {
         console.log(680, 'editor.elements.select', {
             stylesheets
@@ -868,335 +896,336 @@ window.editor.elements.selecting = function(event) {
                         }
                     }
                     do {
-                        var style = cssRule.cssRules[sss].style;
-                        0 < 1 ? console.log(707, {
-                            cssRule,
-                            cssRules,
-                            ownerNode
-                        }) : null;
-
-                        console.log(748, 'lastRule', src, sss, {
-                            cssRules: cssRule.cssRules,
-                            length: cssRule.cssRules.length
-                        });
-                        ///list[sss] ? Object.keys(css[src]) = list[sss] : null;
-                        if (ss === cssRules.length - 1) {
-                            var csr = css[src];
-                            var more = document.head.querySelector('css').querySelector('rule[dom]');
-                            if (sss === cssRule.cssRules.length - 1) {
-                                if (list && list instanceof HTMLElement) {
-                                    var what = list.closest(':has(~ [dom]) ~ [dom]');
-                                    console.log(749, 749.1, 'lastRule', {
-                                        sss,
-                                        src
-                                    }, {
-                                        csr,
-                                        css,
-                                        cssRule,
-                                        rules: cssRule.cssRules,
-                                        rule: cssRule.cssRules[sss]
-                                    }, {
-                                        more: more ? [more, more.outerHTML] : null,
-                                        what: what ? [what, what.outerHTML] : null,
-                                        list: list ? [list, list.outerHTML] : null,
-                                        next: next ? [next, next.outerHTML] : null
-                                    });
-                                    more ? more.removeAttribute('dom') : null;
-                                    //more ? next = more : next = null;
-                                    //list.querySelector(' ')
-                                    list = list.parentNode;
-                                    //.querySelector(':has(> rule[css="media"][dom]:empty) ~ rule[css="media"][dom]:empty')
-                                }
-                            }
-                            more ? more.removeAttribute('dom') : null;
-                            console.log(749, 749.2, 'lastRule', {
-                                sss,
-                                src
-                            }, {
-                                csr,
-                                css,
+                        if (cssRule && cssRule.cssRules[sss]) {
+                            //var style = cssRule && css.cssRules && cssRule.cssRules[sss] ? cssRule.cssRules[sss].style : null;
+                            0 < 1 ? console.log(707, {
                                 cssRule,
-                                rules: cssRule.cssRules,
-                                rule: cssRule.cssRules[sss]
-                            }, {
-                                more: more ? [more, more.outerHTML] : null,
-                                what: what ? [what, what.outerHTML] : null,
-                                list: list ? [list, list.outerHTML] : null,
-                                next: next ? [next, next.outerHTML] : null
+                                cssRules,
+                                ownerNode
+                            }) : null;
+
+                            console.log(748, 'lastRule', src, sss, {
+                                cssRules: cssRule.cssRules,
+                                length: cssRule.cssRules.length
                             });
-                            //list = list.parentNode.firstElementChild('')
-                            //list = document.querySelector('css')
-                        }
-                        //else {
-                        //console.log(834.1, list ? list.outerHTML : null);
-                        var dommie = list && list instanceof HTMLElement ? list.closest(':has(~ [dom]) ~ [dom]') : null;
-                        list = dommie ? dommie : document.querySelector('css').querySelector('rule[dom]');
-                        //console.log(834.2, sheet, list ? list.outerHTML : null);
-                        if (list || !list) {
-                            type = cssRule.cssRules[sss].type === 1 ? 'style' : '';
-                            type = type ? type : cssRule.cssRules[sss].type === 4 ? 'media' : '';
-                            var cssObject = parseCSSText(cssRule.cssRules[sss].cssText);
-                            var selector = cssRule.cssRules[sss].selectorText;
-
-                            var declaration = '';
-                            if (type === "style") {
-                                declaration = '{';
-                                //template.querySelector('header').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + selectorText + '</span> <span>{</span>';
-                                Object.keys(cssObject.style).forEach((prop,index)=>{
-                                    prop = prop.replace(/[A-Z]/g, m=>"-" + m.toLowerCase());
-                                    val = Object.values(cssObject.style)[index];
-                                    console.log(66, {
-                                        prop,
-                                        val
-                                    });
-                                    declaration += prop + ':' + val + ';';
+                            ///list[sss] ? Object.keys(css[src]) = list[sss] : null;
+                            if (ss === cssRules.length - 1) {
+                                var csr = css[src];
+                                var more = document.head.querySelector('css').querySelector('rule[dom]');
+                                if (sss === cssRule.cssRules.length - 1) {
+                                    if (list && list instanceof HTMLElement) {
+                                        var what = list.closest(':has(~ [dom]) ~ [dom]');
+                                        console.log(749, 749.1, 'lastRule', {
+                                            sss,
+                                            src
+                                        }, {
+                                            csr,
+                                            css,
+                                            cssRule,
+                                            rules: cssRule.cssRules,
+                                            rule: cssRule.cssRules[sss]
+                                        }, {
+                                            more: more ? [more, more.outerHTML] : null,
+                                            what: what ? [what, what.outerHTML] : null,
+                                            list: list ? [list, list.outerHTML] : null,
+                                            next: next ? [next, next.outerHTML] : null
+                                        });
+                                        more ? more.removeAttribute('dom') : null;
+                                        //more ? next = more : next = null;
+                                        //list.querySelector(' ')
+                                        list = list.parentNode;
+                                        //.querySelector(':has(> rule[css="media"][dom]:empty) ~ rule[css="media"][dom]:empty')
+                                    }
                                 }
-                                );
-                                declaration += '}';
+                                more ? more.removeAttribute('dom') : null;
+                                console.log(749, 749.2, 'lastRule', {
+                                    sss,
+                                    src
+                                }, {
+                                    csr,
+                                    css,
+                                    cssRule,
+                                    rules: cssRule.cssRules,
+                                    rule: cssRule.cssRules[sss]
+                                }, {
+                                    more: more ? [more, more.outerHTML] : null,
+                                    what: what ? [what, what.outerHTML] : null,
+                                    list: list ? [list, list.outerHTML] : null,
+                                    next: next ? [next, next.outerHTML] : null
+                                });
+                                //list = list.parentNode.firstElementChild('')
+                                //list = document.querySelector('css')
                             }
-                            var elur = document.querySelector('css').querySelectorAll('rule');
-                            var lure = elur[elur.length - 1];
-                            var ee = elur[elur.length - 1].children.length > 0 ? elur[elur.length - 1] : elur[elur.length - 1];
-                            var eee = elur.length > 0;
+                            //else {
+                            //console.log(834.1, list ? list.outerHTML : null);
+                            var dommie = list && list instanceof HTMLElement ? list.closest(':has(~ [dom]) ~ [dom]') : null;
+                            list = dommie ? dommie : document.querySelector('css').querySelector('rule[dom]');
+                            //console.log(834.2, sheet, list ? list.outerHTML : null);
+                            if (list || !list) {
+                                type = cssRule.cssRules[sss].type === 1 ? 'style' : '';
+                                type = type ? type : cssRule.cssRules[sss].type === 4 ? 'media' : '';
+                                var cssObject = parseCSSText(cssRule.cssRules[sss].cssText);
+                                var selector = cssRule.cssRules[sss].selectorText;
 
-                            cssRule.cssRules[sss].type === 1 ? type = "style" : null;
-                            cssRule.cssRules[sss].type === 4 ? type = "media" : null;
-                            var cond = type === "media" && !list;
-                            where = cond ? 'afterend' : 'beforeend';
+                                var declaration = '';
+                                if (type === "style") {
+                                    declaration = '{';
+                                    //template.querySelector('header').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + selectorText + '</span> <span>{</span>';
+                                    Object.keys(cssObject.style).forEach((prop,index)=>{
+                                        prop = prop.replace(/[A-Z]/g, m=>"-" + m.toLowerCase());
+                                        val = Object.values(cssObject.style)[index];
+                                        console.log(66, {
+                                            prop,
+                                            val
+                                        });
+                                        declaration += prop + ':' + val + ';';
+                                    }
+                                    );
+                                    declaration += '}';
+                                }
+                                var elur = document.querySelector('css').querySelectorAll('rule');
+                                var lure = elur[elur.length - 1];
+                                var ee = elur[elur.length - 1].children.length > 0 ? elur[elur.length - 1] : elur[elur.length - 1];
+                                var eee = elur.length > 0;
 
-                            if (list) {
-                                var edon = list;
-                            } else {
-                                var last = elur[elur.length - 1];
-                                if (cssRule.cssRules[sss].type === 4 && last.parentNode.getAttribute('condition') === cssRule.cssRules[sss].parentRule.conditionText) {
-                                    var edon = last;
-                                } else if (cssRule.cssRules[sss].type === 1 && last.parentNode.getAttribute('condition') && last.parentNode.getAttribute('condition') !== cssRule.cssRules[sss].parentRule.conditionText && last.parentNode.parentNode.closest('sheet')) {
-                                    var edon = last.parentNode.parentNode;
-                                } else if (cssRule.cssRules[sss].type === 1 && !last.parentNode.getAttribute('condition')) {
-                                    if(last.innerHTML === "") {
+                                cssRule.cssRules[sss].type === 1 ? type = "style" : null;
+                                cssRule.cssRules[sss].type === 4 ? type = "media" : null;
+                                var cond = type === "media" && !list;
+                                where = cond ? 'afterend' : 'beforeend';
+
+                                if (list) {
+                                    var edon = list;
+                                } else {
+                                    var last = elur[elur.length - 1];
+                                    if (cssRule.cssRules[sss].type === 4 && last.parentNode.getAttribute('condition') === cssRule.cssRules[sss].parentRule.conditionText) {
                                         var edon = last;
+                                    } else if (cssRule.cssRules[sss].type === 1 && last.parentNode.getAttribute('condition') && last.parentNode.getAttribute('condition') !== cssRule.cssRules[sss].parentRule.conditionText && last.parentNode.parentNode.closest('sheet')) {
+                                        var edon = last.parentNode.parentNode;
+                                    } else if (cssRule.cssRules[sss].type === 1 && !last.parentNode.getAttribute('condition')) {
+                                        if (last.innerHTML === "") {
+                                            var edon = last;
+                                        } else {
+                                            var edon = last.parentNode;
+                                        }
                                     } else {
                                         var edon = last.parentNode;
                                     }
-                                } else {
-                                    var edon = last.parentNode;
+                                    if (cssRule.cssRules[sss].type === 4 || cssRule.cssRules[sss].type === 1) {
+                                        console.log({
+                                            edon,
+                                            ct: cssRule.cssRules[sss].type
+                                        }, {
+                                            last,
+                                            pn: last.parentNode
+                                        }, {
+                                            lc: last.parentNode.getAttribute('condition'),
+                                            pc: cssRule.cssRules[sss].parentRule.conditionText
+                                        }, {
+                                            st: cssRule.cssRules[sss].selectorText
+                                        });
+                                    }
                                 }
-                                if (cssRule.cssRules[sss].type === 4 || cssRule.cssRules[sss].type === 1) {
-                                    console.log({
-                                        edon,
-                                        ct: cssRule.cssRules[sss].type
-                                    }, {
-                                        last,
-                                        pn: last.parentNode
-                                    }, {
-                                        lc: last.parentNode.getAttribute('condition'),
-                                        pc: cssRule.cssRules[sss].parentRule.conditionText
-                                    }, {
-                                        st: cssRule.cssRules[sss].selectorText
-                                    });
-                                }
-                            }
-                            var ifit = cond ? 'nextElementSibling' : 'lastElementChild';
-                            console.log(961, {
-                                cond,
-                                type,
-                                where,
-                                text: cssRule.cssRules[sss].selectorText || cssRule.cssRules[sss].conditionText
-                            }, {
-                                elur,
-                                edon,
-                                lure,
-                                sss: cssRule.cssRules[sss]
-                            }, {
-                                ee,
-                                eee,
-                                eel: ee.length
-                            });
-                            edon.insertAdjacentHTML(where, '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '  id="' + Crypto.uid.create(1) + '">' + declaration + '</rule>');
-                            var elur = document.querySelector('css').querySelectorAll('rule');
-                            var elur = document.querySelector('css').querySelectorAll('rule');
-                            var eee = elur.length > 0;
-                            var ifit = cond ? 'nextElementSibling' : 'lastElementChild';
-                            var lure = elur[elur.length - 1];
-                            console.log(964, {
-                                type
-                            }, {
-                                elur,
-                                edon,
-                                last: edon.lastElementChild
-                            }, {
-                                ee,
-                                eee,
-                                eel: ee.length
-                            }, {
-                                edonifit: edon[ifit],
-                                ifit
-                            });
-                            lure.mr = cssRule.cssRules[sss];
-                            cssRule.cssRules[sss].type === 1 ? lure.setAttribute('class', selector) : null;
-                            cssRule.cssRules[sss].type === 4 ? lure.setAttribute('condition', cssRule.cssRules[sss].conditionText) : null;
-                            var cms = cssRule.cssRules[sss];
-                            console.log(807, 807.1, {
-                                type,
-                                cms
-                            }, {
-                                ee: ee.getAttribute('css'),
-                                list,
-                                edon,
-                                rule: cssRule.cssRules[sss],
-                                list,
-                                sheet,
-                                dommie,
-                                cssObject
-                            }, cssRule.cssRules[sss], list instanceof HTMLElement);
-                            if (type === "media") {
-                                loops(edon, cms);
-                                function loops(edo, cr, z, y) {
-                                    var root = edo.lastElementChild && edo.lastElementChild.innerHTML === "" ? edo.lastElementChild : edo.nextElementSibling;
-                                    console.log(869, 869.1, {
-                                        edo,
-                                        root,
-                                        cr,
-                                        z,
-                                        cms
-                                    });
-                                    root ? null : root = edo;
-                                    console.log(869, 869.2, {
-                                        edo,
-                                        root,
-                                        cr,
-                                        z,
-                                        cms
-                                    });
-                                    if (cr) {
-                                        var m = cr.cssRules;
-                                        var r = 0;
-                                        0 < 1 ? console.log(873, '880 loop', {
-                                            m
-                                        }) : null;
-                                        if (m.length > 0) {
-                                            do {
-                                                var t = m[r].type === 1 ? 'style' : '';
-                                                t = t ? t : m[r].type === 4 ? 'media' : '';
-                                                console.log(875, m[r].type, {
-                                                    t,
-                                                    mr: m[r],
-                                                    m,
-                                                    cms,
-                                                    z,
-                                                    y,
-                                                    root,
-                                                    cr,
-                                                    rules: cssRule.cssRules
-                                                });
-                                                root.mr = m[r];
-                                                //list.insertAdjacentHTML('beforeend', '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '  id="' + Crypto.uid.create(1) + '">' + declaration + '</rule>');
-                                                if (t === "media" || t === "style") {
-                                                    cms = cms ? cms.cssRules[r] : null;
-                                                    if (m[r]) {
-                                                        var declaration = JSON.stringify(parseCSSText(m[r].cssText).style);
-                                                        var selector = unescape(parseCSSText(m[r].cssText).ruleName);
-                                                    }
-                                                    console.log(982, {
-                                                        length: m[r].cssRules.length,
-                                                        mr: m[r],
-                                                        root,
+                                var ifit = cond ? 'nextElementSibling' : 'lastElementChild';
+                                console.log(961, {
+                                    cond,
+                                    type,
+                                    where,
+                                    text: cssRule.cssRules[sss].selectorText || cssRule.cssRules[sss].conditionText
+                                }, {
+                                    elur,
+                                    edon,
+                                    lure,
+                                    sss: cssRule.cssRules[sss]
+                                }, {
+                                    ee,
+                                    eee,
+                                    eel: ee.length
+                                });
+                                edon.insertAdjacentHTML(where, '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '  id="' + Crypto.uid.create(1) + '">' + declaration + '</rule>');
+                                var elur = document.querySelector('css').querySelectorAll('rule');
+                                var elur = document.querySelector('css').querySelectorAll('rule');
+                                var eee = elur.length > 0;
+                                var ifit = cond ? 'nextElementSibling' : 'lastElementChild';
+                                var lure = elur[elur.length - 1];
+                                console.log(964, {
+                                    type
+                                }, {
+                                    elur,
+                                    edon,
+                                    last: edon.lastElementChild
+                                }, {
+                                    ee,
+                                    eee,
+                                    eel: ee.length
+                                }, {
+                                    edonifit: edon[ifit],
+                                    ifit
+                                });
+                                lure.mr = cssRule.cssRules[sss];
+                                cssRule.cssRules[sss].type === 1 ? lure.setAttribute('class', selector) : null;
+                                cssRule.cssRules[sss].type === 4 ? lure.setAttribute('condition', cssRule.cssRules[sss].conditionText) : null;
+                                var cms = cssRule.cssRules[sss];
+                                console.log(807, 807.1, {
+                                    type,
+                                    cms
+                                }, {
+                                    ee: ee.getAttribute('css'),
+                                    list,
+                                    edon,
+                                    rule: cssRule.cssRules[sss],
+                                    list,
+                                    sheet,
+                                    dommie,
+                                    cssObject
+                                }, cssRule.cssRules[sss], list instanceof HTMLElement);
+                                if (type === "media") {
+                                    loops(edon, cms);
+                                    function loops(edo, cr, z, y) {
+                                        var root = edo.lastElementChild && edo.lastElementChild.innerHTML === "" ? edo.lastElementChild : edo.nextElementSibling;
+                                        console.log(869, 869.1, {
+                                            edo,
+                                            root,
+                                            cr,
+                                            z,
+                                            cms
+                                        });
+                                        root ? null : root = edo;
+                                        console.log(869, 869.2, {
+                                            edo,
+                                            root,
+                                            cr,
+                                            z,
+                                            cms
+                                        });
+                                        if (cr) {
+                                            var m = cr.cssRules;
+                                            var r = 0;
+                                            0 < 1 ? console.log(873, '880 loop', {
+                                                m
+                                            }) : null;
+                                            if (m.length > 0) {
+                                                do {
+                                                    var t = m[r].type === 1 ? 'style' : '';
+                                                    t = t ? t : m[r].type === 4 ? 'media' : '';
+                                                    console.log(875, m[r].type, {
                                                         t,
-                                                        rule: cssRule.cssRules[sss]
+                                                        mr: m[r],
+                                                        m,
+                                                        cms,
+                                                        z,
+                                                        y,
+                                                        root,
+                                                        cr,
+                                                        rules: cssRule.cssRules
                                                     });
-                                                    if (0 < 1) {
-                                                        console.log(1059, {
-                                                            root,
-                                                            selector
-                                                        });
-                                                        root.insertAdjacentHTML('beforeend', `<rule css="${t}" id="${Crypto.uid.create(1)}">${declaration}</rule>`);
-                                                        selector ? root.lastElementChild.setAttribute('selector', selector) : null;
-                                                        t === "media" ? root.lastElementChild.setAttribute('recursive', true) : null;
-                                                        root.lastElementChild.mr = m[r];
-                                                        root.lastElementChild.setAttribute('selector', m[r].selectorText);
-                                                    }
-                                                    if (m && m[r].cssRules.length > 0) {
-                                                        if (t === "media") {
-                                                            rl = root.lastElementChild;
-                                                        } else {
-                                                            rl = root;
+                                                    root.mr = m[r];
+                                                    //list.insertAdjacentHTML('beforeend', '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '  id="' + Crypto.uid.create(1) + '">' + declaration + '</rule>');
+                                                    if (t === "media" || t === "style") {
+                                                        cms = cms ? cms.cssRules[r] : null;
+                                                        if (m[r]) {
+                                                            var declaration = JSON.stringify(parseCSSText(m[r].cssText).style);
+                                                            var selector = unescape(parseCSSText(m[r].cssText).ruleName);
                                                         }
-                                                        loops(rl, m[r], 'recursed=true', parseCSSText(cms.cssText));
-                                                        console.log(876, 'media.type.recursion', t, root.lastElementChild.outerHTML, m[r], rl)
+                                                        console.log(982, {
+                                                            length: m[r].cssRules.length,
+                                                            mr: m[r],
+                                                            root,
+                                                            t,
+                                                            rule: cssRule.cssRules[sss]
+                                                        });
+                                                        if (0 < 1) {
+                                                            console.log(1059, {
+                                                                root,
+                                                                selector
+                                                            });
+                                                            root.insertAdjacentHTML('beforeend', `<rule css="${t}" id="${Crypto.uid.create(1)}">${declaration}</rule>`);
+                                                            selector ? root.lastElementChild.setAttribute('selector', selector) : null;
+                                                            t === "media" ? root.lastElementChild.setAttribute('recursive', true) : null;
+                                                            root.lastElementChild.mr = m[r];
+                                                            root.lastElementChild.setAttribute('selector', m[r].selectorText);
+                                                        }
+                                                        if (m && m[r].cssRules.length > 0) {
+                                                            if (t === "media") {
+                                                                rl = root.lastElementChild;
+                                                            } else {
+                                                                rl = root;
+                                                            }
+                                                            loops(rl, m[r], 'recursed=true', parseCSSText(cms.cssText));
+                                                            console.log(876, 'media.type.recursion', t, root.lastElementChild.outerHTML, m[r], rl)
+                                                        }
+                                                        //m = cms;
                                                     }
-                                                    //m = cms;
-                                                }
-                                                r++;
-                                            } while (r < m.length);
+                                                    r++;
+                                                } while (r < m.length);
+                                            }
                                         }
                                     }
+                                    //list = list.lastElementChild;
+                                    //cssRules = cssRule.cssRules[sss].cssRules;
+                                    //sss = 0;
                                 }
-                                //list = list.lastElementChild;
-                                //cssRules = cssRule.cssRules[sss].cssRules;
-                                //sss = 0;
-                            }
-                        } else {
-                            type = cssRule.cssRules[sss].type === 1 ? 'style' : '';
-                            type = type ? type : cssRule.cssRules[sss].type === 4 ? 'media' : '';
-                            var cssObject = parseCSSText(cssRule.cssRules[sss].cssText);
-                            var selector = cssRule.cssRules[sss].selectorText;
+                            } else {
+                                type = cssRule.cssRules[sss].type === 1 ? 'style' : '';
+                                type = type ? type : cssRule.cssRules[sss].type === 4 ? 'media' : '';
+                                var cssObject = parseCSSText(cssRule.cssRules[sss].cssText);
+                                var selector = cssRule.cssRules[sss].selectorText;
 
-                            var declaration = '';
-                            if (type === "style") {
-                                declaration = '{';
-                                //template.querySelector('header').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + selectorText + '</span> <span>{</span>';
-                                Object.keys(cssObject.style).forEach((prop,index)=>{
-                                    prop = prop.replace(/[A-Z]/g, m=>"-" + m.toLowerCase());
-                                    val = Object.values(cssObject.style)[index];
-                                    console.log(66, {
-                                        prop,
-                                        val
-                                    });
-                                    declaration += prop + ':' + val + ';';
+                                var declaration = '';
+                                if (type === "style") {
+                                    declaration = '{';
+                                    //template.querySelector('header').innerHTML = '<span onkeydown="window.editor.elements.selector(event)" onkeyup="window.editor.elements.selector(event)">' + selectorText + '</span> <span>{</span>';
+                                    Object.keys(cssObject.style).forEach((prop,index)=>{
+                                        prop = prop.replace(/[A-Z]/g, m=>"-" + m.toLowerCase());
+                                        val = Object.values(cssObject.style)[index];
+                                        console.log(66, {
+                                            prop,
+                                            val
+                                        });
+                                        declaration += prop + ':' + val + ';';
+                                    }
+                                    );
+                                    declaration += '}';
                                 }
-                                );
-                                declaration += '}';
-                            }
-                            if (type === "media") {
-                                var cr = cssRule.cssRules[sss];
-                                //var list = document.head.querySelector('css').querySelector('rule[dom]:empty');
-                                var rs = document.head.querySelector('css').querySelectorAll('rule');
-                                var pn = rs[rs.length - 1].parentNode;
-                                //list ? null : list = rs[rs.length - 1].parentNode;
-                                console.log(891, {
-                                    list,
-                                    cr,
-                                    pn
-                                });
-                                Array.from(cr.cssRules).forEach((a,b)=>{
-                                    console.log(872, {
-                                        a,
-                                        b,
+                                if (type === "media") {
+                                    var cr = cssRule.cssRules[sss];
+                                    //var list = document.head.querySelector('css').querySelector('rule[dom]:empty');
+                                    var rs = document.head.querySelector('css').querySelectorAll('rule');
+                                    var pn = rs[rs.length - 1].parentNode;
+                                    //list ? null : list = rs[rs.length - 1].parentNode;
+                                    console.log(891, {
+                                        list,
+                                        cr,
                                         pn
                                     });
-                                    var t = a.type === 1 ? "style" : "";
-                                    t = t ? t : a.type === 4 ? "media" : "";
-                                    if (list) {
-                                        list.insertAdjacentHTML('beforeend', '<rule css="' + t + '"' + (a.selectorText ? ' selector=\"' + a.selectorText + '\"' : '') + '>' + JSON.stringify(parseCSSText(a.cssText).style) + '</rule>');
-                                        list.lastElementChild.setAttribute('class', a.selectorText)
+                                    Array.from(cr.cssRules).forEach((a,b)=>{
+                                        console.log(872, {
+                                            a,
+                                            b,
+                                            pn
+                                        });
+                                        var t = a.type === 1 ? "style" : "";
+                                        t = t ? t : a.type === 4 ? "media" : "";
+                                        if (list) {
+                                            list.insertAdjacentHTML('beforeend', '<rule css="' + t + '"' + (a.selectorText ? ' selector=\"' + a.selectorText + '\"' : '') + '>' + JSON.stringify(parseCSSText(a.cssText).style) + '</rule>');
+                                            list.lastElementChild.setAttribute('class', a.selectorText)
+                                        }
                                     }
+                                    );
+                                    //cssRule.cssRules = cr.cssRules;
+                                    //sss = -1;
+                                    //forEach() 
+                                    //declaration.push(obj);
                                 }
-                                );
-                                //cssRule.cssRules = cr.cssRules;
-                                //sss = -1;
-                                //forEach() 
-                                //declaration.push(obj);
+                                //list.insertAdjacentHTML('beforeend', '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '>' + declaration + '</rule>');                          
+                                console.log(807, 807.2, {
+                                    list,
+                                    dommie,
+                                    cssObject
+                                }, cssRule.cssRules[sss], list instanceof HTMLElement)
                             }
-                            //list.insertAdjacentHTML('beforeend', '<rule css="' + type + '"' + (selector ? ' selector="' + selector + '"' : '') + '>' + declaration + '</rule>');                          
-                            console.log(807, 807.2, {
-                                list,
-                                dommie,
-                                cssObject
-                            }, cssRule.cssRules[sss], list instanceof HTMLElement)
+                            //}
+                            sss++;
                         }
-                        //}
-
-                        sss++;
                     } while (sss < cssRule.cssRules.length);
                 }
                 //css.push(obj);
@@ -1211,6 +1240,7 @@ window.editor.elements.selecting = function(event) {
         });
     }
 
+    //STYLES PANEL
     if (document.head.querySelector('css')) {
         var css = document.head.querySelector('css');
         var rules = css.querySelectorAll('rule[css="style"]');
@@ -1266,7 +1296,7 @@ window.editor.elements.selecting = function(event) {
                     }) : null;
                 }
             } else {
-                var matches = element.node.matches(mr.selectorText);
+                var matches = mr ? element.node.matches(mr.selectorText) : false;
                 matched = true;
             }
 
