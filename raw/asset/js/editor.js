@@ -751,12 +751,14 @@ window.editor.elements.styles = function(event) {
                     var css = el.getAttribute('css');
                     if(css === "media") {
                         desc.push({
+                            rule: null,
                             conditionText: el.getAttribute('condition'),
                             type: 4
                         });
                     }
                     if(css === "style") {
                         desc.push({
+                            rule: null,
                             selectorText: box.rule.selectorText,
                             type: 1
                         });                        
