@@ -746,20 +746,24 @@ window.editor.elements.styles = function(event) {
                     sheet
                 });
                 var desc = [];
+                var cssText = "";
                 Array.from(cssom).reverse().forEach(function(el, index) {
                     var tagName = el.tagName.toLowerCase();
+                    var conditionText = el.getAttribute('condition');
                     var css = el.getAttribute('css');
                     if(css === "media") {
+                        cssText += "@media " + conditionText + " {";
                         desc.push({
-                            rule: null,
+                            text: cssText,
                             parse: parseCSSText(box.rule.cssText),
-                            conditionText: el.getAttribute('condition'),
+                            conditionText,
                             type: 4
                         });
                     }
                     if(css === "style") {
+                        cssText += box.rule.selectorText + " {";
                         desc.push({
-                            rule: null,
+                            text: null,
                             parse: parseCSSText(box.rule.cssText),
                             selectorText: box.rule.selectorText,
                             type: 1
