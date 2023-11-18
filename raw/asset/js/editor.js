@@ -752,6 +752,7 @@ window.editor.elements.styles = function(event) {
                     if(css === "media") {
                         desc.push({
                             rule: null,
+                            parse: parseCSSText(box.rule.cssText),
                             conditionText: el.getAttribute('condition'),
                             type: 4
                         });
@@ -759,6 +760,7 @@ window.editor.elements.styles = function(event) {
                     if(css === "style") {
                         desc.push({
                             rule: null,
+                            parse: parseCSSText(box.rule.cssText),
                             selectorText: box.rule.selectorText,
                             type: 1
                         });                        
