@@ -763,7 +763,7 @@ window.editor.elements.styles = function(event) {
                     if(css === "style") {
                         cssText += box.rule.selectorText + " {";
                         desc.push({
-                            text: null,
+                            text: cssText,
                             parse: parseCSSText(box.rule.cssText),
                             selectorText: box.rule.selectorText,
                             type: 1
