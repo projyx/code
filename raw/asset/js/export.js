@@ -260,6 +260,7 @@ async function wIDE(paths) {
         var component = editor.closest('component');
 
         var l = [];
+        var myStyleSheets = [];
         if (0 < 1 && styles.length > 0) {
             var i = 0;
             do {
@@ -283,7 +284,7 @@ async function wIDE(paths) {
                     //console.log(164, l);            
                     const myStyleSheet = new contentWindow.CSSStyleSheet();
                     myStyleSheet.replace(text);
-                    contentWindow.document.styleSheets.push(myStyleSheet);
+                    myStyleSheets.push(myStyleSheet);
                 }
                 i++;
             } while (i < styles.length);
@@ -339,9 +340,15 @@ async function wIDE(paths) {
           ${body.outerHTML}
         </html>
         `;
-        editor.src = getBlobURL(src, 'text/html');        
-        iFrameReady(editor, function() {            
+        editor.src = getBlobURL(src, 'text/html');
+        iFrameReady(editor, function() {
             var pushState = contentWindow.history.pushState;
+
+            myStyleSheets.forEach(function(myStyleSheet) {
+                console.log(348, {
+                    myStyleSheet
+                });
+            });
 
             var consolelog = contentWindow.console.log;
             contentWindow.console.log = function(txt) {
@@ -913,6 +920,40 @@ var getParents = function(elem, selector) {
     // Return our parent array
     return parents;
 
+};
+
+// Helpers
+const leafPath = (ps = [], obj = {}) =>
+  ps .reduce ((o, p) => (o || {}) [p], obj)
+
+const findLeafPaths = (o, path = [[]]) => 
+  typeof o == 'object'
+    ? Object .entries (o) .flatMap (
+        ([k, v]) => findLeafPaths (v, path).map(p => [k, ...p])
+      ) 
+    : path
+
+const makeSearcher = (xs) => {
+  const structure = xs .reduce (
+    (a, x) => findLeafPaths (x) .reduce ((a, p) => ({...a, [leafPath (p, x)]: p}), a),
+    {}
+  )
+  return (val) => structure[val] || [] // something else? or throw error?
+}
+
+function keyPath(c, name, v, currentPath, t){
+    var currentPath = currentPath || "root";
+
+    for(var i in c){
+      if(i == name && c[i] == v){
+        t = currentPath;
+      }
+      else if(typeof c[i] == "object"){
+        return path(c[i], name, v, currentPath + "." + i);
+      }
+    }
+
+    return t + "." + name;
 };
 
 window.Crypto = crypt = cx = {

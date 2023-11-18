@@ -725,6 +725,7 @@ window.editor.elements.styles = function(event) {
                     }
                 }
                 var parse = parseCSSText(css);
+                var node = box.node;
 
                 console.log(709, {
                     box,
@@ -732,19 +733,44 @@ window.editor.elements.styles = function(event) {
                     rule: box.rule,
                     sheets
                 });
-
+                
+                //var cssom = makeSearcher(box.rule);
+                var cssom = getParents(node, 'css *');
                 console.log(668, {
                     box,
                     css,
+                    cssom,
+                    node,
                     rule: box.rule,
                     sheets,
                     sheet
+                });
+                var desc = [];
+                Array.from(cssom).forEach(function(el, index) {
+                    var tagName = el.tagName.toLowerCase();
+                    var css = el.getAttribute('css');
+                    if(css === "media") {
+                        desc.push({
+                            conditionText: el.getAttribute('condition'),
+                            type: 4
+                        });
+                    }
+                    if(css === "style") {
+                        desc.push({
+                            selectorText: box.rule.selectorText,
+                            type: 1
+                        });                        
+                    }
+                    console.log(749, {
+                        el
+                    });
                 });
                 //sheets.forEach(sheet=>{
                 sheet.insertRule(parse.cssText, sheet.cssRules.length - 1);
                 //cssText = `.component-home .home-people .people-user { display: flex; width: calc((100% - 220px) / 12); }`;
                 //sheet.addRule(box.rule.selectorText, parseCSSText(css).cssText.split('{')[1].split('}')[0], 1);
                 console.log(688, 'sheet.insertRule', sheet, {
+                    desc,
                     selectorText: box.rule.selectorText,
                     cssText: parse
                 }, {
