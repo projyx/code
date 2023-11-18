@@ -746,7 +746,7 @@ window.editor.elements.styles = function(event) {
                     sheet
                 });
                 var desc = [];
-                Array.from(cssom).forEach(function(el, index) {
+                Array.from(cssom).reverse().forEach(function(el, index) {
                     var tagName = el.tagName.toLowerCase();
                     var css = el.getAttribute('css');
                     if(css === "media") {
