@@ -702,24 +702,25 @@ window.editor.elements.styles = function(event) {
                     let absoluteURL = new URL(window.sheets,document.baseURI).href;
                     window.sheets = [...stylesheets].filter(i=>i.href == absoluteURL);
                 } else {
-                    window.sheets = window.sheets; //[window.sheets];
+                    window.sheets = window.sheets;
+                    //[window.sheets];
                 }
                 // sheets is a stylesheet                
                 var sheet = window.sheets.filter(checkSheet)[0];
                 function checkSheet(s) {
-                    if(s.href && !s.parentStyleSheet) {
-                        if(s.href === box.rule.parentStyleSheet.ownerNode.href) {
+                    if (s.href && !s.parentStyleSheet) {
+                        if (s.href === box.rule.parentStyleSheet.ownerNode.href) {
                             return true;
                         }
-                        if(s.href === box.rule.href) {
+                        if (s.href === box.rule.href) {
                             return true;
                         }
                     }
-                    if(!s.href && s.parentStyleSheet.ownerNode.href) {
-                        if(s.parentStyleSheet.ownerNode.href === box.rule.parentStyleSheet.ownerNode.href) {
+                    if (!s.href && s.parentStyleSheet.ownerNode.href) {
+                        if (s.parentStyleSheet.ownerNode.href === box.rule.parentStyleSheet.ownerNode.href) {
                             return true;
                         }
-                        if(s.parentStyleSheet.ownerNode.href === box.rule.href) {
+                        if (s.parentStyleSheet.ownerNode.href === box.rule.href) {
                             return true;
                         }
                     }
@@ -733,7 +734,7 @@ window.editor.elements.styles = function(event) {
                     rule: box.rule,
                     sheets
                 });
-                
+
                 //var cssom = makeSearcher(box.rule);
                 var cssom = getParents(node, 'css *');
                 console.log(668, {
@@ -746,41 +747,68 @@ window.editor.elements.styles = function(event) {
                     sheet
                 });
                 var desc = [];
-                var cssText = "";
                 Array.from(cssom).reverse().forEach(function(el, index) {
                     var tagName = el.tagName.toLowerCase();
                     var conditionText = el.getAttribute('condition');
                     var css = el.getAttribute('css');
-                    if(css === "media") {
-                        cssText += "@media " + conditionText + " {";
+                    if (css === "media") {
                         desc.push({
-                            text: cssText,
+                            el,
                             parse: parseCSSText(box.rule.cssText),
                             conditionText,
                             type: 4
                         });
                     }
-                    if(css === "style") {
-                        cssText += box.rule.selectorText + " {";
+                    if (css === "style") {
                         desc.push({
-                            text: cssText,
+                            el,
                             parse: parseCSSText(box.rule.cssText),
                             selectorText: box.rule.selectorText,
                             type: 1
-                        });                        
+                        });
                     }
                     console.log(749, {
                         el
                     });
                 });
-                //sheets.forEach(sheet=>{
+                var cssText = "";
+                desc.forEach(leaf=>{
+                    var type = leaf.type;
+                    0 < 1 ? console.log(777, {
+                        type
+                    }) : null;
+                    
+                    if (type === 4) {
+                        cssText += "@media " + leaf.conditionText + " { ";
+                    }
+                    if (type === 1) {
+                        cssText += box.rule.selectorText + " { ";
+                    }
+                }
+                );
+                desc.forEach(leaf=>{
+                    var el = leaf.el;
+                    var css = el.getAttribute('css');
+                    if(css === "style") {
+                        var ruler = parse.cssText.split('{')[1].split('}')[0];                    
+                        cssText += ruler;
+                    }
+                }
+                );
+                desc.forEach(leaf=>{
+                    var type = leaf.type;
+                    
+                    cssText += " }";
+                }
+                );
                 sheet.insertRule(parse.cssText, sheet.cssRules.length - 1);
                 //cssText = `.component-home .home-people .people-user { display: flex; width: calc((100% - 220px) / 12); }`;
                 //sheet.addRule(box.rule.selectorText, parseCSSText(css).cssText.split('{')[1].split('}')[0], 1);
                 console.log(688, 'sheet.insertRule', sheet, {
                     desc,
                     selectorText: box.rule.selectorText,
-                    cssText: parse
+                    parse,
+                    cssText
                 }, {
                     css,
                     box: box,
