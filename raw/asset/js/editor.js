@@ -818,6 +818,7 @@ window.editor.elements.styles = function(event) {
                     css,
                     box: box,
                     rule: box.rule,
+                    nest,
                     target
                 });
                 //}
