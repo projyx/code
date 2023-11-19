@@ -781,10 +781,12 @@ window.editor.elements.styles = function(event) {
                     
                     if (type === 4) {
                         cssText += "@media " + leaf.conditionText + " { ";
+                        var twig = '';
                         nest.push(twig);
                     }
                     if (type === 1) {
                         cssText += box.rule.selectorText + " { ";
+                        var twig = '';
                         nest.push(twig);
                     }
                 }
