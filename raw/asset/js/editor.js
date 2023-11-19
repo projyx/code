@@ -772,6 +772,7 @@ window.editor.elements.styles = function(event) {
                     });
                 });
                 var cssText = "";
+                var nest = [];
                 desc.forEach(leaf=>{
                     var type = leaf.type;
                     0 < 1 ? console.log(777, {
@@ -780,9 +781,11 @@ window.editor.elements.styles = function(event) {
                     
                     if (type === 4) {
                         cssText += "@media " + leaf.conditionText + " { ";
+                        nest.push(twig);
                     }
                     if (type === 1) {
                         cssText += box.rule.selectorText + " { ";
+                        nest.push(twig);
                     }
                 }
                 );
