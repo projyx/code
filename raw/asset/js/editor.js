@@ -706,10 +706,12 @@ window.editor.elements.styles = function(event) {
                     //[window.sheets];
                 }
                 // sheets is a stylesheet                
+                var xdi = node.closest('sheet');
+                var idx = Array.from(xdi.parentNode.children).indexOf(xdi);
                 var sheet = window.sheets.filter(checkSheet)[0];
                 function checkSheet(s) {
                     if (s.href && !s.parentStyleSheet) {
-                        if (s.href === box.rule.parentStyleSheet.ownerNode.href) {
+                        if (s.href === xdi.parentNode.children[idx].href) {
                             return true;
                         }
                         if (s.href === box.rule.href) {
@@ -738,6 +740,8 @@ window.editor.elements.styles = function(event) {
                 //var cssom = makeSearcher(box.rule);
                 var cssom = getParents(node, 'css *');
                 console.log(668, {
+                    idx,
+                    xdi: xdi.parentNode.children[idx],
                     box,
                     css,
                     cssom,
@@ -773,40 +777,64 @@ window.editor.elements.styles = function(event) {
                 });
                 var cssText = "";
                 var nest = [];
-                desc.forEach(leaf=>{
+                var insert;
+                desc.every(leaf=>{
+                    var el = leaf.el;
                     var type = leaf.type;
                     0 < 1 ? console.log(777, {
                         type
                     }) : null;
-                    
                     if (type === 4) {
                         cssText += "@media " + leaf.conditionText + " { ";
-                        var twig = '';
+                        var index = Array.from(el.parentNode.children).indexOf(el);
+                        var twig = index;
                         nest.push(twig);
                     }
                     if (type === 1) {
                         cssText += box.rule.selectorText + " { ";
-                        var twig = '';
-                        nest.push(twig);
+                        var index = Array.from(el.parentNode.children).indexOf(el);
+                        var twig = index;
+                        //nest.push(twig);
+                    }
+                    if ([1].includes(type)) {
+                        insert = twig;
+                        return false;
+                    } else {
+                        return true;
                     }
                 }
                 );
-                desc.forEach(leaf=>{
+                desc.every(leaf=>{
                     var el = leaf.el;
                     var css = el.getAttribute('css');
-                    if(css === "style") {
-                        var ruler = parse.cssText.split('{')[1].split('}')[0];                    
+                    if (css === "style") {
+                        var ruler = parse.cssText.split('{')[1].split('}')[0];
                         cssText += ruler;
+                    }
+                    if ([1].includes(type)) {
+                        return false;
+                    } else {
+                        return true;
                     }
                 }
                 );
-                desc.forEach(leaf=>{
+                desc.every(leaf=>{
                     var type = leaf.type;
-                    
                     cssText += " }";
+                    if ([1].includes(type)) {
+                        return false;
+                    } else {
+                        return true;
+                    }
                 }
                 );
-                sheet.insertRule(parse.cssText, sheet.cssRules.length - 1);
+                var position = document.getElementById('preview-editor').contentWindow.document.styleSheets[idx];
+                nest.forEach(function(o) {
+                    position = position.cssRules[o];
+                })
+                var index = insert; //nest[nest.length - 1];
+                position.insertRule(parse.cssText, index);
+                //sheet.insertRule(parse.cssText, sheet.cssRules.length - 1);
                 //cssText = `.component-home .home-people .people-user { display: flex; width: calc((100% - 220px) / 12); }`;
                 //sheet.addRule(box.rule.selectorText, parseCSSText(css).cssText.split('{')[1].split('}')[0], 1);
                 console.log(688, 'sheet.insertRule', sheet, {
@@ -815,12 +843,19 @@ window.editor.elements.styles = function(event) {
                     parse,
                     cssText
                 }, {
+                    idx,
+                    sheet: xdi.parentNode.children[idx],
+                    position,
+                    index,
+                    insert
+                }, {
                     css,
                     box: box,
                     rule: box.rule,
                     nest,
                     target
                 });
+                position.deleteRule(index + 1);
                 //}
                 //);
                 //})
