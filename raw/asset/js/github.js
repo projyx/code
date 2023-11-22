@@ -410,7 +410,7 @@ github.repos = {};
 github.repos.contents = (params,settings)=>{
     settings ? null : settings = {};
     return new Promise(function(resolve, reject) {
-        const url = github.endpoint + "/repos/" + params.owner + "/" + params.repo + "/contents/" + params.path;
+        const url = github.endpoint + "/repos/" + params.owner + "/" + params.repo + "/contents" + params.resource;
         const a = data=>{
             resolve(data);
         }

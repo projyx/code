@@ -1,7 +1,7 @@
 function request(resource, options) {
     return new Promise(async function(resolve, reject) {
         await fetch(resource, options).then(async(response)=>{
-            //console.log(4, response);
+            console.log(4, response);
             if (!response.ok) {
                 return response.text().then(text=>{
                     var text = JSON.stringify({
@@ -23,7 +23,11 @@ function request(resource, options) {
             }
         }
         ).catch(error=>{
-            console.log("function_get 404 ERROR", error);
+            console.log("function_get 404 ERROR", {
+                error,
+                resource,
+                options
+            });
             reject(error);
         }
         )
@@ -273,7 +277,7 @@ async function wIDE(paths) {
                     var json = await github.repos.contents({
                         owner: paths[0],
                         repo: paths[1],
-                        path: uri.pathname.split('/').filter(o=>o.length > 0).join('/')
+                        resource: uri.pathname.split('/').filter(o=>o.length > 0).join('/')
                     });
 
                     var text = atob(json.content);
@@ -302,7 +306,7 @@ async function wIDE(paths) {
                         var json = await github.repos.contents({
                             owner: paths[0],
                             repo: paths[1],
-                            path: path
+                            resource: path
                         });
                         var text = atob(json.content);
                         var blob = getBlobURL(text, 'text/javascript');
@@ -923,39 +927,33 @@ var getParents = function(elem, selector) {
 };
 
 // Helpers
-const leafPath = (ps = [], obj = {}) =>
-  ps .reduce ((o, p) => (o || {}) [p], obj)
+const leafPath = (ps=[],obj={})=>ps.reduce((o,p)=>(o || {})[p], obj)
 
-const findLeafPaths = (o, path = [[]]) => 
-  typeof o == 'object'
-    ? Object .entries (o) .flatMap (
-        ([k, v]) => findLeafPaths (v, path).map(p => [k, ...p])
-      ) 
-    : path
+const findLeafPaths = (o,path=[[]])=>typeof o == 'object' ? Object.entries(o).flatMap(([k,v])=>findLeafPaths(v, path).map(p=>[k, ...p])) : path
 
-const makeSearcher = (xs) => {
-  const structure = xs .reduce (
-    (a, x) => findLeafPaths (x) .reduce ((a, p) => ({...a, [leafPath (p, x)]: p}), a),
-    {}
-  )
-  return (val) => structure[val] || [] // something else? or throw error?
+const makeSearcher = (xs)=>{
+    const structure = xs.reduce((a,x)=>findLeafPaths(x).reduce((a,p)=>({
+        ...a,
+        [leafPath(p, x)]: p
+    }), a), {})
+    return (val)=>structure[val] || []
+    // something else? or throw error?
 }
 
-function keyPath(c, name, v, currentPath, t){
+function keyPath(c, name, v, currentPath, t) {
     var currentPath = currentPath || "root";
 
-    for(var i in c){
-      if(i == name && c[i] == v){
-        t = currentPath;
-      }
-      else if(typeof c[i] == "object"){
-        return path(c[i], name, v, currentPath + "." + i);
-      }
+    for (var i in c) {
+        if (i == name && c[i] == v) {
+            t = currentPath;
+        } else if (typeof c[i] == "object") {
+            return path(c[i], name, v, currentPath + "." + i);
+        }
     }
 
     return t + "." + name;
-};
-
+}
+;
 window.Crypto = crypt = cx = {
     uid: {
         create: x=>{

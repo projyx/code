@@ -94,13 +94,32 @@ window.routes = function(uri, options) {
                                         var url = new URL(name,parent.origin);
                                         var pn = url.pathname.split("/").filter(o=>o.length > 1);
                                         //var resource = pn.splice(4, pn.length - 1).join("/");
-                                        var resource = path + "/" + file.split('.')[0] + "." + ext;
+                                        //var resource = path + "/" + file.split('.')[0] + "." + ext;
                                         //console.log(93, path, resource);
 
-                                        var json = await github.repos.contents(owner, repo, resource);
+                                        console.log(99, {
+                                            owner,
+                                            repo,
+                                            resource
+                                        });
+
+                                        var resource = "/index.html";
+                                        console.log(114, {
+                                            url
+                                        }, {
+                                            owner,
+                                            repo,
+                                            resource
+                                        });
+
+                                        var json = await github.repos.contents({
+                                            owner,
+                                            repo,
+                                            resource
+                                        });
                                         var content = atob(json.content);
                                         var doc = new DOMParser().parseFromString(content, "text/html");
-                                        var url = "https://api.github.com" + "/repos/" + owner + "/" + repo + "/contents/" + resource;
+
                                         var blob = await github.raw.blob({
                                             owner,
                                             repo,
@@ -339,7 +358,7 @@ window.routes = function(uri, options) {
                                     var trees = await github.repos.contents({
                                         owner,
                                         repo,
-                                        path: 0 < 1 ? "" : (urt.length > 1 ? "/" : "") + urt.join("/")
+                                        resource: 0 < 1 ? "" : (urt.length > 1 ? "/" : "") + urt.join("/")
                                     }, {
                                         headers: {
                                             'If-None-Match': ''
@@ -456,7 +475,7 @@ window.routes = function(uri, options) {
                                             }) : null;
                                         }
                                     })
-                                                        
+
                                     var filetrees = component.querySelector("#file-trees");
                                     var split = uri.split('/');
                                     var urt = split.splice(5, split.length - 1);
