@@ -337,7 +337,7 @@ github.orgs.repos = (org,settings)=>{
 }
 
 github.raw = {};
-github.raw.blob = async(params)=>{
+github.raw.blob = async(params, settings)=>{
     settings ? null : settings = {};
     return new Promise((resolve,reject)=>{
         fetch("https://api.github.com/repos/" + params.owner + "/" + params.repo + "/contents" + params.resource, {
