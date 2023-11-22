@@ -1867,7 +1867,7 @@ window.editor.tree.nl = async function(target) {
     var repo = paths[1];
     var fullname = owner + '/' + paths[1];
     var feed = target.closest('#files-list');
-    var filename = target.closest('span').textContent;
+    var filename = target.closest('text').querySelector('span').textContent;
     var dir = target.closest('column').previousElementSibling.getAttribute('path');
     var path = dir + "/" + filename;
     var ext = filename.split('.')[filename.split('.').length - 1];
@@ -1880,7 +1880,7 @@ window.editor.tree.nl = async function(target) {
         var res = await github.repos.contents({
             owner: owner,
             repo: repo,
-            path: path
+            resource: path
         })
         var sha = res.sha;
         var tab = tabs.nextElementSibling.content.firstElementChild.cloneNode(true);
