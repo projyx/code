@@ -290,6 +290,40 @@ github.database.trees = function(params, settings) {
     }
 }
 
+github.gists = {};
+github.gists.id = async function(id, settings) {
+    settings ? null : settings = {};
+    //alert("github.gists.id " + JSON.stringify(settings));
+    if (Object.keys(settings).length > 0 && settings.method !== "GET") {
+        //alert("297 " + settings.method);
+        if (settings.method) {
+            console.log(298, 'settings.method', settings.method);
+        }
+    } else {
+        //alert("302" + id);
+        return new Promise(function(resolve, reject) {
+            const url = github.endpoint + "/gists/" + id;
+            const a = data=>{
+                console.log(308, data);
+                resolve(data);
+            }
+            const b = (error)=>{
+                console.log(error);
+                resolve(error);
+            }
+            const accessToken = localStorage.githubAccessToken;
+            const settings = accessToken ? {
+                headers: {
+                    Accept: "application/vnd.github+json",
+                    Authorization: "token " + accessToken
+                }
+            } : null;
+            request(url, settings).then(a).catch(b);
+        }
+        );
+    }
+}
+
 github.orgs = {};
 github.orgs.members = async(org,username,settings)=>{
     settings ? null : settings = {};
@@ -337,7 +371,7 @@ github.orgs.repos = (org,settings)=>{
 }
 
 github.raw = {};
-github.raw.blob = async(params, settings)=>{
+github.raw.blob = async(params,settings)=>{
     settings ? null : settings = {};
     return new Promise((resolve,reject)=>{
         fetch("https://api.github.com/repos/" + params.owner + "/" + params.repo + "/contents" + params.resource, {
@@ -377,7 +411,7 @@ github.raw.file = async(params)=>{
         }
     };
     const accessToken = localStorage.githubAccessToken;
-    if(accessToken) {
+    if (accessToken) {
         settings.headers.Accept = "application/vnd.github.raw",
         settings.headers.Authorization = "token " + accessToken
     }
@@ -515,7 +549,7 @@ github.user.repos = (params,settings)=>{
     }
     );
 }
-github.user.self = function(usernam,settings) {
+github.user.self = function(usernam, settings) {
     settings ? null : settings = {};
     return new Promise((resolve,reject)=>{
         const url = github.endpoint + "/user";
@@ -596,7 +630,7 @@ github.users.repos = (username,settings)=>{
     }
     );
 }
-github.users.user = function(username,settings) {
+github.users.user = function(username, settings) {
     settings ? null : settings = {};
     return new Promise((resolve,reject)=>{
         const url = github.endpoint + "/users/" + username;

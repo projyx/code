@@ -88,7 +88,11 @@ async function pvw(e) {
             if (!link.href.includes("/index.css")) {
                 var uri = new URL(link.href);
                 var path = uri.pathname;
-                var json = await github.repos.contents(owner, repo, path);
+                var json = await github.repos.contents({
+                    owner,
+                    repo,
+                    resource: path
+                });
                 var text = atob(json.content);
                 var blob = getBlobURL(text, 'text/javascript');
                 var elem = `<link data-src="${link.href}" rel="stylesheet" type="text/css" href="${blob}" />`
@@ -110,20 +114,26 @@ async function pvw(e) {
         var i = 0;
         do {
             var script = scripts[i];
-            if (!script.src.includes("/index.js")) {
+            if (script.src.includes("/index.js")) {
                 if (script.src.startsWith("http")) {
+                    var elem = `<script src="${script.src}"></script>`;
+                } else {
                     var uri = new URL(script.src);
                     var path = uri.pathname;
-                    var json = await github.repos.contents(owner, repo, path);
+                    var json = await github.repos.contents({
+                        owner,
+                        repo,
+                        resource: path
+                    });
                     var text = atob(json.content);
                     var blob = getBlobURL(text, 'text/javascript');
                     var elem = `<script src="${blob}" data-src="${script.src}">${atob('PC9zY3JpcHQ+')}`;
-                } else {
-                    var elem = `<script src="${script.src}"></script>`;
                 }
                 //console.log(path, {json,text,blob});
                 s.push(elem);
             }
+            //console.log(path, {json,text,blob});
+            s.push(elem);
             //console.log(182, s);
             i++;
         } while (i < scripts.length);
@@ -953,8 +963,7 @@ function keyPath(c, name, v, currentPath, t) {
 
     return t + "." + name;
 }
-;
-window.Crypto = crypt = cx = {
+;window.Crypto = crypt = cx = {
     uid: {
         create: x=>{
             if (window.crypto || window.msCrypto) {

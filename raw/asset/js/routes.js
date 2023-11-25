@@ -16,6 +16,147 @@ window.routes = function(uri, options) {
         if (sub) {
             if (sub === "settings") {
                 console.log("routes.view settings");
+            } else if (sub === "gists") {
+                if (paths.length > 1) {
+                    var username = paths[0];
+                    if (paths.length > 2) {
+                        var id = paths[2];
+                        try {
+                            window.dom = {
+
+                                body: document.body,
+
+                                "style": document.getElementById("css"),
+
+                                "code": document.getElementById("code"),
+
+                                "html": document.getElementById('code-html'),
+
+                                "css": document.getElementById('code-css'),
+
+                                "js": document.getElementById('js-editor'),
+
+                                "resize": {
+
+                                    "code": document.getElementById("resizer"),
+
+                                    "html": document.getElementById('html-resizer'),
+
+                                    "css": document.getElementById('css-resizer'),
+
+                                    "js": document.getElementById('js-resizer')
+
+                                },
+
+                                "iframe": {
+
+                                    "code": {
+
+                                        "elem": document.getElementById("code-frame")
+
+                                    }
+
+                                }
+
+                            };
+
+                            //CONSOLE
+                            let m_pos;
+                            window.dom.pencil = component.querySelector('.aside-code');
+                            var resizer = component.querySelector('line.block-line');
+                            function resize(e) {
+                                const dx = (m_pos - e.x) * -1;
+                                m_pos = e.x;
+                                dom.pencil.style.width = (parseInt(getComputedStyle(dom.pencil, '').width) + dx) + "px";
+                                //console.log({m_pos,x:e.x},dx);
+                            }
+                            resizer.addEventListener("mousedown", function(e) {
+                                //console.log(e.offsetX);
+                                if (e.offsetX < resizer.clientWidth) {
+                                    m_pos = e.x;
+                                    document.body.classList.add('dragging');
+                                    document.addEventListener("mousemove", resize, false);
+                                }
+                            }, false);
+                            resizer.addEventListener("mouseup", function() {
+                                document.body.classList.remove('dragging');
+                                document.removeEventListener("mousemove", resize, false);
+                            }, false);
+
+                            var gist = await github.gists.id(id);
+                            var files = gist.files;
+                            var keys = Object.keys(files);
+                            window.cm = {};
+                            keys.forEach(async(key)=>{
+                                console.log(28, key);
+                                var file = files[key];
+                                var ext = key.split('.')[1];
+                                var content = file.content;
+                                try {
+                                    if (ext === "html") {
+                                        cm[ext] = CodeMirror(component.querySelector('#code-html'), {
+                                            lineNumbers: true,
+                                            lineWrapping: true,
+                                            htmlMode: true,
+                                            mode: 'xml',
+                                            styleActiveLine: true,
+                                            theme: 'abcdef',
+                                            matchBrackets: true
+                                        });
+
+                                        cm[ext].setValue(content);
+                                        cm[ext].on("change", pvw);
+                                        document.getElementById('code-frame')[ext] = content;
+                                    }
+
+                                    if (ext === "css") {
+
+                                        cm[ext] = CodeMirror(component.querySelector('#code-css'), {
+                                            lineNumbers: true,
+                                            lineWrapping: true,
+                                            mode: 'css',
+                                            styleActiveLine: true,
+                                            theme: 'abcdef',
+                                            matchBrackets: true
+                                        });
+
+                                        //console.log(292, content);
+
+                                        cm[ext].setValue(content);
+                                        cm[ext].on("change", pvw);
+                                        document.getElementById('code-frame')[ext] = content;
+                                    }
+
+                                    if (ext === "js") {
+                                        cm[ext] = CodeMirror(component.querySelector('#code-js'), {
+                                            lineNumbers: true,
+                                            lineWrapping: true,
+                                            mode: 'javascript',
+                                            styleActiveLine: true,
+                                            theme: 'abcdef',
+                                            matchBrackets: true
+                                        });
+
+                                        cm[ext].setValue(content);
+                                        cm[ext].on("change", pvw);
+                                    }
+                                } catch (e) {
+                                    console.log(e ? e : null);
+                                }
+
+                                await pvw();
+                            }
+                            );
+                            console.log(24, {
+                                gist,
+                                files,
+                                id
+                            });
+                        } catch (e) {
+                            console.log(30, 'gist.error', e);
+                        }
+                    }
+                }
             } else {
                 if (paths.length > 1) {
                     if (paths.length > 2) {
@@ -186,7 +327,7 @@ window.routes = function(uri, options) {
                                             cm[ext].on("change", pvw);
                                         }
 
-                                        pvw();
+                                        //await pvw();
                                     } catch (e) {
                                         console.log(e ? e : null);
                                     }

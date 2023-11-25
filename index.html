@@ -6,6 +6,7 @@
         <link href="/index.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/wide.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/edit.css" rel="stylesheet">
+        <link href="/raw/asset/css/streamline/gist.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/home.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/tree.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/user.css" rel="stylesheet">
@@ -62,11 +63,11 @@
             </row>
         </header>
         <main>
-            <component component="home" route="/"></component>
-            <component component="gist" routes="/gist/"></component>
-            <component component="gists" routes="/gist/*/"></component>
-            <component component="user" route="/*"></component>
-            <component component="tree" routes="/*/*"></component>
+            <component class="component component-home" component="home" route="/"></component>
+            <component class="component component-gists" component="gists" routes="/gists/*"></component>
+            <component class="component component-gist" component="gist" routes="/gists/*/*"></component>
+            <component class="component component-user" component="user" route="/*"></component>
+            <component class="component component-tree" component="tree" routes="/*/*"></component>
             <component class="component component-wide" component="wide" oncontextmenu="window.events.oncontextmenu.wIDE(event)" routes="/*/*/wide"></component>
             <component class="component component-edit" component="edit" routes="/*/*/edit"></component>
         </main>
