@@ -20,8 +20,11 @@ window.routes = function(uri, options) {
                 if (paths.length > 1) {
                     var username = paths[0];
                     if (paths.length > 2) {
-                        var id = paths[2];
-                        try {
+
+                        var file = paths[paths.length - 1];
+                        if (file) {
+                            console.log(37, 'routes.view editor');
+
                             window.dom = {
 
                                 body: document.body,
@@ -60,39 +63,53 @@ window.routes = function(uri, options) {
 
                             };
 
-                            //CONSOLE
-                            let m_pos;
-                            window.dom.pencil = component.querySelector('.aside-code');
-                            var resizer = component.querySelector('line.block-line');
-                            function resize(e) {
-                                const dx = (m_pos - e.x) * -1;
-                                m_pos = e.x;
-                                dom.pencil.style.width = (parseInt(getComputedStyle(dom.pencil, '').width) + dx) + "px";
-                                //console.log({m_pos,x:e.x},dx);
-                            }
-                            resizer.addEventListener("mousedown", function(e) {
-                                //console.log(e.offsetX);
-                                if (e.offsetX < resizer.clientWidth) {
-                                    m_pos = e.x;
-                                    document.body.classList.add('dragging');
-                                    document.addEventListener("mousemove", resize, false);
-                                }
-                            }, false);
-                            resizer.addEventListener("mouseup", function() {
-                                document.body.classList.remove('dragging');
-                                document.removeEventListener("mousemove", resize, false);
-                            }, false);
+                            var file = paths[paths.length - 1];
+                            var owner = paths[0];
+                            var repo = paths[1];
+                            var path = uri.split('/').filter(o=>o.length > 0).splice(4);
+                            path.pop();
+                            path = path.join('/');
+                            //console.log(143, path, file);
 
+                            var parent = window.parent;
+                            var name = window.parent.location.pathname;
+                            //console.log(229, [parent]);
+                            var pathed = name.split("/").filter(o=>o.length > 1);
+                            //console.log(231, [parent, paths]);
+                            var owner = pathed[0];
+                            var repo = pathed[1];
+                            var path = paths.splice(4, paths.length - 1);
+                            path.pop()
+
+                            window.blobs = {
+                                "html": {
+                                    links: [],
+                                    scripts: []
+                                }
+                            };
+                            window.cm = {};
+                            var id = paths[2];
                             var gist = await github.gists.id(id);
                             var files = gist.files;
-                            var keys = Object.keys(files);
-                            window.cm = {};
-                            keys.forEach(async(key)=>{
-                                console.log(28, key);
-                                var file = files[key];
-                                var ext = key.split('.')[1];
-                                var content = file.content;
+                            var keys = Object.values(files);
+                            keys.forEach(async(ext)=>{
                                 try {
+                                    var url = new URL(name,parent.origin);
+                                    var pn = url.pathname.split("/").filter(o=>o.length > 1);
+                                    //var resource = pn.splice(4, pn.length - 1).join("/");
+                                    //var resource = path + "/" + file.split('.')[0] + "." + ext;
+                                    //console.log(93, path, resource);
+
+                                    var ext = ext.filename.split('.')[1];
+                                    var file = files["index." + ext];
+                                    console.log(99, {
+                                        ext,
+                                        files
+                                    });
+
+                                    var content = file.content;
+                                    var cmx = cm[ext];
+
                                     if (ext === "html") {
                                         cm[ext] = CodeMirror(component.querySelector('#code-html'), {
                                             lineNumbers: true,
@@ -110,7 +127,6 @@ window.routes = function(uri, options) {
                                     }
 
                                     if (ext === "css") {
-
                                         cm[ext] = CodeMirror(component.querySelector('#code-css'), {
                                             lineNumbers: true,
                                             lineWrapping: true,
@@ -140,20 +156,21 @@ window.routes = function(uri, options) {
                                         cm[ext].setValue(content);
                                         cm[ext].on("change", pvw);
                                     }
+
+                                    await pvw();
+                                    cm[ext].refresh();
                                 } catch (e) {
                                     console.log(e ? e : null);
                                 }
-
-                                await pvw();
                             }
                             );
-                            console.log(24, {
-                                gist,
-                                files,
-                                id
-                            });
-                        } catch (e) {
-                            console.log(30, 'gist.error', e);
+
+                        } else {
+                            status = 404;
+                            e = {
+                                code: status,
+                                message: "This page does not exist"
+                            }
                         }
                     }
                 }
@@ -230,7 +247,11 @@ window.routes = function(uri, options) {
                                     }
                                 };
                                 window.cm = {};
-                                ["html", "css", "js"].forEach(async(ext)=>{
+                                var id = "a5ee57d2493835af7ac2d525788074e2";
+                                var gist = await github.gists.id(id);
+                                var files = gist.files;
+                                var keys = Object.values(files);
+                                keys.forEach(async(ext)=>{
                                     try {
                                         var url = new URL(name,parent.origin);
                                         var pn = url.pathname.split("/").filter(o=>o.length > 1);
@@ -238,48 +259,17 @@ window.routes = function(uri, options) {
                                         //var resource = path + "/" + file.split('.')[0] + "." + ext;
                                         //console.log(93, path, resource);
 
+                                        var ext = ext.filename.split('.')[1];
+                                        var file = files["index." + ext];
                                         console.log(99, {
-                                            owner,
-                                            repo,
-                                            resource
+                                            ext,
+                                            files
                                         });
 
-                                        var resource = "/index.html";
-                                        console.log(114, {
-                                            url
-                                        }, {
-                                            owner,
-                                            repo,
-                                            resource
-                                        });
-
-                                        var json = await github.repos.contents({
-                                            owner,
-                                            repo,
-                                            resource
-                                        });
-                                        var content = atob(json.content);
-                                        var doc = new DOMParser().parseFromString(content, "text/html");
-
-                                        var blob = await github.raw.blob({
-                                            owner,
-                                            repo,
-                                            resource
-                                        })
-                                        console.log(246, ext, {
-                                            blob,
-                                            content
-                                        }, {
-                                            owner,
-                                            repo,
-                                            resource
-                                        }, {
-                                            doc,
-                                            ext
-                                        });
+                                        var content = file.content;
+                                        var cmx = cm[ext];
 
                                         if (ext === "html") {
-
                                             cm[ext] = CodeMirror(component.querySelector('#code-html'), {
                                                 lineNumbers: true,
                                                 lineWrapping: true,
@@ -296,7 +286,6 @@ window.routes = function(uri, options) {
                                         }
 
                                         if (ext === "css") {
-
                                             cm[ext] = CodeMirror(component.querySelector('#code-css'), {
                                                 lineNumbers: true,
                                                 lineWrapping: true,
@@ -327,7 +316,8 @@ window.routes = function(uri, options) {
                                             cm[ext].on("change", pvw);
                                         }
 
-                                        //await pvw();
+                                        await pvw();
+                                        cm[ext].refresh();
                                     } catch (e) {
                                         console.log(e ? e : null);
                                     }

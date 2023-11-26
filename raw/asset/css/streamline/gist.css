@@ -165,6 +165,7 @@
     .component-gist .aside-code .code-file > section > box {
         display: flex;
         flex: 1;
+        width: 100%;
     }
     
     .component-gist .aside-code .code-file > section > box > section {
