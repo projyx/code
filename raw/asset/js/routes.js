@@ -165,8 +165,7 @@ window.routes = function(uri, options) {
                                 }
 
                                 if (value === "js") {
-                                    cmx.setValue(content);
-                                    cmx.on("change", pvw);
+                                    console.log(168, value);
                                 }
 
                                 await pvw();

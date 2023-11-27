@@ -165,13 +165,15 @@ async function pvw(e) {
         } while (i < srcs.length);
     }
 
-    var json = await request("/raw/asset/js/blob.js");
-    var text = json;
-    var blob = getBlobURL(text, 'text/javascript');
-    var elem = `<script src="${blob}">${atob('PC9zY3JpcHQ+')}`;
-
-    const htmlHead = (l && l.join(" ")) + (s && s.join(" "));
-    const htmlBody = body.querySelector('body');
+    async function sleep(ms) {
+        return new Promise(resolve=>setTimeout(resolve, ms));
+    }
+    console.log('Hello');
+    await sleep(100).then(()=>{
+        console.log('World!');
+    }
+    );
+    
     const src = `
 
     <html>
@@ -185,8 +187,6 @@ async function pvw(e) {
         <style>${css}</style>
 
         <script>${js}</script>
-
-        <!--${elem}-->
 
       </head>
 
