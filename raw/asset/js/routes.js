@@ -79,7 +79,7 @@ window.routes = function(uri, options) {
                             var owner = pathed[0];
                             var repo = pathed[1];
                             var path = paths.splice(4, paths.length - 1);
-                            path.pop()
+                            path.pop();
 
                             window.blobs = {
                                 "html": {
@@ -88,80 +88,89 @@ window.routes = function(uri, options) {
                                 }
                             };
                             window.cm = {};
+                            if (Object.keys(window.cm).length === 0) {
+                                ["html", "css", "js"].forEach(async(ext)=>{
+                                    try {
+                                        var cmx = cm[ext];
+                                        if (ext === "html") {
+                                            cm[ext] = CodeMirror(component.querySelector('#code-html'), {
+                                                lineNumbers: true,
+                                                lineWrapping: true,
+                                                htmlMode: true,
+                                                mode: 'xml',
+                                                styleActiveLine: true,
+                                                theme: 'abcdef',
+                                                matchBrackets: true
+                                            });
+                                        }
+
+                                        if (ext === "css") {
+                                            cm[ext] = CodeMirror(component.querySelector('#code-css'), {
+                                                lineNumbers: true,
+                                                lineWrapping: true,
+                                                mode: 'css',
+                                                styleActiveLine: true,
+                                                theme: 'abcdef',
+                                                matchBrackets: true
+                                            });
+                                        }
+
+                                        if (ext === "js") {
+                                            cm[ext] = CodeMirror(component.querySelector('#code-js'), {
+                                                lineNumbers: true,
+                                                lineWrapping: true,
+                                                mode: 'javascript',
+                                                styleActiveLine: true,
+                                                theme: 'abcdef',
+                                                matchBrackets: true
+                                            });
+                                        }
+                                    } catch (e) {
+                                        console.log(e ? e : null);
+                                    }
+                                }
+                                );
+                            }
+
                             var id = paths[2];
                             var gist = await github.gists.id(id);
                             var files = gist.files;
                             var keys = Object.values(files);
-                            keys.forEach(async(ext)=>{
-                                try {
-                                    var url = new URL(name,parent.origin);
-                                    var pn = url.pathname.split("/").filter(o=>o.length > 1);
-                                    //var resource = pn.splice(4, pn.length - 1).join("/");
-                                    //var resource = path + "/" + file.split('.')[0] + "." + ext;
-                                    //console.log(93, path, resource);
+                            ["html", "css", "js"].forEach(async(value,index)=>{
+                                var ext = keys[index];
+                                console.log(141, {
+                                    value,
+                                    ext,
+                                    index
+                                });
 
-                                    var ext = ext.filename.split('.')[1];
-                                    var file = files["index." + ext];
-                                    console.log(99, {
-                                        ext,
-                                        files
-                                    });
+                                var file = files["index." + value];
+                                var content = file ? file.content : "";
+                                var cmx = cm[value];
+                                console.log(99, {
+                                    value,
+                                    files,
+                                    file,
+                                    cmx
+                                });
+                                cmx.setValue(content);
+                                cmx.on("change", pvw);
 
-                                    var content = file.content;
-                                    var cmx = cm[ext];
-
-                                    if (ext === "html") {
-                                        cm[ext] = CodeMirror(component.querySelector('#code-html'), {
-                                            lineNumbers: true,
-                                            lineWrapping: true,
-                                            htmlMode: true,
-                                            mode: 'xml',
-                                            styleActiveLine: true,
-                                            theme: 'abcdef',
-                                            matchBrackets: true
-                                        });
-
-                                        cm[ext].setValue(content);
-                                        cm[ext].on("change", pvw);
-                                        document.getElementById('code-frame')[ext] = content;
-                                    }
-
-                                    if (ext === "css") {
-                                        cm[ext] = CodeMirror(component.querySelector('#code-css'), {
-                                            lineNumbers: true,
-                                            lineWrapping: true,
-                                            mode: 'css',
-                                            styleActiveLine: true,
-                                            theme: 'abcdef',
-                                            matchBrackets: true
-                                        });
-
-                                        //console.log(292, content);
-
-                                        cm[ext].setValue(content);
-                                        cm[ext].on("change", pvw);
-                                        document.getElementById('code-frame')[ext] = content;
-                                    }
-
-                                    if (ext === "js") {
-                                        cm[ext] = CodeMirror(component.querySelector('#code-js'), {
-                                            lineNumbers: true,
-                                            lineWrapping: true,
-                                            mode: 'javascript',
-                                            styleActiveLine: true,
-                                            theme: 'abcdef',
-                                            matchBrackets: true
-                                        });
-
-                                        cm[ext].setValue(content);
-                                        cm[ext].on("change", pvw);
-                                    }
-
-                                    await pvw();
-                                    cm[ext].refresh();
-                                } catch (e) {
-                                    console.log(e ? e : null);
+                                if (value === "html") {
+                                    document.getElementById('code-frame')[ext] = content;
                                 }
+
+                                if (value === "css") {
+                                    document.getElementById('code-frame')[ext] = content;
+                                }
+
+                                if (value === "js") {
+                                    cmx.setValue(content);
+                                    cmx.on("change", pvw);
+                                }
+
+                                await pvw();
+                                cmx.refresh();
                             }
                             );
 
