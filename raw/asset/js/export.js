@@ -67,7 +67,7 @@ async function pvw(e) {
     const owner = paths[0];
     const repo = paths[1];
 
-    0 > 1 ? console.log(149, {
+    0 < 1 ? console.log(149, {
         html,
         head,
         body,
@@ -114,10 +114,10 @@ async function pvw(e) {
         var i = 0;
         do {
             var script = scripts[i];
-            if (script.src.includes("/index.js")) {
-                if (script.src.startsWith("http")) {
-                    var elem = `<script src="${script.src}"></script>`;
-                } else {
+            if (script.src.startsWith("http")) {
+                var elem = `<script src="${script.src}"></script>`;
+            } else {
+                if (0 > 1) {
                     var uri = new URL(script.src);
                     var path = uri.pathname;
                     var json = await github.repos.contents({
@@ -129,8 +129,6 @@ async function pvw(e) {
                     var blob = getBlobURL(text, 'text/javascript');
                     var elem = `<script src="${blob}" data-src="${script.src}">${atob('PC9zY3JpcHQ+')}`;
                 }
-                //console.log(path, {json,text,blob});
-                s.push(elem);
             }
             //console.log(path, {json,text,blob});
             s.push(elem);
@@ -139,7 +137,7 @@ async function pvw(e) {
         } while (i < scripts.length);
     }
 
-    0 > 1 ? console.log(112, body, {
+    0 < 1 ? console.log(112, body, {
         scripts,
         s
     }) : null;
@@ -188,7 +186,7 @@ async function pvw(e) {
 
         <script>${js}</script>
 
-        ${elem}
+        <!--${elem}-->
 
       </head>
 
