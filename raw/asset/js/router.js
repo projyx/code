@@ -228,7 +228,7 @@ window.rout.er = (href,params)=>{
                 search
             }
         };
-        0 > 1 ? console.log(4, "browse.route", {
+        0 < 1 ? console.log(4, "browse.route", {
             uri,
             options,
             params

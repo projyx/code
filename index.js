@@ -7,7 +7,7 @@ window.onload = async(event)=>{
         var bb = routed(b);
         var x = rout.ed(aa);
         var y = rout.ed(bb);
-        0 > 1 ? console.log(15, aa, bb, x.length, y.length) : null;
+        0 < 1 ? console.log(15, aa, bb, x.length, y.length) : null;
         var routes = (z)=>{
             return x.length < y.length ? x : y;
         }

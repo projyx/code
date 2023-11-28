@@ -4,7 +4,7 @@ window.api.oauth = {};
 window.api.oauth.config = {
     client_id: 0 > 1 ? "" : "ed63f2ffe8929b18142d",
     redirect_uri: window.location.protocol + "//" + window.location.host + window.location.pathname,
-    scope: "delete_repo,user,public_repo,repo"
+    scope: "delete_repo,gist,user,public_repo,repo"
 }
 window.api.oauth.login = function(target) {
     var client_id = api.oauth.config.client_id;
@@ -55,6 +55,62 @@ api.code.push = function() {
     0 < 1 ? github.repos.push(params, array).then(function(response) {
         console.log(37, response);
     }) : null
+}
+
+window.api.gists = {};
+api.gists.push = function() {
+    var id = rout.e.paths[2];
+
+    var code = [];
+    var html = window.cm.html.getValue();
+    var css = window.cm.css.getValue();
+    var js = window.cm.js.getValue();
+    html === "" ? null : code.html = html;
+    css === "" ? null : code.css = css;
+    js === "" ? null : code.js = js;
+
+    var files = {};
+    var keys = Object.keys(code);
+    var vals = Object.values(code);
+    Object.keys(code).forEach((key,index)=>{
+        var value = vals[index];
+        var extension = key;
+        var content = vals[index];
+        var obj = {
+            content
+        };
+        var file = "index." + extension;
+        files[file] = obj;
+        console.log(83, {
+            code,
+            content,
+            keys,
+            obj,
+            vals,
+            files,
+            file
+        });
+    }
+    );
+    0 > 1 ? console.log(93, {        
+        code,
+        keys,
+        vals,
+        files
+    }) : null;
+
+    var settings = {
+        body: JSON.stringify({
+            description: "An updated gist description",
+            files
+        }),
+        method: 'PATCH'
+    };
+    0 < 1 ? console.log(107, {        
+        id,
+        settings
+    }) : null;
+    github.gists.id(id, settings)
 }
 
 window.api.time = {};
@@ -108,10 +164,10 @@ window.api.tree.edit = function(target) {
     }
 
     if (box.querySelector('.icon-folder')) {
-            var href = link.getAttribute('href');
-            var dirs = href.split('/').filter(o=>o.length > 0);
-            dirs[2] = 'wide';
-            console.log(97, href, dirs);
-            rout.er("/" + dirs.join("/"));
+        var href = link.getAttribute('href');
+        var dirs = href.split('/').filter(o=>o.length > 0);
+        dirs[2] = 'wide';
+        console.log(97, href, dirs);
+        rout.er("/" + dirs.join("/"));
     }
 }

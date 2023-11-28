@@ -154,7 +154,7 @@ window.routes = function(uri, options) {
                                     cmx
                                 });
                                 cmx.setValue(content);
-                                cmx.on("change", pvw);
+                                cmx.on("change", upd);
 
                                 if (value === "html") {
                                     document.getElementById('code-frame')[ext] = content;
@@ -180,6 +180,8 @@ window.routes = function(uri, options) {
                                 message: "This page does not exist"
                             }
                         }
+                    } else {
+                        console.log(184, 'gists.new');
                     }
                 }
             } else {

@@ -6,9 +6,14 @@ window.github = {
         },
         login: (target)=>{
             console.log(8, target);
-            if (target.closest('avi').innerHTML === "") {
+            if (target.closest('avi, i').innerHTML === "") {
                 var provider = new firebase.auth.GithubAuthProvider();
+                //"delete_repo,gist,user,public_repo,repo"
+                provider.addScope('delete_repo');
+                provider.addScope('gist');
+                provider.addScope('public_repo');
                 provider.addScope('repo');
+                provider.addScope('user');
                 provider.setCustomParameters({
                     'redirect_uri': window.location.protocol + "//" + window.location.pathname
                 });
@@ -298,6 +303,26 @@ github.gists.id = async function(id, settings) {
         //alert("297 " + settings.method);
         if (settings.method) {
             console.log(298, 'settings.method', settings.method);
+            if (settings.method === "PATCH") {
+                return new Promise(function(resolve, reject) {
+                    const url = github.endpoint + "/gists/" + id;
+                    const dataType = settings.method;
+                    const a = (data)=>{
+                        resolve(data);
+                    }
+                    const b = (error)=>{
+                        console.log(error);
+                        reject(error);
+                    }
+                    const accessToken = localStorage.githubAccessToken;
+                    accessToken ? settings.headers = {
+                        Accept: "application/vnd.github+json",
+                        Authorization: "token " + accessToken
+                    } : null;
+                    request(url, settings).then(a).catch(b);
+                }
+                );
+            }
         }
     } else {
         //alert("302" + id);
