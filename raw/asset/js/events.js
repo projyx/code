@@ -208,6 +208,18 @@ window.events.onclick.touch = async function(event) {
 
     console.log(136, template);
 }
+window.events.onclick.gistConfigTab = target => {
+    var text = target.closest('text');
+    if(text) {
+        var texts = text.closest('box').querySelectorAll('text');
+        var index = Array.from(texts).indexOf(text);
+        var tabs = text.closest('nav').nextElementSibling;
+        var tab = tabs.children[index];
+        console.log(217, index, text.textContent, tab);
+        tabs.querySelector('card.active').classList.remove('active');
+        tab.classList.add('active');
+    }
+};
 
 window.events.oncontextmenu = {}
 window.events.oncontextmenu.wIDE = async function(event) {

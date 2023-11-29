@@ -112,6 +112,18 @@ api.gists.push = function() {
     }) : null;
     github.gists.id(id, settings)
 }
+api.gists.config = () => {
+    console.log(116, 'api.gists.config');
+    request('/raw/asset/html/modal/gist.options.html').then((html) => {
+        console.log(118, {
+            html
+        });
+        modal.panel(html);
+    });
+}
+api.gists.view = () => {
+    console.log(119, 'api.gists.view');
+}
 
 window.api.time = {};
 api.time.date = (previous)=>{
