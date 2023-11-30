@@ -154,7 +154,7 @@
 
     [modal="gist-options"] > nav + section > card > column > box > column {
         gap: 10px;
-    } 
+    }
 
     [modal="gist-options"] > nav + section > card box > column > dropdown {
         background: white;
@@ -167,7 +167,7 @@
     }
 
     [modal="gist-options"] > nav + section > card box > column > dropdown > row:first-child {
-    width: 100%;
+        width: 100%;
     }
 
     [modal="gist-options"] > nav + section > card box > column > dropdown ul {
@@ -205,7 +205,7 @@
     [modal="gist-options"] > nav + section > card box:has(dropdown ul.active) {
         z-index: 1;
     }
-    
+
     [modal="gist-options"] > nav + section > card box > column > dropdown ul li {
         display: block;
         height: 36px;
@@ -213,7 +213,7 @@
         padding: 0 10px;
         -webkit-appearance: none;
     }
-    
+
     [modal="gist-options"] > nav + section > card box > column > dropdown ul li:hover {
         background: lightblue;
     }
@@ -238,14 +238,14 @@
     [modal="gist-options"] > nav + section > card box > column > dropdown i {
         width: 36px;
     }
-    
+
     [modal="gist-options"] > nav + section > card > column > box > column form {
         display: flex;
         flex-direction: column;
         gap: 10px;
         width: 100%;
     }
-    
+
     [modal="gist-options"] > nav + section > card > column > box > column form i {
         height: 36px;
         width: 36px;
@@ -261,6 +261,10 @@
     [modal="gist-options"] > nav + section > card > column > box > column text {
         line-height: 20px;
         padding: 0;
+    }
+
+    [modal="gist-options"] > nav + section > card > column > box > column dropdown + text {
+        font-size: 13px;        
     }
 }
 
@@ -292,7 +296,8 @@
         width: 100%;
     }
 
-    [modal="gist-options"] > nav + section > card.card-css label {
+    [modal="gist-options"] > nav + section > card:has(form > label input[type="checkbox"]) label,
+    [modal="gist-options"] > nav + section > card:has(form > label input[type="radio"]) label {
         align-items: center;
         display: inline-flex;
         border-radius: 5px;
@@ -303,7 +308,8 @@
         width: 100%;
     }
 
-    [modal="gist-options"] > nav + section > card.card-css input[type="checkbox"] {
+    [modal="gist-options"] > nav + section > card:has(form > label input[type="checkbox"]) input[type="checkbox"],
+    [modal="gist-options"] > nav + section > card:has(form > label input[type="radio"]) input[type="radio"]  {
         background: white;
         border-radius: 50%;
         line-height: 36px;
@@ -311,6 +317,18 @@
         height: 20px;
         width: 20px;
         -webkit-appearance: none;
+        background: #666;
+        border: 2px solid #999;
+        outline: 3px solid transparent;
+        width: 5px;
+    }
+
+    [modal="gist-options"] > nav + section > card:has(form > label input[type="checkbox"]) input[type="checkbox"]:checked,
+    [modal="gist-options"] > nav + section > card:has(form > label input[type="radio"]) input[type="radio"]:checked {
+        background: skyblue;
+        border: 2px solid #333;
+        outline: 2px solid skyblue;
+        width: 10px;
     }
 
     [modal="gist-options"] > nav + section > card.card-css textarea {
@@ -322,10 +340,19 @@
     }
 }
 
-
 @media {
     [modal="gist-options"] > nav + section > card.card-details {
         width: 100%;
+    }
+    
+    [modal="gist-options"] > nav + section > card.card-details box > header:has(span + span) {
+        display: flex;
+    }
+    
+    [modal="gist-options"] > nav + section > card.card-details box > header:has(span + span) span:last-child {
+        display: inline-block;
+        font-size: 13px;
+        margin-left: auto;
     }
 
     [modal="gist-options"] > nav + section > card.card-details input {
@@ -351,13 +378,13 @@
         width: 100%;
     }
 
-    [modal="gist-options"] > nav + section > card.card-behavior label {
+    [modal="gist-options"] > nav + section > card:has([type="checkbox"]) label {
         align-items: center;
         display: flex;
         /* justify-content: space-between; */
     }
 
-    [modal="gist-options"] > nav + section > card.card-behavior label input {
+    [modal="gist-options"] > nav + section > card:has([type="checkbox"]) label input {
         display: none;
         height: 0;
         margin: 0;
@@ -366,15 +393,22 @@
         -webkit-appearance: none;
     }
 
-    [modal="gist-options"] > nav + section > card.card-behavior label input:checked + * {
+    [modal="gist-options"] > nav + section > card:has([type="checkbox"]) label input:checked + * {
         background: #0096c7;
     }
 
-    [modal="gist-options"] > nav + section > card.card-behavior label input:checked + * > :first-child {
+    [modal="gist-options"] > nav + section > card:has([type="checkbox"]) label input:checked + * > :first-child {
         transform: translateX(30px);
     }
 
-    [modal="gist-options"] > nav + section > card.card-behavior label > row {
+    [modal="gist-options"] > nav + section > card:has([type="checkbox"]) label > row > flex {
+        background: white;
+        border-radius: 50px;
+        transition: 1s;
+        width: 24px;
+    }
+
+    [modal="gist-options"] > nav + section > card label > row {
         background: #dbdbdb;
         box-sizing: border-box;
         border-radius: 50px;
@@ -384,13 +418,6 @@
         position: relative;
         transition: 1s;
         width: 60px;
-    }
-
-    [modal="gist-options"] > nav + section > card.card-behavior label > row > flex {
-        background: white;
-        border-radius: 50px;
-        transition: 1s;
-        width: 24px;
     }
 }
 

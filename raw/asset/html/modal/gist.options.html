@@ -24,11 +24,10 @@
                     </flex>
                     <flex>
                         <text class="active">Details</text>
-                        <text style="display:none">Privacy</text>
+                        <text>Privacy</text>
                         <text>Behavior</text>
                         <text>Editor</text>
                         <text>Template</text>
-                        <text>Screenshot</text>
                     </flex>
                 </box>
             </section>
@@ -40,7 +39,7 @@
                 <box>
                     <header>HTML Preprocessor</header>
                     <column>
-                        <dropdown onclick="events.onclick.dropdown(event.target)">
+                        <dropdown>
                             <row drop="down">
                                 <text>None</text>
                                 <i>
@@ -78,7 +77,7 @@
                     <header>CSS Preprocessor</header>
                     <column>
                         <text>If active, Pens will autosave every 30 seconds after being saved once.</text>
-                        <dropdown onclick="events.onclick.dropdown(event.target)">
+                        <dropdown>
                             <row drop="down">
                                 <text>None</text>
                                 <i>
@@ -100,15 +99,15 @@
                     <column>
                         <form>
                             <label>
-                                <input type="checkbox">
+                                <input name="css-base" type="radio">
                                 <span>Normalize</span>
                             </label>
                             <label>
-                                <input type="checkbox">
+                                <input name="css-base" type="radio">
                                 <span>Reset</span>
                             </label>
                             <label>
-                                <input type="checkbox">
+                                <input checked name="css-base" type="radio">
                                 <span>Neither</span>
                             </label>
                         </form>
@@ -119,15 +118,15 @@
                     <column>
                         <form>
                             <label>
-                                <input type="checkbox">
+                                <input name="vendor-prefixing" type="radio">
                                 <span>Autoprefixer</span>
                             </label>
                             <label>
-                                <input type="checkbox">
+                                <input name="vendor-prefixing" type="radio">
                                 <span>Prefixfree</span>
                             </label>
                             <label>
-                                <input type="checkbox">
+                                <input checked name="vendor-prefixing" type="radio">
                                 <span>Neither</span>
                             </label>
                         </form>
@@ -188,6 +187,9 @@
                                 <li>LiveScript</li>
                             </ul>
                         </dropdown>
+                        <text>
+                            <span>Babel includes JSX processing.</span>
+                        </text>
                     </column>
                 </box>
                 <box>
@@ -240,7 +242,7 @@
                     </section>
                 </box>
                 <box>
-                    <header>Tags</header>
+                    <header><span>Tags</span><span>comma separated, spacebar separated</span></header>
                     <section>
                         <input type="text">
                     </section>
@@ -249,9 +251,18 @@
         </card>
         <card class="card-privacy">
             <column>
-                <box></box>
-                <box></box>
-                <box></box>
+                <box>
+                    <header>Make this Snippet private</header>
+                    <column>
+                        <text>If active, Snippets will autosave every 30 seconds after being saved once.</text>
+                        <label>
+                            <input name="autosave" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
+                            <row>
+                                <flex></flex>
+                            </row>
+                        </label>
+                    </column>
+                </box>
             </column>
         </card>
         <card class="card-behavior">
@@ -296,23 +307,58 @@
         </card>
         <card class="card-editor">
             <column>
-                <box></box>
-                <box></box>
-                <box></box>
+                <box>
+                    <header>Code Indentation</header>
+                    <column>
+                        <form>
+                            <label>
+                                <input name="code-indentation" type="radio">
+                                <span>Spaces</span>
+                            </label>
+                            <label>
+                                <input name="code-indentation" type="radio">
+                                <span>Tabs</span>
+                            </label>
+                        </form>
+                    </column>
+                </box>
+                <box>
+                    <header>Indentation Size</header>
+                    <column>
+                        <dropdown>
+                            <row drop="down">
+                                <text>2</text>
+                                <i>
+                                    <con class="gg-select"></con>
+                                </i>
+                            </row>
+                            <ul>
+                                <li>1</li>
+                                <li>2</li>
+                                <li>3</li>
+                                <li>4</li>
+                                <li>5</li>
+                                <li>6</li>
+                            </ul>
+                        </dropdown>
+                    </column>
+                </box>
             </column>
         </card>
         <card class="card-template">
             <column>
-                <box></box>
-                <box></box>
-                <box></box>
-            </column>
-        </card>
-        <card class="card-screenshot">
-            <column>
-                <box></box>
-                <box></box>
-                <box></box>
+                <box>
+                    <header>Make template?</header>
+                    <column>
+                        <text>Templates are Snippets that can be used to start other Snippets quickly from the create menu. The new Snippet will copy all the code and settings from the template and make a new Snippet (that is not a fork).</text>
+                        <label>
+                            <input name="autosave" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
+                            <row>
+                                <flex></flex>
+                            </row>
+                        </label>
+                    </column>
+                </box>
             </column>
         </card>
     </section>
