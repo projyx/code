@@ -41,10 +41,12 @@
                     <header>HTML Preprocessor</header>
                     <column>
                         <dropdown onclick="events.onclick.dropdown(event.target)">
-                            <text>None</text>
-                            <i>
-                                <con class="gg-select"></con>
-                            </i>
+                            <row drop="down">
+                                <text>None</text>
+                                <i>
+                                    <con class="gg-select"></con>
+                                </i>
+                            </row>
                             <ul>
                                 <li>None</li>
                                 <li>Haml</li>
@@ -77,10 +79,12 @@
                     <column>
                         <text>If active, Pens will autosave every 30 seconds after being saved once.</text>
                         <dropdown onclick="events.onclick.dropdown(event.target)">
-                            <text>None</text>
-                            <i>
-                                <con class="gg-select"></con>
-                            </i>
+                            <row drop="down">
+                                <text>None</text>
+                                <i>
+                                    <con class="gg-select"></con>
+                                </i>
+                            </row>
                             <ul>
                                 <li>Less</li>
                                 <li>SCSS</li>
@@ -169,11 +173,13 @@
                 <box>
                     <header>JavaScript Preprocessor</header>
                     <column>
-                        <dropdown onclick="events.onclick.dropdown(event.target)">
-                            <text>None</text>
-                            <i>
-                                <con class="gg-select"></con>
-                            </i>
+                        <dropdown>
+                            <row drop="down">
+                                <text>None</text>
+                                <i>
+                                    <con class="gg-select"></con>
+                                </i>
+                            </row>
                             <ul>
                                 <li>None</li>
                                 <li>Babel</li>

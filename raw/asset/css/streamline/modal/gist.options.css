@@ -166,6 +166,10 @@
         position: relative;
     }
 
+    [modal="gist-options"] > nav + section > card box > column > dropdown > row:first-child {
+    width: 100%;
+    }
+
     [modal="gist-options"] > nav + section > card box > column > dropdown ul {
         background: white;
         border-radius: 5px;

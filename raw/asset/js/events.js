@@ -30,8 +30,9 @@ window.events.onclick.document = async function(event) {
     }
     );
 
-    Array.from(document.querySelectorAll('[drop="down"]')).forEach(elem=>{
-        elem.nextElementSibling.setAttribute('css-display', 'none');
+    Array.from(document.querySelectorAll('dropdown [drop="down"]')).forEach(elem=>{
+        var dropdown = elem.closest('dropdown:has(ul.active)');
+        elem === dropdown ? null : elem.nextElementSibling.classList.remove('active');
     }
     );
 
@@ -43,26 +44,44 @@ window.events.onclick.document = async function(event) {
         rout.er(href);
     }
 
-    elem = target.closest('[drop]');
+    elem = target.closest('dropdown');
     if (elem) {
-        if (elem.nextElementSibling.getAttribute("css-display") === 'none') {
-            Array.from(document.querySelectorAll('[onclick="events.onclick.dropdown(event.target)"]')).forEach(elem=>{
-                elem.nextElementSibling.setAttribute('css-display', 'none');
+        drop = target.closest('[drop]');
+        console.log(47, 'events.onclick.document', {
+            className: elem.className,
+            elem,
+            drop
+        });
+        if (drop) {
+            if (drop.nextElementSibling.classList.contains('active')) {
+                Array.from(document.querySelectorAll('dropdown [drop="down"]')).forEach(elem=>{
+                    elem.nextElementSibling.classList.remove('active');
+                }
+                );
+                drop.nextElementSibling.classList.remove('active');
+            } else {
+                drop.nextElementSibling.classList.add('active');
             }
-            );
-            elem.nextElementSibling['removeAttribute']('css-display', 'none');
-        } else {
-            elem.nextElementSibling['setAttribute']('css-display', 'none');
+        }
+        var ul = target.closest('dropdown > ul');
+        console.log(63, target, ul);
+        if (ul) {
+            var li = target.closest('dropdown > ul > li');
+            console.log(66, ul, li);
+            if (li) {
+                //dropdown.querySelector('ul').classList.remove('active');
+                elem.firstElementChild.querySelector('text').textContent = li.textContent;
+            }
         }
     }
 }
 window.events.onclick.dropdown = function(target) {
     var dropdown = target.closest('dropdown');
     var ul = target.closest('ul');
-    if(ul) {
+    if (ul) {
         var li = target.closest('li');
         console.log(63, ul);
-        if(li) {
+        if (li) {
             dropdown.querySelector('ul').classList.remove('active');
             dropdown.firstElementChild.textContent = li.textContent;
         }
