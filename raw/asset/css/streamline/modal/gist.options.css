@@ -18,8 +18,13 @@
         flex-wrap: wrap;
         margin: auto;
         min-height: 240px;
-        padding: 0 0px 20px;
+        padding: 0 0px 0px;
         width: 640px;
+    }
+}
+
+@media {
+    [modal="gist-options"] {
     }
 }
 
@@ -122,6 +127,20 @@
     [modal="gist-options"] > nav + section {
         display: inline-flex;
         flex: 1;
+    }
+
+    [modal="gist-options"] > nav + section + footer {
+        width: 100%;
+    }
+
+    [modal="gist-options"] > nav + section + footer card text {
+        background: limegreen;
+        border-radius: 5px;
+        color: black;
+        height: 36px;
+        line-height: 36px;
+        margin: 20px 20px 20px auto;
+        padding: 0 16px;
     }
 
     [modal="gist-options"] > nav + section > card:not(.active) {
@@ -301,26 +320,47 @@
         align-items: center;
         display: inline-flex;
         border-radius: 5px;
-        gap: 3px;
+        gap: 10px;
         justify-content: left;
         line-height: 36px;
+        margin-right: auto;
         /* padding: 0 10px; */
-        width: 100%;
+        /* width: 100%; */
     }
 
     [modal="gist-options"] > nav + section > card:has(form > label input[type="checkbox"]) input[type="checkbox"],
-    [modal="gist-options"] > nav + section > card:has(form > label input[type="radio"]) input[type="radio"]  {
+    [modal="gist-options"] > nav + section > card:has(form > label input[type="radio"]) input[type="radio"] {
         background: white;
         border-radius: 50%;
         line-height: 36px;
         padding: 0 10px;
         height: 20px;
         width: 20px;
+        margin: 0;
         -webkit-appearance: none;
         background: #666;
         border: 2px solid #999;
         outline: 3px solid transparent;
-        width: 5px;
+        /* width: 5px; */
+    }
+    
+    [modal="gist-options"] > nav + section > card:has(form > label input[type="radio"]) input[type="radio"] {
+        background: white;
+        border-radius: 50%;
+        line-height: 36px;
+        padding: 0 10px;
+        height: 20px;
+        width: 20px;
+        margin: 0;
+        -webkit-appearance: none;
+        background: #666;
+        border: 2px solid #999;
+        outline: 3px solid transparent;
+        /* width: 5px; */
+    }
+
+    [modal="gist-options"] > nav + section > card:has(form > label input[type="radio"]) input[type="radio"] {
+        border: 1px solid white;
     }
 
     [modal="gist-options"] > nav + section > card:has(form > label input[type="checkbox"]) input[type="checkbox"]:checked,
@@ -328,7 +368,7 @@
         background: skyblue;
         border: 2px solid #333;
         outline: 2px solid skyblue;
-        width: 10px;
+        width: 8px;
     }
 
     [modal="gist-options"] > nav + section > card.card-css textarea {

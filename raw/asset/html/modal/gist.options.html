@@ -76,7 +76,7 @@
                 <box>
                     <header>CSS Preprocessor</header>
                     <column>
-                        <text>If active, Pens will autosave every 30 seconds after being saved once.</text>
+                        <text>If active, Snippets will autosave every 30 seconds after being saved once.</text>
                         <dropdown>
                             <row drop="down">
                                 <text>None</text>
@@ -133,10 +133,10 @@
                     </column>
                 </box>
                 <box>
-                    <header>Add External Stylesheets/Pens</header>
+                    <header>Add External Stylesheets/Snippets</header>
                     <column>
                         <text>
-                            <span>Any URLs added here will be added as a &lt;link &gt;in order, and before the CSS in the editor. You can use the CSS from another Pen by using its URL and the proper</span>
+                            <span>Any URLs added here will be added as a &lt;link &gt;in order, and before the CSS in the editor. You can use the CSS from another Snippet by using its URL and the proper</span>
                             <span>URL extension</span>
                             <span>.</span>
                         </text>
@@ -196,7 +196,7 @@
                     <header>Add External Scripts</header>
                     <column>
                         <text>
-                            <span>Any URLs added here will be added as a &lt;link &gt;in order, and before the CSS in the editor. You can use the CSS from another Pen by using its URL and the proper</span>
+                            <span>Any URLs added here will be added as a &lt;link &gt;in order, and before the CSS in the editor. You can use the CSS from another Snippet by using its URL and the proper</span>
                             <span>URL extension</span>
                             <span>.</span>
                         </text>
@@ -238,11 +238,14 @@
                 <box>
                     <header>Description</header>
                     <section>
-                        <textarea placeholder="Explain what’s going on in your Pen here. This text is searchable, so it can also help others find your work. Remember to credit others where credit is due. Markdown supported."></textarea>
+                        <textarea placeholder="Explain what’s going on in your Snippet here. This text is searchable, so it can also help others find your work. Remember to credit others where credit is due. Markdown supported."></textarea>
                     </section>
                 </box>
                 <box>
-                    <header><span>Tags</span><span>comma separated, spacebar separated</span></header>
+                    <header>
+                        <span>Tags</span>
+                        <span>comma separated, spacebar separated</span>
+                    </header>
                     <section>
                         <input type="text">
                     </section>
@@ -270,7 +273,7 @@
                 <box>
                     <header>Auto Save</header>
                     <column>
-                        <text>If active, Pens will autosave every 30 seconds after being saved once.</text>
+                        <text>If active, Snippets will autosave every 30 seconds after being saved once.</text>
                         <label>
                             <input name="autosave" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
                             <row>
@@ -294,7 +297,7 @@
                 <box>
                     <header>Format on Save</header>
                     <column>
-                        <text>If enabled, your code will be formatted when you actively save your Pen. Note: your code becomes un-folded during formatting.</text>
+                        <text>If enabled, your code will be formatted when you actively save your Snippet.</text>
                         <label>
                             <input name="reformat" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
                             <row>
@@ -362,4 +365,11 @@
             </column>
         </card>
     </section>
+    <footer>
+        <card>
+            <section>
+                <text>Save & Close</text>
+            </section>
+        </card>
+    </footer>
 </block>
