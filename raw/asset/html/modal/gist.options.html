@@ -5,7 +5,7 @@
                 <box>
                     <flex>
                         <text>Settings</text>
-                        <i>
+                        <i onclick="modal.exit(event.target)">
                             <con class="icon-exit"></con>
                         </i>
                     </flex>
@@ -23,12 +23,12 @@
                         <text>JS</text>
                     </flex>
                     <flex>
-                        <text>Details</text>
-                        <text>Privacy</text>
+                        <text class="active">Details</text>
+                        <text style="display:none">Privacy</text>
                         <text>Behavior</text>
                         <text>Editor</text>
-                        <text style="display:none;">Template</text>
-                        <text style="display:none;">Screenshot</text>
+                        <text>Template</text>
+                        <text>Screenshot</text>
                     </flex>
                 </box>
             </section>
@@ -36,34 +36,188 @@
     </nav>
     <section>
         <card class="card-html">
-            <section>
+            <column>
                 <box>
                     <header>HTML Preprocessor</header>
-                    <section></section>
+                    <column>
+                        <dropdown onclick="events.onclick.dropdown(event.target)">
+                            <text>None</text>
+                            <i>
+                                <con class="gg-select"></con>
+                            </i>
+                            <ul>
+                                <li>None</li>
+                                <li>Haml</li>
+                                <li>Markdown</li>
+                                <li>Slim</li>
+                                <li>Pug</li>
+                            </ul>
+                        </dropdown>
+                    </column>
                 </box>
                 <box>
-                    <header>HTML Class</header>
-                    <section></section>
+                    <header>Top-Level Class</header>
+                    <column>
+                        <text>If enabled, the preview panel updates automatically as you code. If disabled, use the "Run" button to update.</text>
+                        <input type="text" placeholder="e.g. single post post-1234">
+                    </column>
                 </box>
                 <box>
-                    <header>Head Tags</header>
-                    <section></section>
+                    <header>Head Elements</header>
+                    <column>
+                        <textarea placeholder="e.g. &lt;meta&gt;, &lt;link&gt;, &lt;script&gt;"></textarea>
+                    </column>
                 </box>
-            </section>
+            </column>
         </card>
         <card class="card-css">
-            <section>
-                <box></box>
-                <box></box>
-                <box></box>
-            </section>
+            <column>
+                <box>
+                    <header>CSS Preprocessor</header>
+                    <column>
+                        <text>If active, Pens will autosave every 30 seconds after being saved once.</text>
+                        <dropdown onclick="events.onclick.dropdown(event.target)">
+                            <text>None</text>
+                            <i>
+                                <con class="gg-select"></con>
+                            </i>
+                            <ul>
+                                <li>Less</li>
+                                <li>SCSS</li>
+                                <li>Sass</li>
+                                <li>Stylus</li>
+                                <li>PostCSS</li>
+                            </ul>
+                        </dropdown>
+                    </column>
+                </box>
+                <box>
+                    <header>CSS Base</header>
+                    <column>
+                        <form>
+                            <label>
+                                <input type="checkbox">
+                                <span>Normalize</span>
+                            </label>
+                            <label>
+                                <input type="checkbox">
+                                <span>Reset</span>
+                            </label>
+                            <label>
+                                <input type="checkbox">
+                                <span>Neither</span>
+                            </label>
+                        </form>
+                    </column>
+                </box>
+                <box>
+                    <header>Vendor Prefixing</header>
+                    <column>
+                        <form>
+                            <label>
+                                <input type="checkbox">
+                                <span>Autoprefixer</span>
+                            </label>
+                            <label>
+                                <input type="checkbox">
+                                <span>Prefixfree</span>
+                            </label>
+                            <label>
+                                <input type="checkbox">
+                                <span>Neither</span>
+                            </label>
+                        </form>
+                    </column>
+                </box>
+                <box>
+                    <header>Add External Stylesheets/Pens</header>
+                    <column>
+                        <text>
+                            <span>Any URLs added here will be added as a &lt;link &gt;in order, and before the CSS in the editor. You can use the CSS from another Pen by using its URL and the proper</span>
+                            <span>URL extension</span>
+                            <span>.</span>
+                        </text>
+                        <form style="display: none;">
+                            <input type="text" placeholder="None">
+                        </form>
+                        <form>
+                            <row>
+                                <i>
+                                    <con class="icon-menu"></con>
+                                </i>
+                                <input type="text" placeholder="/index.css">
+                                <i>
+                                    <con class="gg-close"></con>
+                                </i>
+                            </row>
+                            <row>
+                                <i>
+                                    <con class="icon-menu"></con>
+                                </i>
+                                <input type="text" placeholder="https://example.tld/style.css">
+                                <i>
+                                    <con class="gg-close"></con>
+                                </i>
+                            </row>
+                        </form>
+                    </column>
+                </box>
+            </column>
         </card>
         <card class="card-js">
-            <section>
-                <box></box>
-                <box></box>
-                <box></box>
-            </section>
+            <column>
+                <box>
+                    <header>JavaScript Preprocessor</header>
+                    <column>
+                        <dropdown onclick="events.onclick.dropdown(event.target)">
+                            <text>None</text>
+                            <i>
+                                <con class="gg-select"></con>
+                            </i>
+                            <ul>
+                                <li>None</li>
+                                <li>Babel</li>
+                                <li>TypeScript</li>
+                                <li>CoffeeScript</li>
+                                <li>LiveScript</li>
+                            </ul>
+                        </dropdown>
+                    </column>
+                </box>
+                <box>
+                    <header>Add External Scripts</header>
+                    <column>
+                        <text>
+                            <span>Any URLs added here will be added as a &lt;link &gt;in order, and before the CSS in the editor. You can use the CSS from another Pen by using its URL and the proper</span>
+                            <span>URL extension</span>
+                            <span>.</span>
+                        </text>
+                        <form style="display: none;">
+                            <input type="text" placeholder="None">
+                        </form>
+                        <form>
+                            <row>
+                                <i>
+                                    <con class="icon-menu"></con>
+                                </i>
+                                <input type="text" placeholder="/index.css">
+                                <i>
+                                    <con class="gg-close"></con>
+                                </i>
+                            </row>
+                            <row>
+                                <i>
+                                    <con class="icon-menu"></con>
+                                </i>
+                                <input type="text" placeholder="https://example.tld/style.css">
+                                <i>
+                                    <con class="gg-close"></con>
+                                </i>
+                            </row>
+                        </form>
+                    </column>
+                </box>
+            </column>
         </card>
         <card class="card-details active">
             <column>
@@ -88,40 +242,72 @@
             </column>
         </card>
         <card class="card-privacy">
-            <section>
+            <column>
                 <box></box>
                 <box></box>
                 <box></box>
-            </section>
+            </column>
         </card>
         <card class="card-behavior">
-            <section>
+            <column>
                 <box>
+                    <header>Auto Save</header>
                     <column>
-                        <text>Auto Save</text>
                         <text>If active, Pens will autosave every 30 seconds after being saved once.</text>
+                        <label>
+                            <input name="autosave" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
+                            <row>
+                                <flex></flex>
+                            </row>
+                        </label>
                     </column>
                 </box>
                 <box>
+                    <header>Auto-Updating Preview</header>
                     <column>
-                        <text>Auto-Updating Preview</text>
                         <text>If enabled, the preview panel updates automatically as you code. If disabled, use the "Run" button to update.</text>
+                        <label>
+                            <input name="previews" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
+                            <row>
+                                <flex></flex>
+                            </row>
+                        </label>
                     </column>
                 </box>
                 <box>
+                    <header>Format on Save</header>
                     <column>
-                        <text>Format on Save</text>
                         <text>If enabled, your code will be formatted when you actively save your Pen. Note: your code becomes un-folded during formatting.</text>
+                        <label>
+                            <input name="reformat" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
+                            <row>
+                                <flex></flex>
+                            </row>
+                        </label>
                     </column>
                 </box>
-            </section>
+            </column>
         </card>
         <card class="card-editor">
-            <section>
+            <column>
                 <box></box>
                 <box></box>
                 <box></box>
-            </section>
+            </column>
+        </card>
+        <card class="card-template">
+            <column>
+                <box></box>
+                <box></box>
+                <box></box>
+            </column>
+        </card>
+        <card class="card-screenshot">
+            <column>
+                <box></box>
+                <box></box>
+                <box></box>
+            </column>
         </card>
     </section>
 </block>

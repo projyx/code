@@ -56,6 +56,22 @@ window.events.onclick.document = async function(event) {
         }
     }
 }
+window.events.onclick.dropdown = function(target) {
+    var dropdown = target.closest('dropdown');
+    var ul = target.closest('ul');
+    if(ul) {
+        var li = target.closest('li');
+        console.log(63, ul);
+        if(li) {
+            dropdown.querySelector('ul').classList.remove('active');
+            dropdown.firstElementChild.textContent = li.textContent;
+        }
+    } else {
+        console.log(65, sel);
+        var sel = target.closest('dropdown > *');
+        dropdown.querySelector('ul').classList.toggle('active');
+    }
+}
 window.events.onclick.exit = function(event) {
     var paths = window.location.pathname.split('/').filter(o=>o.length > 0);
     paths[2] = "tree";
@@ -208,18 +224,34 @@ window.events.onclick.touch = async function(event) {
 
     console.log(136, template);
 }
-window.events.onclick.gistConfigTab = target => {
+window.events.onclick.gistConfigTab = target=>{
     var text = target.closest('text');
-    if(text) {
+    if (text) {
+        var nav = text.closest('nav');
         var texts = text.closest('box').querySelectorAll('text');
         var index = Array.from(texts).indexOf(text);
-        var tabs = text.closest('nav').nextElementSibling;
+        var tabs = nav.nextElementSibling;
         var tab = tabs.children[index];
         console.log(217, index, text.textContent, tab);
         tabs.querySelector('card.active').classList.remove('active');
+        nav.querySelector('text.active').classList.remove('active');
         tab.classList.add('active');
+        text.classList.add('active')
     }
-};
+}
+;
+
+window.events.onchange = {}
+window.events.onchange.gistConfigBehavior = target=>{
+    var name = target.getAttribute('name');
+    var bool = target.checked;
+    console.log(228, 'events.onchange.gistConfigBehavior', {
+        bool,
+        name,
+        target
+    });
+
+}
 
 window.events.oncontextmenu = {}
 window.events.oncontextmenu.wIDE = async function(event) {

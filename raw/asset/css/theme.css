@@ -7,7 +7,7 @@
         }
 
         body[theme="system"] input {
-            color: #fff;
+            /* color: #fff; */
         }
     }
 }
