@@ -165,6 +165,27 @@
         width: 50px;
     }
 
+    @media (max-width: 768px) {
+        .component-gist .header-code .buttons-group > section > i:nth-child(2),
+        .component-gist .header-code .buttons-group > section > i:nth-child(3) {
+            display: none;
+        }
+    }
+
+    .component-gist .header-code .buttons-group > section > i:first-child {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .component-gist .header-code .buttons-group > section > i:first-child {
+            display: flex;
+        }
+
+        .component-gist .header-code .buttons-group > section > i:first-child .gg-layout-list {
+            --ggs: 1.4;
+        }
+    }
+
     .component-gist .header-code .buttons-group .dropdown {
         align-items: center;
         display: flex;
