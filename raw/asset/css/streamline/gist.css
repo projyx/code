@@ -22,8 +22,9 @@
         width: 100%;
         z-index: 12345;
     }
+
     .component-gist .header-code:has(flex.active) {
-        z-index: 123456789;
+        z-index: 1234567890;
     }
 
     .component-gist .header-code > section {
@@ -32,68 +33,105 @@
         flex: 1;
         /* gap: 10px; */
     }
-    
+
     .component-gist .header-code .code-file > section {
         display: flex;
         gap: 5px;
-    }  
-    
+    }
+
     .component-gist .header-code .file-menu > section i {
         align-items: center;
         display: flex;
         height: 50px;
         justify-content: Center;
         width: 50px;
-    }   
-    
+    }
+
     .component-gist .header-code .file-meta {
         align-items: center;
         display: flex;
         justify-content: center;
     }
-    
+
     .component-gist .header-code .file-meta > section {
         flex-direction: column;
-    }   
-    
+    }
+
     .component-gist .header-code .file-meta .meta-title {
         font-weight: bolder;
     }
-    
+
     .component-gist .header-code .file-meta .meta-owner {
         font-size: 14px;
     }
-    
+
     .component-gist .header-code .code-buttons {
         margin-left: auto;
     }
-    
+
     .component-gist .header-code .buttons-group > section {
         display: flex;
         gap: 5px;
         position: relative;
     }
-    
+
     .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex):not(.active) [drop="down"] + flex:not(.active) {
         display: none;
     }
-    
+
     .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex {
-        background: #777;
-        border-radius: 5px;
+        background: #555;
+        border-radius: 10px;
+        color: white;
         display: flex;
-        gap: 5px;
-        padding: 5px;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
         position: absolute;
         right: 0;
-        bottom: calc(-50px);
-        width: 150px;
+        /* bottom: calc(-50px); */
+        top: 45px;
+        /* min-width: 150px; */
+        /* width: 150px; */
+    }
+
+    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row {
+        border: 2px solid #999;
+        border-radius: 5px;
+        min-width: auto;
+    }
+
+    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row > * {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        height: 50px;
+        width: 70px;
+    }
+
+    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row > picture:hover {
+        background: #999;
+    }
+
+    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row > *:nth-child(2) {
+        border-left: 2px solid #999;
+        border-right: 2px solid #999;
+    }
+
+    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row > * svg {
+        height: 20px;
+        width: 20px;
+    }
+
+    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row > * svg path {
+        fill: #fff;
     }
 
     .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex.active:before {
         /* background: black; */
         content: '';
         display: flex;
+        display: none;
         height: 100%;
         left: 0;
         position: fixed;
@@ -101,25 +139,44 @@
         width: 100%;
         z-index: 123;
     }
-    
+
     .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex:not(.active) {
         display: none;
     }
-    
-    .component-gist .header-code .buttons-group > section i {
+
+    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > header {
+        font-weight: bolder;
+        width: 100%;
+    }
+
+    .component-gist .header-code .buttons-group > section > * {
         align-items: center;
         display: flex;
         height: 50px;
         justify-content: Center;
         width: 50px;
     }
-    
+
+    .component-gist .header-code .buttons-group > section > * {
+        align-items: center;
+        display: flex;
+        height: 50px;
+        justify-content: Center;
+        width: 50px;
+    }
+
     .component-gist .header-code .buttons-group .dropdown {
         align-items: center;
         display: flex;
         height: 50px;
         justify-content: Center;
         width: 50px;
+    }
+
+    @media (max-width: 768px) {
+        .component-gist .header-code .buttons-group > section > dropdown {
+            display: none;
+        }
     }
 
     .component-gist .header-code .code-authenticate .authenticate-avatar {
@@ -166,14 +223,21 @@
         width: 400px;
     }
 
+    @media screen and (max-width: 768px) {
+        .component-gist .aside-code {
+            width: 100%;
+            height: calc((100% - 50px)/2);
+        }
+    }
+
     .component-gist .aside-code > section {
         display: flex;
         flex: 1;
         flex-direction: column;
         width: 100%;
     }
-    
-    .component-gist .aside-code .code-file  {
+
+    .component-gist .aside-code .code-file {
         background: #555;
         display: flex;
         flex: 1;
@@ -181,37 +245,43 @@
         height: calc(100%/3);
         width: 100%
     }
-    
+
+    @media (max-width: 768px) {
+        .component-gist .aside-code .code-file:not(.active) {
+            display: none;
+        }
+    }
+
     .component-gist .aside-code .code-html {
         /* background: red; */
         /* height: 100%; */
         /* width: 100%; */
     }
-    
+
     .component-gist .aside-code .code-css {
         /* background: green; */
         /* height: 100%; */
         /* width: 100%; */
     }
-    
+
     .component-gist .aside-code .code-js {
         /* background: blue; */
         /* height: 100%; */
         /* width: 100%; */
     }
-    
+
     .component-gist .aside-code .code-file > section {
         display: flex;
         flex: 1;
         overflow-x: hidden;
     }
-    
+
     .component-gist .aside-code .code-file > section > box {
         display: flex;
         flex: 1;
         width: 100%;
     }
-    
+
     .component-gist .aside-code .code-file > section > box > section {
         background: #555;
         display: flex;
@@ -221,14 +291,14 @@
         flex: 1;
         position: relative;
     }
-    
+
     .component-gist .aside-code .code-file > section > box > section .CodeMirror {
         background: #555;
         height: 100%;
         width: 100%;
         /* flex: 1; */
     }
-    
+
     .component-gist .aside-code .code-file header {
         align-items: center;
         background: #292a2d;
@@ -236,7 +306,7 @@
         height: 50px;
         width: 100%;
     }
-    
+
     .component-gist .aside-code .code-file header .file-type {
         align-items: center;
         background: #555;
@@ -247,16 +317,16 @@
         height: 100%;
         padding: 0 10px;
     }
-    
+
     .component-gist .aside-code .code-html header .file-type {
         /* background: red; */
     }
-    
+
     .component-gist .aside-code .code-css header .file-type {
         /* background: green; */
         height: 100%;
     }
-    
+
     .component-gist .aside-code .code-js header .file-type {
         /* background: blue; */
         height: 100%;
@@ -269,6 +339,14 @@
         height: calc(100% - 50px);
         width: 20px;
     }
+
+    @media (max-width: 768px) {
+        .component-gist .block-line {
+            display: none;
+            height: 10px;
+            width: 100%;
+        }
+    }
 }
 
 /*BLOCK*/
@@ -276,14 +354,16 @@
     .component-gist .block-code {
         display: inline-flex;
         flex: 1;
-        height: 100%;
-        /* width: 100%; */
-    }
-    
-    .component-gist .block-code {
-        display: inline-flex;
-        flex: 1;
         height: calc(100% - 50px);
         /* width: 100%; */
+    }
+
+    @media (max-width: 768px) {
+        .component-gist .block-code {
+            display: inline-flex;
+            flex: unset;
+            height: calc((100% - 50px)/2);
+            width: 100%;
+        }
     }
 }

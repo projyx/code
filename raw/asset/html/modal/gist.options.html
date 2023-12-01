@@ -1,376 +1,376 @@
 <blocks>
-<block modal="gist-options">
-    <header>
-        <card>
-            <section>
-                <box>
-                    <flex>
-                        <text>Settings</text>
-                        <i onclick="modal.exit(event.target)">
-                            <con class="icon-exit"></con>
-                        </i>
-                    </flex>
-                </box>
-            </section>
-        </card>
-    </header>
-    <nav>
-        <card>
-            <section>
-                <box onclick="events.onclick.gistConfigTab(event.target)">
-                    <flex>
-                        <text>HTML</text>
-                        <text>CSS</text>
-                        <text>JS</text>
-                    </flex>
-                    <flex>
-                        <text class="active">Details</text>
-                        <text>Privacy</text>
-                        <text>Behavior</text>
-                        <text>Editor</text>
-                        <text style="display:none;">Template</text>
-                    </flex>
-                </box>
-            </section>
-        </card>
-    </nav>
-    <section>
-        <card class="card-html">
-            <column>
-                <box>
-                    <header>HTML Preprocessor</header>
-                    <column>
-                        <dropdown>
-                            <row drop="down">
-                                <text>None</text>
-                                <i>
-                                    <con class="gg-select"></con>
-                                </i>
-                            </row>
-                            <ul>
-                                <li>None</li>
-                                <li>Haml</li>
-                                <li>Markdown</li>
-                                <li>Slim</li>
-                                <li>Pug</li>
-                            </ul>
-                        </dropdown>
-                    </column>
-                </box>
-                <box>
-                    <header>Top-Level Class</header>
-                    <column>
-                        <text>If enabled, the preview panel updates automatically as you code. If disabled, use the "Run" button to update.</text>
-                        <input type="text" placeholder="e.g. single post post-1234">
-                    </column>
-                </box>
-                <box>
-                    <header>Head Elements</header>
-                    <column>
-                        <textarea placeholder="e.g. &lt;meta&gt;, &lt;link&gt;, &lt;script&gt;"></textarea>
-                    </column>
-                </box>
-            </column>
-        </card>
-        <card class="card-css">
-            <column>
-                <box>
-                    <header>CSS Preprocessor</header>
-                    <column>
-                        <text>If active, Snippets will autosave every 30 seconds after being saved once.</text>
-                        <dropdown>
-                            <row drop="down">
-                                <text>None</text>
-                                <i>
-                                    <con class="gg-select"></con>
-                                </i>
-                            </row>
-                            <ul>
-                                <li>Less</li>
-                                <li>SCSS</li>
-                                <li>Sass</li>
-                                <li>Stylus</li>
-                                <li>PostCSS</li>
-                            </ul>
-                        </dropdown>
-                    </column>
-                </box>
-                <box>
-                    <header>CSS Base</header>
-                    <column>
-                        <form>
+    <block modal="gist-options">
+        <header>
+            <card>
+                <section>
+                    <box>
+                        <flex>
+                            <text>Settings</text>
+                            <i onclick="modal.exit(event.target)">
+                                <con class="icon-exit"></con>
+                            </i>
+                        </flex>
+                    </box>
+                </section>
+            </card>
+        </header>
+        <nav>
+            <card>
+                <section>
+                    <box onclick="events.onclick.gistConfigTab(event.target)">
+                        <flex>
+                            <text>HTML</text>
+                            <text>CSS</text>
+                            <text>JS</text>
+                        </flex>
+                        <flex>
+                            <text class="active">Details</text>
+                            <text>Privacy</text>
+                            <text>Behavior</text>
+                            <text>Editor</text>
+                            <text style="display:none;">Template</text>
+                        </flex>
+                    </box>
+                </section>
+            </card>
+        </nav>
+        <section>
+            <card class="card-html">
+                <column>
+                    <box>
+                        <header>HTML Preprocessor</header>
+                        <column>
+                            <dropdown>
+                                <row drop="down">
+                                    <text>None</text>
+                                    <i>
+                                        <con class="gg-select"></con>
+                                    </i>
+                                </row>
+                                <ul>
+                                    <li>None</li>
+                                    <li>Haml</li>
+                                    <li>Markdown</li>
+                                    <li>Slim</li>
+                                    <li>Pug</li>
+                                </ul>
+                            </dropdown>
+                        </column>
+                    </box>
+                    <box>
+                        <header>Top-Level Class</header>
+                        <column>
+                            <text>If enabled, the preview panel updates automatically as you code. If disabled, use the "Run" button to update.</text>
+                            <input type="text" placeholder="e.g. single post post-1234">
+                        </column>
+                    </box>
+                    <box>
+                        <header>Head Elements</header>
+                        <column>
+                            <textarea placeholder="e.g. &lt;meta&gt;, &lt;link&gt;, &lt;script&gt;"></textarea>
+                        </column>
+                    </box>
+                </column>
+            </card>
+            <card class="card-css">
+                <column>
+                    <box>
+                        <header>CSS Preprocessor</header>
+                        <column>
+                            <text>If active, Snippets will autosave every 30 seconds after being saved once.</text>
+                            <dropdown>
+                                <row drop="down">
+                                    <text>None</text>
+                                    <i>
+                                        <con class="gg-select"></con>
+                                    </i>
+                                </row>
+                                <ul>
+                                    <li>Less</li>
+                                    <li>SCSS</li>
+                                    <li>Sass</li>
+                                    <li>Stylus</li>
+                                    <li>PostCSS</li>
+                                </ul>
+                            </dropdown>
+                        </column>
+                    </box>
+                    <box>
+                        <header>CSS Base</header>
+                        <column>
+                            <form>
+                                <label>
+                                    <input name="css-base" type="radio">
+                                    <span>Normalize</span>
+                                </label>
+                                <label>
+                                    <input name="css-base" type="radio">
+                                    <span>Reset</span>
+                                </label>
+                                <label>
+                                    <input checked name="css-base" type="radio">
+                                    <span>Neither</span>
+                                </label>
+                            </form>
+                        </column>
+                    </box>
+                    <box>
+                        <header>Vendor Prefixing</header>
+                        <column>
+                            <form>
+                                <label>
+                                    <input name="vendor-prefixing" type="radio">
+                                    <span>Autoprefixer</span>
+                                </label>
+                                <label>
+                                    <input name="vendor-prefixing" type="radio">
+                                    <span>Prefixfree</span>
+                                </label>
+                                <label>
+                                    <input checked name="vendor-prefixing" type="radio">
+                                    <span>Neither</span>
+                                </label>
+                            </form>
+                        </column>
+                    </box>
+                    <box>
+                        <header>Add External Stylesheets/Snippets</header>
+                        <column>
+                            <text>
+                                <span>Any URLs added here will be added as a &lt;link &gt;in order, and before the CSS in the editor. You can use the CSS from another Snippet by using its URL and the proper</span>
+                                <span>URL extension</span>
+                                <span>.</span>
+                            </text>
+                            <form style="display: none;">
+                                <input type="text" placeholder="None">
+                            </form>
+                            <form>
+                                <row>
+                                    <i>
+                                        <con class="icon-menu"></con>
+                                    </i>
+                                    <input type="text" placeholder="/index.css">
+                                    <i>
+                                        <con class="gg-close"></con>
+                                    </i>
+                                </row>
+                                <row>
+                                    <i>
+                                        <con class="icon-menu"></con>
+                                    </i>
+                                    <input type="text" placeholder="https://example.tld/style.css">
+                                    <i>
+                                        <con class="gg-close"></con>
+                                    </i>
+                                </row>
+                            </form>
+                        </column>
+                    </box>
+                </column>
+            </card>
+            <card class="card-js">
+                <column>
+                    <box>
+                        <header>JavaScript Preprocessor</header>
+                        <column>
+                            <dropdown>
+                                <row drop="down">
+                                    <text>None</text>
+                                    <i>
+                                        <con class="gg-select"></con>
+                                    </i>
+                                </row>
+                                <ul>
+                                    <li>None</li>
+                                    <li>Babel</li>
+                                    <li>TypeScript</li>
+                                    <li>CoffeeScript</li>
+                                    <li>LiveScript</li>
+                                </ul>
+                            </dropdown>
+                            <text>
+                                <span>Babel includes JSX processing.</span>
+                            </text>
+                        </column>
+                    </box>
+                    <box>
+                        <header>Add External Scripts</header>
+                        <column>
+                            <text>
+                                <span>Any URLs added here will be added as a &lt;link &gt;in order, and before the CSS in the editor. You can use the CSS from another Snippet by using its URL and the proper</span>
+                                <span>URL extension</span>
+                                <span>.</span>
+                            </text>
+                            <form style="display: none;">
+                                <input type="text" placeholder="None">
+                            </form>
+                            <form>
+                                <row>
+                                    <i>
+                                        <con class="icon-menu"></con>
+                                    </i>
+                                    <input type="text" placeholder="/index.css">
+                                    <i>
+                                        <con class="gg-close"></con>
+                                    </i>
+                                </row>
+                                <row>
+                                    <i>
+                                        <con class="icon-menu"></con>
+                                    </i>
+                                    <input type="text" placeholder="https://example.tld/style.css">
+                                    <i>
+                                        <con class="gg-close"></con>
+                                    </i>
+                                </row>
+                            </form>
+                        </column>
+                    </box>
+                </column>
+            </card>
+            <card class="card-details active">
+                <column>
+                    <box>
+                        <header>Title</header>
+                        <section>
+                            <input type="text" placeholder="Untitled">
+                        </section>
+                    </box>
+                    <box>
+                        <header>Description</header>
+                        <section>
+                            <textarea placeholder="Explain what’s going on in your Snippet here. This text is searchable, so it can also help others find your work. Remember to credit others where credit is due. Markdown supported."></textarea>
+                        </section>
+                    </box>
+                    <box>
+                        <header>
+                            <span>Tags</span>
+                            <span>comma separated, spacebar separated</span>
+                        </header>
+                        <section>
+                            <input type="text">
+                        </section>
+                    </box>
+                </column>
+            </card>
+            <card class="card-privacy">
+                <column>
+                    <box>
+                        <header>Make this Snippet private</header>
+                        <column>
+                            <text>If active, Snippets will autosave every 30 seconds after being saved once.</text>
                             <label>
-                                <input name="css-base" type="radio">
-                                <span>Normalize</span>
+                                <input name="autosave" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
+                                <row>
+                                    <flex></flex>
+                                </row>
                             </label>
+                        </column>
+                    </box>
+                </column>
+            </card>
+            <card class="card-behavior">
+                <column>
+                    <box>
+                        <header>Auto Save</header>
+                        <column>
+                            <text>If active, Snippets will autosave every 30 seconds after being saved once.</text>
                             <label>
-                                <input name="css-base" type="radio">
-                                <span>Reset</span>
+                                <input name="autosave" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
+                                <row>
+                                    <flex></flex>
+                                </row>
                             </label>
+                        </column>
+                    </box>
+                    <box>
+                        <header>Auto-Updating Preview</header>
+                        <column>
+                            <text>If enabled, the preview panel updates automatically as you code. If disabled, use the "Run" button to update.</text>
                             <label>
-                                <input checked name="css-base" type="radio">
-                                <span>Neither</span>
+                                <input name="previews" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
+                                <row>
+                                    <flex></flex>
+                                </row>
                             </label>
-                        </form>
-                    </column>
-                </box>
-                <box>
-                    <header>Vendor Prefixing</header>
-                    <column>
-                        <form>
+                        </column>
+                    </box>
+                    <box>
+                        <header>Format on Save</header>
+                        <column>
+                            <text>If enabled, your code will be formatted when you actively save your Snippet.</text>
                             <label>
-                                <input name="vendor-prefixing" type="radio">
-                                <span>Autoprefixer</span>
+                                <input name="reformat" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
+                                <row>
+                                    <flex></flex>
+                                </row>
                             </label>
+                        </column>
+                    </box>
+                </column>
+            </card>
+            <card class="card-editor">
+                <column>
+                    <box>
+                        <header>Code Indentation</header>
+                        <column>
+                            <form>
+                                <label>
+                                    <input name="code-indentation" type="radio">
+                                    <span>Spaces</span>
+                                </label>
+                                <label>
+                                    <input name="code-indentation" type="radio">
+                                    <span>Tabs</span>
+                                </label>
+                            </form>
+                        </column>
+                    </box>
+                    <box>
+                        <header>Indentation Size</header>
+                        <column>
+                            <dropdown>
+                                <row drop="down">
+                                    <text>2</text>
+                                    <i>
+                                        <con class="gg-select"></con>
+                                    </i>
+                                </row>
+                                <ul>
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li>6</li>
+                                </ul>
+                            </dropdown>
+                        </column>
+                    </box>
+                </column>
+            </card>
+            <card class="card-template">
+                <column>
+                    <box>
+                        <header>Make template?</header>
+                        <column>
+                            <text>Templates are Snippets that can be used to start other Snippets quickly from the create menu. The new Snippet will copy all the code and settings from the template and make a new Snippet (that is not a fork).</text>
                             <label>
-                                <input name="vendor-prefixing" type="radio">
-                                <span>Prefixfree</span>
+                                <input name="autosave" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
+                                <row>
+                                    <flex></flex>
+                                </row>
                             </label>
-                            <label>
-                                <input checked name="vendor-prefixing" type="radio">
-                                <span>Neither</span>
-                            </label>
-                        </form>
-                    </column>
-                </box>
-                <box>
-                    <header>Add External Stylesheets/Snippets</header>
-                    <column>
-                        <text>
-                            <span>Any URLs added here will be added as a &lt;link &gt;in order, and before the CSS in the editor. You can use the CSS from another Snippet by using its URL and the proper</span>
-                            <span>URL extension</span>
-                            <span>.</span>
-                        </text>
-                        <form style="display: none;">
-                            <input type="text" placeholder="None">
-                        </form>
-                        <form>
-                            <row>
-                                <i>
-                                    <con class="icon-menu"></con>
-                                </i>
-                                <input type="text" placeholder="/index.css">
-                                <i>
-                                    <con class="gg-close"></con>
-                                </i>
-                            </row>
-                            <row>
-                                <i>
-                                    <con class="icon-menu"></con>
-                                </i>
-                                <input type="text" placeholder="https://example.tld/style.css">
-                                <i>
-                                    <con class="gg-close"></con>
-                                </i>
-                            </row>
-                        </form>
-                    </column>
-                </box>
-            </column>
-        </card>
-        <card class="card-js">
-            <column>
-                <box>
-                    <header>JavaScript Preprocessor</header>
-                    <column>
-                        <dropdown>
-                            <row drop="down">
-                                <text>None</text>
-                                <i>
-                                    <con class="gg-select"></con>
-                                </i>
-                            </row>
-                            <ul>
-                                <li>None</li>
-                                <li>Babel</li>
-                                <li>TypeScript</li>
-                                <li>CoffeeScript</li>
-                                <li>LiveScript</li>
-                            </ul>
-                        </dropdown>
-                        <text>
-                            <span>Babel includes JSX processing.</span>
-                        </text>
-                    </column>
-                </box>
-                <box>
-                    <header>Add External Scripts</header>
-                    <column>
-                        <text>
-                            <span>Any URLs added here will be added as a &lt;link &gt;in order, and before the CSS in the editor. You can use the CSS from another Snippet by using its URL and the proper</span>
-                            <span>URL extension</span>
-                            <span>.</span>
-                        </text>
-                        <form style="display: none;">
-                            <input type="text" placeholder="None">
-                        </form>
-                        <form>
-                            <row>
-                                <i>
-                                    <con class="icon-menu"></con>
-                                </i>
-                                <input type="text" placeholder="/index.css">
-                                <i>
-                                    <con class="gg-close"></con>
-                                </i>
-                            </row>
-                            <row>
-                                <i>
-                                    <con class="icon-menu"></con>
-                                </i>
-                                <input type="text" placeholder="https://example.tld/style.css">
-                                <i>
-                                    <con class="gg-close"></con>
-                                </i>
-                            </row>
-                        </form>
-                    </column>
-                </box>
-            </column>
-        </card>
-        <card class="card-details active">
-            <column>
-                <box>
-                    <header>Title</header>
-                    <section>
-                        <input type="text" placeholder="Untitled">
-                    </section>
-                </box>
-                <box>
-                    <header>Description</header>
-                    <section>
-                        <textarea placeholder="Explain what’s going on in your Snippet here. This text is searchable, so it can also help others find your work. Remember to credit others where credit is due. Markdown supported."></textarea>
-                    </section>
-                </box>
-                <box>
-                    <header>
-                        <span>Tags</span>
-                        <span>comma separated, spacebar separated</span>
-                    </header>
-                    <section>
-                        <input type="text">
-                    </section>
-                </box>
-            </column>
-        </card>
-        <card class="card-privacy">
-            <column>
-                <box>
-                    <header>Make this Snippet private</header>
-                    <column>
-                        <text>If active, Snippets will autosave every 30 seconds after being saved once.</text>
-                        <label>
-                            <input name="autosave" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
-                            <row>
-                                <flex></flex>
-                            </row>
-                        </label>
-                    </column>
-                </box>
-            </column>
-        </card>
-        <card class="card-behavior">
-            <column>
-                <box>
-                    <header>Auto Save</header>
-                    <column>
-                        <text>If active, Snippets will autosave every 30 seconds after being saved once.</text>
-                        <label>
-                            <input name="autosave" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
-                            <row>
-                                <flex></flex>
-                            </row>
-                        </label>
-                    </column>
-                </box>
-                <box>
-                    <header>Auto-Updating Preview</header>
-                    <column>
-                        <text>If enabled, the preview panel updates automatically as you code. If disabled, use the "Run" button to update.</text>
-                        <label>
-                            <input name="previews" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
-                            <row>
-                                <flex></flex>
-                            </row>
-                        </label>
-                    </column>
-                </box>
-                <box>
-                    <header>Format on Save</header>
-                    <column>
-                        <text>If enabled, your code will be formatted when you actively save your Snippet.</text>
-                        <label>
-                            <input name="reformat" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
-                            <row>
-                                <flex></flex>
-                            </row>
-                        </label>
-                    </column>
-                </box>
-            </column>
-        </card>
-        <card class="card-editor">
-            <column>
-                <box>
-                    <header>Code Indentation</header>
-                    <column>
-                        <form>
-                            <label>
-                                <input name="code-indentation" type="radio">
-                                <span>Spaces</span>
-                            </label>
-                            <label>
-                                <input name="code-indentation" type="radio">
-                                <span>Tabs</span>
-                            </label>
-                        </form>
-                    </column>
-                </box>
-                <box>
-                    <header>Indentation Size</header>
-                    <column>
-                        <dropdown>
-                            <row drop="down">
-                                <text>2</text>
-                                <i>
-                                    <con class="gg-select"></con>
-                                </i>
-                            </row>
-                            <ul>
-                                <li>1</li>
-                                <li>2</li>
-                                <li>3</li>
-                                <li>4</li>
-                                <li>5</li>
-                                <li>6</li>
-                            </ul>
-                        </dropdown>
-                    </column>
-                </box>
-            </column>
-        </card>
-        <card class="card-template">
-            <column>
-                <box>
-                    <header>Make template?</header>
-                    <column>
-                        <text>Templates are Snippets that can be used to start other Snippets quickly from the create menu. The new Snippet will copy all the code and settings from the template and make a new Snippet (that is not a fork).</text>
-                        <label>
-                            <input name="autosave" onchange="events.onchange.gistConfigBehavior(event.target)" type="checkbox">
-                            <row>
-                                <flex></flex>
-                            </row>
-                        </label>
-                    </column>
-                </box>
-            </column>
-        </card>
-    </section>
-    <footer>
-        <card>
-            <section>
-                <text>Save & Close</text>
-            </section>
-        </card>
-    </footer>
-</block>
+                        </column>
+                    </box>
+                </column>
+            </card>
+        </section>
+        <footer>
+            <card>
+                <section>
+                    <text>Save & Close</text>
+                </section>
+            </card>
+        </footer>
+    </block>
