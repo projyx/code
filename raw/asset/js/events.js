@@ -32,7 +32,11 @@ window.events.onclick.document = async function(event) {
 
     Array.from(document.querySelectorAll('dropdown [drop="down"]')).forEach(elem=>{
         var dropdown = elem.closest('dropdown:has(ul.active)');
-        elem === dropdown ? null : elem.nextElementSibling.classList.remove('active');
+        console.log({
+            elem,
+            dropdown
+        });
+        //elem === dropdown ? null : elem.nextElementSibling.classList.remove('active');
     }
     );
 
@@ -52,7 +56,25 @@ window.events.onclick.document = async function(event) {
             elem,
             drop
         });
+        var ul = target.closest('dropdown > ul');
+        var drop = elem.querySelector('[drop="down"]');
+        console.log(63, {
+            target,
+            ul,
+            drop
+        });
+        if (ul) {
+            drop.classList.add('active');
+
+            var li = target.closest('dropdown > ul > li');
+            console.log(66, ul, li);
+            if (li) {
+                //dropdown.querySelector('ul').classList.remove('active');
+                elem.firstElementChild.querySelector('text').textContent = li.textContent;
+            }
+        }
         if (drop) {
+            console.log(84, drop.nextElementSibling.classList.contains('active'));
             if (drop.nextElementSibling.classList.contains('active')) {
                 Array.from(document.querySelectorAll('dropdown [drop="down"]')).forEach(elem=>{
                     elem.nextElementSibling.classList.remove('active');
@@ -63,16 +85,16 @@ window.events.onclick.document = async function(event) {
                 drop.nextElementSibling.classList.add('active');
             }
         }
-        var ul = target.closest('dropdown > ul');
-        console.log(63, target, ul);
-        if (ul) {
-            var li = target.closest('dropdown > ul > li');
-            console.log(66, ul, li);
-            if (li) {
-                //dropdown.querySelector('ul').classList.remove('active');
-                elem.firstElementChild.querySelector('text').textContent = li.textContent;
-            }
+    } else {
+        Array.from(document.querySelectorAll('dropdown [drop="down"]')).forEach(elem=>{
+            var dropdown = elem.closest('dropdown:has(ul.active)');
+            console.log({
+                elem,
+                dropdown
+            });
+            elem === dropdown ? null : elem.nextElementSibling.classList.remove('active');
         }
+        );
     }
 }
 window.events.onclick.dropdown = function(target) {

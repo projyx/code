@@ -22,6 +22,9 @@
         width: 100%;
         z-index: 12345;
     }
+    .component-gist .header-code:has(flex.active) {
+        z-index: 123456789;
+    }
 
     .component-gist .header-code > section {
         align-items: center;
@@ -68,9 +71,50 @@
     .component-gist .header-code .buttons-group > section {
         display: flex;
         gap: 5px;
-    }  
+        position: relative;
+    }
+    
+    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex):not(.active) [drop="down"] + flex:not(.active) {
+        display: none;
+    }
+    
+    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex {
+        background: #777;
+        border-radius: 5px;
+        display: flex;
+        gap: 5px;
+        padding: 5px;
+        position: absolute;
+        right: 0;
+        bottom: calc(-50px);
+        width: 150px;
+    }
+
+    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex.active:before {
+        /* background: black; */
+        content: '';
+        display: flex;
+        height: 100%;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 123;
+    }
+    
+    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex:not(.active) {
+        display: none;
+    }
     
     .component-gist .header-code .buttons-group > section i {
+        align-items: center;
+        display: flex;
+        height: 50px;
+        justify-content: Center;
+        width: 50px;
+    }
+    
+    .component-gist .header-code .buttons-group .dropdown {
         align-items: center;
         display: flex;
         height: 50px;

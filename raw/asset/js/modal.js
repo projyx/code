@@ -116,7 +116,8 @@ window.modal = {
         ppp.setAttribute('class', 'aside body-aside panel');
         className ? card.className = className : null;
         ppp.onclick = event=>{
-            event.target.classList.contains('aside') ? event.target.remove() : null
+            console.log(event.target);
+            event.target.classList.contains('aside') || event.target.tagName.toLowerCase() === 'blocks' ? event.target.closest('aside').remove() : null
         }
         dom.body.insertBefore(ppp, document.getElementById('boot').nextElementSibling);
         modal.zIndex(document.querySelectorAll('aside'));

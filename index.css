@@ -85,4 +85,8 @@
     [component]:not(.active) {
         display: none;
     }
+
+    dropdown {
+        position: relative;
+    }
 }
