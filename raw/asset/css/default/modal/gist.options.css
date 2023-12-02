@@ -6,13 +6,12 @@
         /* display: flex; */
         flex-direction: column;
         flex-wrap: wrap;
-        padding: 0 20px;
-        /* width: 100%; */
-        max-width: calc(100% - 40px);
+        margin: auto;
+        width: 100%;
     }
 }
 
-@media {
+@media {    
     aside:has([modal="gist-options"]) blocks {
         align-items: center;
         width: 100%;
@@ -44,7 +43,7 @@
         font-weight: bolder;
         justify-content: space-between;
         line-height: 50px;
-        margin-bottom: 0;
+        margin-bottom: 20px;
         width: 100%;
     }
 
@@ -70,10 +69,9 @@
 @media {
     [modal="gist-options"] > nav {
         border-right: 3px solid #777;
-        border-right: unset;
         display: inline-flex;
         /* margin-right: 20px; */
-        width: 100%;
+        width: 120px;
     }
 
     [modal="gist-options"] > nav card {
@@ -82,63 +80,39 @@
 
     [modal="gist-options"] > nav box {
         display: inline-flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        /* gap: 10px; */
+        flex-direction: column;
+        gap: 10px;
         width: 100%;
     }
 
     [modal="gist-options"] > nav box text {
-        display: inline-flex;
         line-height: 36px;
-        padding: 0 20px;
+        padding-left: 20px;
         position: relative;
-        width: auto;
     }
 
     [modal="gist-options"] > nav box text:hover {
-        background: #777;
         width: auto;
     }
 
     [modal="gist-options"] > nav box text.active {
-        /* background: #333; */
+        background: #333;
         font-weight: bolder;
-        height: 40px;
     }
 
-    [modal="gist-options"] > nav box text.active:hover {
-        background: #777;
-        top: 0px;
-    }
-
-    [modal="gist-options"] > nav box text:not(.active):hover:before {
+    [modal="gist-options"] > nav box text:hover {
         background: #555;
-        border-bottom: 4px solid #555;
-        line-height: 36px;
-        /* top: 1px; */
-    }
-
-    [modal="gist-options"] > nav box text:not(.active):hover:before {
-        bottom: 0px;
-        content: '';
-        display: block;
-        height: 0;
-        left: 0;
-        position: absolute;
-        width: 100%;
-        z-index: 12345;
     }
 
     [modal="gist-options"] > nav box text.active:before {
-        background: white;
+        background: #32cd32;
         bottom: 0px;
         content: '';
         display: block;
-        height: 3px;
+        height: 100%;
         left: 0;
         position: absolute;
-        width: 100%;
+        width: 3px;
         z-index: 123;
     }
 
@@ -153,13 +127,9 @@
     }
 
     [modal="gist-options"] nav box > flex {
-        /* border-bottom: 1px solid; */
         display: inline-flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin: 0 20px;
+        flex-direction: column;
         /* gap: 10px; */
-        width: 100%;
     }
 
     [modal="gist-options"] > nav + section {
@@ -323,7 +293,7 @@
     }
 
     [modal="gist-options"] > nav + section > card > column > box > column dropdown + text {
-        font-size: 13px;
+        font-size: 13px;        
     }
 }
 
@@ -355,7 +325,8 @@
         width: 100%;
     }
 
-    [modal="gist-options"] > nav + section > card:has(form > label input[type="checkbox"]) label, [modal="gist-options"] > nav + section > card:has(form > label input[type="radio"]) label {
+    [modal="gist-options"] > nav + section > card:has(form > label input[type="checkbox"]) label,
+    [modal="gist-options"] > nav + section > card:has(form > label input[type="radio"]) label {
         align-items: center;
         display: inline-flex;
         border-radius: 5px;
@@ -367,7 +338,8 @@
         /* width: 100%; */
     }
 
-    [modal="gist-options"] > nav + section > card:has(form > label input[type="checkbox"]) input[type="checkbox"], [modal="gist-options"] > nav + section > card:has(form > label input[type="radio"]) input[type="radio"] {
+    [modal="gist-options"] > nav + section > card:has(form > label input[type="checkbox"]) input[type="checkbox"],
+    [modal="gist-options"] > nav + section > card:has(form > label input[type="radio"]) input[type="radio"] {
         background: white;
         border-radius: 50%;
         line-height: 36px;
@@ -381,7 +353,7 @@
         outline: 3px solid transparent;
         /* width: 5px; */
     }
-
+    
     [modal="gist-options"] > nav + section > card:has(form > label input[type="radio"]) input[type="radio"] {
         background: white;
         border-radius: 50%;
@@ -401,7 +373,8 @@
         border: 1px solid white;
     }
 
-    [modal="gist-options"] > nav + section > card:has(form > label input[type="checkbox"]) input[type="checkbox"]:checked, [modal="gist-options"] > nav + section > card:has(form > label input[type="radio"]) input[type="radio"]:checked {
+    [modal="gist-options"] > nav + section > card:has(form > label input[type="checkbox"]) input[type="checkbox"]:checked,
+    [modal="gist-options"] > nav + section > card:has(form > label input[type="radio"]) input[type="radio"]:checked {
         background: skyblue;
         border: 2px solid #333;
         outline: 2px solid skyblue;
@@ -421,11 +394,11 @@
     [modal="gist-options"] > nav + section > card.card-details {
         width: 100%;
     }
-
+    
     [modal="gist-options"] > nav + section > card.card-details box > header:has(span + span) {
         display: flex;
     }
-
+    
     [modal="gist-options"] > nav + section > card.card-details box > header:has(span + span) span:last-child {
         display: inline-block;
         font-size: 13px;
