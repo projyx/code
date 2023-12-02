@@ -83,6 +83,14 @@
         position: relative;
     }
 
+    .component-gist .header-code .buttons-group > section > * {
+        align-items: center;
+        display: flex;
+        height: 50px;
+        justify-content: Center;
+        width: 50px;
+    }
+
     .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex):not(.active) [drop="down"] + flex:not(.active) {
         display: none;
     }
@@ -103,13 +111,43 @@
         /* width: 150px; */
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row {
+    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex i {
+        height: 36px;
+        width: 36px;
+    }
+
+    /*LIST*/
+    .component-gist .header-code .buttons-group > section > dropdown:nth-child(1) {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .component-gist .header-code .buttons-group > section > dropdown:nth-child(1) {
+            display: flex;
+        }
+        .component-gist .header-code .buttons-group > section > dropdown:nth-child(1) > row i con {
+            --ggs: 1.4;
+        }
+    }
+    
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(1):has([drop="down"] + flex) [drop="down"] + flex {
+        box-shadow: 0 0 10pc -9px;
+    }
+
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(1):has([drop="down"] + flex) [drop="down"] + flex > column > text {
+        align-items: center;
+        display: flex;
+    }
+    /*LIST*/
+
+    /*VIEW*/
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row {
         border: 2px solid #999;
         border-radius: 5px;
         min-width: auto;
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row > * {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > * {
         align-items: center;
         display: flex;
         justify-content: center;
@@ -117,37 +155,37 @@
         width: 70px;
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row > picture.active {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > picture.active {
         background: #999;
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row > picture:hover {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > picture:hover {
         background: #999;
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row > *:nth-child(2) {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > *:nth-child(2) {
         border-left: 2px solid #999;
         border-right: 2px solid #999;
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row > * svg {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > * svg {
         height: 20px;
         width: 20px;
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row > *:first-child svg {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > *:first-child svg {
         transform: rotate(-90deg)
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row > *:last-child svg {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > *:last-child svg {
         transform: rotate(90deg);
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row > * svg path {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > * svg path {
         fill: #fff;
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex.active:before {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex.active:before {
         /* background: black; */
         content: '';
         display: flex;
@@ -160,34 +198,19 @@
         z-index: 123;
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex:not(.active) {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex:not(.active) {
         display: none;
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > header {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > header {
         font-weight: bolder;
         width: 100%;
     }
 
-    .component-gist .header-code .buttons-group > section > * {
-        align-items: center;
-        display: flex;
-        height: 50px;
-        justify-content: Center;
-        width: 50px;
-    }
-
-    .component-gist .header-code .buttons-group > section > * {
-        align-items: center;
-        display: flex;
-        height: 50px;
-        justify-content: Center;
-        width: 50px;
-    }
-
+    /*VIEW*/
+    /**/
     @media (max-width: 768px) {
-        .component-gist .header-code .buttons-group > section > i:nth-child(2),
-        .component-gist .header-code .buttons-group > section > i:nth-child(3) {
+        .component-gist .header-code .buttons-group > section > i:nth-child(2), .component-gist .header-code .buttons-group > section > i:nth-child(3) {
             display: none;
         }
     }

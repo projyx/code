@@ -21,9 +21,29 @@
             <section>
                 <span class="buttons-group">
                     <section>
-                        <i onclick="api.gists.push()">
-                            <con class="gg-layout-list"></con>
-                        </i>
+                        <dropdown>
+                            <row drop="down">
+                                <i>
+                                    <con class="gg-layout-list"></con>
+                                </i>
+                            </row>
+                            <flex>
+                                <column>
+                                    <text>
+                                        <i onclick="api.gists.push()">
+                                            <con class="gg-software-upload"></con>
+                                        </i>
+                                        <span>Save</span>
+                                    </text>
+                                    <text>
+                                        <i onclick="api.gists.push()">
+                                            <con class="gg-options"></con>
+                                        </i>
+                                        <span>Settings</span>
+                                    </text>
+                                </column>
+                            </flex>
+                        </dropdown>
                         <i onclick="api.gists.push()">
                             <con class="icon-upload"></con>
                         </i>
