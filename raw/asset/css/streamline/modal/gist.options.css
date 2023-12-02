@@ -72,8 +72,16 @@
         border-right: 3px solid #777;
         border-right: unset;
         display: inline-flex;
+        margin: 0;
         /* margin-right: 20px; */
         width: 100%;
+        width: 120px;
+    }
+
+    @media (max-width: 768px) {
+        [modal="gist-options"] > nav {
+            width: 100%;
+        }
     }
 
     [modal="gist-options"] > nav card {
@@ -90,31 +98,33 @@
 
     [modal="gist-options"] > nav box text {
         display: inline-flex;
-        line-height: 36px;
+        line-height: 50px;
         padding: 0 20px;
+        padding: 0;
         position: relative;
         width: auto;
     }
 
-    [modal="gist-options"] > nav box text:hover {
-        background: #777;
+    [modal="gist-options"] > nav box text:not(.active):hover {
+        /* background: #777; */
+        color: #0096c7;
         width: auto;
     }
 
     [modal="gist-options"] > nav box text.active {
         /* background: #333; */
+        color: #0096c7;
         font-weight: bolder;
-        height: 40px;
+        /* height: 40px; */
     }
 
     [modal="gist-options"] > nav box text.active:hover {
-        background: #777;
+        /* background: #777; */
         top: 0px;
     }
 
     [modal="gist-options"] > nav box text:not(.active):hover:before {
-        background: #555;
-        border-bottom: 4px solid #555;
+        border-bottom: 1px solid #0096c7;
         line-height: 36px;
         /* top: 1px; */
     }
@@ -128,6 +138,7 @@
         position: absolute;
         width: 100%;
         z-index: 12345;
+        opacity: 0;
     }
 
     [modal="gist-options"] > nav box text.active:before {
@@ -135,11 +146,12 @@
         bottom: 0px;
         content: '';
         display: block;
-        height: 3px;
+        height: 2px;
         left: 0;
         position: absolute;
         width: 100%;
         z-index: 123;
+        opacity: 0;
     }
 
     @media screen and (max-width: 768px) {
@@ -156,10 +168,18 @@
         /* border-bottom: 1px solid; */
         display: inline-flex;
         flex-direction: row;
+        flex-direction: column;
         flex-wrap: wrap;
-        margin: 0 20px;
+        margin: 0 20px 20px;
         /* gap: 10px; */
         width: 100%;
+    }
+
+    @media screen and (max-width: 768px) {
+        [modal="gist-options"] nav box > flex {
+            flex-direction: row;
+            gap: 20px;
+        }
     }
 
     [modal="gist-options"] > nav + section {
@@ -205,6 +225,12 @@
         flex-direction: column;
         gap: 5px;
         padding: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+    [modal="gist-options"] > nav + section > card > column > box {
+        padding: 0;
+    }
     }
 
     [modal="gist-options"] > nav + section > card > column > box > header {
