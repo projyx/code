@@ -124,6 +124,15 @@ api.gists.config = () => {
 api.gists.view = () => {
     console.log(119, 'api.gists.view');
 }
+api.gists.likes = () => {
+    console.log(116, 'api.gists.likes');
+    request('/raw/asset/html/modal/gist.likes.html').then((html) => {
+        console.log(118, {
+            html
+        });
+        modal.panel(html);
+    });
+}
 
 window.api.time = {};
 api.time.date = (previous)=>{
