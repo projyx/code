@@ -117,6 +117,10 @@
         width: 70px;
     }
 
+    .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row > picture.active {
+        background: #999;
+    }
+
     .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > row > picture:hover {
         background: #999;
     }
