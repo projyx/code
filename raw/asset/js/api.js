@@ -32,6 +32,22 @@ window.api.oauth.login = function(target) {
 }
 
 window.api.code = {};
+api.code.css = function() {
+    var html = document.getElementById('code-html');
+    html.closest('card').classList.toggle('active');
+}
+api.code.html = function() {
+    var css = document.getElementById('code-css');
+    css.closest('card').classList.toggle('active');
+}
+api.code.js = function() {
+    Array.from(js.closest('card').parentNode.all('card')).forEach((el)=>{
+        js.closest('card').classList.remove('active');
+    }
+    )
+    var js = document.getElementById('code-js');
+    js.closest('card').classList.toggle('active');
+}
 api.code.push = function() {
     var paths = window.location.pathname.split("/").filter(o=>o.length > 1);
     var names = paths.splice(5, paths.length - 1);
@@ -99,7 +115,7 @@ api.gists.push = function() {
         });
     }
     );
-    0 > 1 ? console.log(93, {        
+    0 > 1 ? console.log(93, {
         code,
         keys,
         vals,
@@ -113,32 +129,34 @@ api.gists.push = function() {
         }),
         method: 'PATCH'
     };
-    0 < 1 ? console.log(107, {        
+    0 < 1 ? console.log(107, {
         id,
         settings
     }) : null;
     github.gists.id(id, settings)
 }
-api.gists.config = () => {
+api.gists.config = ()=>{
     console.log(116, 'api.gists.config');
-    request('/raw/asset/html/modal/gist.options.html').then((html) => {
+    request('/raw/asset/html/modal/gist.options.html').then((html)=>{
         console.log(118, {
             html
         });
         modal.panel(html);
-    });
+    }
+    );
 }
-api.gists.view = () => {
+api.gists.view = ()=>{
     console.log(119, 'api.gists.view');
 }
-api.gists.likes = () => {
+api.gists.likes = ()=>{
     console.log(116, 'api.gists.likes');
-    request('/raw/asset/html/modal/gist.likes.html').then((html) => {
+    request('/raw/asset/html/modal/gist.likes.html').then((html)=>{
         console.log(118, {
             html
         });
         modal.panel(html);
-    });
+    }
+    );
 }
 
 window.api.time = {};

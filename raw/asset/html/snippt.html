@@ -127,7 +127,7 @@
 </header>
 <aside class="aside-code">
     <header>
-        <box class="file-type active">
+        <box class="file-type active" onclick="api.code['html']()">
             <section>
                 <text>
                     <picture>
@@ -142,7 +142,7 @@
                 </text>
             </section>
         </box>
-        <box class="file-type">
+        <box class="file-type" onclick="api.code['css']()">
             <section>
                 <text>
                     <picture>
@@ -157,7 +157,7 @@
                 </text>
             </section>
         </box>
-        <box class="file-type">
+        <box class="file-type" onclick="api.code['js']()">
             <section>
                 <text>
                     <picture>
@@ -180,70 +180,6 @@
             </section>
         </box>
     </header>
-    <section>
-        <card class="code-file code-html active">
-            <header>
-                <box class="file-type">
-                    <section>
-                        <text>
-                            <span>HTML</span>
-                        </text>
-                    </section>
-                </box>
-                <i>
-                    <con class="gg-options"></con>
-                </i>
-                <i>
-                    <con class="gg-chevron-down"></con>
-                </i>
-            </header>
-            <section>
-                <box>
-                    <section id="code-html"></section>
-                </box>
-            </section>
-        </card>
-        <card class="code-file code-css">
-            <header>
-                <box class="file-type">
-                    <section>
-                        <text>CSS</text>
-                    </section>
-                </box>
-                <i>
-                    <con class="gg-options"></con>
-                </i>
-                <i>
-                    <con class="gg-chevron-down"></con>
-                </i>
-            </header>
-            <section>
-                <box>
-                    <section id="code-css"></section>
-                </box>
-            </section>
-        </card>
-        <card class="code-file code-js">
-            <header>
-                <box class="file-type">
-                    <section>
-                        <text>JS</text>
-                    </section>
-                </box>
-                <i>
-                    <con class="gg-options"></con>
-                </i>
-                <i>
-                    <con class="gg-chevron-down"></con>
-                </i>
-            </header>
-            <section>
-                <box>
-                    <section id="code-js"></section>
-                </box>
-            </section>
-        </card>
-    </section>
 </aside>
 <line class="block-line"></line>
 <block class="block-code">

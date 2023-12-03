@@ -156,7 +156,11 @@
         flex-direction: column;
     }
 
-    .component-snip .header-code > section > dropdown:last-child > column.active text spn:hover {
+    .component-snip .header-code > section > dropdown:last-child > column.active text span {
+        
+    }
+
+    .component-snip .header-code > section > dropdown:last-child > column.active text span:hover {
         background: #777;
     }
 
