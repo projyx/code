@@ -364,7 +364,7 @@
     }
 
     @media screen and (max-width: 768px) {
-         .component-gist .aside-code > header {
+        .component-gist .aside-code > header {
             display: flex;
         }
     }
@@ -384,10 +384,12 @@
 
     .component-gist .aside-code > header .file-icon.active {
         background: #777;
+        padding: 0px;
     }
 
     .component-gist .aside-code > header .file-type {
         align-items: center;
+        justify-content: center;
         background: #333;
         /* border-left: 1px solid #111; */
         border-right: 4px solid #292a2d;
@@ -401,8 +403,38 @@
         padding: 0 16px;
     }
 
+    .component-gist .aside-code > header .file-type text {
+        display: flex;
+        gap: 3px;
+    }
+
+    @media (max-width: 540px) {
+        .component-gist .aside-code > header .file-type {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            width: 50px;
+        }
+    }
+
     .component-gist .aside-code > header .file-type.active {
         background: #555;
+    }
+
+    .component-gist .aside-code > header .file-type text picture {
+        display: inline-flex;
+        width: 20px;
+    }
+
+    .component-gist .aside-code > header .file-type text span {
+        display: inline-flex;
+    }
+
+    @media (max-width: 540px) {
+        .component-gist .aside-code > header .file-type text span {
+            display: none;
+        }
     }
 
     .component-gist .aside-code > section {
@@ -501,8 +533,7 @@
 
     @media (max-width: 768px) {
         .component-gist .aside-code .code-html header .file-type {
-            /* background: red; */ 
-            display: none;
+            /* background: red; */ display: none;
         }
     }
 
