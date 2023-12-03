@@ -6,9 +6,9 @@
         <link href="/index.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/wide.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/edit.css" rel="stylesheet">
-        <link href="/raw/asset/css/streamline/gist.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/home.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/tree.css" rel="stylesheet">
+        <link href="/raw/asset/css/streamline/snip.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/user.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/modal/gist.likes.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/modal/gist.options.css" rel="stylesheet">
@@ -44,10 +44,8 @@
         <boot id="boot"></boot>
         <main>
             <component class="component component-home" component="home" route="/"></component>
-            <component class="component component-gists" component="gists" routes="/gists/*"></component>
-            <component class="component component-gist" component="gist" routes="/gists/*/*"></component>
-            <component class="component component-snippets" component="snippets" routes="/snippet/*/*"></component>
-            <component class="component component-snippet" component="snippet" routes="/snippet/*"></component>
+            <component class="component component-snips" component="snips" routes="/snippet/*"></component>
+            <component class="component component-snip" component="snip" routes="/snippet/*/*"></component>
             <component class="component component-user" component="user" route="/*"></component>
             <component class="component component-user" component="user" route="/*"></component>
             <component class="component component-tree" component="tree" routes="/*/*"></component>

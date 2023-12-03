@@ -16,7 +16,7 @@ window.routes = function(uri, options) {
         if (sub) {
             if (sub === "settings") {
                 console.log("routes.view settings");
-            } else if (sub === "gists") {
+            } else if (sub === "gists" || sub ==="snippet") {
                 if (paths.length > 1) {
                     var username = paths[0];
                     if (paths.length > 2) {
