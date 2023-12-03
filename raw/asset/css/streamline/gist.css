@@ -35,8 +35,7 @@
         width: 100%;
     }
 
-    .component-gist .header-code:has(dropdown > .active:last-child) ~ .aside-code:before,
-    .component-gist .header-code:has(dropdown > .active:last-child) ~ .block-code:before {
+    .component-gist .header-code:has(dropdown > .active:last-child) ~ .aside-code:before, .component-gist .header-code:has(dropdown > .active:last-child) ~ .block-code:before {
         backdrop-filter: blur(10px);
         content: '';
         display: block;
@@ -349,7 +348,7 @@
     .component-gist .aside-code {
         background: #292a2d;
         display: flex;
-        height: calc(100% - 100px);
+        height: calc(100% - 86px);
         width: 400px;
         /* z-index: 123456789; */
     }
@@ -600,7 +599,7 @@
     .component-gist .block-code {
         display: inline-flex;
         flex: 1;
-        height: calc(100% - 100px);
+        height: calc(100% - 86px);
         width: 100%;
     }
 
@@ -619,7 +618,7 @@
     .component-gist .footer-snippet {
         /* display: inline-flex; */
         /* flex: 1; */
-        /* height: 50px; */
+        height: auto;
         /* width: 100%; */
         background: aliceblue;
         background: #1a1a1a;
@@ -632,12 +631,30 @@
         z-index: 12345;
     }
 
-    @media (max-width: 768px) {
-        .component-gist .footer- {
-            display: inline-flex;
-            flex: unset;
-            width: 100%;
-        }
+    .component-gist .footer-snippet card {
+    }
+
+    .component-gist .footer-snippet card box {
+        /* background: #777; */
+        height: 36px;
+        line-height: 36px;
+        padding: 0 20px;
+    }
+
+    .component-gist .footer-snippet card box:hover {
+        background: #333;
+    }
+
+    .component-gist .footer-snippet card box:not(:last-child) {
+        border-right: 4px solid #333;
+    }
+
+    .component-gist .footer-snippet > section {
+        /* height: 36px; */
+        /* line-height: 36px; */
+    }
+
+    .component-gist .footer-snippet .tools-tool {
+        /* margin: 5px; */
     }
 }
-
