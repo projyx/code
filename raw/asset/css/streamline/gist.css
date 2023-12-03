@@ -336,9 +336,40 @@
 
     @media screen and (max-width: 768px) {
         .component-gist .aside-code {
+            flex-direction: column;
             width: 100%;
             height: calc((100% - 50px)/2);
         }
+    }
+
+    .component-gist .aside-code > header {
+        display: flex;
+    }
+
+    .component-gist .aside-code > header {
+        align-items: center;
+        background: #292a2d;
+        display: flex;
+        height: 50px;
+        position: absolute;
+        width: 100%;
+    }
+
+    .component-gist .aside-code > header .file-type {
+        align-items: center;
+        background: #333;
+        /* border-left: 1px solid #111; */
+        border-right: 1px solid #111;
+        border-top: 4px solid #111;
+        box-sizing: border-box;
+        display: flex;
+        font-weight: bolder;
+        height: 100%;
+        padding: 0 10px;
+    }
+
+    .component-gist .aside-code > header .file-type.active {
+        background: #555;
     }
 
     .component-gist .aside-code > section {
@@ -418,6 +449,12 @@
         width: 100%;
     }
 
+    @media (max-width: 768px) {
+        .component-gist .aside-code .code-file heade box {
+            display: none;
+        }
+    }
+
     .component-gist .aside-code .code-file header .file-type {
         align-items: center;
         background: #555;
@@ -431,6 +468,16 @@
 
     .component-gist .aside-code .code-html header .file-type {
         /* background: red; */
+        display: none;
+    }
+
+    .component-gist .aside-code .code-html header > i {
+        height: 50px;
+        width: 50px;
+    }
+
+    .component-gist .aside-code .code-html header > i:nth-last-child(2) {
+        margin-left: auto;
     }
 
     .component-gist .aside-code .code-css header .file-type {
