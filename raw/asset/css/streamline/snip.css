@@ -157,7 +157,6 @@
     }
 
     .component-snip .header-code > section > dropdown:last-child > column.active text span {
-        
     }
 
     .component-snip .header-code > section > dropdown:last-child > column.active text span:hover {
@@ -368,11 +367,11 @@
             width: 100%;
             height: calc((100% - 86px)/2);
         }
-        
+
         .component-snip .aside-code:has(~ .hidden) {
             height: calc(100% - 86px);
         }
-        
+
         .component-snip .aside-code {
             height: calc((100% - 86px)/2);
         }
@@ -389,6 +388,7 @@
         height: 50px;
         position: absolute;
         width: 100%;
+        /* z-index: 123; */
     }
 
     @media screen and (max-width: 768px) {
@@ -484,6 +484,10 @@
         width: 100%;
     }
 
+    .component-snip .aside-code > section:has(.code-file dropdown:last-child > column.active) {
+        z-index: 1;
+    }
+
     .component-snip .aside-code .code-file {
         background: #555;
         display: flex;
@@ -497,6 +501,48 @@
         .component-snip .aside-code .code-file:not(.active) {
             display: none;
         }
+    }
+
+    .component-snip .aside-code .code-file dropdown:last-child > column:not(.active) {
+        display: none;
+    }
+
+    .component-snip .aside-code .code-file dropdown:last-child > column.active {
+        background: #999;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 10px;
+        /* box-shadow: 0 0 10pc -9px; */
+        border-radius: 5px;
+        font-size: 13px;
+        font-weight: bolder;
+        line-height: 36px;
+        padding: 0px 20px;
+        position: absolute;
+        width: 120px;
+        right: 10px;
+        top: calc(100% + 5px);
+        /* z-index: 12345678901; */
+        /* position: fixed; */
+        /* top: 0; */
+    }
+
+    .component-snip .aside-code .code-file dropdown:last-child > column text {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .component-snip .aside-code .code-file dropdown:last-child {
+        flex-direction: column;
+    }
+
+    .component-snip .aside-code .code-file dropdown i {
+        width: 50px;
+        height: 50px;
+    }
+
+    .component-snip .aside-code .code-file *:has(dropdown:last-child) {
+        z-indeX: 123;
     }
 
     .component-snip .aside-code .code-html {
@@ -552,11 +598,14 @@
         display: flex;
         height: 50px;
         width: 100%;
+        z-index: 123;
+        position: relative;
     }
 
     @media (max-width: 768px) {
-        .component-snip .aside-code .code-file heade box {
-            display: none;
+        .component-snip .aside-code > header {
+            z-index: 1234;
+            width: 200px;
         }
     }
 
@@ -621,7 +670,7 @@
         height: calc(100% - 86px);
         width: 100%;
     }
-    
+
     .component-snip .block-code.hidden {
         display: none;
     }
