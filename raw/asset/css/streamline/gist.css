@@ -107,7 +107,7 @@
         right: 0;
         /* bottom: calc(-50px); */
         top: 45px;
-        /* min-width: 150px; */
+        min-width: 150px;
         /* width: 150px; */
     }
 
@@ -155,37 +155,50 @@
         width: 70px;
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > picture.active {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row {
+        border: 2px solid;
+        border-radius: 5px;
+    }
+
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > picture.active {
         background: #999;
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > picture:hover {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > picture:hover {
         background: #999;
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > *:nth-child(2) {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > *:nth-child(2) {
         border-left: 2px solid #999;
         border-right: 2px solid #999;
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > * svg {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > * svg {
         height: 20px;
         width: 20px;
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > *:first-child svg {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > * {
+        align-items: center;
+        display: flex;
+        height: 40px;
+        justify-content: center;
+        width: 90px;
+    }
+
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > *:first-child svg {
         transform: rotate(-90deg)
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > *:last-child svg {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > *:last-child svg {
         transform: rotate(90deg);
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > * svg path {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > * svg path {
         fill: #fff;
     }
 
-    .component-gist .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex.active:before {
+    .component-gist .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex.active:before {
         /* background: black; */
         content: '';
         display: flex;
