@@ -368,10 +368,13 @@
             width: 100%;
             height: calc((100% - 86px)/2);
         }
-
         
         .component-snip .aside-code:has(~ .hidden) {
             height: calc(100% - 86px);
+        }
+        
+        .component-snip .aside-code {
+            height: calc((100% - 86px)/2);
         }
     }
 
