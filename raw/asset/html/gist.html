@@ -90,15 +90,48 @@
                 </span>
             </section>
         </div>
-        <div class="code-authenticate">
-            <section>
-                <span class="authenticate-avatar">
+        <dropdown>
+            <row drop="down">
+                <div class="code-authenticate">
                     <section>
-                        <i class="avatar-image" onclick="window[0 < 1 ? 'github' : 'api'].oauth.login(event.target)"></i>
+                        <span class="authenticate-avatar">
+                            <section>
+                                <i class="avatar-image"></i>
+                                <!--onclick="window[0 < 1 ? 'github' : 'api'].oauth.login(event.target)"></i>-->
+                            </section>
+                        </span>
                     </section>
-                </span>
-            </section>
-        </div>
+                </div>
+            </row>
+            <column>
+                <box>
+                    <section>
+                        <text>
+                            <span></span>
+                            <span></span>
+                        </text>
+                        <text>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </text>
+                        <text>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </text>
+                        <text>
+                            <span></span>
+                            <span></span>
+                        </text>
+                        <text>
+                            <span></span>
+                            <span></span>
+                        </text>
+                    </section>
+                </box>
+            </column>
+        </dropdown>
     </section>
 </header>
 <aside class="aside-code">
@@ -125,12 +158,6 @@
             <section>
                 <box>
                     <section id="code-html"></section>
-                </box>
-                <box>
-                    <section id="code-css"></section>
-                </box>
-                <box>
-                    <section id="code-js"></section>
                 </box>
             </section>
         </card>
