@@ -113,7 +113,7 @@
         -webkit-backdrop-filter: blur(10px);
         border-radius: 10px;
         box-shadow: 0 0 10pc -9px;
-        color: white;
+        color: #000;
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -247,10 +247,20 @@
         transform: rotate(90deg);
     }
 
-    .component-snippt .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > * svg path {
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > picture.active > svg path {
         fill: #fff;
     }
 
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > * svg path {
+        fill: #000;
+    }
+
+    @media (max-width: 768px) {
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > * svg path {
+        fill: #fff;
+    }
+    }
+    
     .component-snippt .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex.active:before {
         /* background: black; */
         content: '';
