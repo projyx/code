@@ -35,12 +35,16 @@
         width: 100%;
     }
 
-    .component-gist .header-code:has(.buttons-group > section > dropdown > .active:last-child) ~ .block-code:before {
+    .component-gist .header-code:has(dropdown > .active:last-child) ~ .aside-code:before,
+    .component-gist .header-code:has(dropdown > .active:last-child) ~ .block-code:before {
+        backdrop-filter: blur(10px);
         content: '';
         display: block;
         height: 100%;
-        position: fixed;
+        position: absolute;
+        top: 0;
         width: 100%;
+        z-index: 12;
     }
 
     .component-gist .header-code > section {
@@ -174,6 +178,13 @@
 
     .component-gist .header-code .buttons-group > section dropdown:nth-child(1):has([drop="down"] + flex) [drop="down"] + flex {
         box-shadow: 0 0 10pc -9px;
+    }
+
+    @media (max-width: 480px) {
+        .component-gist .header-code .buttons-group > section dropdown:nth-child(1):has([drop="down"] + flex) [drop="down"] + flex {
+            position: fixed;
+            right: 5px;
+        }
     }
 
     .component-gist .header-code .buttons-group > section dropdown:nth-child(1):has([drop="down"] + flex) [drop="down"] + flex > column > text {
@@ -340,6 +351,7 @@
         display: flex;
         height: calc(100% - 50px);
         width: 400px;
+        /* z-index: 123456789; */
     }
 
     @media screen and (max-width: 768px) {

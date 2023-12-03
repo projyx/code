@@ -141,6 +141,13 @@
         width: 100%;
     }
 
+    @media (max-width: 480px) {
+        [modal="gist-likes"] > header {
+            /* position: fixed; */
+            top: 0;
+        }
+    }
+
     [modal="gist-likes"] > header text {
         font-size: 18px;
     }

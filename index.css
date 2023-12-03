@@ -6,7 +6,7 @@
 
     body.dragging iframe {
         pointer-events: none;
-    }    
+    }
 
     body > aside {
         position: absolute;
@@ -15,6 +15,10 @@
         height: 100%;
         overflow-x: hidden;
         /* background: white; */
+    }
+
+    body > aside::-webkit-scrollbar {
+        width: 0px;
     }
 
     form {
@@ -89,5 +93,23 @@
 
     dropdown {
         position: relative;
+    }
+}
+
+@media {
+    ::-webkit-scrollbar {
+        width: 0px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
     }
 }
