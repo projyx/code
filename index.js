@@ -16,7 +16,7 @@ window.onload = async(event)=>{
         var paths = rout.ed(aa).length - rout.ed(bb).length;
         return alpha
     }
-    Array.from(document.querySelectorAll('[route], [routes]')).sort(compare).forEach(function(component) {
+    Array.from(document.querySelectorAll('[route], [routes]')).sort(compare).reverse().forEach(function(component) {
         var route = {
             file: component.getAttribute('component') + ".html",
             url: component.getAttribute('route') || component.getAttribute('routes'),

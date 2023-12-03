@@ -1,0 +1,661 @@
+@media {
+    .component-snippt {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+/*HEADER*/
+@media {
+    .component-snippt .header-code {
+        background: aliceblue;
+        background: #1a1a1a;
+        /* border-bottom: 1px solid #666; */
+        box-sizing: border-box;
+        display: flex;
+        /* padding: 10px; */
+        position: relative;
+        width: 100%;
+        z-index: 12345;
+    }
+
+    .component-snippt .header-code:has(flex.active) {
+        z-index: 1234567890;
+    }
+
+    .component-snippt .header-code:has(.code-buttons > section > dropdown > .active:last-child) ~ .block-code:before {
+        content: '';
+        display: block;
+        height: 100%;
+        position: fixed;
+        width: 100%;
+    }
+
+    .component-snippt .header-code:has(dropdown > .active:last-child) ~ .aside-code:before, .component-snippt .header-code:has(dropdown > .active:last-child) ~ .block-code:before {
+        /* backdrop-filter: blur(10px); */
+        content: '';
+        display: block;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 12;
+    }
+
+    .component-snippt .header-code > section {
+        align-items: center;
+        display: flex;
+        flex: 1;
+        /* gap: 10px; */
+    }
+
+    .component-snippt .header-code .code-file > section {
+        display: flex;
+        gap: 5px;
+    }
+
+    .component-snippt .header-code .file-menu > section i {
+        align-items: center;
+        display: flex;
+        height: 50px;
+        justify-content: Center;
+        width: 50px;
+    }
+
+    .component-snippt .header-code .file-meta {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .component-snippt .header-code .file-meta > section {
+        flex-direction: column;
+    }
+
+    .component-snippt .header-code .file-meta .meta-title {
+        font-weight: bolder;
+    }
+
+    .component-snippt .header-code .file-meta .meta-owner {
+        font-size: 14px;
+    }
+
+    .component-snippt .header-code .code-buttons {
+        margin-left: auto;
+    }
+
+    .component-snippt .header-code .buttons-group > section {
+        display: flex;
+        gap: 5px;
+        position: relative;
+    }
+
+    .component-snippt .header-code .buttons-group > section > * {
+        align-items: center;
+        display: flex;
+        height: 50px;
+        justify-content: Center;
+        width: 50px;
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:has([drop="down"] + flex):not(.active) [drop="down"] + flex:not(.active) {
+        display: none;
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex {
+        /* background: #555; */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 10px;
+        box-shadow: 0 0 10pc -9px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        position: absolute;
+        right: 0;
+        /* bottom: calc(-50px); */
+        top: 45px;
+        min-width: 150px;
+        /* width: 150px; */
+    }
+
+    .component-snippt .header-code > section > dropdown:last-child > column:not(.active) {
+        display: none;
+    }
+
+    .component-snippt .header-code > section > dropdown:last-child > column.active {
+        /* background: #999; */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 10px;
+        box-shadow: 0 0 10pc -9px;
+        border-radius: 5px;
+        font-size: 13px;
+        font-weight: bolder;
+        line-height: 36px;
+        padding: 10px 20px;
+        position: absolute;
+        width: 120px;
+        right: 10px;
+        top: calc(100% - 5px);
+    }
+
+    .component-snippt .header-code > section > dropdown:last-child > column.active text:not(:last-child) {
+        border-bottom: 1px solid #777;
+    }
+
+    .component-snippt .header-code > section > dropdown:last-child > column.active text {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex i {
+        height: 36px;
+        width: 36px;
+    }
+
+    /*LIST*/
+    .component-snippt .header-code .buttons-group > section > dropdown:nth-child(1) {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .component-snippt .header-code .buttons-group > section > dropdown:nth-child(1) {
+            display: flex;
+        }
+
+        .component-snippt .header-code .buttons-group > section > dropdown:nth-child(1) > row i con {
+            --ggs: 1.4;
+        }
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(1):has([drop="down"] + flex) [drop="down"] + flex {
+        box-shadow: 0 0 10pc -9px;
+    }
+
+    @media (max-width: 480px) {
+        .component-snippt .header-code .buttons-group > section dropdown:nth-child(1):has([drop="down"] + flex) [drop="down"] + flex {
+            position: fixed;
+            right: 5px;
+        }
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(1):has([drop="down"] + flex) [drop="down"] + flex > column > text {
+        align-items: center;
+        display: flex;
+    }
+
+    /*LIST*/
+    /*VIEW*/
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row {
+        border: 2px solid #999;
+        border-radius: 5px;
+        min-width: auto;
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > * {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        height: 50px;
+        width: 70px;
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row {
+        border: 2px solid #999;
+        border-radius: 5px;
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > picture.active {
+        background: #999;
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > picture:hover {
+        background: #999;
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > *:nth-child(2) {
+        border-left: 2px solid #999;
+        border-right: 2px solid #999;
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > * svg {
+        height: 20px;
+        width: 20px;
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > * {
+        align-items: center;
+        display: flex;
+        height: 40px;
+        justify-content: center;
+        width: 90px;
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > *:first-child svg {
+        transform: rotate(-90deg)
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > *:last-child svg {
+        transform: rotate(90deg);
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > * svg path {
+        fill: #fff;
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex.active:before {
+        /* background: black; */
+        content: '';
+        display: flex;
+        display: none;
+        height: 100%;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 123;
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex:not(.active) {
+        display: none;
+    }
+
+    .component-snippt .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > header {
+        font-weight: bolder;
+        width: 100%;
+    }
+
+    /*VIEW*/
+    /**/
+    @media (max-width: 768px) {
+        .component-snippt .header-code .buttons-group > section > i:nth-child(2), .component-snippt .header-code .buttons-group > section > i:nth-child(3) {
+            display: none;
+        }
+    }
+
+    .component-snippt .header-code .buttons-group > section > i:first-child {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .component-snippt .header-code .buttons-group > section > i:first-child {
+            display: flex;
+        }
+
+        .component-snippt .header-code .buttons-group > section > i:first-child .gg-layout-list {
+            --ggs: 1.4;
+        }
+    }
+
+    .component-snippt .header-code .buttons-group .dropdown {
+        align-items: center;
+        display: flex;
+        height: 50px;
+        justify-content: Center;
+        width: 50px;
+    }
+
+    @media (max-width: 768px) {
+        .component-snippt .header-code .buttons-group > section > dropdown {
+            display: none;
+        }
+    }
+
+    .component-snippt .header-code .code-authenticate .authenticate-avatar {
+        align-items: center;
+        display: flex;
+        height: 50px;
+        justify-content: center;
+        width: 50px;
+    }
+
+    .component-snippt .header-code .code-authenticate .authenticate-avatar .avatar-image {
+        align-items: center;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        height: 30px;
+        width: 30px;
+    }
+
+    .component-snippt .header-code .code-authenticate .authenticate-avatar .avatar-image:empty {
+        background-color: white;
+        background-image: url(/raw/asset/svg/github.svg);
+        background-position: bottom center;
+        background-repeat: no-repeat;
+        background-size: 75%;
+        filter: invert(1);
+    }
+
+    .component-snippt .header-code .code-authenticate .authenticate-avatar .avatar-image img {
+        /* filter: invert(1); */
+        border-radius: 50%;
+        height: 100%;
+        margin: 0;
+        width: 100%;
+    }
+}
+
+/*ASIDE*/
+@media {
+    .component-snippt .aside-code {
+        background: #292a2d;
+        display: flex;
+        height: calc(100% - 86px);
+        width: 400px;
+        /* z-index: 123456789; */
+    }
+
+    @media screen and (max-width: 768px) {
+        .component-snippt .aside-code {
+            flex-direction: column;
+            width: 100%;
+            height: calc((100% - 50px)/2);
+        }
+    }
+
+    .component-snippt .aside-code > header {
+        display: flex;
+    }
+
+    .component-snippt .aside-code > header {
+        align-items: center;
+        background: #292a2d;
+        display: none;
+        height: 50px;
+        position: absolute;
+        width: 100%;
+    }
+
+    @media screen and (max-width: 768px) {
+        .component-snippt .aside-code > header {
+            display: flex;
+        }
+    }
+
+    .component-snippt .aside-code > header .file-icon {
+        align-items: center;
+        border-right: 4px solid #292a2d;
+        border-top: 4px solid #292a2d;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        box-sizing: border-box;
+        display: flex;
+        font-weight: bolder;
+        height: 100%;
+        padding: 0 16px;
+    }
+
+    .component-snippt .aside-code > header .file-icon.active {
+        /* background: #777; */
+        justify-content: center;
+        padding: 0px;
+        width: 50px;
+    }
+
+    .component-snippt .aside-code > header .file-type {
+        align-items: center;
+        justify-content: center;
+        background: #333;
+        /* border-left: 1px solid #111; */
+        border-right: 4px solid #292a2d;
+        border-top: 4px solid #292a2d;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        box-sizing: border-box;
+        color: #fff;
+        display: flex;
+        font-weight: bolder;
+        height: 100%;
+        padding: 0 16px;
+    }
+
+    .component-snippt .aside-code > header .file-type text {
+        display: flex;
+        gap: 3px;
+        height: 20px;
+    }
+
+    @media (max-width: 540px) {
+        .component-snippt .aside-code > header .file-type {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            width: 50px;
+        }
+    }
+
+    .component-snippt .aside-code > header .file-type.active {
+        background: #555;
+    }
+
+    .component-snippt .aside-code > header .file-type text picture {
+        display: inline-flex;
+        width: 20px;
+    }
+
+    .component-snippt .aside-code > header .file-type text picture svg {
+        height: 100%;
+        width: 100%;
+    }
+
+    .component-snippt .aside-code > header .file-type text span {
+        display: inline-flex;
+        font-size: 16px;
+    }
+
+    @media (max-width: 540px) {
+        .component-snippt .aside-code > header .file-type text span {
+            display: none;
+        }
+    }
+
+    .component-snippt .aside-code > section {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .component-snippt .aside-code .code-file {
+        background: #555;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        height: calc(100%/3);
+        width: 100%
+    }
+
+    @media (max-width: 768px) {
+        .component-snippt .aside-code .code-file:not(.active) {
+            display: none;
+        }
+    }
+
+    .component-snippt .aside-code .code-html {
+        /* background: red; */
+        /* height: 100%; */
+        /* width: 100%; */
+    }
+
+    .component-snippt .aside-code .code-css {
+        /* background: green; */
+        /* height: 100%; */
+        /* width: 100%; */
+    }
+
+    .component-snippt .aside-code .code-js {
+        /* background: blue; */
+        /* height: 100%; */
+        /* width: 100%; */
+    }
+
+    .component-snippt .aside-code .code-file > section {
+        display: flex;
+        flex: 1;
+        overflow-x: hidden;
+    }
+
+    .component-snippt .aside-code .code-file > section > box {
+        display: flex;
+        flex: 1;
+        width: 100%;
+    }
+
+    .component-snippt .aside-code .code-file > section > box > section {
+        background: #555;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        flex: 1;
+        position: relative;
+    }
+
+    .component-snippt .aside-code .code-file > section > box > section .CodeMirror {
+        background: #555;
+        height: 100%;
+        width: 100%;
+        /* flex: 1; */
+    }
+
+    .component-snippt .aside-code .code-file header {
+        align-items: center;
+        background: #292a2d;
+        display: flex;
+        height: 50px;
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .component-snippt .aside-code .code-file heade box {
+            display: none;
+        }
+    }
+
+    .component-snippt .aside-code .code-file header .file-type {
+        align-items: center;
+        background: #555;
+        border-top: 4px solid #777;
+        box-sizing: border-box;
+        display: flex;
+        font-weight: bolder;
+        height: 100%;
+        padding: 0 10px;
+    }
+
+    @media (max-width: 768px) {
+        .component-snippt .aside-code .code-html header .file-type {
+            /* background: red; */ display: none;
+        }
+    }
+
+    .component-snippt .aside-code .code-file header > i {
+        height: 50px;
+        width: 50px;
+    }
+
+    .component-snippt .aside-code .code-file header > i:nth-last-child(2) {
+        margin-left: auto;
+    }
+
+    .component-snippt .aside-code .code-css header .file-type {
+        /* background: green; */
+        height: 100%;
+    }
+
+    .component-snippt .aside-code .code-js header .file-type {
+        /* background: blue; */
+        height: 100%;
+    }
+}
+
+@media {
+    .component-snippt .block-line {
+        background: #333;
+        height: calc(100% - 86px);
+        width: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .component-snippt .block-line {
+            display: none;
+            height: 10px;
+            width: 100%;
+        }
+    }
+}
+
+/*BLOCK*/
+@media {
+    .component-snippt .block-code {
+        display: inline-flex;
+        flex: 1;
+        height: calc(100% - 86px);
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .component-snippt .block-code {
+            display: inline-flex;
+            flex: unset;
+            height: calc((100% - 50px)/2);
+            width: 100%;
+        }
+    }
+}
+
+/*FOOTER*/
+@media {
+    .component-snippt .footer-snippet {
+        /* display: inline-flex; */
+        /* flex: 1; */
+        height: auto;
+        /* width: 100%; */
+        background: aliceblue;
+        background: #1a1a1a;
+        /* border-bottom: 1px solid #666; */
+        box-sizing: border-box;
+        display: flex;
+        /* padding: 10px; */
+        position: relative;
+        width: 100%;
+        z-index: 12345;
+    }
+
+    .component-snippt .footer-snippet card {
+    }
+
+    .component-snippt .footer-snippet card box {
+        /* background: #777; */
+        height: 36px;
+        line-height: 36px;
+        padding: 0 20px;
+    }
+
+    .component-snippt .footer-snippet card box:hover {
+        background: #333;
+    }
+
+    .component-snippt .footer-snippet card box:not(:last-child) {
+        border-right: 4px solid #333;
+    }
+
+    .component-snippt .footer-snippet > section {
+        /* height: 36px; */
+        /* line-height: 36px; */
+    }
+
+    .component-snippt .footer-snippet .tools-tool {
+        /* margin: 5px; */
+    }
+}

@@ -119,7 +119,7 @@ window.modal = {
             console.log(event.target);
             event.target.classList.contains('aside') || event.target.tagName.toLowerCase() === 'blocks' ? event.target.closest('aside').remove() : null
         }
-        dom.body.insertBefore(ppp, document.getElementById('boot').nextElementSibling);
+        document.body.insertBefore(ppp, document.getElementById('boot').nextElementSibling);
         modal.zIndex(document.querySelectorAll('body > boot ~ aside'));
         //dom.body.onclick = () => on.touch.tap(event,'tap');
         return new Promise((resolve,reject)=>resolve(document.getElementById('boot').nextElementSibling));

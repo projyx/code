@@ -9,6 +9,7 @@
         <link href="/raw/asset/css/streamline/home.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/tree.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/snip.css" rel="stylesheet">
+        <link href="/raw/asset/css/streamline/snippt.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/user.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/modal/gist.likes.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/modal/gist.options.css" rel="stylesheet">
@@ -44,13 +45,14 @@
         <boot id="boot"></boot>
         <main>
             <component class="component component-home" component="home" route="/"></component>
-            <component class="component component-snips" component="snips" routes="/snippet/*"></component>
-            <component class="component component-snip" component="snip" routes="/snippet/*/*"></component>
             <component class="component component-user" component="user" route="/*"></component>
             <component class="component component-user" component="user" route="/*"></component>
             <component class="component component-tree" component="tree" routes="/*/*"></component>
             <component class="component component-wide" component="wide" oncontextmenu="window.events.oncontextmenu.wIDE(event)" routes="/*/*/wide"></component>
             <component class="component component-edit" component="edit" routes="/*/*/edit"></component>
+            <component class="component component-snippt" component="snippt" routes="/snippet"></component>
+            <component class="component component-snips" component="snips" routes="/snippet/*"></component>
+            <component class="component component-snip" component="snip" routes="/snippet/*/*"></component>
         </main>
     </body>
 </html>
