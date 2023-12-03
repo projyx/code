@@ -349,7 +349,7 @@
     .component-gist .aside-code {
         background: #292a2d;
         display: flex;
-        height: calc(100% - 50px);
+        height: calc(100% - 100px);
         width: 400px;
         /* z-index: 123456789; */
     }
@@ -582,7 +582,7 @@
 @media {
     .component-gist .block-line {
         background: #333;
-        height: calc(100% - 50px);
+        height: calc(100% - 100px);
         width: 20px;
     }
 
@@ -600,8 +600,8 @@
     .component-gist .block-code {
         display: inline-flex;
         flex: 1;
-        height: calc(100% - 50px);
-        /* width: 100%; */
+        height: calc(100% - 100px);
+        width: 100%;
     }
 
     @media (max-width: 768px) {
@@ -613,3 +613,31 @@
         }
     }
 }
+
+/*FOOTER*/
+@media {
+    .component-gist .footer-snippet {
+        /* display: inline-flex; */
+        /* flex: 1; */
+        /* height: 50px; */
+        /* width: 100%; */
+        background: aliceblue;
+        background: #1a1a1a;
+        /* border-bottom: 1px solid #666; */
+        box-sizing: border-box;
+        display: flex;
+        /* padding: 10px; */
+        position: relative;
+        width: 100%;
+        z-index: 12345;
+    }
+
+    @media (max-width: 768px) {
+        .component-gist .footer- {
+            display: inline-flex;
+            flex: unset;
+            width: 100%;
+        }
+    }
+}
+
