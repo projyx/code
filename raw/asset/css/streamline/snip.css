@@ -140,7 +140,7 @@
         font-size: 13px;
         font-weight: bolder;
         line-height: 36px;
-        padding: 10px 20px;
+        padding: 0px 0px;
         position: absolute;
         width: 120px;
         right: 10px;
@@ -154,6 +154,10 @@
     .component-snip .header-code > section > dropdown:last-child > column.active text {
         display: flex;
         flex-direction: column;
+    }
+
+    .component-snip .header-code > section > dropdown:last-child > column.active text spn:hover {
+        background: #777;
     }
 
     .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex i {
