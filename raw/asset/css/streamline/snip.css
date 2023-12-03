@@ -358,7 +358,12 @@
         .component-snip .aside-code {
             flex-direction: column;
             width: 100%;
-            height: calc((100% - 50px)/2);
+            height: calc((100% - 86px)/2);
+        }
+
+        
+        .component-snip .aside-code:has(~ .hidden) {
+            height: calc(100% - 86px);
         }
     }
 
@@ -391,13 +396,15 @@
         display: flex;
         font-weight: bolder;
         height: 100%;
+        justify-content: center;
+        width: 50px;
         padding: 0 16px;
     }
 
     .component-snip .aside-code > header .file-icon.active {
-        /* background: #777; */
+        background: #777;
         justify-content: center;
-        padding: 0px;
+        padding: 0px 16px;
         width: 50px;
     }
 
@@ -612,7 +619,7 @@
         .component-snip .block-code {
             display: inline-flex;
             flex: unset;
-            height: calc((100% - 50px)/2);
+            height: calc((100% - 86px)/2);
             width: 100%;
         }
     }

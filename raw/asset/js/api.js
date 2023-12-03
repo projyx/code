@@ -56,7 +56,9 @@ api.code.push = function() {
         console.log(37, response);
     }) : null
 }
-api.code.view = function() {
+api.code.view = function(target) {
+    console.log(60, target);
+    target.closest('box').classList.toggle('active');
     var frame = document.getElementById("code-frame");
     var code = frame.closest("block");
     code.classList.toggle('hidden');
