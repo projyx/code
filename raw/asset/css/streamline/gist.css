@@ -98,6 +98,7 @@
     .component-gist .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex {
         background: #555;
         border-radius: 10px;
+        box-shadow: 0 0 10pc -9px;
         color: white;
         display: flex;
         flex-direction: column;
@@ -156,7 +157,7 @@
     }
 
     .component-gist .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row {
-        border: 2px solid;
+        border: 2px solid #999;
         border-radius: 5px;
     }
 
