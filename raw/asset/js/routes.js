@@ -16,10 +16,10 @@ window.routes = function(uri, options) {
         if (sub) {
             if (sub === "settings") {
                 console.log("routes.view settings");
-            } else if (sub === "gists" || sub ==="snippet") {
-                if (paths.length > 1) {
+            } else if (sub === "gists" || sub === "snippet") {
+                if (paths.length === 1 || paths.length > 1) {
                     var username = paths[0];
-                    if (paths.length > 2) {
+                    if (paths.length === 1 || paths.length > 2) {
 
                         var file = paths[paths.length - 1];
                         if (file) {
@@ -133,45 +133,47 @@ window.routes = function(uri, options) {
                             }
 
                             var id = paths[2];
-                            var gist = await github.gists.id(id);
-                            var files = gist.files;
-                            var keys = Object.values(files);
-                            ["html", "css", "js"].forEach(async(value,index)=>{
-                                var ext = keys[index];
-                                console.log(141, {
-                                    value,
-                                    ext,
-                                    index
-                                });
+                            if (id) {
+                                var gist = await github.gists.id(id);
+                                var files = gist.files;
+                                var keys = Object.values(files);
+                                ["html", "css", "js"].forEach(async(value,index)=>{
+                                    var ext = keys[index];
+                                    console.log(141, {
+                                        value,
+                                        ext,
+                                        index
+                                    });
 
-                                var file = files["index." + value];
-                                var content = file ? file.content : "";
-                                var cmx = cm[value];
-                                console.log(99, {
-                                    value,
-                                    files,
-                                    file,
-                                    cmx
-                                });
-                                cmx.setValue(content);
-                                cmx.on("change", upd);
+                                    var file = files["index." + value];
+                                    var content = file ? file.content : "";
+                                    var cmx = cm[value];
+                                    console.log(99, {
+                                        value,
+                                        files,
+                                        file,
+                                        cmx
+                                    });
+                                    cmx.setValue(content);
+                                    cmx.on("change", upd);
 
-                                if (value === "html") {
-                                    document.getElementById('code-frame')[ext] = content;
+                                    if (value === "html") {
+                                        document.getElementById('code-frame')[ext] = content;
+                                    }
+
+                                    if (value === "css") {
+                                        document.getElementById('code-frame')[ext] = content;
+                                    }
+
+                                    if (value === "js") {
+                                        console.log(168, value);
+                                    }
+
+                                    await pvw();
+                                    cmx.refresh();
                                 }
-
-                                if (value === "css") {
-                                    document.getElementById('code-frame')[ext] = content;
-                                }
-
-                                if (value === "js") {
-                                    console.log(168, value);
-                                }
-
-                                await pvw();
-                                cmx.refresh();
+                                );
                             }
-                            );
 
                         } else {
                             status = 404;

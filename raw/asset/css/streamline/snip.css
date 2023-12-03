@@ -603,6 +603,10 @@
         height: calc(100% - 86px);
         width: 100%;
     }
+    
+    .component-snip .block-code.hidden {
+        display: none;
+    }
 
     @media (max-width: 768px) {
         .component-snip .block-code {

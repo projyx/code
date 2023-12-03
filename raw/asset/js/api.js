@@ -56,6 +56,11 @@ api.code.push = function() {
         console.log(37, response);
     }) : null
 }
+api.code.view = function() {
+    var frame = document.getElementById("code-frame");
+    var code = frame.closest("block");
+    code.classList.toggle('hidden');
+}
 
 window.api.gists = {};
 api.gists.push = function() {

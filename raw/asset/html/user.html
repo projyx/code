@@ -1,3 +1,61 @@
+<header class="header-shell">
+    <row>
+        <card class="shell-brand">
+            <section>
+                <box class="brand-image" href="/">
+                    <section>
+                        <i>
+                            <con class="icon-code-slash"></con>
+                        </i>
+                        <text>CodePencil</text>
+                    </section>
+                </box>
+            </section>
+        </card>
+        <card class="shell-authenticate">
+            <section>
+                <box class="authenticate-avatar">
+                    <section>
+                        <avi class="avatar-image" onclick="window[0 < 1 ? 'github' : 'api'].oauth.login(event.target)"></avi>
+                    </section>
+                </box>
+            </section>
+        </card>
+        <dropdown>
+            <row drop="down">
+                <div class="code-authenticate">
+                    <section>
+                        <span class="authenticate-avatar">
+                            <section>
+                                <i class="avatar-image"></i>
+                                <!--onclick="window[0 < 1 ? 'github' : 'api'].oauth.login(event.target)"></i>-->
+                            </section>
+                        </span>
+                    </section>
+                </div>
+            </row>
+            <column>
+                <box>
+                    <column>
+                        <text>
+                            <span href="/snippet/:user">Your Work</span>
+                            <span href="/:user">Profile</span>
+                        </text>
+                        <text>
+                            <span href="/snippet">Snippet</span>
+                            <span href="/:user/new/wide/main">Web App</span>
+                            <span>Archive</span>
+                        </text>
+                        <text>
+                            <span>Settings</span>
+                            <span>Log Out</span>
+                        </text>
+                    </column>
+                </box>
+            </column>
+        </dropdown>
+    </row>
+</header>
 <block class="block-cover">
     <column>
         <card class="cover-photo">
