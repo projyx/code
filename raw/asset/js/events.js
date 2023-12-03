@@ -40,6 +40,11 @@ window.events.onclick.document = async function(event) {
 
     elem = target.closest('dropdown');
     if (elem) {
+        Array.from(document.querySelectorAll('dropdown [drop="down"]')).forEach(elem=>{
+            var dropdown = elem.closest('dropdown:has(ul.active)');
+            elem === dropdown ? null : elem.nextElementSibling.classList.remove('active');
+        }
+        );        
         drop = target.closest('[drop]');
         var ul = target.closest('dropdown > ul');
         var drop = elem.querySelector('[drop="down"]');
@@ -68,22 +73,6 @@ window.events.onclick.document = async function(event) {
             elem === dropdown ? null : elem.nextElementSibling.classList.remove('active');
         }
         );
-    }
-}
-window.events.onclick.dropdown = function(target) {
-    var dropdown = target.closest('dropdown');
-    var ul = target.closest('ul');
-    if (ul) {
-        var li = target.closest('li');
-        console.log(63, ul);
-        if (li) {
-            dropdown.querySelector('ul').classList.remove('active');
-            dropdown.firstElementChild.textContent = li.textContent;
-        }
-    } else {
-        console.log(65, sel);
-        var sel = target.closest('dropdown > *');
-        dropdown.querySelector('ul').classList.toggle('active');
     }
 }
 window.events.onclick.exit = function(event) {
