@@ -386,9 +386,10 @@
             height: 50px
         }
 
-        .component-snip .aside-code:has(header .active) ~ .block-code {
+        .component-snip .aside-code:has(header .file-type.active) ~ .block-code {
             margin-top: auto;
             height: calc(100% - 136px);
+            height: calc((100% - 86px) / 2);
         }
 
         .component-snip .aside-code {
@@ -627,8 +628,8 @@
             width: 200px;
             /* width: 100%; */
         }
-        .component-snip .aside-code:has(header .file-icon.active) {
-            
+        .component-snip .aside-code:has(header .file-icon.active) ~ .block-code {
+            /* height: calc((100% - 86px) / 2); */
         }
     }
 
@@ -702,7 +703,7 @@
         .component-snip .block-code {
             display: inline-flex;
             flex: unset;
-            height: calc((100% - 86px)/2);
+            height: calc((100% - 136px)/1);
             width: 100%;
         }
     }
