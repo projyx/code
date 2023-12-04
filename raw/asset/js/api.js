@@ -121,10 +121,12 @@ api.code.push = function() {
 }
 api.code.view = function(target) {
     console.log(60, target);
-    target.closest('box').classList.toggle('active');
     var frame = document.getElementById("code-frame");
     var code = frame.closest("block");
-    code.classList.toggle('hidden');
+    if (code.parentNode.querySelectorAll('.file-type.active').length > 0) {
+        target.closest('box').classList.toggle('active');
+        code.classList.toggle('hidden');
+    }
 }
 
 window.api.gists = {};
