@@ -17,6 +17,7 @@
         /* border-bottom: 1px solid #666; */
         box-sizing: border-box;
         display: flex;
+        height: 50px;
         /* padding: 10px; */
         position: relative;
         width: 100%;
@@ -374,6 +375,24 @@
 
         .component-snip .aside-code {
             height: calc((100% - 86px)/2);
+            height: 50px;
+        }
+
+        .component-snip .aside-code:has(header .file-type.active) {
+            height: calc((100% - 86px)/2);
+        }
+
+        .component-snip .aside-code:has(header:has(.file-type)) ~ .block-code {
+            height: 50px
+        }
+
+        .component-snip .aside-code:has(header .active) ~ .block-code {
+            margin-top: auto;
+            height: calc(100% - 136px);
+        }
+
+        .component-snip .aside-code {
+            
         }
     }
 
@@ -606,6 +625,10 @@
         .component-snip .aside-code > header {
             z-index: 1234;
             width: 200px;
+            /* width: 100%; */
+        }
+        .component-snip .aside-code:has(header .file-icon.active) {
+            
         }
     }
 
@@ -708,6 +731,7 @@
 
     .component-snip .footer-snippet card box {
         /* background: #777; */
+        font-size: 13;
         height: 36px;
         line-height: 36px;
         padding: 0 20px;
@@ -718,7 +742,7 @@
     }
 
     .component-snip .footer-snippet card box:not(:last-child) {
-        border-right: 4px solid #333;
+        border-right: 1px solid #333;
     }
 
     .component-snip .footer-snippet > section {

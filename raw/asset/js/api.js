@@ -34,20 +34,19 @@ window.api.oauth.login = function(target) {
 window.api.code = {};
 api.code.css = function(target) {
     var boxes = target.closest('header').querySelectorAll('box.file-type');
-    Array.from(boxes).forEach((box)=>{
-        box.classList.remove('active');
+    var box = target.closest('box');
+    Array.from(boxes).forEach((el)=>{
+        el === box ? box.classList.toggle('active') : el.classList.remove('active');
     }
     )
-    target.closest('box').classList.add('active');
-
     var file = document.getElementById('code-css');
     var card = file.closest('card');
     Array.from(card.parentNode.querySelectorAll('card')).forEach((el)=>{
-        //el === card ? card.classList.add('active') : el.classList.remove('active');
-        el.classList.remove('active');
+        el === card ? card.classList.toggle('active') : el.classList.remove('active');
+        //el.classList.remove('active');
     }
     )
-    card.classList.add('active')
+    //card.classList.add('active')
     console.log('api.code', {
         file,
         card
@@ -56,20 +55,19 @@ api.code.css = function(target) {
 }
 api.code.html = function(target) {
     var boxes = target.closest('header').querySelectorAll('box.file-type');
-    Array.from(boxes).forEach((box)=>{
-        box.classList.remove('active');
+    var box = target.closest('box');
+    Array.from(boxes).forEach((el)=>{
+        el === box ? box.classList.toggle('active') : el.classList.remove('active');
     }
     )
-    target.closest('box').classList.add('active');
-
     var file = document.getElementById('code-html');
     var card = file.closest('card');
     Array.from(card.parentNode.querySelectorAll('card')).forEach((el)=>{
-        //el === card ? card.classList.add('active') : el.classList.remove('active');
-        el.classList.remove('active');
+        el === card ? card.classList.toggle('active') : el.classList.remove('active');
+        //el.classList.remove('active');
     }
     )
-    card.classList.add('active')
+    //card.classList.add('active')
     console.log('api.code', {
         file,
         card
@@ -78,20 +76,19 @@ api.code.html = function(target) {
 }
 api.code.js = function(target) {
     var boxes = target.closest('header').querySelectorAll('box.file-type');
-    Array.from(boxes).forEach((box)=>{
-        box.classList.remove('active');
+    var box = target.closest('box');
+    Array.from(boxes).forEach((el)=>{
+        el === box ? box.classList.toggle('active') : el.classList.remove('active');
     }
     )
-    target.closest('box').classList.add('active');
-
     var file = document.getElementById('code-js');
     var card = file.closest('card');
     Array.from(card.parentNode.querySelectorAll('card')).forEach((el)=>{
-        //el === card ? card.classList.add('active') : el.classList.remove('active');
-        el.classList.remove('active');
+        el === card ? card.classList.toggle('active') : el.classList.remove('active');
+        //el.classList.remove('active');
     }
     )
-    card.classList.add('active')
+    //card.classList.add('active')
     console.log('api.code', {
         file,
         card
