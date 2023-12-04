@@ -397,9 +397,7 @@
             height: calc((100% - 86px)/1);
         }
 
-
         .component-snip .aside-code {
-            
         }
     }
 
@@ -626,15 +624,26 @@
         height: 50px;
         width: 100%;
         z-index: 123;
-        position: fixed;
+        position: relative;
     }
 
     @media (max-width: 768px) {
+        .component-snip .aside-code .code-file header {
+            align-items: center;
+            background: #292a2d;
+            display: flex;
+            height: 50px;
+            width: 100%;
+            z-index: 123;
+            position: fixed;
+        }
+
         .component-snip .aside-code > header {
             z-index: 1234;
             width: 200px;
             /* width: 100%; */
         }
+
         .component-snip .aside-code:has(header .file-icon.active) ~ .block-code {
             /* height: calc((100% - 86px) / 2); */
         }
