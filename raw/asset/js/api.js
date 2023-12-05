@@ -236,6 +236,12 @@ api.gists.likes = ()=>{
     );
 }
 
+window.api.snippet = {};
+api.snippet.console = () => {
+    var codeFrame = document.getElementById('code-frame');
+    codeFrame.nextElementSibling.classList.toggle('hidden');
+}
+
 window.api.time = {};
 api.time.date = (previous)=>{
     var date = Date.now();

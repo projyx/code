@@ -766,6 +766,10 @@
         position: relative;
     }
 
+    .component-snip .block-code > section.hidden {
+        display: none;
+    }
+
     .component-snip .block-code > section card {
         width: 100%;
     }
@@ -847,7 +851,7 @@
     }
 
     .component-snip .footer-snippet card box:hover {
-        background: #333;
+        /* background: #333; */
     }
 
     .component-snip .footer-snippet card box:not(:last-child) {
