@@ -323,7 +323,7 @@
 <line class="block-line"></line>
 <block class="block-code">
     <iframe class="code-frame" id="code-frame"></iframe>
-    <section>
+    <section class="hidden">
         <card>
             <header>
                 <box class="file-type" onclick="api.snippet.console()">
@@ -347,12 +347,12 @@
             <section></section>
             <footer>
                 <box>
-                    <row>
+                    <form onsubmit="events.onsubmit.function(event)">
                         <i>
                             <con class="gg-chevron-right"></con>
                         </i>
                         <textarea></textarea>
-                    </row>
+                    </form>
                 </box>
             </footer>
         </card>

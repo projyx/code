@@ -484,3 +484,7 @@ window.events.onkeydown = async function(e) {
 }
 
 window.events.onsubmit = {};
+window.events.onsubmit.function = event => {
+    console.log(488, 'events.onsubmit.function');
+    event.preventDefault();
+}
