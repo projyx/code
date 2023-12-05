@@ -382,6 +382,14 @@ window.events.onfocusout.touch = async function(e) {
     }
 }
 
+window.events.keydown = {};
+window.events.keydown.console = async function(event) {
+    //console.log('events.keyup.console', event.keyCode);
+    if(event.keyCode === 13) {
+        event.preventDefault();
+    }
+}
+
 window.events.onkeydown = async function(e) {
     if (e.ctrlKey) {
         if (e.keyCode === 83) {
