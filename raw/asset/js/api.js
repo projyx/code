@@ -237,6 +237,15 @@ api.gists.likes = ()=>{
 }
 
 window.api.snippet = {};
+api.snippet.assets = function() {    
+    request('/raw/asset/html/modal/gist.assets.html').then((html)=>{
+        console.log(118, {
+            html
+        });
+        modal.panel(html);
+    }
+    );
+}
 api.snippet.console = () => {
     var codeFrame = document.getElementById('code-frame');
     codeFrame.nextElementSibling.classList.toggle('hidden');
