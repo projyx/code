@@ -35,7 +35,7 @@
                                         </i>
                                         <span>Save</span>
                                     </text>
-                                    <text onclick="api.gists.config()">
+                                    <text onclick="api.gists.config(event.target)">
                                         <i>
                                             <con class="gg-options"></con>
                                         </i>
@@ -47,7 +47,7 @@
                         <i onclick="api.gists.push()">
                             <con class="icon-upload"></con>
                         </i>
-                        <i onclick="api.gists.config()">
+                        <i onclick="api.gists.config(event.target)">
                             <con class="icon-config"></con>
                         </i>
                         <dropdown>
@@ -190,7 +190,7 @@
                         </text>
                     </section>
                 </box>
-                <i onclick="api.gists.config()">
+                <i onclick="api.gists.config(event.target)">
                     <con class="gg-options"></con>
                 </i>
                 <dropdown>
@@ -235,7 +235,7 @@
                         <text>CSS</text>
                     </section>
                 </box>
-                <i onclick="api.gists.config()">
+                <i onclick="api.gists.config(event.target)">
                     <con class="gg-options"></con>
                 </i>
                 <dropdown>
@@ -280,7 +280,7 @@
                         <text>JS</text>
                     </section>
                 </box>
-                <i onclick="api.gists.config()">
+                <i onclick="api.gists.config(event.target)">
                     <con class="gg-options"></con>
                 </i>
                 <dropdown>
@@ -323,6 +323,40 @@
 <line class="block-line"></line>
 <block class="block-code">
     <iframe class="code-frame" id="code-frame"></iframe>
+    <section>
+        <card>
+            <header>
+                <box class="file-type">
+                    <section>
+                        <text>Console</text>
+                    </section>
+                </box>
+                <box class="file-text">
+                    <section>
+                        <text>Clear</text>
+                    </section>
+                </box>
+                <box class="file-icon">
+                    <section>
+                        <i>
+                            <con class="gg-close"></con>
+                        </i>
+                    </section>
+                </box>
+            </header>
+            <section></section>
+            <footer>
+                <box>
+                    <row>
+                        <i>
+                            <con class="gg-chevron-right"></con>
+                        </i>
+                        <textarea></textarea>
+                    </row>
+                </box>
+            </footer>
+        </card>
+    </section>
 </block>
 <footer class="footer-snippet">
     <section>

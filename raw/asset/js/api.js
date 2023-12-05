@@ -47,6 +47,15 @@ api.code.css = function(target) {
     }
     )
     //card.classList.add('active')
+    var view = target.closest('header').querySelector('.file-icon');
+    if (!view.classList.contains('active')) {
+        var frame = document.getElementById("code-frame");
+        var code = frame.closest("block");
+        if (code.parentNode.querySelectorAll('.file-type.active').length === 0) {
+            view.classList.add('active');
+            code.classList.remove('hidden');
+        }
+    }
     console.log('api.code', {
         file,
         card
@@ -68,6 +77,15 @@ api.code.html = function(target) {
     }
     )
     //card.classList.add('active')
+    var view = target.closest('header').querySelector('.file-icon');
+    if (!view.classList.contains('active')) {
+        var frame = document.getElementById("code-frame");
+        var code = frame.closest("block");
+        if (code.parentNode.querySelectorAll('.file-type.active').length === 0) {
+            view.classList.add('active');
+            code.classList.remove('hidden');
+        }
+    }
     console.log('api.code', {
         file,
         card
@@ -89,6 +107,15 @@ api.code.js = function(target) {
     }
     )
     //card.classList.add('active')
+    var view = target.closest('header').querySelector('.file-icon');
+    if (!view.classList.contains('active')) {
+        var frame = document.getElementById("code-frame");
+        var code = frame.closest("block");
+        if (code.parentNode.querySelectorAll('.file-type.active').length === 0) {
+            view.classList.add('active');
+            code.classList.remove('hidden');
+        }
+    }
     console.log('api.code', {
         file,
         card
@@ -184,8 +211,9 @@ api.gists.push = function() {
     }) : null;
     github.gists.id(id, settings)
 }
-api.gists.config = ()=>{
-    console.log(116, 'api.gists.config');
+api.gists.config = (target)=>{
+    console.log(116, 'api.gists.config', target, target.closest('.active'));
+    //target.closest('.active').classList.remove('active');
     request('/raw/asset/html/modal/gist.options.html').then((html)=>{
         console.log(118, {
             html

@@ -591,7 +591,12 @@
         display: flex;
         flex: 1;
         overflow-x: hidden;
-        padding-top: 50px;
+    }
+
+    @media (max-width: 768px) {
+        .component-snip .aside-code .code-file > section {
+            padding-top: 50px;
+        }
     }
 
     .component-snip .aside-code .code-file > section > box {
@@ -686,6 +691,35 @@
     }
 }
 
+@media {    
+    .component-snip .block-code .file-icon {
+        display: inline-flex;
+        height: 50px;
+        /* margin-left: auto; */
+        width: 50px;
+    }
+    .component-snip .block-code .file-icon i:has(con) {
+        display: inline-flex;
+        height: 50px;
+        width: 50px;
+    }
+    .component-snip .block-code .file-text {
+        border-right: 1px solid;
+        padding: 0 20px;
+    }    
+    .component-snip .block-code .file-type {
+        align-items: center;
+        background: #555;
+        border-top: 4px solid #777;
+        box-sizing: border-box;
+        display: inline-flex;
+        font-weight: bolder;
+        line-height: 46px;
+        padding: 0 10px;
+        margin-right: auto;
+    }
+}
+
 @media {
     .component-snip .block-line {
         background: #333;
@@ -707,6 +741,7 @@
     .component-snip .block-code {
         display: inline-flex;
         flex: 1;
+        flex-direction: column;
         height: calc(100% - 86px);
         width: 100%;
     }
@@ -722,6 +757,63 @@
             height: calc((100% - 136px)/1);
             width: 100%;
         }
+    }
+
+    .component-snip .block-code > section {
+        background: #555;
+        width: 100%;
+        height: calc(100%/3);
+        position: relative;
+    }
+
+    .component-snip .block-code > section card {
+        width: 100%;
+    }
+
+    .component-snip .block-code > section card > header {
+        align-items: center;
+        background: #292a2d;
+        display: flex;
+        height: 50px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .component-snip .block-code > section card > section {
+        background: #555;
+        flex: 1;
+        height: calc(100% - 86px);
+        width: 100%;
+    }
+
+    .component-snip .block-code > section card > footer {
+        background: #777;
+        display: flex;
+        position: relative;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+    }
+
+    .component-snip .block-code > section card > footer i {
+        height: 36px;
+        width: 36px;
+    }
+
+    .component-snip .block-code > section card > footer box {
+        /* display: flex; */
+        /* flex: 1; */
+        width: 100%;
+    }
+
+    .component-snip .block-code > section card > footer i + textarea {
+        background: none;
+        border: sienna;
+        display: flex;
+        flex: 1;
+        outline: none;
+        resize: none;
+        width: 100%;
     }
 }
 
