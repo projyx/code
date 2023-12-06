@@ -26,7 +26,7 @@
     [modal="gist-comments"] {
         /* background: #111; */
         border-radius: 10px;
-        box-shadow: 0 0 10pc -9px;
+        box-shadow: 0 0 10pc -9px black;
         display: flex;
         display: grid;
         flex-wrap: wrap;
@@ -39,6 +39,7 @@
     }
 
     [modal="gist-comments"] {
+        background: #333;
         display: grid;
         grid-template-columns: minmax(0,35em) minmax(0,240px);
         grid-template-rows: minmax(0,auto) minmax(0,auto) 1fr minmax(0,auto);
@@ -119,7 +120,7 @@
         [modal="gist-comments"] > nav card > section:nth-child(3) {
             justify-content: flex-start;
         }
-        
+
         [modal="gist-comments"] > nav card > section:nth-child(3) box {
             width: 50%;
         }
@@ -139,7 +140,7 @@
 
     [modal="gist-comments"] > nav box:has(i) {
         /* background: #777; */
-        border: 1px solid #fff;
+        border: 1px solid #777;
         display: inline-flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -258,7 +259,12 @@
     }
 
     [modal="gist-comments"] > section:nth-child(3) {
+        /* background: #0c0c0c; */
+        /* border: 1px solid #777; */
+        border-radius: 5px;
+        /* box-shadow: 0 0 3pc -9px black; */
         margin: 0 0 20px 2rem;
+        /* padding: 20px; */
     }
 
     @media screen and (max-width: 768px) {
@@ -353,13 +359,25 @@
         /* padding: 20px; */
     }
 
+    [modal="gist-comments"] > section > card > column > box {
+    }
+
     [modal="gist-comments"] > section > card > column > box form text:last-child {
         font-size: 13px;
         line-height: 50px;
         text-align: right;
     }
 
+    [modal="gist-comments"] > section:nth-child(3) > card > column > box:nth-child(1) {
+        box-shadow: 0 0 3pc -9px black;
+        padding: 20px;
+    }
+
     [modal="gist-comments"] > section > card > column > box:nth-child(2) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0;
     }
 
     @media screen and (max-width: 768px) {
@@ -616,7 +634,7 @@
         border: 0;
         -webkit-appearance: none;
     }
-    
+
     [modal="gist-comments"] > section > card.card-details box:nth-child(2) text:first-child {
         font-weight: bolder;
     }
