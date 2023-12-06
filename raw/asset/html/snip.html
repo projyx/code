@@ -81,6 +81,24 @@
                                         </svg>
                                     </picture>
                                 </row>
+                                <column>
+                                    <text>
+                                        <span>Editor View</span>
+                                        <span>&hellip;/:id</span>
+                                    </text>
+                                    <text>
+                                        <span>Details View</span>
+                                        <span>&hellip;/:id/details</span>
+                                    </text>
+                                    <text>
+                                        <span>Full Page View</span>
+                                        <span>&hellip;/:id/full</span>
+                                    </text>
+                                    <text>
+                                        <span>Debug Mode</span>
+                                        <span>&hellip;/:id/debug</span>
+                                    </text>
+                                </column>
                             </flex>
                         </dropdown>
                         <i onclick="api.gists.likes()">
@@ -359,25 +377,70 @@
     </section>
 </block>
 <footer class="footer-snippet">
-    <section>
+    <row>
         <card class="snippet-tools">
             <row>
                 <box class="tools-tool tools-console" onclick="api.snippet.console()">
                     <section>
+                        <i>
+                            <con class="gg-terminal"></con>
+                        </i>
                         <text>Console</text>
                     </section>
                 </box>
                 <box class="tools-tool tools-assets" onclick="api.snippet.assets()">
                     <section>
+                        <i>
+                            <con class="gg-cloud"></con>
+                        </i>
                         <text>Assets</text>
                     </section>
                 </box>
                 <box class="tools-tool tools-comments" onclick="api.snippet.comments()">
                     <section>
+                        <i>
+                            <con class="gg-comment"></con>
+                        </i>
                         <text>Comments</text>
                     </section>
                 </box>
             </row>
         </card>
-    </section>
+        <card class="snippet-tools">
+            <row>
+                <box class="tools-tool tools-console" onclick="api.snippet.console()">
+                    <section>
+                        <i>
+                            <con class="gg-trash"></con>
+                        </i>
+                        <text>Delete</text>
+                    </section>
+                </box>
+                <box class="tools-tool tools-console" onclick="api.snippet.console()">
+                    <section>
+                        <i>
+                            <con class="gg-git-fork"></con>
+                        </i>
+                        <text>Fork</text>
+                    </section>
+                </box>
+                <box class="tools-tool tools-assets" onclick="api.snippet.assets()">
+                    <section>
+                        <i>
+                            <con class="gg-software-download"></con>
+                        </i>
+                        <text>Export</text>
+                    </section>
+                </box>
+                <box class="tools-tool tools-comments" onclick="api.snippet.comments()">
+                    <section>
+                        <i>
+                            <con class="gg-share"></con>
+                        </i>
+                        <text>Share</text>
+                    </section>
+                </box>
+            </row>
+        </card>
+    </row>
 </footer>

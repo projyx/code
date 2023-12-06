@@ -109,16 +109,17 @@
     }
 
     .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex {
-        /* background: #555; */
+        background: #292a2d;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         border-radius: 10px;
-        box-shadow: 0 0 10pc -9px;
+        /* box-shadow: 0 0 10pc -9px; */
         color: white;
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        padding: 10px;
+        /* gap: 10px; */
+        padding: 0;
+        padding: 10px 0;
         position: absolute;
         right: 0;
         /* bottom: calc(-50px); */
@@ -127,12 +128,28 @@
         /* width: 150px; */
     }
 
+    .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > column text {
+        display: flex;
+        justify-content: space-between;
+        line-height: 36px;
+        padding: 0 20px;
+    }
+
+    .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > column text:hover {
+        background: #777;
+    }
+
+    .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > column text.active {
+        background: #555;
+        line-height: 36px;
+    }
+
     .component-snip .header-code > section > dropdown:last-child > column:not(.active) {
         display: none;
     }
 
     .component-snip .header-code > section > dropdown:last-child > column.active {
-        /* background: #999; */
+        background: #292a2d;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         border-radius: 10px;
@@ -216,9 +233,19 @@
         width: 70px;
     }
 
+    .component-snip .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > header {
+        margin: 10px 20px 10px;
+    }
+
+    .component-snip .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > header text {
+        font-weight: bolder;
+        font-size: 18px;
+    }
+
     .component-snip .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row {
         border: 2px solid #999;
         border-radius: 5px;
+        margin: 0 20px 20px;
     }
 
     .component-snip .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > picture.active {
@@ -872,6 +899,11 @@
         width: 100%;
         z-index: 12345;
     }
+    
+    .component-snip .footer-snippet > row {
+        justify-content: space-between;
+        width: 100%;
+    }
 
     .component-snip .footer-snippet card {
     }
@@ -881,7 +913,19 @@
         font-size: 13;
         height: 36px;
         line-height: 36px;
-        padding: 0 20px;
+        padding: 0 10px;
+    }
+
+    .component-snip .footer-snippet card box > * {
+        gap: 3px;
+    }
+
+    .component-snip .footer-snippet card box i {
+        width: 30px;
+    }
+
+    .component-snip .footer-snippet card box i con {
+        --ggs: 0.75;
     }
 
     .component-snip .footer-snippet card box:hover {

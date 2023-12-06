@@ -26,7 +26,7 @@
     [modal="gist-comments"] {
         /* background: #111; */
         border-radius: 10px;
-        box-shadow: 0 0 10pc -9px black;
+        box-shadow: 0 0 10pc -9px white;
         display: flex;
         display: grid;
         flex-wrap: wrap;
@@ -39,7 +39,7 @@
     }
 
     [modal="gist-comments"] {
-        background: #333;
+        /* background: #333; */
         display: grid;
         grid-template-columns: minmax(0,35em) minmax(0,240px);
         grid-template-rows: minmax(0,auto) minmax(0,auto) 1fr minmax(0,auto);
@@ -95,8 +95,9 @@
     @media (max-width: 768px) {
         [modal="gist-comments"] > nav {
             width: auto;
+            width: calc(100% - 40px);
             margin: 0;
-            margin: 0 2rem;
+            margin: 0 20px;
         }
     }
 
@@ -270,7 +271,8 @@
     @media screen and (max-width: 768px) {
         [modal="gist-comments"] > section:nth-child(1) {
             margin: 0;
-            margin: 2rem 2rem 0;
+            margin: 20px 20px 0;
+            width: calc(100% - 40px);
         }
 
         [modal="gist-comments"] > section:nth-child(2) {
@@ -279,7 +281,8 @@
 
         [modal="gist-comments"] > section:nth-child(3) {
             margin: 0;
-            margin: 0 2rem;
+            margin: 0 20px;
+            width: calc(100% - 40px);
         }
 
         [modal="gist-comments"] > section:nth-child(4) {
@@ -288,10 +291,17 @@
     }
 
     [modal="gist-comments"] > footer {
-        /* background: #333; */
-        margin: 20px auto 2rem;
-        padding: 20px 2rem 2rem;
-        /* width: 100%; */
+        margin: 0;
+        padding: 20px 2rem 20px;
+        width: calc(100% - 4rem);
+    }
+
+    @media (max-width: 768px) {
+        [modal="gist-comments"] > footer {
+            margin: 0;
+            padding: 20px 20px 20px;
+            width: calc(100% - 40px);
+        }
     }
 
     [modal="gist-comments"] > footer card box > header {
