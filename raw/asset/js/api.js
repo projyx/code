@@ -246,6 +246,15 @@ api.snippet.assets = function() {
     }
     );
 }
+api.snippet.comments = function() {    
+    request('/raw/asset/html/modal/gist.comments.html').then((html)=>{
+        console.log(118, {
+            html
+        });
+        modal.panel(html);
+    }
+    );
+}
 api.snippet.console = () => {
     var codeFrame = document.getElementById('code-frame');
     codeFrame.nextElementSibling.classList.toggle('hidden');
