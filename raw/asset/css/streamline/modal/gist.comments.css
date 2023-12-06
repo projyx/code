@@ -379,8 +379,8 @@
     }
 
     [modal="gist-comments"] > section:nth-child(3) > card > column > box:nth-child(1) {
-        box-shadow: 0 0 3pc -9px black;
-        padding: 20px;
+        /* box-shadow: 0 0 3pc -9px black; */
+        /* padding: 20px; */
     }
 
     [modal="gist-comments"] > section > card > column > box:nth-child(2) {
