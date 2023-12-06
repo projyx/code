@@ -22,8 +22,9 @@ window.rout.er = (href,params)=>{
                 if (p.startsWith(":")) {
                     var x = p.split(":")[1];
                     if (x === "get") {
-                        var p = window.location.pathname.split("/").splice(1).filter(n=>n.length > 0);
-                        console.log(p);
+                        var pindex = window.location.pathname.split("/").splice(1).filter(n=>n.length > 0);
+                        var p = pindex[index];
+                        console.log(26, { p, index, pindex });
                     }
                     if (x === "user") {
                         var p = localStorage.user;
