@@ -383,25 +383,34 @@ window.events.onfocusout.touch = async function(e) {
 }
 
 window.events.keydown = {};
-window.events.keydown.console = async function(event) {
-    var console = event.target.closest('#code-frame + *');
-    console.log(388, console);
-    if (console) {
-        var element = event.target;
-        console.log(390, element);
-        element.style.height = "5px";
-        element.style.height = (element.scrollHeight) + "px";
-    }
 
+window.events.keyup = {};
+window.events.keyup.console = async function(event) {
+    var target = event.target;
+    var panel = target.closest('#code-frame + * form textarea');
+    console.log(388, panel);
+    if (panel) {
+        panel.style.height = "0";
+        panel.style.height = ((36 * (panel.scrollHeight) / 36)) + "px";
+        var iframe = document.querySelector("#code-frame");
+        var win = iframe.contentWindow;
+        var script = target.value;
+        win.console.log(395, 'events.keydown.console', {
+            script
+        });
+        var x = eval(script);
+        if (typeof x === "function") {
+            x();
+        }
+    }
     //console.log('events.keyup.console', event.keyCode);
-    if (event.keyCode === 13) {//event.preventDefault();
+    if (event.keyCode === 13) {
+        console.log(123);
+        //event.preventDefault();
     }
 }
 
 window.events.onkeydown = async function(e) {
-    var console = e.target.closest('#code-frame + *');
-    if (console) {}
-
     if (e.ctrlKey) {
         if (e.keyCode === 83) {
             e.preventDefault();

@@ -259,6 +259,14 @@ api.snippet.console = () => {
     var codeFrame = document.getElementById('code-frame');
     codeFrame.nextElementSibling.classList.toggle('hidden');
 }
+api.snippet.view = (target) => {
+    console.log(263, 'api.snippet.view');
+    var btn = target.closest('[onclick]');
+    Array.from(btn.children).forEach(el => {
+        el.classList.remove('active');
+    })
+    target.closest('[onclick] > *').classList.add('active');
+}
 
 window.api.time = {};
 api.time.date = (previous)=>{

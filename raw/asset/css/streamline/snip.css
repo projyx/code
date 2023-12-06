@@ -22,6 +22,7 @@
         position: relative;
         width: 100%;
         z-index: 12345;
+        order: 1;
     }
 
     .component-snip .header-code:has(flex.active) {
@@ -113,7 +114,7 @@
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         border-radius: 10px;
-        /* box-shadow: 0 0 10pc -9px; */
+        box-shadow: 0 0 10pc -9px black;
         color: white;
         display: flex;
         flex-direction: column;
@@ -153,12 +154,13 @@
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         border-radius: 10px;
-        box-shadow: 0 0 10pc -9px;
+        box-shadow: 0 0 10pc -9px black;
         border-radius: 5px;
         font-size: 13px;
         font-weight: bolder;
         line-height: 36px;
-        padding: 0px 20px;
+        overflow: hidden;
+        /* padding: 0px 20px; */
         position: absolute;
         width: 120px;
         right: 10px;
@@ -166,7 +168,12 @@
     }
 
     .component-snip .header-code > section > dropdown:last-child > column.active text:not(:last-child) {
-        border-bottom: 1px solid #777;
+        border-bottom: 1px solid #444;
+        /* padding: 0 20px; */
+    }
+
+    .component-snip .header-code > section > dropdown:last-child > column.active text span {
+        padding: 0 20px;
     }
 
     .component-snip .header-code > section > dropdown:last-child > column.active text {
@@ -259,6 +266,53 @@
     .component-snip .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > *:nth-child(2) {
         border-left: 2px solid #999;
         border-right: 2px solid #999;
+    }
+
+    @media {
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(1).active) ~ aside.aside-code {
+        }
+
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code {
+            height: 50%;
+            width: 100%;
+        }
+
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code {
+            height: calc((100% - 136px)/2);
+            width: 100%;
+        }
+
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code > section {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code .code-file {
+            height: 100%;
+        }
+
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ line.block-line {
+            height: 20px;
+            width: 100%;
+        }
+
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ block.block-code {
+            flex: unset;
+            height: 50%;
+            width: 100%;
+        }
+
+
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(3).active) ~ aside.aside-code {
+            order: 4;
+        }
+
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(3).active) ~ block.block-code {
+            order: 3;
+        }
+    }
+
+    .component-snip .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex [drop="down"] + flex > row > picture.active) {
     }
 
     .component-snip .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + flex) [drop="down"] + flex > row > * svg {
@@ -388,6 +442,7 @@
         width: 400px;
         /* z-index: 123456789; */
         overflow-x: hidden;
+        order: 2;
     }
 
     @media screen and (max-width: 768px) {
@@ -533,6 +588,18 @@
         flex: 1;
         flex-direction: column;
         width: 100%;
+    }
+
+    .component-snip .aside-code > section .block-line {
+        display: none;
+    }
+
+    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code .block-line {
+        background: #333;
+        display: flex;
+        height: 100%;
+        order: unset;
+        width: 20px;
     }
 
     .component-snip .aside-code > section:has(.code-file dropdown:last-child > column.active) {
@@ -751,9 +818,10 @@
 }
 
 @media {
-    .component-snip .block-line {
+    .component-snip > .block-line {
         background: #333;
         height: calc(100% - 86px);
+        order: 3;
         width: 20px;
     }
 
@@ -773,6 +841,7 @@
         flex: 1;
         flex-direction: column;
         height: calc(100% - 86px);
+        order: 4;
         width: 100%;
         position: relative;
     }
@@ -802,6 +871,8 @@
     }
 
     .component-snip .block-code > section card {
+        display: flex;
+        flex-direction: column;
         width: 100%;
     }
 
@@ -816,8 +887,9 @@
 
     .component-snip .block-code > section card > section {
         background: #555;
+        display: flex;
         flex: 1;
-        height: calc(100% - 86px);
+        /* height: calc(100% - 86px); */
         width: 100%;
     }
 
@@ -847,13 +919,19 @@
         bottom: 0;
         right: 0;
         /* height: 100%; */
-        min-height: 50px;
+        min-height: 20px;
+        min-height: 30px;
         width: 100%;
     }
 
     .component-snip .block-code > section card > footer i {
-        height: 36px;
-        width: 36px;
+        height: 20px;
+        margin: 0 5px;
+        width: 20px;
+    }
+
+    .component-snip .block-code > section card > footer i con {
+        --ggs: 0.6;
     }
 
     .component-snip .block-code > section card > footer box {
@@ -863,7 +941,12 @@
     }
 
     .component-snip .block-code > section card > footer box form {
+        align-items: flex-start;
         display: flex;
+        min-height: 20px;
+        justify-content: center;
+        padding: 3px 0;
+        /* padding: 0; */
     }
 
     .component-snip .block-code > section card > footer i + textarea {
@@ -873,9 +956,9 @@
         display: flex;
         flex: 1;
         /* font-family: Arial; */
-        font-size: 16px;
-        height: 36px;
-        line-height: 36px;
+        font-size: 13px;
+        height: 20px;
+        line-height: 20px;
         outline: none;
         padding: 0;
         resize: none;
@@ -895,6 +978,7 @@
         /* border-bottom: 1px solid #666; */
         box-sizing: border-box;
         display: flex;
+        order: 5;
         /* padding: 10px; */
         position: relative;
         width: 100%;
