@@ -44,7 +44,7 @@ window.events.onclick.document = async function(event) {
             var dropdown = elem.closest('dropdown:has(ul.active)');
             elem === dropdown ? null : elem.nextElementSibling.classList.remove('active');
         }
-        );        
+        );
         drop = target.closest('[drop]');
         var ul = target.closest('dropdown > ul');
         var drop = elem.querySelector('[drop="down"]');
@@ -384,13 +384,24 @@ window.events.onfocusout.touch = async function(e) {
 
 window.events.keydown = {};
 window.events.keydown.console = async function(event) {
+    var console = event.target.closest('#code-frame + *');
+    console.log(388, console);
+    if (console) {
+        var element = event.target;
+        console.log(390, element);
+        element.style.height = "5px";
+        element.style.height = (element.scrollHeight) + "px";
+    }
+
     //console.log('events.keyup.console', event.keyCode);
-    if(event.keyCode === 13) {
-        event.preventDefault();
+    if (event.keyCode === 13) {//event.preventDefault();
     }
 }
 
 window.events.onkeydown = async function(e) {
+    var console = e.target.closest('#code-frame + *');
+    if (console) {}
+
     if (e.ctrlKey) {
         if (e.keyCode === 83) {
             e.preventDefault();
@@ -492,7 +503,7 @@ window.events.onkeydown = async function(e) {
 }
 
 window.events.onsubmit = {};
-window.events.onsubmit.function = event => {
+window.events.onsubmit.function = event=>{
     console.log(488, 'events.onsubmit.function');
     event.preventDefault();
 }
