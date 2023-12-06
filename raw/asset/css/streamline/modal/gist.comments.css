@@ -28,13 +28,23 @@
         border-radius: 10px;
         box-shadow: 0 0 10pc -9px;
         display: flex;
+        display: grid;
         flex-wrap: wrap;
         gap: 20px;
         margin: 60px auto;
         min-height: 240px;
         overflow: hidden;
-        padding: 20px;
-        width: 640px;
+        /* padding: 20px; */
+        width: 720px;
+    }
+
+    [modal="gist-comments"] {
+        display: grid;
+        grid-template-columns: minmax(0,35em) minmax(0,240px);
+        grid-template-rows: minmax(0,auto) minmax(0,auto) 1fr minmax(0,auto);
+        justify-content: center;
+        grid-gap: 1rem 2rem;
+        /* padding: 2rem; */
     }
 }
 
@@ -75,13 +85,17 @@
         display: inline-flex;
         margin: 0;
         /* margin-right: 20px; */
+        margin: 2rem 2rem 2rem 0;
         width: 100%;
         width: 240px;
+        width: calc(100% - 2rem);
     }
 
     @media (max-width: 768px) {
         [modal="gist-comments"] > nav {
-            width: 100%;
+            width: auto;
+            margin: 0;
+            margin: 0 2rem;
         }
     }
 
@@ -95,6 +109,20 @@
     [modal="gist-comments"] > nav card > section {
         gap: 1px;
         justify-content: space-around;
+    }
+
+    [modal="gist-comments"] > nav card > section:nth-child(3) {
+        gap: 10px;
+    }
+
+    @media (max-width: 768px) {
+        [modal="gist-comments"] > nav card > section:nth-child(3) {
+            justify-content: flex-start;
+        }
+        
+        [modal="gist-comments"] > nav card > section:nth-child(3) box {
+            width: 50%;
+        }
     }
 
     [modal="gist-comments"] > nav card > section:last-child box > column text:first-child {
@@ -217,45 +245,82 @@
         flex: 1;
     }
 
-    [modal="gist-comments"] > section + nav + footer {
-        /* background: #333; */
-        margin: 20px auto 0;
-        width: 100%;
+    [modal="gist-comments"] > section:nth-child(1) {
+        display: grid;
+        grid-template-columns: minmax(0,100%);
+        /* gap: 1rem; */
+        margin: 2rem 0 20px 2rem;
     }
 
-    [modal="gist-comments"] > section + nav + footer card box > header {
+    [modal="gist-comments"] > section:nth-child(2) {
+        grid-column: 2;
+        grid-row: 1/span 3;
+    }
+
+    [modal="gist-comments"] > section:nth-child(3) {
+        margin: 0 0 20px 2rem;
+    }
+
+    @media screen and (max-width: 768px) {
+        [modal="gist-comments"] > section:nth-child(1) {
+            margin: 0;
+            margin: 2rem 2rem 0;
+        }
+
+        [modal="gist-comments"] > section:nth-child(2) {
+            margin: 0;
+        }
+
+        [modal="gist-comments"] > section:nth-child(3) {
+            margin: 0;
+            margin: 0 2rem;
+        }
+
+        [modal="gist-comments"] > section:nth-child(4) {
+            margin: 0;
+        }
+    }
+
+    [modal="gist-comments"] > footer {
+        /* background: #333; */
+        margin: 20px auto 2rem;
+        padding: 20px 2rem 2rem;
+        /* width: 100%; */
+    }
+
+    [modal="gist-comments"] > footer card box > header {
         display: flex;
         height: 36px;
         line-height: 36px;
     }
 
-    [modal="gist-comments"] > section + nav + footer card box > header > text {
+    [modal="gist-comments"] > footer card box > header > text {
         display: flex;
     }
 
-    [modal="gist-comments"] > section + nav + footer card box > header > text:first-child {
+    [modal="gist-comments"] > footer card box > header > text:first-child {
         font-weight: bolder;
     }
 
-    [modal="gist-comments"] > section + nav + footer card box > header > :last-child {
+    [modal="gist-comments"] > footer card box > header > :last-child {
         color: #777;
     }
 
-    [modal="gist-comments"] > section + nav + footer card box > header > text i:has(con) {
+    [modal="gist-comments"] > footer card box > header > text i:has(con) {
         height: 36px;
         width: 24px;
     }
 
-    [modal="gist-comments"] > section + nav + footer card box > header i {
+    [modal="gist-comments"] > footer card box > header i {
         --ggs: 0.77;
     }
 
-    [modal="gist-comments"] > section + nav + footer card box > header > text:last-child {
+    [modal="gist-comments"] > footer card box > header > text:last-child {
         font-size: 13px;
         margin-left: auto;
     }
 
-    [modal="gist-comments"] > section + nav + footer card box > section text {
+    [modal="gist-comments"] > footer card box > section text {
         border: 1px solid #777;
         border-radius: 5px;
         font-size: 14px;
@@ -288,8 +353,13 @@
         /* padding: 20px; */
     }
 
+    [modal="gist-comments"] > section > card > column > box form text:last-child {
+        font-size: 13px;
+        line-height: 50px;
+        text-align: right;
+    }
+
     [modal="gist-comments"] > section > card > column > box:nth-child(2) {
-        
     }
 
     @media screen and (max-width: 768px) {
@@ -418,6 +488,17 @@
     [modal="gist-comments"] > section > card > column > box:nth-child(3) > column text:nth-child(1) {
         font-weight: bolder;
     }
+
+    @media screen and (max-width: 768px) {
+        [modal="gist-comments"] {
+            display: flex;
+            flex-direction: column;
+        }
+
+        [modal="gist-comments"] > * {
+            margin: 0;
+        }
+    }
 }
 
 @media {
@@ -511,6 +592,10 @@
 }
 
 @media {
+    [modal="gist-comments"] > footer {
+        border-top: 1px solid #777;
+    }
+
     [modal="gist-comments"] > section > card.card-details {
         display: flex;
         flex-direction: column;
@@ -530,6 +615,10 @@
         outline: none;
         border: 0;
         -webkit-appearance: none;
+    }
+    
+    [modal="gist-comments"] > section > card.card-details box:nth-child(2) text:first-child {
+        font-weight: bolder;
     }
 
     [modal="gist-comments"] > section > card.card-details box > header:has(span + span) {
@@ -628,6 +717,10 @@
         transition: 1s;
         width: 60px;
     }
+}
+
+[modal="gist-comments"] > footer {
+    grid-column: 1/-1;
 }
 
 @media {
