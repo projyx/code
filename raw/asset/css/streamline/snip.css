@@ -300,7 +300,7 @@
 
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ block.block-code {
             flex: unset;
-            height: 50%;
+            height: calc((100% - 86px)/2);
             width: 100%;
         }
 
@@ -887,7 +887,7 @@
     .component-snip .block-code > section {
         background: #555;
         width: 100%;
-        height: calc(100%/3);
+        height: calc(100%/2.75);
         position: relative;
     }
 
