@@ -21,14 +21,20 @@ window.routes = function(uri, options) {
                     var username = paths[0];
                     if (paths.length === 1 || paths.length > 2) {
 
+                        var i = paths[3] ? (paths[3] ? ['details', 'full', 'debug'].indexOf(paths[3]) : 1) + 2 : '1';
+                        var btn = document.querySelector('.buttons-group > * > :nth-child(4) [drop="down"] + flex > column text:nth-child(' + i + ')');
+                        console.log(25, {
+                            paths,
+                            i,
+                            btn
+                        });
+                        Array.from(btn.parentNode.children).forEach(el=>el.classList.remove('active'));
+                        btn.classList.add('active');
+
                         if (paths.length > 3) {
                             var view = paths[3];
                             console.log(26, view);
-                        } else {
-                            var btn = document.querySelector('.buttons-group > * > :nth-child(4) [drop="down"] + flex > column text:nth-child(1)');
-                            Array.from(btn.parentNode.children).forEach(el=>el.classList.remove('active'));
-                            btn.classList.add('active');
-
+                        }
                             var file = paths[paths.length - 1];
                             if (file) {
                                 console.log(37, 'routes.view editor');
@@ -190,7 +196,7 @@ window.routes = function(uri, options) {
                                     message: "This page does not exist"
                                 }
                             }
-                        }
+                        
                     } else {
                         console.log(184, 'gists.new');
                     }
