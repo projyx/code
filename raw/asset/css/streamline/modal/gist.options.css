@@ -231,7 +231,27 @@
         display: flex;
         flex-direction: column;
         gap: 5px;
-        padding: 20px;
+        /* padding: 20px; */
+    }
+
+    [modal="gist-assets"] > nav + section > card > column:empty + column:nth-child(2) > box {
+        border: 2px dashed #777;
+        border-radius: 5px;
+        height: 100px;
+        /* padding: 30px 20px; */
+        text-align: center;
+    }
+
+    [modal="gist-assets"] > nav + section > card > column:empty + column:nth-child(2) > box > label {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        padding: 30px 20px;
+    }
+
+    [modal="gist-assets"] > nav + section > card > column > box input[type="file"] {
+        display: none;
     }
 
     @media screen and (max-width: 768px) {
