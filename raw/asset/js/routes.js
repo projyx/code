@@ -13,6 +13,11 @@ window.routes = function(uri, options) {
         var e = {};
         var status = 200;
 
+        Array.from(document.querySelectorAll('dropdown [drop="down"] + *')).forEach(el=>{
+            el.classList.remove('active');
+        }
+        )
+
         if (sub) {
             if (sub === "settings") {
                 console.log("routes.view settings");
@@ -28,8 +33,8 @@ window.routes = function(uri, options) {
                             i,
                             btn
                         });
-                        Array.from(btn.parentNode.children).forEach(el=>el.classList.remove('active'));
-                        btn.classList.add('active');
+                        Array.from(document.querySelectorAll('.buttons-group > * > :nth-child(4) [drop="down"] + flex > column text')).forEach(el=>el.classList.remove('active'));
+                        btn ? btn.classList.add('active') : null;
 
                         if (paths.length > 3) {
                             var view = paths[3];

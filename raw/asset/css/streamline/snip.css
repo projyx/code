@@ -114,6 +114,10 @@
         position: relative;
     }
 
+    .component-snip .header-code .buttons-group > section dropdown:nth-child(4) > row > text {
+        display: none;
+    }
+
     .component-snip .header-code .buttons-group > section > * {
         align-items: center;
         display: flex;
@@ -382,11 +386,72 @@
             }
         }
 
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(4) {
+            /* display: none; */
+            width: 50px;
+            width: auto;
+        }
+
+        @media (min-width: 641px) {
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(4) > row > i {
+                display: none;
+            }
+
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(4) > row > text {
+                border: 1px solid;
+                border-radius: 3px;
+                display: flex;
+                line-height: 36px;
+                padding: 0 10px;
+                white-space: nowrap;
+                width: auto;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(4) > row > text {
+                /* display: none; */ display: flex;
+                border: 1px solid;
+                border: none;
+                border-radius: 3px;
+                gap: 8px;
+                line-height: 30px;
+                padding: 0 10px;
+                padding: 0;
+                white-space: nowrap;
+            }
+        }
+
+        @media (min-width: 641px) {
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(4) > row text i con {
+                --ggs: calc(2/3);
+            }
+
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(4) > row text i {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(4) > row text span {
+                display: none;
+            }
+
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(4) > row text i {
+                height: 36px;
+                width: 36px;
+            }
+        }
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file > header {
             position: absolute;
             left: 0;
             top: -50px;
             width: 100vw;
+        }
+
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file > header > :not(:first-child) {
+            display: none;
         }
 
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ .block-line {
@@ -495,7 +560,11 @@
     }
 
     @media (max-width: 768px) {
-        .component-snip .header-code .buttons-group > section > dropdown {
+        .component-snip .header-code .buttons-group > section > dropdown:nth-child(4) > row > i {
+            display: none;
+        }
+
+        .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex {
             display: none;
         }
     }
