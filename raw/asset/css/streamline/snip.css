@@ -1535,11 +1535,21 @@
     }
 
     .component-snip .footer-snippet > row {
+        display: none;
         justify-content: space-between;
         width: 100%;
     }
-
-    .component-snip .footer-snippet card {
+    
+    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(1).active) ~ .footer-snippet > row {
+        display: none;
+    }
+    
+    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(1).active) ~ .footer-snippet > row:nth-child(1) {
+        display: flex;
+    }
+    
+    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ .footer-snippet {
+        display: none;
     }
 
     .component-snip .footer-snippet card box {
