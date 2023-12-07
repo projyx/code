@@ -27,13 +27,13 @@ window.routes = function(uri, options) {
                     if (paths.length === 1 || paths.length > 2) {
 
                         var i = paths[3] ? (paths[3] ? ['details', 'full', 'debug'].indexOf(paths[3]) : 1) + 2 : '1';
-                        var btn = document.querySelector('.buttons-group > * > :nth-child(4) [drop="down"] + flex > column text:nth-child(' + i + ')');
+                        var btn = document.querySelector('.buttons-group > * > :nth-child(5) [drop="down"] + flex > column text:nth-child(' + i + ')');
                         console.log(25, {
                             paths,
                             i,
                             btn
                         });
-                        Array.from(document.querySelectorAll('.buttons-group > * > :nth-child(4) [drop="down"] + flex > column text')).forEach(el=>el.classList.remove('active'));
+                        Array.from(document.querySelectorAll('.buttons-group > * > :nth-child(5) [drop="down"] + flex > column text')).forEach(el=>el.classList.remove('active'));
                         btn ? btn.classList.add('active') : null;
 
                         if (paths.length > 3) {
