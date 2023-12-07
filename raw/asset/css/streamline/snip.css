@@ -557,9 +557,14 @@
             width: 100%;
             top: 0;
             z-index: 123;
+            flex: auto;
             /* height: calc((100% - 0px)/2); */
             height: 540px;
-            /* margin-top: 0; */
+            margin-top: 0;
+        }
+
+        .component-snip:has(header.header-code .buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) {
+            flex-direction: column;
         }
 
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code {
@@ -581,8 +586,11 @@
             /* display: none; */
             height: 0;
             min-height: 0;
+            position: relative;
             /* position: absolute; */
             /* top: 50px; */
+            /* width: 0; */
+            width: 100%;
         }
         
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type.active) ~ aside.aside-code {
