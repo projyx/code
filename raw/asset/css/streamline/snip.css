@@ -563,7 +563,11 @@
             margin-top: 0;
         }
 
-        .component-snip:has(header.header-code .buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) {
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ footer.footer-code {
+            
+        }
+
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(:not(.file-type.active)) {
             flex-direction: column;
         }
 
