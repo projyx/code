@@ -19,7 +19,7 @@
     .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-details {
         display: flex;
     }
-    
+
     .component-snip .block-details {
         display: none;
         position: relative;
@@ -365,39 +365,43 @@
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ line.block-line {
             display: none;
         }
-        
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ aside.aside-code {
             display: none;
         }
-        
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ block.block-code {
             flex: initial;
             width: 100%;
             height: calc(100% - 50px);
         }
-        
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) ~ aside.aside-code {
             height: 100%;
         }
-        
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) {
             display: none;
         }
-                
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) ~ line.block-line {
             display: none;
         }
-        
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) ~ aside.aside-code {
             display: none;
         }
-        
+
+        .component-snip header.header-code:has(.file-type:not(.active)) ~ aside.aside-code {
+            display: none;
+        }
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) ~ block.block-code {
             flex: initial;
             width: 100%;
             height: calc(100% - 50px);
         }
-        
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code {
             width: 100%;
             width: 50%;
@@ -415,6 +419,12 @@
             /* position: absolute; */
         }
 
+        @media (max-width: 640px) {
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-icon:not(.active)) {
+                min-height: 240px;
+            }
+        }
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section {
             flex-direction: row;
         }
@@ -428,7 +438,7 @@
             height: 540px;
             width: 100%;
         }
-        
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) ~ block.block-code {
             width: 100%;
             height: calc(100% - 0px);
@@ -445,6 +455,10 @@
             .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file {
                 height: 100%;
                 height: 240px;
+            }
+
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-icon.active) > section:has(.code-file) {
+                display: none;
             }
         }
 
@@ -540,7 +554,7 @@
             position: relative;
             margin-top: 50px;
             right: 0;
-            width: 50%;
+            width: 100%;
             top: 0;
             z-index: 123;
             /* height: calc((100% - 0px)/2); */
@@ -548,10 +562,68 @@
             /* margin-top: 0; */
         }
 
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code {
+            /* margin-top: 0; */
+            min-height: 0;
+            width: 100%;
+        }
+
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code {
+            /* display: none; */
+            height: 540px;
+            min-height: 0px;
+            min-height: 540px;
+            flex: auto;
+            width: 50%;
+        }        
+
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type:not(.active):nth-child(1) ~ .file-type:not(.active):nth-child(2) ~ .file-type:not(.active):nth-child(3)){
+            /* display: none; */
+            height: 0;
+            min-height: 0;
+            /* position: absolute; */
+            /* top: 50px; */
+        }
+        
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type.active) ~ aside.aside-code {
+                
+        }
+        
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-icon.active) > section {
+            /* display: none; */
+        }
+        
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-icon.active) > section {
+            /* display: none; */
+        }
+
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type.active) ~ block.block-code {
+            flex: auto;
+            margin-top: 50px;
+            width: 50%;
+            margin-top: 0;
+            margin-top: 50px;
+        }
+
         @media (max-width: 640px) {
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-code {
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-code.hidden {
                 display: none;
+            }
+
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-code:not(.hidden) {
                 height: 240px;
+                margin-top: 0;
+                width: 100%;
+            }
+
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type:not(.active):nth-child(1)):has(.file-type:not(.active):nth-child(2)):has(.file-type:not(.active):nth-child(3)) ~ block.block-code {
+                margin-top: 0;
+            }
+
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(> header > box .file-icon.active) ~ block.block-code {
+                display: flex;
+                height: 240px;
+                width: 100%;
             }
         }
     }
@@ -901,7 +973,7 @@
 
     @media (min-width: 769px) {
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2):not(.active)) ~ aside.aside-code .code-file:not(:first-child) {
-            border-top: 1px solid #777;
+            /* border-top: 1px solid #777; */
         }
     }
 
@@ -1023,6 +1095,7 @@
     .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > header {
         display: flex;
         top: -50px;
+        /* top: 0; */
         z-index: 12345;
         width: 100vw;
     }
