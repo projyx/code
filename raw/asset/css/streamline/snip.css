@@ -127,9 +127,22 @@
     .component-snip .header-code .buttons-group > section > * {
         align-items: center;
         display: flex;
-        height: 50px;
         justify-content: Center;
         width: 50px;
+        /* width: 50px; */
+    }
+
+    .component-snip .header-code .buttons-group > section > i:last-child {
+        border: 1px solid #fff;
+        border-radius: 3px;
+    }
+
+    .component-snip .header-code .buttons-group > section > i:last-child con:nth-child(1) {
+        margin-left: 10px
+    }
+
+    .component-snip .header-code .buttons-group > section > i:last-child con:nth-child(2) {
+        --ggs: calc(2/3);
     }
 
     .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex):not(.active) [drop="down"] + flex:not(.active) {
