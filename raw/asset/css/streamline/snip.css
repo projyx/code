@@ -159,12 +159,12 @@
     }
 
     .component-snip .header-code .buttons-group > section > i:last-child {
-        border: 1px solid #fff;
+        border: 1px solid #777;
         border-radius: 3px;
     }
 
     .component-snip .header-code .buttons-group > section > i {
-        border: 1px solid;
+        border: 1px solid #777;
     }
 
     .component-snip .header-code .buttons-group > section i {
@@ -174,7 +174,7 @@
     }
 
     .component-snip .header-code .buttons-group > section > text {
-        border: 1px solid;
+        border: 1px solid #777;
         border-radius: 3px;
         height: 36px;
         line-height: 36px;
@@ -223,7 +223,7 @@
     }
 
     .component-snip .header-code .buttons-group > section > dropdown:nth-child(5) > * > i {
-        border: 1px solid;
+        border: 1px solid #777;
         border-radius: 3px;
         /* border-top-left-radius: 50px; */
         /* border-bottom-left-radius: 50px; */
@@ -235,7 +235,7 @@
         content: '';
         display: block;
         height: 100%;
-        border-right: 1px solid;
+        border-right: 1px solid #777;
         order: 1;
     }
 
@@ -356,7 +356,7 @@
     }
 
     .component-snip .header-code .buttons-group > section dropdown:nth-child(1):has([drop="down"] + flex) [drop="down"] + flex {
-        box-shadow: 0 0 10pc -9px;
+        box-shadow: 0 0 10pc -9px black;
     }
 
     @media (max-width: 480px) {
@@ -615,7 +615,7 @@
             }
 
             .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row > text {
-                border: 1px solid;
+                border: 1px solid #777;
                 border-radius: 3px;
                 display: flex;
                 height: 36px;
@@ -846,7 +846,13 @@
     }
 
     /*VIEW*/
-    /**/
+    .component-snip .header-code .buttons-group > section > dropdown:nth-child(1) {
+        border: 1px solid #777;
+        border-radius: 3px;
+        height: 36px;
+        width: 36px;
+    }
+    
     @media (max-width: 768px) {
         .component-snip .header-code .buttons-group > section > i:nth-child(2), .component-snip .header-code .buttons-group > section > i:nth-child(3) {
             display: none;
@@ -884,7 +890,7 @@
             display: none;
         }
 
-        .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex {
+        .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex:not(.active) {
             display: none;
         }
     }
