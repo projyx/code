@@ -92,10 +92,11 @@
         display: inline-flex;
         margin: 0;
         /* margin-right: 20px; */
-        margin: 2rem 2rem 2rem 0;
+        margin: 2rem 0rem;
+        /* margin: 2rem 0; */
         width: 100%;
         width: 240px;
-        width: calc(100% - 2rem);
+        width: calc(100% - 0rem);
     }
 
     @media (max-width: 768px) {
@@ -258,6 +259,7 @@
         grid-template-columns: minmax(0,100%);
         /* gap: 1rem; */
         margin: 2rem 0 20px 2rem;
+        margin: 2rem 0;
     }
 
     [modal="gist-comments"] > section:nth-child(2) {
@@ -270,7 +272,7 @@
         /* border: 1px solid #777; */
         border-radius: 5px;
         /* box-shadow: 0 0 3pc -9px black; */
-        margin: 0 0 20px 2rem;
+        margin: 0 0 20px 0rem;
         /* padding: 20px; */
     }
 
@@ -298,8 +300,8 @@
 
     [modal="gist-comments"] > footer {
         margin: 0;
-        padding: 20px 2rem 20px;
-        width: calc(100% - 4rem);
+        padding: 20px 0rem 20px;
+        width: calc(100% - 0rem);
     }
 
     @media (max-width: 768px) {

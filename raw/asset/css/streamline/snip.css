@@ -1030,6 +1030,8 @@
     .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > header > :last-child {
         margin-left: auto;
         margin: 0 0 0 auto;
+        margin: 0;
+        margin-left: auto;
     }
 
     @media (max-width: 768px) {
