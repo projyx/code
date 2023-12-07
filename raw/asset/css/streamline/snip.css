@@ -114,8 +114,10 @@
         position: relative;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(4) > row > text {
-        display: none;
+    @media (min-width: 768px) {
+        .component-snip .header-code .buttons-group > section dropdown:nth-child(4) > row > text {
+            display: none;
+        }
     }
 
     .component-snip .header-code .buttons-group > section > * {
@@ -560,6 +562,10 @@
     }
 
     @media (max-width: 768px) {
+        .component-snip .header-code .buttons-group > section > dropdown:nth-child(4) {
+            display: none;
+        }
+        
         .component-snip .header-code .buttons-group > section > dropdown:nth-child(4) > row > i {
             display: none;
         }
@@ -939,6 +945,12 @@
         display: flex;
         top: -50px;
         z-index: 12345;
+        width: 100vw;
+    }
+
+    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > header > :last-child {
+        margin-left: auto;
+        margin: 0 0 0 auto;
     }
 
     @media (max-width: 768px) {
@@ -955,7 +967,7 @@
         .component-snip .aside-code > header {
             z-index: 1234;
             width: 200px;
-            /* width: 100%; */
+            width: 100%;
         }
 
         .component-snip .aside-code:has(header .file-icon.active) ~ .block-code {
