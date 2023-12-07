@@ -177,6 +177,7 @@
         border: 1px solid;
         border-radius: 3px;
         height: 36px;
+        line-height: 36px;
         font-size: 14px;
         white-space: nowrap;
         width: auto;
@@ -185,6 +186,7 @@
 
     .component-snip .header-code .buttons-group > section text:nth-child(4) {
         display: block;
+        display: none;
     }
 
     .component-snip .header-code .buttons-group > section > i:nth-child(2) {
@@ -195,6 +197,7 @@
 
     .component-snip .header-code .buttons-group > section > i:nth-child(3) {
         /* border-radius: 50px; */
+        /* display: none; */
     }
 
     @media {
@@ -593,6 +596,10 @@
         }
 
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section i:nth-child(2) {
+            display: none;
+        }
+
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section > :nth-child(3) {
             display: none;
         }
 
