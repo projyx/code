@@ -23,10 +23,16 @@
 }
 
 @media {
+    aside [modal="gist-comments"] {        
+        box-shadow: 0 0 10pc -9px white;
+    }
+    [modal="gist-comments"] {
+        margin: 20px;
+        width: calc((100% - 40px)/1);
+    }
     [modal="gist-comments"] {
         /* background: #111; */
         border-radius: 10px;
-        box-shadow: 0 0 10pc -9px white;
         display: flex;
         display: grid;
         flex-wrap: wrap;

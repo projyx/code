@@ -38,6 +38,7 @@
         z-index: 12345;
         order: 1;
     }
+
     .component-snip .header-code {
     }
 
@@ -337,14 +338,14 @@
         }
     }
 
-    @media {       
+    @media {
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code {
             height: calc((100% - 130px)/2);
             width: 100%;
         }
     }
 
-    @media {       
+    @media {
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code {
             width: 100%;
             width: 50%;
@@ -354,7 +355,7 @@
             /* position: absolute; */
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code  > section {
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section {
             flex-direction: row;
         }
 
@@ -367,17 +368,31 @@
             height: 540px;
         }
 
+        @media (max-width: 768px) {
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file {
+                height: 100%;
+                height: 540px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file {
+                height: 100%;
+                height: 240px;
+            }
+        }
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file > header {
             position: absolute;
             left: 0;
             top: -50px;
             width: 100vw;
         }
-        
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ .block-line {
             display: none;
         }
-        
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-code {
             position: absolute;
             position: relative;
@@ -389,6 +404,13 @@
             /* height: calc((100% - 0px)/2); */
             height: 540px;
             /* margin-top: 0; */
+        }
+
+        @media (max-width: 640px) {
+            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-code {
+                display: none;
+                height: 240px;
+            }
         }
     }
 
@@ -559,8 +581,13 @@
         .component-snip .aside-code:has(header .file-icon:not(.active)) {
             height: calc((100% - 86px)/1);
         }
+    }
 
-        .component-snip .aside-code {
+    @media (max-width: 640px) {
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code {
+            height: 240px;
+            min-height: 240px;
+            width: 100%;
         }
     }
 
@@ -699,11 +726,11 @@
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(1).active) ~ aside.aside-code .block-line {
             display: none;
         }
-        
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code .block-line {
             display: none;
         }
-        
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(3).active) ~ aside.aside-code .block-line {
             display: none;
         }
@@ -802,7 +829,7 @@
 
     @media (max-width: 768px) {
         .component-snip .aside-code .code-file > section {
-            padding-top: 50px;
+            padding-top: 0;
         }
     }
 
@@ -837,6 +864,12 @@
         width: 100%;
         z-index: 123;
         position: relative;
+    }
+
+    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > header {
+        display: flex;
+        top: -50px;
+        z-index: 12345;
     }
 
     @media (max-width: 768px) {
