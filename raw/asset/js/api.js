@@ -259,6 +259,9 @@ api.snippet.console = () => {
     var codeFrame = document.getElementById('code-frame');
     codeFrame.nextElementSibling.classList.toggle('hidden');
 }
+api.snippet.resources = (target) => {
+    console.log(263, 'api.snippet.resources');
+}
 api.snippet.view = (target) => {
     console.log(263, 'api.snippet.view');
     var btn = target.closest('[onclick]');

@@ -549,6 +549,10 @@
             display: none;
         }
 
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ .footer-snippet > :first-child {
+            display: none;
+        }
+
         .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-code {
             position: absolute;
             position: relative;
