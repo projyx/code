@@ -613,7 +613,7 @@
             }
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section i:nth-child(2) {
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section > i:nth-child(2) {
             display: none;
         }
 
