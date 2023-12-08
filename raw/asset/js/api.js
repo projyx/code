@@ -157,7 +157,10 @@ api.code.view = function(target) {
 }
 
 window.api.gists = {};
-api.gists.push = function() {
+api.gists.push = function(target) {
+    taret.closest('ico').querySelector('con').classList.remove('gg-software-upload');
+    taret.closest('ico').querySelector('con').classList.add('gg-spinner');
+    
     var id = rout.e.paths[2];
 
     var code = [];
@@ -211,9 +214,8 @@ api.gists.push = function() {
     }) : null;
     github.gists.id(id, settings)
 }
-api.gists.config = (target)=>{
-    console.log(116, 'api.gists.config', target, target.closest('.active'));
-    //target.closest('.active').classList.remove('active');
+api.gists.config = (tab)=>{
+    console.log(116, 'api.gists.config');
     request('/raw/asset/html/modal/gist.options.html').then((html)=>{
         console.log(118, {
             html
@@ -254,6 +256,9 @@ api.snippet.comments = function() {
         modal.panel(html);
     }
     );
+}
+api.snippet.clear = () => {
+    document.getElementById('code-frame').nextElementSibling.querySelector('card > section').innerHTML = "";
 }
 api.snippet.console = () => {
     var codeFrame = document.getElementById('code-frame');

@@ -2,7 +2,7 @@
     <section>
         <div class="code-file">
             <section>
-                <span class="file-menu" onclick="events.onclick.exit()">
+                <span class="file-menu" href="/snippet/:get">
                     <section>
                         <i>
                             <con class="icon-chevron-left"></con>
@@ -222,7 +222,7 @@
                         </text>
                     </section>
                 </box>
-                <i onclick="api.gists.config(event.target)">
+                <i onclick="api.gists.config('html')">
                     <con class="gg-options"></con>
                 </i>
                 <dropdown>
@@ -268,7 +268,7 @@
                         <text>CSS</text>
                     </section>
                 </box>
-                <i onclick="api.gists.config(event.target)">
+                <i onclick="api.gists.config('css')">
                     <con class="gg-options"></con>
                 </i>
                 <dropdown>
@@ -314,7 +314,7 @@
                         <text>JS</text>
                     </section>
                 </box>
-                <i onclick="api.gists.config(event.target)">
+                <i onclick="api.gists.config('js')">
                     <con class="gg-options"></con>
                 </i>
                 <dropdown>
@@ -365,7 +365,7 @@
                         <text>Console</text>
                     </section>
                 </box>
-                <box class="file-text">
+                <box class="file-text" onclick="api.snippet.clear()">
                     <section>
                         <text>Clear</text>
                     </section>

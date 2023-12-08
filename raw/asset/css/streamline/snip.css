@@ -1488,6 +1488,7 @@
         background: #555;
         display: flex;
         flex: 1;
+        flex-direction: column;
         /* height: calc(100% - 86px); */
         width: 100%;
     }
