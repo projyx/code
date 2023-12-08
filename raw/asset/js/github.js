@@ -348,21 +348,16 @@ github.gists.id = async function(id, settings) {
         );
     }
 }
-github.gists.star = async(params, settings)=>{
+github.gists.star = async(params,settings)=>{
     console.log(352, 'github.gists.star', {
-        id: params.id,
-        params
+        params,
+        settings
     });
     if (settings) {
         if (settings.method) {
-            if (settings.method === "POST") {
+            if (settings.method === "PUT") {
                 return new Promise((resolve,reject)=>{
-                    const data = settings.body;
-                    const encoding = params.encoding ? settings.encoding = params.encoding : null
-                    const owner = params.owner;
-                    const repo = params.repo;
-                    const url = github.endpoint + "/repos/" + owner + "/" + repo + "/git/blobs";
-                    const dataType = settings.method;
+                    const url = github.endpoint + "/gists/" + params.id + "/star";
                     const a = (data)=>{
                         resolve(data);
                     }
@@ -371,14 +366,12 @@ github.gists.star = async(params, settings)=>{
                         reject(error);
                     }
                     const accessToken = localStorage.githubAccessToken;
+                    var settings = {};
                     accessToken ? settings.headers = {
                         Accept: "application/vnd.github+json",
                         Authorization: "token " + accessToken
                     } : null;
-                    console.log(173, params, {
-                        url,
-                        settings
-                    });
+                    //console.log({ url, settings });
                     request(url, settings).then(a).catch(b);
                 }
                 );

@@ -289,15 +289,37 @@ api.snippet.save = async()=>{
         console.log(116, 2, 'api.gists.likes 200', {
             starred
         });
-        alert("You unlike like this");
+        try {
+            alert("You unlike like this");
+            var star = await github.gists.star({
+                id: rout.e.paths[2]
+            }, {
+                method: "PUT"
+            });
+            console.log(116, 3, 'api.gists.likes 200', {
+                star
+            });
+        } catch (e) {
+            console.log(116, 3, 'api.gists.likes 404', {
+                e
+            });
+        }
     } catch (e) {
         var msg = JSON.parse(e.message)
         console.log(116, 2, 'api.gists.likes 404', {
             e,
             msg
         });
-        if(msg.code === 404) {
+        if (msg.code === 404) {
             alert("You like this");
+            var star = await github.gists.star({
+                id: rout.e.paths[2]
+            }, {
+                method: "PUT"
+            });
+            console.log(116, 3, 'api.gists.likes 404', {
+                star                
+            });
         }
     }
 }
