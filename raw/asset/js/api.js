@@ -262,6 +262,20 @@ api.snippet.console = () => {
 api.snippet.resources = (target) => {
     console.log(263, 'api.snippet.resources');
 }
+api.snippet.saved = ()=>{
+    console.log(116, 'api.gists.likes');
+    request('/raw/asset/html/modal/gist.saved.html').then((html)=>{
+        console.log(118, {
+            html
+        });
+        modal.panel(html);
+    }
+    );
+}
+api.snippet.save = ()=>{
+    console.log(116, 'api.gists.likes');
+    github.gists.star()
+}
 api.snippet.view = (target) => {
     console.log(263, 'api.snippet.view');
     var btn = target.closest('[onclick]');

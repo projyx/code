@@ -110,10 +110,14 @@
                                 </column>
                             </flex>
                         </dropdown>
-                        <i>
-                            <con class="gg-bookmark"></con>
-                            <con class="gg-chevron-down" onclick="api.gists.likes()"></con>
-                        </i>
+                        <text>
+                            <i onclick="api.snippet.save()">
+                                <con class="gg-bookmark"></con>
+                            </i>
+                            <i onclick="api.snippet.saved()">
+                                <con class="gg-chevron-down"></con>
+                            </i>
+                        </text>
                     </section>
                 </span>
             </section>

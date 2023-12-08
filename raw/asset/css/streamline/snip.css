@@ -158,16 +158,33 @@
         --ggs: calc(2/3);
     }
 
-    .component-snip .header-code .buttons-group > section > i:last-child {
+    .component-snip .header-code .buttons-group > section > :last-child {
         border: 1px solid #777;
         border-radius: 3px;
+        padding: 0;
+    }
+
+    .component-snip .header-code .buttons-group > section > text:last-child i:first-child {
+        border-right: 1px solid #777;
+        height: 36px;
+        width: 36px;
+    }
+
+    .component-snip .header-code .buttons-group > section > text:last-child i:nth-child(2) {
+        /* border-right: 1px solid #777; */
+        height: 36px;
+        width: 20px;
+    }
+
+    .component-snip .header-code .buttons-group > section > text:last-child i:nth-child(2) con {
+        --ggs: calc(2/3);
     }
 
     .component-snip .header-code .buttons-group > section > i {
         border: 1px solid #777;
     }
 
-    .component-snip .header-code .buttons-group > section i {
+    .component-snip .header-code .buttons-group > section > i {
         border-radius: 3px;
         height: 36px;
         width: 60px;
@@ -227,6 +244,7 @@
         border-radius: 3px;
         /* border-top-left-radius: 50px; */
         /* border-bottom-left-radius: 50px; */
+        padding: 0 10px;
         width: 36px;
         height: 36px;
     }

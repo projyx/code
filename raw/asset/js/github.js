@@ -348,6 +348,11 @@ github.gists.id = async function(id, settings) {
         );
     }
 }
+github.gists.star = async(id) => {
+    console.log(352, 'github.gists.star', {
+        id
+    });
+};
 
 github.orgs = {};
 github.orgs.members = async(org,username,settings)=>{
