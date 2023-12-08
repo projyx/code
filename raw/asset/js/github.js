@@ -348,11 +348,65 @@ github.gists.id = async function(id, settings) {
         );
     }
 }
-github.gists.star = async(id) => {
+github.gists.star = async(params, settings)=>{
     console.log(352, 'github.gists.star', {
-        id
+        id: params.id,
+        params
     });
-};
+    if (settings) {
+        if (settings.method) {
+            if (settings.method === "POST") {
+                return new Promise((resolve,reject)=>{
+                    const data = settings.body;
+                    const encoding = params.encoding ? settings.encoding = params.encoding : null
+                    const owner = params.owner;
+                    const repo = params.repo;
+                    const url = github.endpoint + "/repos/" + owner + "/" + repo + "/git/blobs";
+                    const dataType = settings.method;
+                    const a = (data)=>{
+                        resolve(data);
+                    }
+                    const b = (error)=>{
+                        console.log(error);
+                        reject(error);
+                    }
+                    const accessToken = localStorage.githubAccessToken;
+                    accessToken ? settings.headers = {
+                        Accept: "application/vnd.github+json",
+                        Authorization: "token " + accessToken
+                    } : null;
+                    console.log(173, params, {
+                        url,
+                        settings
+                    });
+                    request(url, settings).then(a).catch(b);
+                }
+                );
+            }
+        }
+    } else {
+        return new Promise((resolve,reject)=>{
+            const url = github.endpoint + "/gists/" + params.id + "/star";
+            const a = (data)=>{
+                resolve(data);
+            }
+            const b = (error)=>{
+                console.log(error);
+                reject(error);
+            }
+            const accessToken = localStorage.githubAccessToken;
+            var settings = {};
+            accessToken ? settings.headers = {
+                Accept: "application/vnd.github+json",
+                Authorization: "token " + accessToken
+            } : null;
+            //console.log({ url, settings });
+            request(url, settings).then(a).catch(b);
+        }
+        );
+    }
+}
+;
 
 github.orgs = {};
 github.orgs.members = async(org,username,settings)=>{

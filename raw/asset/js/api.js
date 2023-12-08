@@ -160,7 +160,7 @@ window.api.gists = {};
 api.gists.push = function(target) {
     taret.closest('ico').querySelector('con').classList.remove('gg-software-upload');
     taret.closest('ico').querySelector('con').classList.add('gg-spinner');
-    
+
     var id = rout.e.paths[2];
 
     var code = [];
@@ -239,7 +239,7 @@ api.gists.likes = ()=>{
 }
 
 window.api.snippet = {};
-api.snippet.assets = function() {    
+api.snippet.assets = function() {
     request('/raw/asset/html/modal/gist.assets.html').then((html)=>{
         console.log(118, {
             html
@@ -248,7 +248,7 @@ api.snippet.assets = function() {
     }
     );
 }
-api.snippet.comments = function() {    
+api.snippet.comments = function() {
     request('/raw/asset/html/modal/gist.comments.html').then((html)=>{
         console.log(118, {
             html
@@ -257,14 +257,14 @@ api.snippet.comments = function() {
     }
     );
 }
-api.snippet.clear = () => {
+api.snippet.clear = ()=>{
     document.getElementById('code-frame').nextElementSibling.querySelector('card > section').innerHTML = "";
 }
-api.snippet.console = () => {
+api.snippet.console = ()=>{
     var codeFrame = document.getElementById('code-frame');
     codeFrame.nextElementSibling.classList.toggle('hidden');
 }
-api.snippet.resources = (target) => {
+api.snippet.resources = (target)=>{
     console.log(263, 'api.snippet.resources');
 }
 api.snippet.saved = ()=>{
@@ -277,16 +277,37 @@ api.snippet.saved = ()=>{
     }
     );
 }
-api.snippet.save = ()=>{
-    console.log(116, 'api.gists.likes');
-    github.gists.star()
+api.snippet.save = async()=>{
+    console.log(116, 1, 'api.gists.likes', {
+        paths: rout.e.paths,
+        path: rout.e.paths[2]
+    });
+    try {
+        var starred = await github.gists.star({
+            id: rout.e.paths[2]
+        });
+        console.log(116, 2, 'api.gists.likes 200', {
+            starred
+        });
+        alert("You unlike like this");
+    } catch (e) {
+        var msg = JSON.parse(e.message)
+        console.log(116, 2, 'api.gists.likes 404', {
+            e,
+            msg
+        });
+        if(msg.code === 404) {
+            alert("You like this");
+        }
+    }
 }
-api.snippet.view = (target) => {
+api.snippet.view = (target)=>{
     console.log(263, 'api.snippet.view');
     var btn = target.closest('[onclick]');
-    Array.from(btn.children).forEach(el => {
+    Array.from(btn.children).forEach(el=>{
         el.classList.remove('active');
-    })
+    }
+    )
     target.closest('[onclick] > *').classList.add('active');
 }
 

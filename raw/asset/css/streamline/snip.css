@@ -1493,6 +1493,13 @@
         width: 100%;
     }
 
+    .component-snip .block-code > section card > section > box {
+        border-bottom: 1px solid #777;
+        font-size: 13px;
+        line-height: 30px;
+        padding: 0 10px;
+    }
+
     @media (max-width: 768px) {
         .component-snip .block-code > section {
             background: #555;
