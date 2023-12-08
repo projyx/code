@@ -387,26 +387,138 @@ window.events.keydown = {};
 window.events.keyup = {};
 window.events.keyup.console = async function(event) {
     var target = event.target;
-    var panel = target.closest('#code-frame + * form textarea');
-    console.log(388, panel);
-    if (panel) {
-        panel.style.height = "0";
-        panel.style.height = ((36 * (panel.scrollHeight) / 36)) + "px";
-        var iframe = document.querySelector("#code-frame");
-        var win = iframe.contentWindow;
-        var script = target.value;
-        win.console.log(395, 'events.keydown.console', {
-            script
-        });
-        var x = eval(script);
-        if (typeof x === "function") {
-            x();
-        }
-    }
     //console.log('events.keyup.console', event.keyCode);
     if (event.keyCode === 13) {
-        console.log(123);
-        //event.preventDefault();
+        var panel = target.closest('#code-frame + * form textarea');
+        if (panel) {
+            event.preventDefault();
+            panel.style.height = "0";
+            panel.style.height = ((36 * (panel.scrollHeight) / 36)) + "px";
+            var iframe = document.querySelector("#code-frame");
+            var win = iframe.contentWindow;
+            var script = target.value;
+            var x = eval(script);
+            if (typeof x === "function") {
+                var xf = x();
+                win.console.log(395, 'events.keydown.console', {
+                    script,
+                    xf
+                });
+            } else {
+                win.console.log(395, 'events.keydown.console ERR', {
+                    x
+                });
+            }
+            var feed = target.closest('footer').previousElementSibling;
+            var box = document.createElement('box');
+
+            feed.insertAdjacentHTML("beforeend", box.outerHTML);
+            target.value = "";
+            target.style.height = "20px";
+        }
+    }
+}
+
+window.events.keyup.console = function(event) {
+    var txt = event.target.value;
+    console.log(424, event, txt);
+    if (event.keyCode === 13) {
+        var panel = event.target.closest('#code-frame + * form textarea');
+        if (panel) {
+            var contentWindow = document.getElementById('code-frame').contentWindow;
+            try {
+                throw new Error('Throwing error for stack trace...');
+            } catch (err) {
+                //console.log(343, arguments);
+                var stackTrace = err.stack.split('\n');
+                for (var i = 0; i < stackTrace.length; ++i) {
+                    stackTrace[i] = stackTrace[i].replace(/\s+/g, ' ');
+                }
+                var caller = stackTrace[1];
+                var callerParts = caller.split('@');
+                var line = '';
+
+                //CHROME & SAFARI
+                if (callerParts.length == 1) {
+                    callerParts = stackTrace[2].split('('),
+                    caller = false;
+                    //console.log(355, 'callerParts', callerParts);
+                    //we have an object caller
+                    if (callerParts.length > 1) {
+                        //console.log(358, 'callerParts', callerParts);
+                        var script = callerParts[1].split(')')[0];
+                        var lines = script.split(':');
+                        var src = lines.splice(0, 3).join(':');
+                        var elem = contentWindow.document.head.querySelector('[src="' + src + '"]');
+                        console.log(447, {
+                            head: contentWindow.document.head,
+                            elem,
+                            src
+                        });
+                        var file = src; //elem.getAttribute('src');
+                        var uri = new URL(file,contentWindow.origin);
+                        var tiator = uri.pathname.split('/').filter(o=>o.length > 0);
+                        var ini = tiator[tiator.length - 1];
+                        0 > 1 ? console.log(360, 'callerParts', {
+                            ini,
+                            file,
+                            uri,
+                            src,
+                            callerParts,
+                            script,
+                            elem,
+                            lines,
+                            line
+                        }) : null;
+                        caller = callerParts[0].replace('at Object.', '');
+                        line = callerParts[1].split(':');
+                        line = line[2];
+                    }//called from outside of an object
+                    else {
+                        //console.log(363, 'callerParts', callerParts);
+                        callerParts[0] = callerParts[0].replace('at ', '');
+                        //console.log(365, 'callerParts', callerParts);
+                        callerParts = callerParts[0].split(':');
+                        caller = callerParts[0] + callerParts[1];
+                        line = callerParts[2];
+                    }
+                }//FIREFOX
+                else {
+                    var callerParts2 = callerParts[1].split(':');
+                    line = callerParts2.pop();
+                    callerParts[1] = callerParts2.join(':');
+                    caller = (callerParts[0] == '') ? callerParts[1] : callerParts[0];
+                }
+
+                0 > 1 ? consolelog(539, 'contentWindow.console.err', arguments, {
+                    err,
+                    stackTrace,
+                    caller,
+                    callerParts,
+                    ini,
+                    txt
+                }) : null;
+            }
+            //consolelog.apply(console, arguments);
+            if (0 < 1) {
+                var component = event.target.closest('.component');
+                var consoletab = component.querySelector('.block-code card');
+                var template = consoletab.querySelector('template');
+                var log = template.content.firstElementChild.cloneNode(true);
+                var s = log.querySelectorAll('text')[0].querySelector('span');
+                var m = log.querySelectorAll('text')[1];
+                s.textContent = ini;
+                //console.log(405, arguments);
+                Object.values(arguments).forEach((e,g)=>{
+                    //console.log(e, g, Object.keys(arguments)[g]);
+                    var span = document.createElement('span');
+                    span.innerHTML = e;
+                    m.insertAdjacentHTML('beforeend', span.outerHTML);
+                }
+                );
+                consoletab.children[1].insertAdjacentHTML('beforeend', log.outerHTML);
+            }
+        }
     }
 }
 
