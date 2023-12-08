@@ -772,6 +772,10 @@
             margin-top: 50px;
         }
 
+        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type.active) ~ block.block-code > section {
+            display: none;
+        }
+
         @media (max-width: 640px) {
             .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-code.hidden {
                 display: none;
