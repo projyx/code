@@ -1,13 +1,13 @@
 @media {
-    body:has(.active[routes="/*/*/wide"]) .header-shell {
+    body:has(.active[routes="/*/*/wide"]) .header-user {
         display: none;
     }
     
-    body:has(.active[routes="/*/*/edit"]) .header-shell {
+    body:has(.active[routes="/*/*/edit"]) .header-user {
         display: none;
     }
     
-    .header-shell {
+    .header-user {
         background: #292a2d;
         border-bottom: 1px solid #555;
         box-sizing: border-box;
@@ -17,19 +17,19 @@
         width: 100%;
         z-index: 12345;
     }
-    .header-shell > row {
+    .header-user > row {
         align-items: center;
         display: flex;
         flex: 1;
         height: 100%;
     }
     
-    .header-shell .shell-brand .brand-image > section {
+    .header-user .shell-brand .brand-image > section {
         align-items: center;
         justify-content: center;
     }
     
-    .header-shell .shell-brand .brand-image i {
+    .header-user .shell-brand .brand-image i {
         align-items: center;
         display: flex;
         height: 30px;
@@ -38,14 +38,14 @@
         width: 30px;
     }
     
-    .header-shell dropdown {
+    .header-user dropdown {
         height: 30px;
         margin-left: auto;
         width: 30px;
     }
     
 
-    .header-shell dropdown:last-child > column.active {
+    .header-user dropdown:last-child > .active {
         background: #292a2d;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
@@ -64,24 +64,24 @@
         z-index: 1234;
     }
 
-    .header-shell dropdown:last-child > column.active text:not(:last-child) {
+    .header-user dropdown:last-child > .active text:not(:last-child) {
         border-bottom: 1px solid #444;
         /* padding: 0 20px; */
     }
 
-    .header-shell dropdown:last-child > column.active text span {
+    .header-user dropdown:last-child > .active text span {
         padding: 0 20px;
     }
 
-    .header-shell dropdown:last-child > column.active text {
+    .header-user dropdown:last-child > .active text {
         display: flex;
         flex-direction: column;
     }
 
-    .header-shell dropdown:last-child > column.active text span {
+    .header-user dropdown:last-child > .active text span {
     }
 
-    .header-shell dropdown:last-child > column.active text span:hover {
+    .header-user dropdown:last-child > .active text span:hover {
         background: #777;
     }
 
@@ -90,37 +90,38 @@
         width: 36px;
     }
     
-    .header-shell .shell-authenticate {
+    .header-user .shell-authenticate {
         height: 30px;
         margin-left: auto;
         width: 30px;
     }
     
-    .header-shell .shell-authenticate .authenticate-avatar avi {
+    .header-user .shell-authenticate .authenticate-avatar avi {
         border-radius: 50%;
         height: 30px;
         overflow: hidden;
         width: 30px;
     }
     
-    .header-shell .shell-authenticate .authenticate-avatar avi:empty {
+    .header-user .shell-authenticate .authenticate-avatar avi:empty {
         border: 1px solid #555;
         box-sizing: border-box;
     }
 
-    .header-shell .shell-authenticate .authenticate-avatar avi img {
+    .header-user .shell-authenticate .authenticate-avatar avi img {
         height: 100%;
         width: 100%;
     }
     
     .code-authenticate .authenticate-avatar i {
+        background: black;
         border-radius: 50%;
         height: 30px;
         overflow: hidden;
         width: 30px;
     }
     
-    .header-shell dropdown > :first-child + *:not(.active) {
+    .header-user dropdown > :first-child + *:not(.active) {
         display: none;
     }
 }

@@ -24,7 +24,11 @@ window.rout.er = (href,params)=>{
                     if (x === "get") {
                         var pindex = window.location.pathname.split("/").splice(1).filter(n=>n.length > 0);
                         var p = pindex[index];
-                        console.log(26, { p, index, pindex });
+                        console.log(26, {
+                            p,
+                            index,
+                            pindex
+                        });
                     }
                     if (x === "user") {
                         var p = localStorage.user;
@@ -213,7 +217,13 @@ window.rout.er = (href,params)=>{
         var uri = link + (search ? "?" + search : "");
         var route = window.rout.es.filter(o=>o.url === matched)[0];
         //console.log(145, route, matched, pool);
-        var component = document.querySelector('[component="' + route.file.split('.')[0] + '"]');
+        var component = document.querySelector('[component="' + route.file.split('.html')[0] + '"]');
+        0 > 1 ? console.log(216, {
+            route,
+            file: route.file,
+            component,
+            path: route.file.split('.html')[0]
+        }) : null;
         var options = {
             loop,
             pool,

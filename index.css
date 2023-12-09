@@ -47,6 +47,10 @@
         justify-content: center;
     }
 
+    i img {
+        width: 100%;
+    }
+
     iframe {
         background: white;
         border: 0;

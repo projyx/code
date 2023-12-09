@@ -48,6 +48,15 @@
         height: 100%;
         width: 100%;
     }
+
+    [component="user"] .header-user .user-authenticate .authenticate-avatar .avatar-image:empty {
+        background-color: white;
+        background-image: url(/raw/asset/svg/github.svg);
+        background-position: bottom center;
+        background-repeat: no-repeat;
+        background-size: 75%;
+        filter: invert(1);
+    }
 }
 
 @media {
