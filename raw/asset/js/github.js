@@ -296,6 +296,28 @@ github.database.trees = function(params, settings) {
 }
 
 github.gists = {};
+github.gists.list = async function(query) {
+    return new Promise(function(resolve, reject) {
+        const url = github.endpoint + "/gists";
+        const a = data=>{
+            console.log(308, data);
+            resolve(data);
+        }
+        const b = (error)=>{
+            console.log(error);
+            resolve(error);
+        }
+        const accessToken = localStorage.githubAccessToken;
+        const settings = accessToken ? {
+            headers: {
+                Accept: "application/vnd.github+json",
+                Authorization: "token " + accessToken
+            }
+        } : null;
+        request(url, settings).then(a).catch(b);
+    }
+    );
+}
 github.gists.id = async function(id, settings) {
     settings ? null : settings = {};
     //alert("github.gists.id " + JSON.stringify(settings));

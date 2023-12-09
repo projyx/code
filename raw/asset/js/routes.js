@@ -24,9 +24,22 @@ window.routes = function(uri, options) {
             } else if (sub === "snippets") {
                 if (paths.length === 1) {
                     document.getElementById("code-frame").src = "";
-                } else if(paths.length > 2) {
+                } else if (paths.length > 2) {
                     document.getElementById("code-frame").src = "";
                 }
+
+                if (paths.length === 2) {
+                    var username = paths[1];
+                    console.log(33, {
+                        username
+                    });
+
+                    var list = await github.gists.list();
+                    console.log(33, {
+                        list
+                    });
+                }
+
                 if (paths.length === 1 || paths.length > 1) {
                     var username = paths[0];
                     if (paths.length === 1 || paths.length > 2) {
@@ -112,6 +125,7 @@ window.routes = function(uri, options) {
                                 }
                             };
                             window.cm = {};
+
                             if (Object.keys(window.cm).length === 0) {
                                 ["html", "css", "js"].forEach(async(ext)=>{
                                     try {
