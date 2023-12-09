@@ -174,10 +174,10 @@ async function pvw(e) {
     }
     );
 
-    var json = await request("/raw/asset/js/blob.js");
+    var json = await request("/raw/asset/js/fetch.js");
     var text = json;
     var blob = getBlobURL(text, 'text/javascript');
-    var elem = `<script src="${blob}" data-src="` + (window.location.origin + '/raw/asset/js/blob.js') + `">${atob('PC9zY3JpcHQ+')}`;
+    var elem = `<script src="${blob}" data-src="` + (window.location.origin + '/raw/asset/js/fetch.js') + `">${atob('PC9zY3JpcHQ+')}`;
 
     const src = `
 
