@@ -174,6 +174,11 @@ async function pvw(e) {
     }
     );
 
+    var json = await request("/raw/asset/js/blob.js");
+    var text = json;
+    var blob = getBlobURL(text, 'text/javascript');
+    var elem = `<script src="${blob}" data-src="` + (window.location.origin + '/raw/asset/js/blob.js') + `">${atob('PC9zY3JpcHQ+')}`;
+
     const src = `
 
     <html>
@@ -188,7 +193,9 @@ async function pvw(e) {
 
         <script>${js}</script>
 
-        <script src="/raw/asset/js/blob.js"></script>
+        <!--<script src="/raw/asset/js/blob.js"></script>-->
+
+        ${elem}
 
       </head>
 
@@ -221,7 +228,7 @@ async function pvw(e) {
 
     dom.iframe.code.elem.src = getBlobURL(src, 'text/html');
     //dom.iframe.code.elem.contentWindow.document.body.parentNode.outerHTML = src;
-    
+
     dom.iframe.code.elem.contentWindow.console.log = function(txt) {
         console.log(226, 'console.log');
         try {

@@ -29,7 +29,7 @@
                             </row>
                             <flex>
                                 <column>
-                                    <text onclick="api.gists.push()">
+                                    <text onclick="api.gists.push(event.target)">
                                         <i>
                                             <con class="gg-software-upload"></con>
                                         </i>
@@ -44,7 +44,7 @@
                                 </column>
                             </flex>
                         </dropdown>
-                        <i onclick="api.gists.push()">
+                        <i onclick="api.gists.push(event.target)">
                             <con class="icon-upload"></con>
                         </i>
                         <i onclick="api.gists.config(event.target)">

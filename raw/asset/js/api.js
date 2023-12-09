@@ -158,8 +158,8 @@ api.code.view = function(target) {
 
 window.api.gists = {};
 api.gists.push = function(target) {
-    taret.closest('ico').querySelector('con').classList.remove('gg-software-upload');
-    taret.closest('ico').querySelector('con').classList.add('gg-spinner');
+    target.closest('i').querySelector('con').classList.remove('gg-software-upload');
+    target.closest('i').querySelector('con').classList.add('gg-spinner');
 
     var id = rout.e.paths[2];
 
