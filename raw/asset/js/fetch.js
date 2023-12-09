@@ -19,7 +19,7 @@ window.fetch = window.request = async(resource,options)=>{
             var paths = parent.location.pathname.split("/").filter(o=>o.length > 1);
             var owner = paths[1];
             var id = paths[2];
-            var url = "https://api.github.com" + "/gists/" + owner + "/" + id;
+            var url = "https://api.github.com" + "/gists/" + id;
             console.log(15, {
                 dirs,
                 path,
