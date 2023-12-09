@@ -1,0 +1,178 @@
+@media {
+    [component="snips"] {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+@media {
+    [component="snips"] .header-user {
+        background: #292a2d;
+        border-bottom: 1px solid #555;
+        box-sizing: border-box;
+        height: 50px;
+        padding: 0 10px;
+        position: fixed;
+        width: 100%;
+        z-index: 12345;
+    }
+    [component="snips"] .header-user > row {
+        align-items: center;
+        display: flex;
+        flex: 1;
+        height: 100%;
+    }
+    
+    [component="snips"] .header-user .user-authenticate {
+        height: 30px;
+        margin-left: auto;
+        width: 30px;
+    }
+    
+    [component="snips"] .header-user .user-authenticate .authenticate-avatar i {
+        border-radius: 50%;
+        height: 30px;
+        overflow: hidden;
+        width: 30px;
+    }
+    
+    [component="snips"] .header-user .user-authenticate .authenticate-avatar i:empty {
+        border: 1px solid #555;
+        box-sizing: border-box;
+    }
+
+    [component="snips"] .header-user .user-authenticate .authenticate-avatar i img {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+@media {
+    [component="snips"] .block-cover {
+        /* background-color: #222; */
+        position: relative;
+    }
+
+    [component="snips"] .block-cover > column {
+        padding-bottom: 25px;
+        position: relative;
+        z-index: 123;
+    }
+
+    [component="snips"] .block-cover .cover-photo {
+        padding-top: 170px;
+    }
+
+    [component="snips"] .block-cover .cover-photo > column {
+        align-items: center;
+        text-align: center;
+    }
+
+    [component="snips"] .block-cover .cover-photo .photo-user {
+        margin: 10px 0;
+    }
+
+    [component="snips"] .block-cover .cover-photo .photo-user text:nth-child(1) {
+        font-size: 24px;
+        font-weight: bolder;
+    }
+
+    [component="snips"] .block-cover .cover-photo .photo-user text:nth-child(2) {
+        color: #ccc;
+        font-size: 16px;
+    }
+
+    [component="snips"] .block-cover .cover-photo .photo-avatar picture {
+        background-color: #292a2d;
+        border: 1px solid #555;
+        border-radius: 15%;
+        box-sizing: border-box;
+        height: 120px;
+        overflow: hidden;
+        /* padding: 10px; */
+        width: 120px;
+    }
+
+    [component="snips"] .block-cover .cover-photo .photo-avatar picture img {
+        height: 100%;
+        object-fit: contain;
+        width: 100%;
+    }
+
+    [component="snips"] .block-cover > footer {
+        /* background: #292a2d; */
+        border-bottom: 1px solid #555;
+        border-top: 1px solid #555;
+        box-sizing: border-box;
+        bottom: 0;
+        position: absolute;
+        width: 100%;
+    }
+    
+    [component="snips"] .block-cover .cover-stats .stats-follow {
+        align-items: center;
+        display: flex;
+        height: 50px;
+        justify-content: end;
+        padding: 0 20px;
+    }
+
+    [component="snips"] .block-cover .cover-stats .stats-follow > section {
+        gap: 10px;
+    }
+
+    [component="snips"] .block-cover .cover-stats .stats-follow > section > text > span:last-child {
+        color: #777;
+    }
+}
+
+@media {
+    [component="snips"] .block-source .source-code {
+        /* background-color: #222; */
+        position: relative;
+    }
+    
+    [component="snips"] .block-source .source-code > column > box {
+        /* background-color: #292a2d; */
+        border-bottom: 1px solid #555;
+        box-sizing: border-box;
+    }
+    
+    [component="snips"] .block-source .source-code > column > box > row {
+        align-items: center;
+        margin: auto;
+        max-width: 768px;
+        padding: 10px 0;
+    }
+    
+    [component="snips"] .block-source .source-code > column > box > row > picture {
+        /* background-color: black; */
+        border: 1px solid #555;
+        border-radius: 15%;
+        box-sizing: border-box;
+        height: 64px;
+        width: 64px;
+    }
+    
+    [component="snips"] .block-source .source-code > column > box > row > text {
+        display: flex;
+        flex-direction: column;
+        padding: 0 10px;
+    }
+
+    [component="snips"] .block-source .source-code > column > box > row > text > span:first-child {
+        font-weight: bolder;
+    }
+
+    [component="snips"] .block-source .source-code > column > box > row > text > span:last-child {
+        color: #ccc;
+        font-size: 13px;
+    }
+    
+    [component="snips"] .block-source .source-code > column > box > row > i {
+        margin-left: auto;
+    }
+}
