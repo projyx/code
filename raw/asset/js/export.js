@@ -191,11 +191,9 @@ async function pvw(e) {
 
         <style>${css}</style>
 
-        <script>${js}</script>
-
-        <!--<script src="/raw/asset/js/blob.js"></script>-->
-
         ${elem}
+
+        <script>${js}</script>
 
       </head>
 
