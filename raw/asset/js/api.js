@@ -312,14 +312,21 @@ api.snippet.save = async()=>{
         });
         if (msg.code === 404) {
             alert("You like this");
-            var star = await github.gists.star({
-                id: rout.e.paths[2]
-            }, {
-                method: "PUT"
+            console.log(116, 3.5, 'api.gists.likes 404', {
+                star
             });
-            console.log(116, 3, 'api.gists.likes 404', {
-                star                
-            });
+            try {
+                var star = await github.gists.star({
+                    id: rout.e.paths[2]
+                }, {
+                    method: "PUT"
+                });
+                console.log(116, 4, 'api.gists.likes 200s', {
+                    star
+                });
+            } catch (e) {
+                console.log(328, 4, 'api.gists.likes 404', e);
+            }
         }
     }
 }

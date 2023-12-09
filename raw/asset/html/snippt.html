@@ -2,7 +2,7 @@
     <section>
         <div class="code-file">
             <section>
-                <span class="file-menu" onclick="events.onclick.exit()">
+                <span class="file-menu" href="/snippets/:get">
                     <section>
                         <i>
                             <con class="icon-chevron-left"></con>
@@ -29,14 +29,14 @@
                             </row>
                             <flex>
                                 <column>
-                                    <text>
-                                        <i onclick="api.gists.push()">
+                                    <text onclick="api.gists.push(event.target)">
+                                        <i>
                                             <con class="gg-software-upload"></con>
                                         </i>
                                         <span>Save</span>
                                     </text>
-                                    <text>
-                                        <i onclick="api.gists.push()">
+                                    <text onclick="api.gists.config(event.target)">
+                                        <i>
                                             <con class="gg-options"></con>
                                         </i>
                                         <span>Settings</span>
@@ -44,17 +44,26 @@
                                 </column>
                             </flex>
                         </dropdown>
-                        <i onclick="api.gists.push()">
+                        <i onclick="api.gists.push(event.target)">
                             <con class="icon-upload"></con>
                         </i>
-                        <i onclick="api.gists.config()">
+                        <i onclick="api.gists.config(event.target)">
                             <con class="icon-config"></con>
                         </i>
+                        <text href="/snippets/:get/:get">
+                            <span>View Source Code</span>
+                        </text>
                         <dropdown>
                             <row drop="down">
                                 <i>
                                     <con class="icon-eye"></con>
                                 </i>
+                                <text href="/snippets/:get/:get">
+                                    <i>
+                                        <con class="gg-pen"></con>
+                                    </i>
+                                    <span>View in Editor</span>
+                                </text>
                             </row>
                             <flex>
                                 <header>
@@ -64,7 +73,7 @@
                                         </section>
                                     </box>
                                 </header>
-                                <row>
+                                <row onclick="api.snippet.view(event.target)">
                                     <picture class="active">
                                         <svg viewBox="0 0 20 20" class="EditorHeaderViewSwitcher_iconPen-jP26l">
                                             <path d="M0 9.002C0 8.45.455 8 .992 8h18.016c.548 0 .992.456.992 1.002v9.996c0 .553-.455 1.002-.992 1.002H.992C.444 20 0 19.544 0 18.998V9.002Zm0-8C0 .45.451 0 .99 0h4.02A.99.99 0 0 1 6 1.003v4.994C6 6.551 5.549 7 5.01 7H.99A.99.99 0 0 1 0 5.997V1.003Zm7 0C7 .45 7.451 0 7.99 0h4.02A.99.99 0 0 1 13 1.003v4.994C13 6.551 12.549 7 12.01 7H7.99A.99.99 0 0 1 7 5.997V1.003Zm7 0C14 .45 14.451 0 14.99 0h4.02A.99.99 0 0 1 20 1.003v4.994C20 6.551 19.549 7 19.01 7h-4.02A.99.99 0 0 1 14 5.997V1.003Z"></path>
@@ -81,11 +90,34 @@
                                         </svg>
                                     </picture>
                                 </row>
+                                <column>
+                                    <text href="/snippets/:get/:get">
+                                        <span>Editor View</span>
+                                        <span>&hellip;/:id</span>
+                                    </text>
+                                    <text href="/snippets/:get/:get/details">
+                                        <span>Details View</span>
+                                        <span>&hellip;/:id/details</span>
+                                    </text>
+                                    <text href="/snippets/:get/:get/full">
+                                        <span>Full Page View</span>
+                                        <span>&hellip;/:id/full</span>
+                                    </text>
+                                    <text href="/snippets/:get/:get/debug">
+                                        <span>Debug Mode</span>
+                                        <span>&hellip;/:id/debug</span>
+                                    </text>
+                                </column>
                             </flex>
                         </dropdown>
-                        <i onclick="api.gists.likes()">
-                            <con class="gg-heart"></con>
-                        </i>
+                        <text>
+                            <i onclick="api.snippet.save()">
+                                <con class="gg-bookmark"></con>
+                            </i>
+                            <i onclick="api.snippet.saved()">
+                                <con class="gg-chevron-down"></con>
+                            </i>
+                        </text>
                     </section>
                 </span>
             </section>
@@ -107,7 +139,7 @@
                 <box>
                     <column>
                         <text>
-                            <span href="/snippet/:user">Your Work</span>
+                            <span href="/snippets/:user">Your Work</span>
                             <span href="/:user">Profile</span>
                         </text>
                         <text>
@@ -127,7 +159,7 @@
 </header>
 <aside class="aside-code">
     <header>
-        <box class="file-type active" onclick="api.code['html']()">
+        <box class="file-type active" onclick="api.code['html'](event.target)">
             <section>
                 <text>
                     <picture>
@@ -142,7 +174,7 @@
                 </text>
             </section>
         </box>
-        <box class="file-type" onclick="api.code['css']()">
+        <box class="file-type" onclick="api.code['css'](event.target)">
             <section>
                 <text>
                     <picture>
@@ -157,7 +189,7 @@
                 </text>
             </section>
         </box>
-        <box class="file-type" onclick="api.code['js']()">
+        <box class="file-type" onclick="api.code['js'](event.target)">
             <section>
                 <text>
                     <picture>
@@ -180,31 +212,391 @@
             </section>
         </box>
     </header>
+    <section>
+        <card class="code-file code-html active">
+            <header>
+                <box class="file-type">
+                    <section>
+                        <text>
+                            <span>HTML</span>
+                        </text>
+                    </section>
+                </box>
+                <i onclick="api.gists.config('html')">
+                    <con class="gg-options"></con>
+                </i>
+                <dropdown>
+                    <row drop="down">
+                        <div>
+                            <section>
+                                <span>
+                                    <section>
+                                        <i>
+                                            <con class="gg-chevron-down"></con>
+                                        </i>
+                                        <!--onclick="window[0 < 1 ? 'github' : 'api'].oauth.login(event.target)"></i>-->
+                                    </section>
+                                </span>
+                            </section>
+                        </div>
+                    </row>
+                    <column>
+                        <box>
+                            <column>
+                                <text>
+                                    <span>Format HTML</span>
+                                    <span>Analyze HTML</span>
+                                    <span>Fold All</span>
+                                    <span>Unfold All</span>
+                                </text>
+                            </column>
+                        </box>
+                    </column>
+                </dropdown>
+            </header>
+            <section>
+                <box>
+                    <section id="code-html"></section>
+                </box>
+            </section>
+        </card>
+        <line class="block-line"></line>
+        <card class="code-file code-css">
+            <header>
+                <box class="file-type">
+                    <section>
+                        <text>CSS</text>
+                    </section>
+                </box>
+                <i onclick="api.gists.config('css')">
+                    <con class="gg-options"></con>
+                </i>
+                <dropdown>
+                    <row drop="down">
+                        <div>
+                            <section>
+                                <span>
+                                    <section>
+                                        <i>
+                                            <con class="gg-chevron-down"></con>
+                                        </i>
+                                        <!--onclick="window[0 < 1 ? 'github' : 'api'].oauth.login(event.target)"></i>-->
+                                    </section>
+                                </span>
+                            </section>
+                        </div>
+                    </row>
+                    <column>
+                        <box>
+                            <column>
+                                <text>
+                                    <span>Format CSS</span>
+                                    <span>Analyze CSS</span>
+                                    <span>Fold All</span>
+                                    <span>Unfold All</span>
+                                </text>
+                            </column>
+                        </box>
+                    </column>
+                </dropdown>
+            </header>
+            <section>
+                <box>
+                    <section id="code-css"></section>
+                </box>
+            </section>
+        </card>
+        <line class="block-line"></line>
+        <card class="code-file code-js">
+            <header>
+                <box class="file-type">
+                    <section>
+                        <text>JS</text>
+                    </section>
+                </box>
+                <i onclick="api.gists.config('js')">
+                    <con class="gg-options"></con>
+                </i>
+                <dropdown>
+                    <row drop="down">
+                        <div>
+                            <section>
+                                <span>
+                                    <section>
+                                        <i>
+                                            <con class="gg-chevron-down"></con>
+                                        </i>
+                                        <!--onclick="window[0 < 1 ? 'github' : 'api'].oauth.login(event.target)"></i>-->
+                                    </section>
+                                </span>
+                            </section>
+                        </div>
+                    </row>
+                    <column>
+                        <box>
+                            <column>
+                                <text>
+                                    <span>Format JavaScript</span>
+                                    <span>Analyze JavaScript</span>
+                                    <span>Fold All</span>
+                                    <span>Unfold All</span>
+                                </text>
+                            </column>
+                        </box>
+                    </column>
+                </dropdown>
+            </header>
+            <section>
+                <box>
+                    <section id="code-js"></section>
+                </box>
+            </section>
+        </card>
+    </section>
 </aside>
 <line class="block-line"></line>
 <block class="block-code">
     <iframe class="code-frame" id="code-frame"></iframe>
-</block>
-<footer class="footer-snippet">
-    <section>
-        <card class="snippet-tools">
-            <row>
-                <box class="tools-tool tools-console">
+    <section class="hidden">
+        <card>
+            <header>
+                <box class="file-type" onclick="api.snippet.console()">
                     <section>
                         <text>Console</text>
                     </section>
                 </box>
-                <box class="tools-tool tools-assets">
+                <box class="file-text" onclick="api.snippet.clear()">
                     <section>
+                        <text>Clear</text>
+                    </section>
+                </box>
+                <box class="file-icon" onclick="api.snippet.console()">
+                    <section>
+                        <i>
+                            <con class="gg-close"></con>
+                        </i>
+                    </section>
+                </box>
+            </header>
+            <section></section>
+            <template>
+                <box>
+                    <section>
+                        <text>
+                            <span></span>
+                        </text>
+                        <text>
+                            <span></span>
+                        </text>
+                    </section>
+                </box>
+            </template>
+            <footer>
+                <box>
+                    <form onsubmit="events.onsubmit.function(event)">
+                        <i>
+                            <con class="gg-chevron-right"></con>
+                        </i>
+                        <textarea onkeyup="events.keyup.console(event)"></textarea>
+                    </form>
+                </box>
+            </footer>
+        </card>
+    </section>
+</block>
+<footer class="footer-snippet">
+    <row>
+        <card class="snippet-tools">
+            <row>
+                <box class="tools-tool tools-console" onclick="api.snippet.console()">
+                    <section>
+                        <i>
+                            <con class="gg-terminal"></con>
+                        </i>
+                        <text>Console</text>
+                    </section>
+                </box>
+                <box class="tools-tool tools-assets" onclick="api.snippet.assets()">
+                    <section>
+                        <i>
+                            <con class="gg-cloud"></con>
+                        </i>
                         <text>Assets</text>
                     </section>
                 </box>
-                <box class="tools-tool tools-shortcuts">
+                <box class="tools-tool tools-comments" onclick="api.snippet.comments()">
                     <section>
+                        <i>
+                            <con class="gg-comment"></con>
+                        </i>
                         <text>Comments</text>
                     </section>
                 </box>
             </row>
         </card>
-    </section>
+        <card class="snippet-tools">
+            <row>
+                <box class="tools-tool tools-console" onclick="api.snippet.console()">
+                    <section>
+                        <i>
+                            <con class="gg-trash"></con>
+                        </i>
+                        <text>Delete</text>
+                    </section>
+                </box>
+                <box class="tools-tool tools-console" onclick="api.snippet.console()">
+                    <section>
+                        <i>
+                            <con class="gg-git-fork"></con>
+                        </i>
+                        <text>Fork</text>
+                    </section>
+                </box>
+                <box class="tools-tool tools-assets" onclick="api.snippet.assets()">
+                    <section>
+                        <i>
+                            <con class="gg-software-download"></con>
+                        </i>
+                        <text>Export</text>
+                    </section>
+                </box>
+                <box class="tools-tool tools-comments" onclick="api.snippet.comments()">
+                    <section>
+                        <i>
+                            <con class="gg-share"></con>
+                        </i>
+                        <text>Share</text>
+                    </section>
+                </box>
+            </row>
+        </card>
+    </row>
+    <row>
+        <card class="snippet-tools">
+            <row>
+                <box class="tools-tool tools-console" onclick="api.snippet.resources()">
+                    <section>
+                        <i>
+                            <con class="gg-link"></con>
+                        </i>
+                        <text>Resources</text>
+                    </section>
+                </box>
+            </row>
+        </card>
+    </row>
 </footer>
+<block class="block-details" modal="gist-comments">
+    <section>
+        <card class="card-details">
+            <column>
+                <box>
+                    <column>
+                        <text>No description. Snippets with descriptions are more hepful and easier to find.</text>
+                        <text>No tags. Snippets with tags are more helpful and easier to find.</text>
+                    </column>
+                </box>
+            </column>
+        </card>
+    </section>
+    <nav>
+        <card>
+            <header style="display:none;">
+                <box>
+                    <column>
+                        <text contenteditable="true" placeholder="No description. Snippets with descriptions are more hepful and easier to find."></text>
+                    </column>
+                </box>
+            </header>
+            <section>
+                <box>
+                    <flex>
+                        <i>
+                            <svg viewBox="0 0 100 100" class="ItemDetailsShare-module_shareIcon-4I9dI">
+                                <path d="M100.001 17.942a39.965 39.965 0 0 1-11.783 3.339c4.236-2.624 7.49-6.779 9.021-11.73a40.289 40.289 0 0 1-13.026 5.146C80.47 10.575 75.138 8 69.234 8c-11.33 0-20.518 9.494-20.518 21.205 0 1.662.183 3.281.533 4.833-17.052-.884-32.168-9.326-42.288-22.155a21.637 21.637 0 0 0-2.778 10.659c0 7.357 3.622 13.849 9.127 17.65a19.94 19.94 0 0 1-9.293-2.651c-.002.089-.002.178-.002.268 0 10.272 7.072 18.845 16.458 20.793a19.939 19.939 0 0 1-9.264.365c2.609 8.424 10.187 14.555 19.166 14.726-7.021 5.688-15.867 9.077-25.48 9.077A40.59 40.59 0 0 1 0 82.473C9.08 88.491 19.865 92 31.449 92c37.737 0 58.374-32.312 58.374-60.336 0-.92-.02-1.834-.059-2.743a42.547 42.547 0 0 0 10.237-10.979z"></path>
+                            </svg>
+                        </i>
+                    </flex>
+                </box>
+                <box>
+                    <flex>
+                        <i>
+                            <svg viewBox="0 0 200 200" class="ItemDetailsShare-module_shareIcon-4I9dI">
+                                <path d="M188 0H12A12 12 0 0 0 0 12v176a12 12 0 0 0 12 12h176a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12ZM57.64 134.55C52.72 140.9 46 143 29.79 143H15.15V60.06h15.54C49 60.06 54.4 62 59.32 70c2.85 4.67 3.11 6.48 3.5 28.25.52 24.64-.26 30.08-5.18 36.3Zm56-60.24H86.4v19.43h16.84v14.12l-8 .39-8.16.39v19.43l13.34.39 13.21.39V143H96.11c-17 0-17.74-.13-20.72-3.24l-3.24-3.11v-34.88c0-33.29.13-35 2.72-38.34s2.72-3.37 20.73-3.37h18Zm51.56 60c-1.81 4.66-7 8.68-11 8.68-1.94 0-4.92-1.69-7.38-4.28-3.5-3.49-4.93-7-9.07-22.93-2.72-10.36-7.13-27.07-9.85-37.3l-4.92-18.4h8.29c4.53 0 8.29.26 8.29.52 0 .65 12.83 50 13.86 53.24.52 1.69 3.5-7.64 8-25.26l7.26-27.85 8.16-.39c4.4-.26 8 0 8 .39.01 1.53-18.38 70.19-19.68 73.56Z"></path>
+                                <path d="M45.07 76.77c-2.07-1.68-5-2.46-9.32-2.46H29.4l.26 26.82.39 26.94 6.21-.13c4.54 0 6.87-.78 9.07-2.85 2.72-2.72 2.85-4 2.85-24.35 0-20.99-.13-21.51-3.11-23.97Z"></path>
+                            </svg>
+                        </i>
+                    </flex>
+                </box>
+                <box>
+                    <flex>
+                        <i>
+                            <con class="gg-link"></con>
+                        </i>
+                        <!--<text>Copy Link</text>-->
+                    </flex>
+                </box>
+            </section>
+            <section>
+                <box>
+                    <column>
+                        <text>Created on</text>
+                        <text>January 1, 2022</text>
+                    </column>
+                </box>
+                <box>
+                    <column>
+                        <text>Updated on</text>
+                        <text>February 12, 2023</text>
+                    </column>
+                </box>
+            </section>
+        </card>
+    </nav>
+    <section>
+        <card class="card-details">
+            <column>
+                <box>
+                    <form onsubmit>
+                        <textarea></textarea>
+                        <input type="submit" value="Comment">
+                        <text>Comments can use Markdown</text>
+                    </form>
+                </box>
+                <box>
+                    <column></column>
+                    <column>
+                        <text>No Comments</text>
+                        <text>You can be the first!</text>
+                    </column>
+                </box>
+            </column>
+        </card>
+    </section>
+    <footer>
+        <card>
+            <footer>
+                <box>
+                    <header>
+                        <text>License</text>
+                        <text>
+                            <i>
+                                <con class="gg-copy"></con>
+                            </i>
+                            <span>Copy</span>
+                        </text>
+                    </header>
+                    <section>
+                        <text>Copyright (c) 2023 by anoniiimous (https://codepen.io/anoniiimous/pen/GRxMLaR)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</text>
+                    </section>
+                </box>
+            </footer>
+        </card>
+    </footer>
+</block>

@@ -22,6 +22,11 @@ window.routes = function(uri, options) {
             if (sub === "settings") {
                 console.log("routes.view settings");
             } else if (sub === "snippets") {
+                if (paths.length === 1) {
+                    document.getElementById("code-frame").src = "";
+                } else if(paths.length > 2) {
+                    document.getElementById("code-frame").src = "";
+                }
                 if (paths.length === 1 || paths.length > 1) {
                     var username = paths[0];
                     if (paths.length === 1 || paths.length > 2) {

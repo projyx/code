@@ -327,9 +327,10 @@
         overflow: hidden;
         /* padding: 0px 20px; */
         position: absolute;
-        width: 120px;
+        width: 160px;
         right: 10px;
         top: calc(100% - 5px);
+        z-index: 1234;
     }
 
     .component-snip .header-code > section > dropdown:last-child > column.active text:not(:last-child) {
@@ -1447,6 +1448,7 @@
         order: 4;
         width: 100%;
         position: relative;
+        z-index: 1;
     }
 
     .component-snip .block-code.hidden {
