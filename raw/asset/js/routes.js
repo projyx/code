@@ -13,14 +13,16 @@ window.routes = function(uri, options) {
         var e = {};
         var status = 200;
 
-        var usr = await github.oauth.user();
-        var avi = usr.avatar_url
-        var avis = document.body.querySelectorAll(".avatar-image:empty");
-        avis.length > 0 ? Array.from(avis).forEach(function(avatar) {
-            var img = document.createElement("img");
-            img.src = avi;
-            avatar.innerHTML = img.outerHTML;
-        }) : null;
+        if(localStorage.user) {
+            var usr = await github.oauth.user(localStorage.user);
+            var avi = usr.avatar_url
+            var avis = document.body.querySelectorAll(".avatar-image:empty");
+            avis.length > 0 ? Array.from(avis).forEach(function(avatar) {
+                var img = document.createElement("img");
+                img.src = avi;
+                avatar.innerHTML = img.outerHTML;
+            }) : null;
+        }
 
         Array.from(document.querySelectorAll('dropdown [drop="down"] + *')).forEach(el=>{
             el.classList.remove('active');
