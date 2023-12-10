@@ -239,3 +239,26 @@
         width: 24px;
     }
 }
+
+/*BLOCK*/
+@media {
+    [component="snippets._._"] .block-code {
+        display: inline-flex;
+        flex: 1;
+        height: calc(100% - 86px);
+        width: 100%;
+    }
+    
+    [component="snippets._._"] .block-code .hidden {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        [component="snippets._._"] .block-code {
+            display: inline-flex;
+            flex: unset;
+            height: calc((100% - 50px)/2);
+            width: 100%;
+        }
+    }
+}
