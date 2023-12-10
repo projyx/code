@@ -120,6 +120,19 @@
         padding: 0 20px;
     }
 
+    @media (max-width: 768px) {
+    
+    [component="snippets._"] .block-cover .cover-stats .stats-follow {
+        align-items: center;
+        display: flex;
+        height: 75px;
+        justify-content: end;
+        padding: 0 20px;
+        margin-top: 0px;
+    }
+        
+              }
+
     [component="snippets._"] .block-cover .cover-stats .stats-follow > section {
         gap: 10px;
     }
