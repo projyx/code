@@ -14,12 +14,11 @@ window.routes = function(uri, options) {
         var status = 200;
 
         if (0 < 1 && localStorage.user) {
-            var usr = await github.oauth.user(localStorage.user);
-            var avi = usr.avatar_url
+            //var usr = await github.oauth.user(localStorage.user);
             var avis = document.body.querySelectorAll(".avatar-image:empty");
             avis.length > 0 ? Array.from(avis).forEach(function(avatar) {
                 var img = document.createElement("img");
-                img.src = avi;
+                //img.src = usr.avatar_url;
                 avatar.innerHTML = img.outerHTML;
             }) : null;
         }
