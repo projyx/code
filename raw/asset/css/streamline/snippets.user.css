@@ -145,13 +145,31 @@
 @media {
     [component="snippets._"] .block-source .source-code {
         /* background-color: #222; */
+        padding: 36px 0;
         position: relative;
     }
     
-    [component="snippets._"] .block-source .source-code > column > box {
+    [component="snippets._"] .block-source .source-code #code-snippets {
+        gap: 40px;
+    }
+    
+    [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet {
         /* background-color: #292a2d; */
-        border-bottom: 1px solid #555;
         box-sizing: border-box;
+        margin: auto;
+    }
+
+    [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet > column > :first-child > :not(:nth-child(2)) {
+        color: #0096c7;
+    }
+    
+    [component="snippets._"] .block-source .source-code .snippets-snippet .snippet-code {
+        background: transparent;
+        border: 1px solid #777;
+        border-radius: 5px;
+        margin-top: 20px;
+        min-height: 240px;
+        width: 960px;
     }
     
     [component="snippets._"] .block-source .source-code > column > box > row {
@@ -171,21 +189,51 @@
     }
     
     [component="snippets._"] .block-source .source-code > column > box > row > text {
+        align-items: center;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        gap: 3px;
         padding: 0 10px;
     }
 
     [component="snippets._"] .block-source .source-code > column > box > row > text > span:first-child {
-        font-weight: bolder;
+        /* font-weight: bolder; */
     }
 
     [component="snippets._"] .block-source .source-code > column > box > row > text > span:last-child {
         color: #ccc;
-        font-size: 13px;
+        /* font-size: 13px; */
     }
     
     [component="snippets._"] .block-source .source-code > column > box > row > i {
         margin-left: auto;
+    }
+}
+
+@media {
+    [component="snippets._"] .snippet-stats {
+        display: flex;
+        gap: 10px;
+        padding: 20px 0 0;
+    }
+    
+    [component="snippets._"] .snippet-stats i {
+        display: inline-flex;
+    }
+    
+    [component="snippets._"] .snippet-stats row:nth-child(1) i {
+        width: 36px;
+    }
+    
+    [component="snippets._"] .snippet-stats row:nth-child(2) i {
+        width: 24px;
+    }
+    
+    [component="snippets._"] .snippet-stats row:nth-child(3) i {
+        width: 30px;
+    }
+    
+    [component="snippets._"] .snippet-stats row:nth-child(4) i {
+        width: 24px;
     }
 }

@@ -93,16 +93,48 @@
             <column id="code-snippets"></column>
             <template>
                 <box class="snippets-snippet">
-                    <row>
-                        <picture></picture>
+                    <column>
+                        <!--<picture></picture>-->
                         <text>
-                            <span class="snippet-name">Name</span>
-                            <span class="snippet-push">Last pushed on Jan 1, 1970</span>
+                            <span class="snippet-user" placeholder="username"></span>
+                            <span>/</span>
+                            <span class="snippet-file" placeholder="file.ext"></span>
                         </text>
-                        <i>
-                            <con class="icon-chevron-right"></con>
-                        </i>
-                    </row>
+                        <text>
+                            <span class="snippet-name"></span>
+                        </text>
+                        <text class="snippet-description">
+                            <header class="description-header"></header>
+                            <section class="description-content"></section>
+                        </text>
+                        <text class="snippet-stats">
+                            <row>
+                                <i>
+                                    <con class="gg-code-slash"></con>
+                                </i>
+                                <span after="files">2 files</span>
+                            </row>
+                            <row>
+                                <i>
+                                    <con class="gg-git-fork"></con>
+                                </i>
+                                <span after="forks">0 forks</span>
+                            </row>
+                            <row>
+                                <i>
+                                    <con class="gg-comment"></con>
+                                </i>
+                                <span after="comments">0 comments</span>
+                            </row>
+                            <row>
+                                <i>
+                                    <con class="gg-bookmark"></con>
+                                </i>
+                                <span after="saves">0 saves</span>
+                            </row>
+                        </text>
+                        <textarea class="snippet-code"></textarea>
+                    </column>
                 </box>
             </template>
         </card>

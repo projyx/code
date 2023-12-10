@@ -41,9 +41,12 @@
         flex-direction: column;
     }
 
+    i {
+        display: inline-flex;
+    }
+
     i:has(con) {
         align-items: center;
-        display: flex;
         justify-content: center;
     }
 

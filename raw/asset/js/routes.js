@@ -13,7 +13,7 @@ window.routes = function(uri, options) {
         var e = {};
         var status = 200;
 
-        if(0 < 1 && localStorage.user) {
+        if (0 < 1 && localStorage.user) {
             var usr = await github.oauth.user(localStorage.user);
             var avi = usr.avatar_url
             var avis = document.body.querySelectorAll(".avatar-image:empty");
@@ -26,7 +26,8 @@ window.routes = function(uri, options) {
 
         Array.from(document.querySelectorAll('dropdown [drop="down"] + *')).forEach(el=>{
             el.classList.remove('active');
-        })
+        }
+        )
 
         if (sub) {
             if (sub === "settings") {
@@ -46,13 +47,18 @@ window.routes = function(uri, options) {
 
                     var snippets = document.getElementById('code-snippets');
                     var list = await github.gists.list();
-                    console.log(33, {
-                        snippets,
-                        list
-                    });
-                                    
-                    var box = snippets.nextElementSibling.content.firstElementChild.cloneNode(true);
-                    snippets.insertAdjacentHTML('beforeend', box.outerHTML);
+                    snippets.innerHTML = "";
+                    list.forEach((item)=>{
+                        var box = snippets.nextElementSibling.content.firstElementChild.cloneNode(true);
+                        box.querySelector('.snippet-user').textContent = item.owner.login;
+                        box.querySelector('.snippet-file').textContent = "";
+                        box.querySelector('.snippet-description').textContent = item.description;
+                        snippets.insertAdjacentHTML('beforeend', box.outerHTML);
+                        console.log(33, {
+                            item
+                        });
+                    }
+                    );
                 }
 
                 if (paths.length === 1 || paths.length > 1) {
