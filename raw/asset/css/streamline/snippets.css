@@ -1,5 +1,5 @@
 @media {
-    .component-snip {
+    [component=“snippets”] {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -8,7 +8,7 @@
         overflow: hidden;
     }
 
-    .component-snip:has(header.header-code .buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) {
+    [component=“snippets”]:has(header.header-code .buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) {
         align-items: stretch;
         height: auto;
         overflow-x: hidden;
@@ -16,11 +16,11 @@
 }
 
 @media {
-    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-details {
+    [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-details {
         display: flex;
     }
 
-    .component-snip .block-details {
+    [component=“snippets”] .block-details {
         display: none;
         position: relative;
         order: 6;
@@ -29,7 +29,7 @@
 
 /*HEADER*/
 @media {
-    .component-snip .header-code {
+    [component=“snippets”] .header-code {
         background: aliceblue;
         background: #1a1a1a;
         /* border-bottom: 1px solid #666; */
@@ -43,14 +43,14 @@
         order: 1;
     }
 
-    .component-snip .header-code {
+    [component=“snippets”] .header-code {
     }
 
-    .component-snip .header-code:has(flex.active) {
+    [component=“snippets”] .header-code:has(flex.active) {
         z-index: 1234567890;
     }
 
-    .component-snip .header-code:has(.code-buttons > section > dropdown > .active:last-child) ~ .block-code:before {
+    [component=“snippets”] .header-code:has(.code-buttons > section > dropdown > .active:last-child) ~ .block-code:before {
         content: '';
         display: block;
         height: 100%;
@@ -58,7 +58,7 @@
         width: 100%;
     }
 
-    .component-snip .header-code:has(dropdown > .active:last-child) ~ .aside-code:before, .component-snip .header-code:has(dropdown > .active:last-child) ~ .block-code:before {
+    [component=“snippets”] .header-code:has(dropdown > .active:last-child) ~ .aside-code:before, [component=“snippets”] .header-code:has(dropdown > .active:last-child) ~ .block-code:before {
         /* backdrop-filter: blur(10px); */
         content: '';
         display: block;
@@ -70,19 +70,19 @@
         z-index: 12345;
     }
 
-    .component-snip .header-code > section {
+    [component=“snippets”] .header-code > section {
         align-items: center;
         display: flex;
         flex: 1;
         /* gap: 10px; */
     }
 
-    .component-snip .header-code .code-file > section {
+    [component=“snippets”] .header-code .code-file > section {
         display: flex;
         gap: 5px;
     }
 
-    .component-snip .header-code .file-menu > section i {
+    [component=“snippets”] .header-code .file-menu > section i {
         align-items: center;
         display: flex;
         height: 50px;
@@ -90,29 +90,29 @@
         width: 50px;
     }
 
-    .component-snip .header-code .file-meta {
+    [component=“snippets”] .header-code .file-meta {
         align-items: center;
         display: flex;
         justify-content: center;
     }
 
-    .component-snip .header-code .file-meta > section {
+    [component=“snippets”] .header-code .file-meta > section {
         flex-direction: column;
     }
 
-    .component-snip .header-code .file-meta .meta-title {
+    [component=“snippets”] .header-code .file-meta .meta-title {
         font-weight: bolder;
     }
 
-    .component-snip .header-code .file-meta .meta-owner {
+    [component=“snippets”] .header-code .file-meta .meta-owner {
         font-size: 14px;
     }
 
-    .component-snip .header-code .code-buttons {
+    [component=“snippets”] .header-code .code-buttons {
         margin-left: auto;
     }
 
-    .component-snip .header-code .buttons-group > section {
+    [component=“snippets”] .header-code .buttons-group > section {
         align-items: center;
         display: flex;
         gap: 10px;
@@ -121,12 +121,12 @@
     }
 
     @media (min-width: 768px) {
-        .component-snip .header-code .buttons-group > section dropdown:nth-child(5) > row > text {
+        [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5) > row > text {
             display: none;
         }
     }
 
-    .component-snip .header-code .buttons-group > section > * {
+    [component=“snippets”] .header-code .buttons-group > section > * {
         align-items: center;
         display: flex;
         height: 30px;
@@ -135,7 +135,7 @@
         /* width: 50px; */
     }
 
-    .component-snip .header-code .buttons-group > section > dropdown:nth-child(5) > * > text {
+    [component=“snippets”] .header-code .buttons-group > section > dropdown:nth-child(5) > * > text {
         align-items: center;
         display: inline-flex;
         display: none;
@@ -145,52 +145,52 @@
         white-space: nowrap;
     }
 
-    .component-snip .header-code .buttons-group > section > dropdown:nth-child(5) text > * {
+    [component=“snippets”] .header-code .buttons-group > section > dropdown:nth-child(5) text > * {
         display: inline-flex;
     }
 
-    .component-snip .header-code .buttons-group > section > dropdown:nth-child(5) text i {
+    [component=“snippets”] .header-code .buttons-group > section > dropdown:nth-child(5) text i {
         width: 20px;
         height: 20px;
     }
 
-    .component-snip .header-code .buttons-group > section > dropdown:nth-child(5) text i con {
+    [component=“snippets”] .header-code .buttons-group > section > dropdown:nth-child(5) text i con {
         --ggs: calc(2/3);
     }
 
-    .component-snip .header-code .buttons-group > section > :last-child {
+    [component=“snippets”] .header-code .buttons-group > section > :last-child {
         border: 1px solid #777;
         border-radius: 3px;
         padding: 0;
     }
 
-    .component-snip .header-code .buttons-group > section > text:last-child i:first-child {
+    [component=“snippets”] .header-code .buttons-group > section > text:last-child i:first-child {
         border-right: 1px solid #777;
         height: 36px;
         width: 36px;
     }
 
-    .component-snip .header-code .buttons-group > section > text:last-child i:nth-child(2) {
+    [component=“snippets”] .header-code .buttons-group > section > text:last-child i:nth-child(2) {
         /* border-right: 1px solid #777; */
         height: 36px;
         width: 20px;
     }
 
-    .component-snip .header-code .buttons-group > section > text:last-child i:nth-child(2) con {
+    [component=“snippets”] .header-code .buttons-group > section > text:last-child i:nth-child(2) con {
         --ggs: calc(2/3);
     }
 
-    .component-snip .header-code .buttons-group > section > i {
+    [component=“snippets”] .header-code .buttons-group > section > i {
         border: 1px solid #777;
     }
 
-    .component-snip .header-code .buttons-group > section > i {
+    [component=“snippets”] .header-code .buttons-group > section > i {
         border-radius: 3px;
         height: 36px;
         width: 60px;
     }
 
-    .component-snip .header-code .buttons-group > section > text {
+    [component=“snippets”] .header-code .buttons-group > section > text {
         border: 1px solid #777;
         border-radius: 3px;
         height: 36px;
@@ -201,45 +201,45 @@
         padding: 0 10px;
     }
 
-    .component-snip .header-code .buttons-group > section text:nth-child(4) {
+    [component=“snippets”] .header-code .buttons-group > section text:nth-child(4) {
         display: block;
         display: none;
     }
 
-    .component-snip .header-code .buttons-group > section > i:nth-child(2) {
+    [component=“snippets”] .header-code .buttons-group > section > i:nth-child(2) {
         border: 0;
         border-radius: 50px;
         width: 36px;
     }
 
-    .component-snip .header-code .buttons-group > section > i:nth-child(3) {
+    [component=“snippets”] .header-code .buttons-group > section > i:nth-child(3) {
         /* border-radius: 50px; */
         /* display: none; */
     }
 
     @media {
-        .component-snip .header-code .buttons-group > section > :nth-childs(1) {
+        [component=“snippets”] .header-code .buttons-group > section > :nth-childs(1) {
             display: none;
         }
 
-        .component-snip .header-code .buttons-group > section > :nth-childs(2) {
+        [component=“snippets”] .header-code .buttons-group > section > :nth-childs(2) {
             display: none;
         }
 
-        .component-snip .header-code .buttons-group > section > :nth-childs(3) {
+        [component=“snippets”] .header-code .buttons-group > section > :nth-childs(3) {
             display: none;
         }
 
-        .component-snip .header-code .buttons-group > section > :nth-childs(4) {
+        [component=“snippets”] .header-code .buttons-group > section > :nth-childs(4) {
             display: none;
         }
 
-        .component-snip .header-code .buttons-group > section > :nth-childs(5) {
+        [component=“snippets”] .header-code .buttons-group > section > :nth-childs(5) {
             display: none;
         }
     }
 
-    .component-snip .header-code .buttons-group > section > dropdown:nth-child(5) > * > i {
+    [component=“snippets”] .header-code .buttons-group > section > dropdown:nth-child(5) > * > i {
         border: 1px solid #777;
         border-radius: 3px;
         /* border-top-left-radius: 50px; */
@@ -249,7 +249,7 @@
         height: 36px;
     }
 
-    .component-snip .header-code .buttons-group > section > i:last-child:before {
+    [component=“snippets”] .header-code .buttons-group > section > i:last-child:before {
         content: '';
         display: block;
         height: 100%;
@@ -257,24 +257,24 @@
         order: 1;
     }
 
-    .component-snip .header-code .buttons-group > section > i:last-child :nth-child(2) {
+    [component=“snippets”] .header-code .buttons-group > section > i:last-child :nth-child(2) {
         order: 3;
     }
 
-    .component-snip .header-code .buttons-group > section > i:last-child con:nth-child(1) {
+    [component=“snippets”] .header-code .buttons-group > section > i:last-child con:nth-child(1) {
         margin-left: 10px;
         margin-right: 10px;
     }
 
-    .component-snip .header-code .buttons-group > section > i:last-child con:nth-child(2) {
+    [component=“snippets”] .header-code .buttons-group > section > i:last-child con:nth-child(2) {
         --ggs: calc(2/3);
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex):not(.active) [drop="down"] + flex:not(.active) {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:has([drop="down"] + flex):not(.active) [drop="down"] + flex:not(.active) {
         display: none;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex {
         background: #292a2d;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
@@ -294,27 +294,27 @@
         /* width: 150px; */
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > column text {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > column text {
         display: flex;
         justify-content: space-between;
         line-height: 36px;
         padding: 0 20px;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > column text:hover {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > column text:hover {
         background: #777;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > column text.active {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > column text.active {
         background: #555;
         line-height: 36px;
     }
 
-    .component-snip .header-code > section > dropdown:last-child > column:not(.active) {
+    [component=“snippets”] .header-code > section > dropdown:last-child > column:not(.active) {
         display: none;
     }
 
-    .component-snip .header-code > section > dropdown:last-child > column.active {
+    [component=“snippets”] .header-code > section > dropdown:last-child > column.active {
         background: #292a2d;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
@@ -333,72 +333,72 @@
         z-index: 1234;
     }
 
-    .component-snip .header-code > section > dropdown:last-child > column.active text:not(:last-child) {
+    [component=“snippets”] .header-code > section > dropdown:last-child > column.active text:not(:last-child) {
         border-bottom: 1px solid #444;
         /* padding: 0 20px; */
     }
 
-    .component-snip .header-code > section > dropdown:last-child > column.active text span {
+    [component=“snippets”] .header-code > section > dropdown:last-child > column.active text span {
         padding: 0 20px;
     }
 
-    .component-snip .header-code > section > dropdown:last-child > column.active text {
+    [component=“snippets”] .header-code > section > dropdown:last-child > column.active text {
         display: flex;
         flex-direction: column;
     }
 
-    .component-snip .header-code > section > dropdown:last-child > column.active text span {
+    [component=“snippets”] .header-code > section > dropdown:last-child > column.active text span {
     }
 
-    .component-snip .header-code > section > dropdown:last-child > column.active text span:hover {
+    [component=“snippets”] .header-code > section > dropdown:last-child > column.active text span:hover {
         background: #777;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex i {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex i {
         height: 36px;
         width: 36px;
     }
 
     /*LIST*/
-    .component-snip .header-code .buttons-group > section > dropdown:nth-child(1) {
+    [component=“snippets”] .header-code .buttons-group > section > dropdown:nth-child(1) {
         display: none;
     }
 
     @media (max-width: 768px) {
-        .component-snip .header-code .buttons-group > section > dropdown:nth-child(1) {
+        [component=“snippets”] .header-code .buttons-group > section > dropdown:nth-child(1) {
             display: flex;
         }
 
-        .component-snip .header-code .buttons-group > section > dropdown:nth-child(1) > row i con {
+        [component=“snippets”] .header-code .buttons-group > section > dropdown:nth-child(1) > row i con {
             --ggs: 1.4;
         }
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(1):has([drop="down"] + flex) [drop="down"] + flex {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(1):has([drop="down"] + flex) [drop="down"] + flex {
         box-shadow: 0 0 10pc -9px black;
     }
 
     @media (max-width: 480px) {
-        .component-snip .header-code .buttons-group > section dropdown:nth-child(1):has([drop="down"] + flex) [drop="down"] + flex {
+        [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(1):has([drop="down"] + flex) [drop="down"] + flex {
             position: fixed;
             right: 5px;
         }
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(1):has([drop="down"] + flex) [drop="down"] + flex > column > text {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(1):has([drop="down"] + flex) [drop="down"] + flex > column > text {
         align-items: center;
         display: flex;
     }
 
     /*LIST*/
     /*VIEW*/
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row {
         border: 2px solid #999;
         border-radius: 5px;
         min-width: auto;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > * {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > * {
         align-items: center;
         display: flex;
         justify-content: center;
@@ -406,86 +406,86 @@
         width: 70px;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > header {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > header {
         margin: 10px 20px 10px;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > header text {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > header text {
         /* font-weight: bolder; */
         font-size: 18px;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row {
         border: 2px solid #999;
         border-radius: 5px;
         margin: 0 20px 20px;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > picture.active {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > picture.active {
         background: #999;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > picture:hover {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > picture:hover {
         background: #999;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > *:nth-child(2) {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > *:nth-child(2) {
         border-left: 2px solid #999;
         border-right: 2px solid #999;
     }
 
     @media {
         @media (max-width: 768px) {
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(1).active) .buttons-group > section dropdown:nth-child(5) {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(1).active) .buttons-group > section dropdown:nth-child(5) {
                 display: none;
             }
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code {
             height: 50%;
             width: 100%;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code {
             height: calc((100% - 136px)/2);
             width: 100%;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code > section {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code > section {
             display: flex;
             flex-direction: row;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code .code-file {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code .code-file {
             height: 100%;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ line.block-line {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ line.block-line {
             border-bottom: 1px solid #777;
             border-top: 1px solid #777;
             height: 20px;
             width: 100%;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ block.block-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ block.block-code {
             flex: unset;
             height: calc((100% - 86px)/2);
             width: 100%;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(3).active) ~ line.block-line {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(3).active) ~ line.block-line {
             border-left: 1px solid #777;
             border-right: 1px solid #777;
             height: calc(100% - 86px);
             order: 3;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(3).active) ~ aside.aside-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(3).active) ~ aside.aside-code {
             height: calc(100% - 86px);
             order: 4;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(3).active) ~ block.block-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(3).active) ~ block.block-code {
             flex: auto;
             height: calc(100% - 86px);
             order: 2;
@@ -494,67 +494,67 @@
     }
 
     @media {
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ header.header-code i:nth-child(2) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ header.header-code i:nth-child(2) {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ header.header-code i:nth-child(3) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ header.header-code i:nth-child(3) {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ header.header-code dropdown:nth-child(5) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ header.header-code dropdown:nth-child(5) {
             display: none;
         }
     }
 
     @media {
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ block.block-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ block.block-code {
             flex: initial;
             width: 100%;
             height: calc(100% - 50px);
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ line.block-line {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ line.block-line {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ aside.aside-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ aside.aside-code {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ block.block-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) ~ block.block-code {
             flex: initial;
             width: 100%;
             height: calc(100% - 50px);
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) ~ aside.aside-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) ~ aside.aside-code {
             height: 100%;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) ~ line.block-line {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) ~ line.block-line {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) ~ aside.aside-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) ~ aside.aside-code {
             display: none;
         }
 
-        .component-snip header.header-code:has(.file-type:not(.active)) ~ aside.aside-code {
+        [component=“snippets”] header.header-code:has(.file-type:not(.active)) ~ aside.aside-code {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) ~ block.block-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) ~ block.block-code {
             flex: initial;
             width: 100%;
             height: calc(100% - 50px);
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code {
             width: 100%;
             width: 50%;
             /* height: calc((100% - 136px)/2); */
@@ -563,7 +563,7 @@
             /* position: absolute; */
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-icon:not(.active)) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-icon:not(.active)) {
             width: 100%;
             /* height: calc((100% - 136px)/2); */
             margin-top: 50px;
@@ -572,68 +572,68 @@
         }
 
         @media (max-width: 640px) {
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-icon:not(.active)) {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-icon:not(.active)) {
                 min-height: 240px;
             }
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section {
             flex-direction: row;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file:not(.active) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file:not(.active) {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file {
             height: 100%;
             height: 540px;
             width: 100%;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) ~ block.block-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(4).active) ~ block.block-code {
             width: 100%;
             height: calc(100% - 0px);
         }
 
         @media (max-width: 768px) {
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file {
                 height: 100%;
                 height: 540px;
             }
         }
 
         @media (max-width: 640px) {
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file {
                 height: 100%;
                 height: 240px;
             }
 
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-icon.active) > section:has(.code-file) {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-icon.active) > section:has(.code-file) {
                 display: none;
             }
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section > i:nth-child(2) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section > i:nth-child(2) {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section > :nth-child(3) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section > :nth-child(3) {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) {
             /* display: none; */
             width: 50px;
             width: auto;
         }
 
         @media (min-width: 641px) {
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row > i {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row > i {
                 display: none;
             }
 
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row > text {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row > text {
                 border: 1px solid #777;
                 border-radius: 3px;
                 display: flex;
@@ -646,13 +646,13 @@
         }
 
         @media (max-width: 768px) {
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row > text {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row > text {
                 border: none;
             }
         }
 
         @media (max-width: 640px) {
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row > text {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row > text {
                 /* display: none; */ display: flex;
                 border: 1px solid;
                 border: none;
@@ -666,46 +666,46 @@
         }
 
         @media (min-width: 769px) {
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row text i con {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row text i con {
                 --ggs: calc(2/3);
             }
 
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row text i {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row text i {
                 display: none;
             }
         }
 
         @media (max-width: 640px) {
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row text span {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row text span {
                 display: none;
             }
 
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row text i {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) .buttons-group > section dropdown:nth-child(5) > row text i {
                 height: 36px;
                 width: 36px;
             }
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file > header {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file > header {
             position: absolute;
             left: 0;
             top: -50px;
             width: 100vw;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file > header > :not(:first-child) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > section .code-file > header > :not(:first-child) {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ .block-line {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ .block-line {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ .footer-snippet > :first-child {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ .footer-snippet > :first-child {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-code {
             position: absolute;
             position: relative;
             margin-top: 50px;
@@ -719,20 +719,20 @@
             margin-top: 0;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ footer.footer-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ footer.footer-code {
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(:not(.file-type.active)) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(:not(.file-type.active)) {
             flex-direction: column;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code {
             /* margin-top: 0; */
             min-height: 0;
             width: 100%;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code {
             /* display: none; */
             height: 540px;
             min-height: 0px;
@@ -741,7 +741,7 @@
             width: 50%;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type:not(.active):nth-child(1) ~ .file-type:not(.active):nth-child(2) ~ .file-type:not(.active):nth-child(3)) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type:not(.active):nth-child(1) ~ .file-type:not(.active):nth-child(2) ~ .file-type:not(.active):nth-child(3)) {
             /* display: none; */
             height: 0;
             min-height: 0;
@@ -752,18 +752,18 @@
             width: 100%;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type.active) ~ aside.aside-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type.active) ~ aside.aside-code {
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-icon.active) > section {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-icon.active) > section {
             /* display: none; */
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-icon.active) > section {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-icon.active) > section {
             /* display: none; */
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type.active) ~ block.block-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type.active) ~ block.block-code {
             flex: auto;
             margin-top: 50px;
             width: 50%;
@@ -771,26 +771,26 @@
             margin-top: 50px;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type.active) ~ block.block-code > section {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type.active) ~ block.block-code > section {
             display: none;
         }
 
         @media (max-width: 640px) {
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-code.hidden {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-code.hidden {
                 display: none;
             }
 
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-code:not(.hidden) {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ block.block-code:not(.hidden) {
                 height: 240px;
                 margin-top: 0;
                 width: 100%;
             }
 
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type:not(.active):nth-child(1)):has(.file-type:not(.active):nth-child(2)):has(.file-type:not(.active):nth-child(3)) ~ block.block-code {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(.file-type:not(.active):nth-child(1)):has(.file-type:not(.active):nth-child(2)):has(.file-type:not(.active):nth-child(3)) ~ block.block-code {
                 margin-top: 0;
             }
 
-            .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(> header > box .file-icon.active) ~ block.block-code {
+            [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code:has(> header > box .file-icon.active) ~ block.block-code {
                 display: flex;
                 height: 240px;
                 width: 100%;
@@ -799,32 +799,32 @@
     }
 
     @media {
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) .buttons-group > section > :nth-child(2) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) .buttons-group > section > :nth-child(2) {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) .buttons-group > section > :nth-child(3) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) .buttons-group > section > :nth-child(3) {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) .buttons-group > section > :nth-child(4) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) .buttons-group > section > :nth-child(4) {
             display: flex;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) .buttons-group > section > :nth-child(5) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(3).active) .buttons-group > section > :nth-child(5) {
             display: none;
         }
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex [drop="down"] + flex > row > picture.active) {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex [drop="down"] + flex > row > picture.active) {
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > * svg {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > * svg {
         height: 20px;
         width: 20px;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > * {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > * {
         align-items: center;
         display: flex;
         height: 40px;
@@ -832,19 +832,19 @@
         width: 90px;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > *:first-child svg {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > *:first-child svg {
         transform: rotate(-90deg)
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > *:last-child svg {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > *:last-child svg {
         transform: rotate(90deg);
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > * svg path {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > row > * svg path {
         fill: #fff;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex.active:before {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex.active:before {
         /* background: black; */
         content: '';
         display: flex;
@@ -857,17 +857,17 @@
         z-index: 123;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex:not(.active) {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex:not(.active) {
         display: none;
     }
 
-    .component-snip .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > header {
+    [component=“snippets”] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + flex) [drop="down"] + flex > header {
         font-weight: bolder;
         width: 100%;
     }
 
     /*VIEW*/
-    .component-snip .header-code .buttons-group > section > dropdown:nth-child(1) {
+    [component=“snippets”] .header-code .buttons-group > section > dropdown:nth-child(1) {
         border: 1px solid #777;
         border-radius: 3px;
         height: 36px;
@@ -875,26 +875,26 @@
     }
 
     @media (max-width: 768px) {
-        .component-snip .header-code .buttons-group > section > i:nth-child(2), .component-snip .header-code .buttons-group > section > i:nth-child(3) {
+        [component=“snippets”] .header-code .buttons-group > section > i:nth-child(2), [component=“snippets”] .header-code .buttons-group > section > i:nth-child(3) {
             display: none;
         }
     }
 
-    .component-snip .header-code .buttons-group > section > i:first-child {
+    [component=“snippets”] .header-code .buttons-group > section > i:first-child {
         display: none;
     }
 
     @media (max-width: 768px) {
-        .component-snip .header-code .buttons-group > section > i:first-child {
+        [component=“snippets”] .header-code .buttons-group > section > i:first-child {
             display: flex;
         }
 
-        .component-snip .header-code .buttons-group > section > i:first-child .gg-layout-list {
+        [component=“snippets”] .header-code .buttons-group > section > i:first-child .gg-layout-list {
             --ggs: 1.4;
         }
     }
 
-    .component-snip .header-code .buttons-group .dropdown {
+    [component=“snippets”] .header-code .buttons-group .dropdown {
         align-items: center;
         display: flex;
         height: 50px;
@@ -903,20 +903,20 @@
     }
 
     @media (max-width: 768px) {
-        .component-snip .header-code .buttons-group > section > dropdown:nth-child(5) span {
+        [component=“snippets”] .header-code .buttons-group > section > dropdown:nth-child(5) span {
             display: none;
         }
 
-        .component-snip .header-code .buttons-group > section > dropdown:nth-child(5) > row > i {
+        [component=“snippets”] .header-code .buttons-group > section > dropdown:nth-child(5) > row > i {
             display: none;
         }
 
-        .component-snip .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex:not(.active) {
+        [component=“snippets”] .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex:not(.active) {
             display: none;
         }
     }
 
-    .component-snip .header-code .code-authenticate .authenticate-avatar {
+    [component=“snippets”] .header-code .code-authenticate .authenticate-avatar {
         align-items: center;
         display: flex;
         height: 50px;
@@ -924,7 +924,7 @@
         width: 50px;
     }
 
-    .component-snip .header-code .code-authenticate .authenticate-avatar .avatar-image {
+    [component=“snippets”] .header-code .code-authenticate .authenticate-avatar .avatar-image {
         align-items: center;
         border-radius: 50%;
         display: flex;
@@ -933,7 +933,7 @@
         width: 30px;
     }
 
-    .component-snip .header-code .code-authenticate .authenticate-avatar .avatar-image:empty {
+    [component=“snippets”] .header-code .code-authenticate .authenticate-avatar .avatar-image:empty {
         background-color: white;
         background-image: url(/raw/asset/svg/github.svg);
         background-position: bottom center;
@@ -942,7 +942,7 @@
         filter: invert(1);
     }
 
-    .component-snip .header-code .code-authenticate .authenticate-avatar .avatar-image img {
+    [component=“snippets”] .header-code .code-authenticate .authenticate-avatar .avatar-image img {
         /* filter: invert(1); */
         border-radius: 50%;
         height: 100%;
@@ -953,7 +953,7 @@
 
 /*ASIDE*/
 @media {
-    .component-snip .aside-code {
+    [component=“snippets”] .aside-code {
         background: #292a2d;
         display: flex;
         height: calc(100% - 86px);
@@ -965,53 +965,53 @@
     }
 
     @media screen and (max-width: 768px) {
-        .component-snip .aside-code {
+        [component=“snippets”] .aside-code {
             flex-direction: column;
             width: 100%;
             height: calc((100% - 86px)/2);
         }
 
-        .component-snip .aside-code:has(~ .hidden) {
+        [component=“snippets”] .aside-code:has(~ .hidden) {
             height: calc(100% - 86px);
         }
 
-        .component-snip .aside-code {
+        [component=“snippets”] .aside-code {
             height: calc((100% - 86px)/2);
             height: 50px;
         }
 
-        .component-snip .aside-code:has(header .file-type.active) {
+        [component=“snippets”] .aside-code:has(header .file-type.active) {
             height: calc((100% - 86px)/2);
         }
 
-        .component-snip .aside-code:has(header:has(.file-type)) ~ .block-code {
+        [component=“snippets”] .aside-code:has(header:has(.file-type)) ~ .block-code {
             height: 50px
         }
 
-        .component-snip .aside-code:has(header .file-type.active) ~ .block-code {
+        [component=“snippets”] .aside-code:has(header .file-type.active) ~ .block-code {
             margin-top: auto;
             height: calc(100% - 136px);
             height: calc((100% - 86px) / 2);
         }
 
-        .component-snip .aside-code:has(header .file-icon:not(.active)) {
+        [component=“snippets”] .aside-code:has(header .file-icon:not(.active)) {
             height: calc((100% - 86px)/1);
         }
     }
 
     @media (max-width: 640px) {
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code {
             height: 240px;
             min-height: 240px;
             width: 100%;
         }
     }
 
-    .component-snip .aside-code > header {
+    [component=“snippets”] .aside-code > header {
         display: flex;
     }
 
-    .component-snip .aside-code > header {
+    [component=“snippets”] .aside-code > header {
         align-items: center;
         background: #292a2d;
         display: none;
@@ -1022,12 +1022,12 @@
     }
 
     @media screen and (max-width: 768px) {
-        .component-snip .aside-code > header {
+        [component=“snippets”] .aside-code > header {
             display: flex;
         }
     }
 
-    .component-snip .aside-code > header .file-icon {
+    [component=“snippets”] .aside-code > header .file-icon {
         align-items: center;
         border-right: 4px solid #292a2d;
         border-top: 4px solid #292a2d;
@@ -1042,14 +1042,14 @@
         padding: 0 16px;
     }
 
-    .component-snip .aside-code > header .file-icon.active {
+    [component=“snippets”] .aside-code > header .file-icon.active {
         background: #777;
         justify-content: center;
         padding: 0px 16px;
         width: 50px;
     }
 
-    .component-snip .aside-code > header .file-type {
+    [component=“snippets”] .aside-code > header .file-type {
         align-items: center;
         justify-content: center;
         background: #333;
@@ -1066,14 +1066,14 @@
         padding: 0 16px;
     }
 
-    .component-snip .aside-code > header .file-type text {
+    [component=“snippets”] .aside-code > header .file-type text {
         display: flex;
         gap: 3px;
         height: 20px;
     }
 
     @media (max-width: 540px) {
-        .component-snip .aside-code > header .file-type {
+        [component=“snippets”] .aside-code > header .file-type {
             align-items: center;
             display: flex;
             justify-content: center;
@@ -1082,53 +1082,53 @@
         }
     }
 
-    .component-snip .aside-code > header .file-type.active {
+    [component=“snippets”] .aside-code > header .file-type.active {
         background: #555;
     }
 
-    .component-snip .aside-code > header .file-type text picture {
+    [component=“snippets”] .aside-code > header .file-type text picture {
         display: inline-flex;
         width: 20px;
     }
 
-    .component-snip .aside-code > header .file-type text picture svg {
+    [component=“snippets”] .aside-code > header .file-type text picture svg {
         height: 100%;
         width: 100%;
     }
 
-    .component-snip .aside-code > header .file-type text span {
+    [component=“snippets”] .aside-code > header .file-type text span {
         display: inline-flex;
         font-size: 16px;
     }
 
     @media (max-width: 540px) {
-        .component-snip .aside-code > header .file-type text span {
+        [component=“snippets”] .aside-code > header .file-type text span {
             display: none;
         }
     }
 
-    .component-snip .aside-code > section {
+    [component=“snippets”] .aside-code > section {
         display: flex;
         flex: 1;
         flex-direction: column;
         width: 100%;
     }
 
-    .component-snip .aside-code > section .block-line {
+    [component=“snippets”] .aside-code > section .block-line {
         display: none;
     }
 
-    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(1).active) ~ .block-line {
+    [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(1).active) ~ .block-line {
         border-left: 1px solid #777;
         border-right: 1px solid #777;
     }
 
-    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(1).active) ~ .block-line {
+    [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(1).active) ~ .block-line {
         border-left: 1px solid #777;
         border-right: 1px solid #777;
     }
 
-    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(1).active) ~ .aside-code > section .block-line {
+    [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(1).active) ~ .aside-code > section .block-line {
         background: #333;
         border-bottom: 1px solid #777;
         border-top: 1px solid #777;
@@ -1137,7 +1137,7 @@
         height: 20px;
     }
 
-    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code .block-line {
+    [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code .block-line {
         background: #333;
         border-left: 1px solid #777;
         border-right: 1px solid #777;
@@ -1148,7 +1148,7 @@
         width: 20px;
     }
 
-    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(3).active) ~ .aside-code > section .block-line {
+    [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(3).active) ~ .aside-code > section .block-line {
         background: #333;
         border-bottom: 1px solid #777;
         border-top: 1px solid #777;
@@ -1157,29 +1157,29 @@
         height: 20px;
     }
 
-    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code .block-line {
+    [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code .block-line {
         display: none;
     }
 
     @media (max-width: 768px) {
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(1).active) ~ aside.aside-code .block-line {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(1).active) ~ aside.aside-code .block-line {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code .block-line {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2).active) ~ aside.aside-code .block-line {
             display: none;
         }
 
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(3).active) ~ aside.aside-code .block-line {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(3).active) ~ aside.aside-code .block-line {
             display: none;
         }
     }
 
-    .component-snip .aside-code > section:has(.code-file dropdown:last-child > column.active) {
+    [component=“snippets”] .aside-code > section:has(.code-file dropdown:last-child > column.active) {
         z-index: 1;
     }
 
-    .component-snip .aside-code .code-file {
+    [component=“snippets”] .aside-code .code-file {
         background: #555;
         display: flex;
         flex: 1;
@@ -1189,26 +1189,26 @@
     }
 
     @media (min-width: 769px) {
-        .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2):not(.active)) ~ aside.aside-code .code-file:not(:first-child) {
+        [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > row > picture:nth-child(2):not(.active)) ~ aside.aside-code .code-file:not(:first-child) {
             /* border-top: 1px solid #777; */
         }
     }
 
-    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code .file-icon {
+    [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code .file-icon {
         /* display: none; */
     }
 
     @media (max-width: 768px) {
-        .component-snip .aside-code .code-file:not(.active) {
+        [component=“snippets”] .aside-code .code-file:not(.active) {
             display: none;
         }
     }
 
-    .component-snip .aside-code .code-file dropdown:last-child > column:not(.active) {
+    [component=“snippets”] .aside-code .code-file dropdown:last-child > column:not(.active) {
         display: none;
     }
 
-    .component-snip .aside-code .code-file dropdown:last-child > column.active {
+    [component=“snippets”] .aside-code .code-file dropdown:last-child > column.active {
         background: #999;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
@@ -1228,61 +1228,61 @@
         /* top: 0; */
     }
 
-    .component-snip .aside-code .code-file dropdown:last-child > column text {
+    [component=“snippets”] .aside-code .code-file dropdown:last-child > column text {
         display: flex;
         flex-direction: column;
     }
 
-    .component-snip .aside-code .code-file dropdown:last-child {
+    [component=“snippets”] .aside-code .code-file dropdown:last-child {
         flex-direction: column;
     }
 
-    .component-snip .aside-code .code-file dropdown i {
+    [component=“snippets”] .aside-code .code-file dropdown i {
         width: 50px;
         height: 50px;
     }
 
-    .component-snip .aside-code .code-file *:has(dropdown:last-child) {
+    [component=“snippets”] .aside-code .code-file *:has(dropdown:last-child) {
         z-indeX: 123;
     }
 
-    .component-snip .aside-code .code-html {
+    [component=“snippets”] .aside-code .code-html {
         /* background: red; */
         /* height: 100%; */
         /* width: 100%; */
     }
 
-    .component-snip .aside-code .code-css {
+    [component=“snippets”] .aside-code .code-css {
         /* background: green; */
         /* height: 100%; */
         /* width: 100%; */
     }
 
-    .component-snip .aside-code .code-js {
+    [component=“snippets”] .aside-code .code-js {
         /* background: blue; */
         /* height: 100%; */
         /* width: 100%; */
     }
 
-    .component-snip .aside-code .code-file > section {
+    [component=“snippets”] .aside-code .code-file > section {
         display: flex;
         flex: 1;
         overflow-x: hidden;
     }
 
     @media (max-width: 768px) {
-        .component-snip .aside-code .code-file > section {
+        [component=“snippets”] .aside-code .code-file > section {
             padding-top: 0;
         }
     }
 
-    .component-snip .aside-code .code-file > section > box {
+    [component=“snippets”] .aside-code .code-file > section > box {
         display: flex;
         flex: 1;
         width: 100%;
     }
 
-    .component-snip .aside-code .code-file > section > box > section {
+    [component=“snippets”] .aside-code .code-file > section > box > section {
         background: #555;
         display: flex;
         flex-direction: column;
@@ -1293,19 +1293,19 @@
     }
 
     @media (max-width: 768px) {
-        .component-snip .aside-code .code-file > section > box > section {
+        [component=“snippets”] .aside-code .code-file > section > box > section {
             padding-top: 50px;
         }
     }
 
-    .component-snip .aside-code .code-file > section > box > section .CodeMirror {
+    [component=“snippets”] .aside-code .code-file > section > box > section .CodeMirror {
         background: #555;
         height: 100%;
         width: 100%;
         /* flex: 1; */
     }
 
-    .component-snip .aside-code .code-file header {
+    [component=“snippets”] .aside-code .code-file header {
         align-items: center;
         background: #292a2d;
         display: flex;
@@ -1315,7 +1315,7 @@
         position: relative;
     }
 
-    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > header {
+    [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > header {
         display: flex;
         top: -50px;
         /* top: 0; */
@@ -1323,7 +1323,7 @@
         width: 100vw;
     }
 
-    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > header > :last-child {
+    [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ aside.aside-code > header > :last-child {
         margin-left: auto;
         margin: 0 0 0 auto;
         margin: 0;
@@ -1331,7 +1331,7 @@
     }
 
     @media (max-width: 768px) {
-        .component-snip .aside-code .code-file header {
+        [component=“snippets”] .aside-code .code-file header {
             align-items: center;
             background: #292a2d;
             display: flex;
@@ -1341,18 +1341,18 @@
             position: fixed;
         }
 
-        .component-snip .aside-code > header {
+        [component=“snippets”] .aside-code > header {
             z-index: 1234;
             width: 200px;
             width: 100%;
         }
 
-        .component-snip .aside-code:has(header .file-icon.active) ~ .block-code {
+        [component=“snippets”] .aside-code:has(header .file-icon.active) ~ .block-code {
             /* height: calc((100% - 86px) / 2); */
         }
     }
 
-    .component-snip .aside-code .code-file header .file-type {
+    [component=“snippets”] .aside-code .code-file header .file-type {
         align-items: center;
         background: #555;
         border-top: 4px solid #777;
@@ -1364,51 +1364,51 @@
     }
 
     @media (max-width: 768px) {
-        .component-snip .aside-code .code-html header .file-type {
+        [component=“snippets”] .aside-code .code-html header .file-type {
             /* background: red; */ display: none;
         }
     }
 
-    .component-snip .aside-code .code-file header > i {
+    [component=“snippets”] .aside-code .code-file header > i {
         height: 50px;
         width: 50px;
     }
 
-    .component-snip .aside-code .code-file header > i:nth-last-child(2) {
+    [component=“snippets”] .aside-code .code-file header > i:nth-last-child(2) {
         margin-left: auto;
     }
 
-    .component-snip .aside-code .code-css header .file-type {
+    [component=“snippets”] .aside-code .code-css header .file-type {
         /* background: green; */
         height: 100%;
     }
 
-    .component-snip .aside-code .code-js header .file-type {
+    [component=“snippets”] .aside-code .code-js header .file-type {
         /* background: blue; */
         height: 100%;
     }
 }
 
 @media {
-    .component-snip .block-code .file-icon {
+    [component=“snippets”] .block-code .file-icon {
         display: inline-flex;
         height: 50px;
         /* margin-left: auto; */
         width: 50px;
     }
 
-    .component-snip .block-code .file-icon i:has(con) {
+    [component=“snippets”] .block-code .file-icon i:has(con) {
         display: inline-flex;
         height: 50px;
         width: 50px;
     }
 
-    .component-snip .block-code .file-text {
+    [component=“snippets”] .block-code .file-text {
         border-right: 1px solid;
         padding: 0 20px;
     }
 
-    .component-snip .block-code .file-type {
+    [component=“snippets”] .block-code .file-type {
         align-items: center;
         background: #555;
         border-top: 4px solid #777;
@@ -1422,7 +1422,7 @@
 }
 
 @media {
-    .component-snip > .block-line {
+    [component=“snippets”] > .block-line {
         background: #333;
         height: calc(100% - 86px);
         order: 3;
@@ -1430,7 +1430,7 @@
     }
 
     @media (max-width: 768px) {
-        .component-snip .block-line {
+        [component=“snippets”] .block-line {
             display: none;
             height: 10px;
             width: 100%;
@@ -1440,7 +1440,7 @@
 
 /*BLOCK*/
 @media {
-    .component-snip .block-code {
+    [component=“snippets”] .block-code {
         display: inline-flex;
         flex: 1;
         flex-direction: column;
@@ -1451,12 +1451,12 @@
         z-index: 1;
     }
 
-    .component-snip .block-code.hidden {
+    [component=“snippets”] .block-code.hidden {
         display: none;
     }
 
     @media (max-width: 768px) {
-        .component-snip .block-code {
+        [component=“snippets”] .block-code {
             display: inline-flex;
             flex: unset;
             height: calc((100% - 136px)/1);
@@ -1464,24 +1464,24 @@
         }
     }
 
-    .component-snip .block-code > section {
+    [component=“snippets”] .block-code > section {
         background: #555;
         width: 100%;
         height: calc(100%/2.75);
         position: relative;
     }
 
-    .component-snip .block-code > section.hidden {
+    [component=“snippets”] .block-code > section.hidden {
         display: none;
     }
 
-    .component-snip .block-code > section card {
+    [component=“snippets”] .block-code > section card {
         display: flex;
         flex-direction: column;
         width: 100%;
     }
 
-    .component-snip .block-code > section card > header {
+    [component=“snippets”] .block-code > section card > header {
         align-items: center;
         background: #292a2d;
         display: flex;
@@ -1490,7 +1490,7 @@
         width: 100%;
     }
 
-    .component-snip .block-code > section card > section {
+    [component=“snippets”] .block-code > section card > section {
         background: #555;
         display: flex;
         flex: 1;
@@ -1499,7 +1499,7 @@
         width: 100%;
     }
 
-    .component-snip .block-code > section card > section > box {
+    [component=“snippets”] .block-code > section card > section > box {
         border-bottom: 1px solid #777;
         font-size: 13px;
         line-height: 30px;
@@ -1507,7 +1507,7 @@
     }
 
     @media (max-width: 768px) {
-        .component-snip .block-code > section {
+        [component=“snippets”] .block-code > section {
             background: #555;
             bottom: 0;
             width: 100%;
@@ -1515,7 +1515,7 @@
             position: absolute;
         }
 
-        .component-snip .block-code > section card > section {
+        [component=“snippets”] .block-code > section card > section {
             background: #555;
             display: flex;
             flex: 1;
@@ -1525,7 +1525,7 @@
         }
     }
 
-    .component-snip .block-code > section card > footer {
+    [component=“snippets”] .block-code > section card > footer {
         background: #777;
         display: flex;
         position: relative;
@@ -1537,23 +1537,23 @@
         width: 100%;
     }
 
-    .component-snip .block-code > section card > footer i {
+    [component=“snippets”] .block-code > section card > footer i {
         height: 20px;
         margin: 0 5px;
         width: 20px;
     }
 
-    .component-snip .block-code > section card > footer i con {
+    [component=“snippets”] .block-code > section card > footer i con {
         --ggs: 0.6;
     }
 
-    .component-snip .block-code > section card > footer box {
+    [component=“snippets”] .block-code > section card > footer box {
         /* display: flex; */
         /* flex: 1; */
         width: 100%;
     }
 
-    .component-snip .block-code > section card > footer box form {
+    [component=“snippets”] .block-code > section card > footer box form {
         align-items: flex-start;
         display: flex;
         min-height: 20px;
@@ -1562,7 +1562,7 @@
         /* padding: 0; */
     }
 
-    .component-snip .block-code > section card > footer i + textarea {
+    [component=“snippets”] .block-code > section card > footer i + textarea {
         background: none;
         border: sienna;
         color: white;
@@ -1581,7 +1581,7 @@
 
 /*FOOTER*/
 @media {
-    .component-snip .footer-snippet {
+    [component=“snippets”] .footer-snippet {
         /* display: inline-flex; */
         /* flex: 1; */
         height: auto;
@@ -1599,25 +1599,25 @@
         z-index: 12345;
     }
 
-    .component-snip .footer-snippet > row {
+    [component=“snippets”] .footer-snippet > row {
         display: none;
         justify-content: space-between;
         width: 100%;
     }
 
-    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(1).active) ~ .footer-snippet > row {
+    [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(1).active) ~ .footer-snippet > row {
         display: none;
     }
 
-    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(1).active) ~ .footer-snippet > row:nth-child(1) {
+    [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(1).active) ~ .footer-snippet > row:nth-child(1) {
         display: flex;
     }
 
-    .component-snip header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ .footer-snippet > row:nth-child(2) {
+    [component=“snippets”] header.header-code:has(.buttons-group > section dropdown [drop="down"] + flex > column > text:nth-child(2).active) ~ .footer-snippet > row:nth-child(2) {
         display: flex;
     }
 
-    .component-snip .footer-snippet card box {
+    [component=“snippets”] .footer-snippet card box {
         /* background: #777; */
         font-size: 13;
         height: 36px;
@@ -1625,64 +1625,64 @@
         padding: 0 10px;
     }
 
-    .component-snip .footer-snippet card box > * {
+    [component=“snippets”] .footer-snippet card box > * {
         align-items: center;
         gap: 3px;
         height: 36px;
         justify-content: center;
     }
 
-    .component-snip .footer-snippet card box i {
+    [component=“snippets”] .footer-snippet card box i {
         height: 30px;
         width: 30px;
     }
 
-    .component-snip .footer-snippet card box i con {
+    [component=“snippets”] .footer-snippet card box i con {
         --ggs: 0.75;
     }
 
-    .component-snip .footer-snippet card box:hover {
+    [component=“snippets”] .footer-snippet card box:hover {
         /* background: #333; */
     }
 
-    .component-snip .footer-snippet card box:not(:last-child) {
+    [component=“snippets”] .footer-snippet card box:not(:last-child) {
         border-right: 1px solid #333;
     }
 
     @media (max-width: 768px) {
-        .component-snip .footer-snippet card box:not(:last-child) {
+        [component=“snippets”] .footer-snippet card box:not(:last-child) {
             border: 0;
         }
 
-        .component-snip .footer-snippet .tools-tool text {
+        [component=“snippets”] .footer-snippet .tools-tool text {
             border: 0;
             /* display: none; */
         }
     }
 
     @media (max-width: 480px) {
-        .component-snip .footer-snippet card box {
+        [component=“snippets”] .footer-snippet card box {
             border: 0;
         }
     }
 
     @media (max-width: 375px) {
-        .component-snip .footer-snippet card box {
+        [component=“snippets”] .footer-snippet card box {
             padding: 0;
         }
     }
 
-    .component-snip .footer-snippet > section {
+    [component=“snippets”] .footer-snippet > section {
         /* height: 36px; */
         /* line-height: 36px; */
     }
 
-    .component-snip .footer-snippet .tools-tool {
+    [component=“snippets”] .footer-snippet .tools-tool {
         /* margin: 5px; */
     }
 
     @media (max-width: 768px) {
-        .component-snip .footer-snippet .tools-tool text {
+        [component=“snippets”] .footer-snippet .tools-tool text {
             border: 0;
             display: none;
         }
