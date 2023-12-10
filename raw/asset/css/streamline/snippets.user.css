@@ -157,6 +157,8 @@
         /* background-color: #292a2d; */
         box-sizing: border-box;
         margin: auto;
+        max-width: 960px;
+        width: calc(100% - 20px);
     }
 
     [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet > column > :first-child > :not(:nth-child(2)) {
@@ -167,9 +169,9 @@
         background: transparent;
         border: 1px solid #777;
         border-radius: 5px;
-        margin-top: 20px;
-        min-height: 240px;
-        width: 960px;
+        margin: 20px auto;
+        min-height: 120px;
+        width: 100%;
     }
     
     [component="snippets._"] .block-source .source-code > column > box > row {
