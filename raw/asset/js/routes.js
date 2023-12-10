@@ -45,10 +45,15 @@ window.routes = function(uri, options) {
                         username
                     });
 
+                    var snippets = document.getElementById('code-snippets');
                     var list = await github.gists.list();
                     console.log(33, {
+                        snippets,
                         list
                     });
+                                    
+                    var box = snippets.nextElementSibling.content.firstElementChild.cloneNode(true);
+                    snippets.insertAdjacentHTML('beforeend', box.outerHTML);
                 }
 
                 if (paths.length === 1 || paths.length > 1) {
