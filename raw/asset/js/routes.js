@@ -769,7 +769,9 @@ window.routes = function(uri, options) {
                         }
                     }
                 } else {
-                    console.log("routes.view user");
+                    console.log("routes.view user", {
+                        sub
+                    });
 
                     var json = await github.users.user(sub, {
                         cache: "reload"
