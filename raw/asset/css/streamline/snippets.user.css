@@ -160,6 +160,25 @@
         max-width: 960px;
         width: calc(100% - 20px);
     }
+    
+    [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet text:nth-child(1) {
+        margin-bottom: 5px;
+    }
+    
+    [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet text:nth-child(2) {
+        margin-bottom: 5px;
+    }
+    
+    [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet text:nth-child(3) {
+    }
+    
+    [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-date {
+        font-size: 13px;
+    }
+    
+    [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-description {
+        font-size: 13px;
+    }
 
     [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet > column > :first-child > :not(:nth-child(2)) {
         color: #0096c7;

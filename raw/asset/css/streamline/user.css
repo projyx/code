@@ -49,6 +49,10 @@
         width: 100%;
     }
 
+    [component="user"] .header-user .user-authenticate .authenticate-avatar i:has(img:not([src])) {
+        border: 1px solid #777;
+    }
+
     [component="user"] .header-user .user-authenticate .authenticate-avatar .avatar-image:empty {
         background-color: white;
         background-image: url(/raw/asset/svg/github.svg);

@@ -15,7 +15,10 @@ window.routes = function(uri, options) {
 
         if (0 < 1) {
             //var usr = await github.oauth.user(localStorage.user);
-            var avis = document.body.querySelectorAll(".avatar-image:empty");
+            var avis = document.body.querySelectorAll(".avatar-image");
+            console.log(19, {
+                avis
+            });
             avis.length > 0 ? Array.from(avis).forEach(function(avatar) {
                 var img = document.createElement("img");
                 //img.src = usr.avatar_url;
