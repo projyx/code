@@ -41,7 +41,7 @@ window.events.onclick.document = async function(event) {
     elem = target.closest('dropdown');
     if (elem) {
         Array.from(document.querySelectorAll('dropdown [drop="down"]')).forEach(elem=>{
-            var dropdown = elem.closest('dropdown:has(ul.active)');
+            var dropdown = elem.closest('dropdown:has( > .active)');
             elem === dropdown ? null : elem.nextElementSibling.classList.remove('active');
         }
         );

@@ -103,7 +103,7 @@
         position: relative;
     }
 
-    dropdown > [drop] + :not(.hidden) {   
+    dropdown > [drop] + :not(.active):not(.hidden) {   
         display: none;
     }
 }
