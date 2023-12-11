@@ -258,11 +258,11 @@
     }
 
     @media (max-width: 768px) {
-    .component-snippets-user-snippet .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + *) [drop="down"] + * > row > * svg path {
-        fill: #fff;
+        .component-snippets-user-snippet .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + *) [drop="down"] + * > row > * svg path {
+            fill: #fff;
+        }
     }
-    }
-    
+
     .component-snippets-user-snippet .header-code .buttons-group > section dropdown:nth-child(4):has([drop="down"] + *) [drop="down"] + *.active:before {
         /* background: black; */
         content: '';
@@ -376,6 +376,19 @@
         .component-snippets-user-snippet .aside-code:has(~ .hidden) {
             height: calc(100% - 86px);
         }
+    }
+
+    .component-snippets-user-snippet .aside-code + .block-line {
+        border-left: 1px solid #777;
+        border-right: 1px solid #777;
+        width: 20px;
+    }
+
+    .component-snippets-user-snippet .aside-code .block-line {
+        border-bottom: 1px solid #777;
+        border-top: 1px solid #777;
+        height: 20px;
+        width: 100%;
     }
 
     .component-snippets-user-snippet .aside-code > header {
@@ -584,6 +597,14 @@
         margin-left: auto;
     }
 
+    .component-snippets-user-snippet .aside-code .code-file header > dropdown {
+        align-items: center;
+        display: flex;
+        height: 50px;
+        justify-content: center;
+        width: 50px;
+    }
+
     .component-snippets-user-snippet .aside-code .code-css header .file-type {
         /* background: green; */
         height: 100%;
@@ -619,7 +640,7 @@
         height: calc(100% - 86px);
         width: 100%;
     }
-    
+
     .component-snippets-user-snippet .block-code .hidden {
         display: none;
     }
@@ -652,6 +673,15 @@
         z-index: 12345;
     }
 
+    .component-snippets-user-snippet .footer-snippet > row {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .component-snippets-user-snippet .footer-snippet > :not(:nth-child(1)) {
+        display: none;
+    }
+
     .component-snippets-user-snippet .footer-snippet card {
     }
 
@@ -670,6 +700,11 @@
         border-right: 4px solid #333;
     }
 
+    .component-snippets-user-snippet .footer-snippet card box i {
+        margin: auto;
+        width: auto;
+    }
+
     .component-snippets-user-snippet .footer-snippet > section {
         /* height: 36px; */
         /* line-height: 36px; */
@@ -677,5 +712,9 @@
 
     .component-snippets-user-snippet .footer-snippet .tools-tool {
         /* margin: 5px; */
+    }
+
+    .component-snippets-user-snippet .footer-snippet .tools-tool > section {
+        gap: 5px;
     }
 }
