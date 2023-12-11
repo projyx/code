@@ -2,7 +2,7 @@
     <section>
         <div class="code-file">
             <section>
-                <span class="file-menu" href="/snippets/:get">
+                <span class="file-menu" href="/gists/:get">
                     <section>
                         <i>
                             <con class="icon-chevron-left"></con>
@@ -50,7 +50,7 @@
                         <i onclick="api.gists.config(event.target)">
                             <con class="icon-config"></con>
                         </i>
-                        <text href="/snippets/:get/:get">
+                        <text href="/gists/:get/:get">
                             <span>View Source Code</span>
                         </text>
                         <dropdown>
@@ -58,7 +58,7 @@
                                 <i>
                                     <con class="icon-eye"></con>
                                 </i>
-                                <text href="/snippets/:get/:get">
+                                <text href="/gists/:get/:get">
                                     <i>
                                         <con class="gg-pen"></con>
                                     </i>
@@ -91,19 +91,19 @@
                                     </picture>
                                 </row>
                                 <column>
-                                    <text href="/snippets/:get/:get">
+                                    <text href="/gists/:get/:get">
                                         <span>Editor View</span>
                                         <span>&hellip;/:id</span>
                                     </text>
-                                    <text href="/snippets/:get/:get/details">
+                                    <text href="/gists/:get/:get/details">
                                         <span>Details View</span>
                                         <span>&hellip;/:id/details</span>
                                     </text>
-                                    <text href="/snippets/:get/:get/full">
+                                    <text href="/gists/:get/:get/full">
                                         <span>Full Page View</span>
                                         <span>&hellip;/:id/full</span>
                                     </text>
-                                    <text href="/snippets/:get/:get/debug">
+                                    <text href="/gists/:get/:get/debug">
                                         <span>Debug Mode</span>
                                         <span>&hellip;/:id/debug</span>
                                     </text>
@@ -140,10 +140,10 @@
                     <column>
                         <text>
                             <span href="/:user">My Apps</span>
-                            <span href="/snippets/:user">My Snippets</span>
+                            <span href="/gists/:user">My Snippets</span>
                         </text>
                         <text>
-                            <span href="/snippets">New Snippet</span>
+                            <span href="/gists">New Snippet</span>
                             <span href="/:user/new/wide/main">New Web App</span>
                             <span>New Archive</span>
                         </text>
