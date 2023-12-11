@@ -13,7 +13,7 @@ window.routes = function(uri, options) {
         var e = {};
         var status = 200;
 
-        if (0 < 1 && localStorage.user) {
+        if (0 < 1) {
             //var usr = await github.oauth.user(localStorage.user);
             var avis = document.body.querySelectorAll(".avatar-image:empty");
             avis.length > 0 ? Array.from(avis).forEach(function(avatar) {

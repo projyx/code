@@ -114,11 +114,15 @@
     }
     
     .code-authenticate .authenticate-avatar i {
-        background: black;
+        box-sizing: border-box;
         border-radius: 50%;
         height: 30px;
         overflow: hidden;
         width: 30px;
+    }
+    
+    .code-authenticate .authenticate-avatar i:has(img:not([src])) {
+        border: 1px solid #777;
     }
     
     .header-user dropdown > :first-child + *:not(.active) {
