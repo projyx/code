@@ -315,7 +315,7 @@ github.gists.list = async function(query) {
                 Authorization: "token " + accessToken
             }
         } : null;
-        request(url, settings).then(a).catch(b);
+        request(url).then(a).catch(b);
     }
     );
 }
