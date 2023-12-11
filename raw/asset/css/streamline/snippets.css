@@ -46,7 +46,7 @@
     [component="snippets"] .header-code {
     }
 
-    [component="snippets"] .header-code:has(flex.active) {
+    [component="snippets"] .header-code:has(:first-child + .active) {
         z-index: 1234567890;
     }
 
