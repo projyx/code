@@ -298,7 +298,8 @@ github.database.trees = function(params, settings) {
 github.gists = {};
 github.gists.list = async function(query) {
     return new Promise(function(resolve, reject) {
-        const url = github.endpoint + "/gists";
+        query = query ? query : "?per_page=30"
+        const url = github.endpoint + "/gists?" + query;
         const a = data=>{
             console.log(308, data);
             resolve(data);
@@ -421,7 +422,6 @@ github.gists.star = async(params,settings)=>{
         );
     }
 }
-;
 
 github.orgs = {};
 github.orgs.members = async(org,username,settings)=>{
@@ -682,6 +682,29 @@ github.users.events = (username,settings)=>{
         const b = (error)=>{
             console.log(error);
             reject(error);
+        }
+        const accessToken = localStorage.githubAccessToken;
+        const settings = accessToken ? {
+            headers: {
+                Accept: "application/vnd.github+json",
+                Authorization: "token " + accessToken
+            }
+        } : null;
+        request(url, settings).then(a).catch(b);
+    }
+    );
+}
+github.users.gists = async function(user, query) {
+    return new Promise(function(resolve, reject) {
+        query = query ? query : "?per_page=60"
+        const url = github.endpoint + "/users/" + user + "/gists?" + query;
+        const a = data=>{
+            console.log(308, data);
+            resolve(data);
+        }
+        const b = (error)=>{
+            console.log(error);
+            resolve(error);
         }
         const accessToken = localStorage.githubAccessToken;
         const settings = accessToken ? {

@@ -55,7 +55,7 @@ window.routes = function(uri, options) {
                         var d = new Date(timeDate);
                         var m = d.getMonth();
                         var lastActive = new Date().getMonth() === m;
-                        box.querySelector('.snippet-date').textContent = (lastActive || item.updated_at ? "Last active " : "Created ") + dateTime;
+                        box.querySelector('.snippet-date').textContent = ((item.updated_at) || (lastActive) ? "Last active " : "Created ") + dateTime;
                         box.querySelector('.snippet-file').textContent = Object.keys(item.files)[0];
                         box.querySelector('.snippet-description').textContent = item.description;
                         snippets.insertAdjacentHTML('beforeend', box.outerHTML);
