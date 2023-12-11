@@ -298,7 +298,7 @@ github.database.trees = function(params, settings) {
 github.gists = {};
 github.gists.list = async function(query) {
     return new Promise(function(resolve, reject) {
-        query = query ? query : "?per_page=30"
+        query = query ? query : "per_page=30"
         const url = github.endpoint + "/gists?" + query;
         const a = data=>{
             console.log(308, data);
