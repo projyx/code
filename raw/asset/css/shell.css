@@ -2,11 +2,11 @@
     body:has(.active[routes="/*/*/wide"]) .header-user {
         display: none;
     }
-    
+
     body:has(.active[routes="/*/*/edit"]) .header-user {
         display: none;
     }
-    
+
     .header-user {
         background: #292a2d;
         border-bottom: 1px solid #555;
@@ -17,18 +17,19 @@
         width: 100%;
         z-index: 12345;
     }
+
     .header-user > row {
         align-items: center;
         display: flex;
         flex: 1;
         height: 100%;
     }
-    
+
     .header-user .shell-brand .brand-image > section {
         align-items: center;
         justify-content: center;
     }
-    
+
     .header-user .shell-brand .brand-image i {
         align-items: center;
         display: flex;
@@ -37,13 +38,12 @@
         margin-left: auto;
         width: 30px;
     }
-    
+
     .header-user dropdown {
         height: 30px;
         margin-left: auto;
         width: 30px;
     }
-    
 
     .header-user dropdown:last-child > .active {
         background: #292a2d;
@@ -89,30 +89,30 @@
         height: 36px;
         width: 36px;
     }
-    
+
     .header-user .shell-authenticate {
         height: 30px;
         margin-left: auto;
         width: 30px;
     }
-    
-    .header-user .shell-authenticate .authenticate-avatar avi {
+
+    .authenticate-avatar avi {
         border-radius: 50%;
         height: 30px;
         overflow: hidden;
         width: 30px;
     }
-    
-    .header-user .shell-authenticate .authenticate-avatar avi:empty {
+
+    .authenticate-avatar avi:empty {
         border: 1px solid #555;
         box-sizing: border-box;
     }
 
-    .header-user .shell-authenticate .authenticate-avatar avi img {
+    .authenticate-avatar avi img {
         height: 100%;
         width: 100%;
     }
-    
+
     .code-authenticate .authenticate-avatar i {
         box-sizing: border-box;
         border-radius: 50%;
@@ -120,11 +120,11 @@
         overflow: hidden;
         width: 30px;
     }
-    
+
     .code-authenticate .authenticate-avatar i:has(img:not([src])) {
         border: 1px solid #777;
     }
-    
+
     .header-user dropdown > :first-child + *:not(.active) {
         display: none;
     }
