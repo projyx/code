@@ -29,6 +29,7 @@
         <script src="/raw/asset/js/github.js"></script>
         <script src="/raw/asset/js/github.repos.push.js"></script>
         <script src="/raw/asset/js/modal.js"></script>
+        <script src="/raw/asset/js/mvc.m.js"></script>
         <script src="/raw/asset/js/routes.js"></script>
         <script src="/raw/asset/js/firebase.app.js"></script>
         <script src="/raw/asset/js/firebase.auth.js"></script>
@@ -55,9 +56,9 @@
             <component class="component component-tree" component="tree" routes="/*/*"></component>
             <component class="component component-wide" component="wide" oncontextmenu="window.events.oncontextmenu.wIDE(event)" routes="/*/*/wide"></component>
             <component class="component component-edit" component="edit" routes="/*/*/edit"></component>
-            <component class="component component-snippets" component="snippets" routes="/snippets"></component>
-            <component class="component component-snippets-user" component="snippets._" routes="/snippets/*"></component>
-            <component class="component component-snippets-user-snippet" component="snippets._._" routes="/snippets/*/*"></component>
+            <component class="component component-snippets" component="snippets" routes="/gists"></component>
+            <component class="component component-snippets-user" component="snippets._" routes="/gists/*"></component>
+            <component class="component component-snippets-user-snippet" component="snippets._._" routes="/gists/*/*"></component>
         </main>
     </body>
 </html>

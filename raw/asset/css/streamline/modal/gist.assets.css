@@ -316,6 +316,7 @@
         line-height: 36px;
         padding: 0 10px;
         width: 100%;
+        flex: 1;
     }
 
     [modal="gist-options"] > nav + section > card box dropdown input[type="text"] {

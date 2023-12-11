@@ -31,7 +31,7 @@ window.routes = function(uri, options) {
         if (sub) {
             if (sub === "settings") {
                 console.log("routes.view settings");
-            } else if (sub === "snippets") {
+            } else if (sub === "gists") {
                 if (paths.length === 1) {
                     document.getElementById("code-frame").src = "";
                 } else if (paths.length > 2) {
@@ -48,13 +48,23 @@ window.routes = function(uri, options) {
                     var list = await github.gists.list();
                     snippets.innerHTML = "";
                     list.forEach((item)=>{
+                        var timeDate = item.updated_at ? item.updated_at : item.created_at;
+                        var dateTime = model.time.date(timeDate);
                         var box = snippets.nextElementSibling.content.firstElementChild.cloneNode(true);
                         box.querySelector('.snippet-user').textContent = item.owner.login;
-                        box.querySelector('.snippet-file').textContent = "";
+                        var d = new Date(timeDate);
+                        var m = d.getMonth();
+                        var lastActive = new Date().getMonth() === m;
+                        box.querySelector('.snippet-date').textContent = (lastActive || item.updated_at ? "Last active " : "Created ") + dateTime;
+                        box.querySelector('.snippet-file').textContent = Object.keys(item.files)[0];
                         box.querySelector('.snippet-description').textContent = item.description;
                         snippets.insertAdjacentHTML('beforeend', box.outerHTML);
                         console.log(33, {
-                            item
+                            item,
+                            lastActive,
+                            m,
+                            timeDate,
+                            dateTime
                         });
                     }
                     );
