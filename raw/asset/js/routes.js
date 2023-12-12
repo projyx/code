@@ -817,8 +817,7 @@ window.routes = function(uri, options) {
                     }
                 } else {
                     console.log(819, "routes.view user", {
-                        sub,
-                        user
+                        sub
                     });
 
                     try {
@@ -835,35 +834,26 @@ window.routes = function(uri, options) {
                         img.src = json.avatar_url;
                         component.querySelector('.photo-avatar picture').innerHTML = img.outerHTML;
 
-                        try {
-                            var res = await github.oauth.user(json.login);
-                            console.log(839, {
-                                res
-                            });
-                            var user = res.login;
-                        } catch (e) {
-                            console.log(841, {
-                                e
-                            });
+                        var me = localStorage.user;
+                        if (me) {
+                            try {
+                                var res = await github.users.user(me);
+                                console.log(839, {
+                                    json,
+                                    res
+                                });
+                            } catch (e) {
+                                console.log(841, {
+                                    e
+                                });
+                            }
                         }
 
-                        if (sub === user) {
-                            var json = await github.user.repos(user);
+                        if (sub === me) {
+                            var json = await github.user.repos(sub);
                         } else {
-                            var req = 500;
-                            try {
-                                var member = await github.orgs.members(paths[0], user);
-                                req = member.status;
-                                console.log(392, member);
-                            } catch (e) {
-                                console.log(397, e);
-                            }
-
-                            if (req === 302) {
-                                var json = await github.users.repos(sub);
-                            } else {
-                                var json = await github.orgs.repos(sub);
-                            }
+                            var json = await github.users.repos(sub);
+                            //req = 302;
                         }
                         console.log(291, {
                             json
