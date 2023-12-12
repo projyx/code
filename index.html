@@ -8,9 +8,10 @@
         <link href="/raw/asset/css/streamline/edit.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/home.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/tree.css" rel="stylesheet">
-        <link href="/raw/asset/css/streamline/snippets.css" rel="stylesheet">
-        <link href="/raw/asset/css/streamline/snippets.user.css" rel="stylesheet">
-        <link href="/raw/asset/css/streamline/snippets.user.snippet.css" rel="stylesheet">
+        <link href="/raw/asset/css/streamline/gists.css" rel="stylesheet">
+        <link href="/raw/asset/css/streamline/gists.discover.css" rel="stylesheet">
+        <link href="/raw/asset/css/streamline/gists.user.css" rel="stylesheet">
+        <link href="/raw/asset/css/streamline/gists.user.gist.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/user.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/modal/gist.assets.css" rel="stylesheet">
         <link href="/raw/asset/css/streamline/modal/gist.comments.css" rel="stylesheet">
@@ -45,7 +46,7 @@
         <script src="/raw/asset/js/codemirror/htmlmixed.min.js"></script>
         <script src="/raw/asset/js/codemirror/xml.min.js"></script>
         <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-        <script>eruda.init();</script>
+        <!--<script>eruda.init();</script>-->
     </head>
     <body theme="system">
         <boot id="boot"></boot>
@@ -56,9 +57,10 @@
             <component class="component component-tree" component="tree" routes="/*/*"></component>
             <component class="component component-wide" component="wide" oncontextmenu="window.events.oncontextmenu.wIDE(event)" routes="/*/*/wide"></component>
             <component class="component component-edit" component="edit" routes="/*/*/edit"></component>
-            <component class="component component-snippets" component="snippets" routes="/gists"></component>
-            <component class="component component-snippets-user" component="snippets._" routes="/gists/*"></component>
-            <component class="component component-snippets-user-snippet" component="snippets._._" routes="/gists/*/*"></component>
+            <component class="component component-gists" component="gists" routes="/gists"></component>
+            <component class="component component-gists-user" component="gists._" routes="/gists/*"></component>
+            <component class="component component-gists-discover" component="gists.discover" routes="/gists/discover"></component>
+            <component class="component component-gists-user-gist" component="gists._._" routes="/gists/*/*"></component>
         </main>
     </body>
 </html>

@@ -40,22 +40,7 @@ window.events.onclick.document = async function(event) {
 
     elem = target.closest('dropdown');
     if (elem) {
-        Array.from(document.querySelectorAll('dropdown [drop="down"]')).forEach(elem=>{
-            var dropdown = elem.closest('dropdown:has( > .active)');
-            elem === dropdown ? null : elem.nextElementSibling.classList.remove('active');
-        }
-        );
-        drop = target.closest('[drop]');
-        var ul = target.closest('dropdown > ul');
         var drop = elem.querySelector('[drop="down"]');
-        if (ul) {
-            drop.classList.add('active');
-            var li = target.closest('dropdown > ul > li');
-            if (li) {
-                //dropdown.querySelector('ul').classList.remove('active');
-                elem.firstElementChild.querySelector('text').textContent = li.textContent;
-            }
-        }
         if (drop) {
             if (drop.nextElementSibling.classList.contains('active')) {
                 Array.from(document.querySelectorAll('dropdown [drop="down"]')).forEach(elem=>{
@@ -66,11 +51,12 @@ window.events.onclick.document = async function(event) {
             } else {
                 drop.nextElementSibling.classList.add('active');
             }
+        } else {
+            drop.nextElementSibling.classList.toggle('active');
         }
     } else {
         Array.from(document.querySelectorAll('dropdown [drop="down"]')).forEach(elem=>{
-            var dropdown = elem.closest('dropdown:has(ul.active)');
-            elem === dropdown ? null : elem.nextElementSibling.classList.remove('active');
+            elem === elem.closest('dropdown:has(ul.active)') ? null : elem.nextElementSibling.classList.remove('active');
         }
         );
     }
@@ -455,7 +441,8 @@ window.events.keyup.console = function(event) {
                             elem,
                             src
                         });
-                        var file = src; //elem.getAttribute('src');
+                        var file = src;
+                        //elem.getAttribute('src');
                         var uri = new URL(file,contentWindow.origin);
                         var tiator = uri.pathname.split('/').filter(o=>o.length > 0);
                         var ini = tiator[tiator.length - 1];

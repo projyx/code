@@ -42,35 +42,38 @@ window.routes = function(uri, options) {
                 }
 
                 if (paths.length === 2) {
-                    var username = paths[1];
-                    console.log(33, {
-                        username
-                    });
-
-                    var snippets = document.getElementById('code-snippets');
-                    var list = await github.gists.list();
-                    snippets.innerHTML = "";
-                    list.forEach((item)=>{
-                        var timeDate = item.updated_at ? item.updated_at : item.created_at;
-                        var dateTime = model.time.date(timeDate);
-                        var box = snippets.nextElementSibling.content.firstElementChild.cloneNode(true);
-                        box.querySelector('.snippet-user').textContent = item.owner.login;
-                        var d = new Date(timeDate);
-                        var m = d.getMonth();
-                        var lastActive = new Date().getMonth() === m;
-                        box.querySelector('.snippet-date').textContent = ((item.updated_at) || (lastActive) ? "Last active " : "Created ") + dateTime;
-                        box.querySelector('.snippet-file').textContent = Object.keys(item.files)[0];
-                        box.querySelector('.snippet-description').textContent = item.description;
-                        snippets.insertAdjacentHTML('beforeend', box.outerHTML);
+                    if (paths[1] === "discover") {
+                        var username = paths[1];
                         console.log(33, {
-                            item,
-                            lastActive,
-                            m,
-                            timeDate,
-                            dateTime
+                            username
                         });
+
+                        var snippets = document.getElementById('code-snippets');
+                        var list = await github.gists.list();
+                        snippets.innerHTML = "";
+                        list.forEach((item)=>{
+                            var timeDate = item.updated_at ? item.updated_at : item.created_at;
+                            var dateTime = model.time.date(timeDate);
+                            var box = snippets.nextElementSibling.content.firstElementChild.cloneNode(true);
+                            box.querySelector('.snippet-user').textContent = item.owner.login;
+                            var d = new Date(timeDate);
+                            var m = d.getMonth();
+                            var lastActive = new Date().getMonth() === m;
+                            box.querySelector('.snippet-date').textContent = ((item.updated_at) || (lastActive) ? "Last active " : "Created ") + dateTime;
+                            box.querySelector('.snippet-file').textContent = Object.keys(item.files)[0];
+                            box.querySelector('.snippet-file').setAttribute('href', '/:get/:get/' + item.id);
+                            box.querySelector('.snippet-description').textContent = item.description;
+                            snippets.insertAdjacentHTML('beforeend', box.outerHTML);
+                            console.log(33, {
+                                item,
+                                lastActive,
+                                m,
+                                timeDate,
+                                dateTime
+                            });
+                        }
+                        );
                     }
-                    );
                 }
 
                 if (paths.length === 1 || paths.length > 1) {
