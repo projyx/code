@@ -1,5 +1,5 @@
 @media {
-    [component="snippets._"] {
+    [component="gists._"] {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
@@ -9,7 +9,7 @@
 }
 
 @media {
-    [component="snippets._"] .header-user {
+    [component="gists._"] .header-user {
         background: #292a2d;
         border-bottom: 1px solid #555;
         box-sizing: border-box;
@@ -19,73 +19,73 @@
         width: 100%;
         z-index: 12345;
     }
-    [component="snippets._"] .header-user > row {
+    [component="gists._"] .header-user > row {
         align-items: center;
         display: flex;
         flex: 1;
         height: 100%;
     }
     
-    [component="snippets._"] .header-user .user-authenticate {
+    [component="gists._"] .header-user .user-authenticate {
         height: 30px;
         margin-left: auto;
         width: 30px;
     }
     
-    [component="snippets._"] .header-user .user-authenticate .authenticate-avatar i {
+    [component="gists._"] .header-user .user-authenticate .authenticate-avatar i {
         border-radius: 50%;
         height: 30px;
         overflow: hidden;
         width: 30px;
     }
     
-    [component="snippets._"] .header-user .user-authenticate .authenticate-avatar i:empty {
+    [component="gists._"] .header-user .user-authenticate .authenticate-avatar i:empty {
         border: 1px solid #555;
         box-sizing: border-box;
     }
 
-    [component="snippets._"] .header-user .user-authenticate .authenticate-avatar i img {
+    [component="gists._"] .header-user .user-authenticate .authenticate-avatar i img {
         height: 100%;
         width: 100%;
     }
 }
 
 @media {
-    [component="snippets._"] .block-cover {
+    [component="gists._"] .block-cover {
         /* background-color: #222; */
         position: relative;
     }
 
-    [component="snippets._"] .block-cover > column {
+    [component="gists._"] .block-cover > column {
         padding-bottom: 25px;
         position: relative;
         z-index: 123;
     }
 
-    [component="snippets._"] .block-cover .cover-photo {
+    [component="gists._"] .block-cover .cover-photo {
         padding-top: 170px;
     }
 
-    [component="snippets._"] .block-cover .cover-photo > column {
+    [component="gists._"] .block-cover .cover-photo > column {
         align-items: center;
         text-align: center;
     }
 
-    [component="snippets._"] .block-cover .cover-photo .photo-user {
+    [component="gists._"] .block-cover .cover-photo .photo-user {
         margin: 10px 0;
     }
 
-    [component="snippets._"] .block-cover .cover-photo .photo-user text:nth-child(1) {
+    [component="gists._"] .block-cover .cover-photo .photo-user text:nth-child(1) {
         font-size: 24px;
         font-weight: bolder;
     }
 
-    [component="snippets._"] .block-cover .cover-photo .photo-user text:nth-child(2) {
+    [component="gists._"] .block-cover .cover-photo .photo-user text:nth-child(2) {
         color: #ccc;
         font-size: 16px;
     }
 
-    [component="snippets._"] .block-cover .cover-photo .photo-avatar picture {
+    [component="gists._"] .block-cover .cover-photo .photo-avatar picture {
         background-color: #292a2d;
         border: 1px solid #555;
         border-radius: 15%;
@@ -96,13 +96,13 @@
         width: 120px;
     }
 
-    [component="snippets._"] .block-cover .cover-photo .photo-avatar picture img {
+    [component="gists._"] .block-cover .cover-photo .photo-avatar picture img {
         height: 100%;
         object-fit: contain;
         width: 100%;
     }
 
-    [component="snippets._"] .block-cover > footer {
+    [component="gists._"] .block-cover > footer {
         /* background: #292a2d; */
         border-bottom: 1px solid #555;
         border-top: 1px solid #555;
@@ -112,7 +112,7 @@
         width: 100%;
     }
     
-    [component="snippets._"] .block-cover .cover-stats .stats-follow {
+    [component="gists._"] .block-cover .cover-stats .stats-follow {
         align-items: center;
         display: flex;
         height: 50px;
@@ -122,7 +122,7 @@
 
     @media (max-width: 768px) {
     
-    [component="snippets._"] .block-cover .cover-stats .stats-follow {
+    [component="gists._"] .block-cover .cover-stats .stats-follow {
         align-items: center;
         display: flex;
         height: 75px;
@@ -133,27 +133,27 @@
         
               }
 
-    [component="snippets._"] .block-cover .cover-stats .stats-follow > section {
+    [component="gists._"] .block-cover .cover-stats .stats-follow > section {
         gap: 10px;
     }
 
-    [component="snippets._"] .block-cover .cover-stats .stats-follow > section > text > span:last-child {
+    [component="gists._"] .block-cover .cover-stats .stats-follow > section > text > span:last-child {
         color: #777;
     }
 }
 
 @media {
-    [component="snippets._"] .block-source .source-code {
+    [component="gists._"] .block-source .source-code {
         /* background-color: #222; */
         padding: 36px 0;
         position: relative;
     }
     
-    [component="snippets._"] .block-source .source-code #code-snippets {
+    [component="gists._"] .block-source .source-code #code-snippets {
         gap: 40px;
     }
     
-    [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet {
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet {
         /* background-color: #292a2d; */
         box-sizing: border-box;
         margin: auto;
@@ -161,30 +161,30 @@
         width: calc(100% - 20px);
     }
     
-    [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet text:nth-child(1) {
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet text:nth-child(1) {
         margin-bottom: 5px;
     }
     
-    [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet text:nth-child(2) {
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet text:nth-child(2) {
         margin-bottom: 5px;
     }
     
-    [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet text:nth-child(3) {
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet text:nth-child(3) {
     }
     
-    [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-date {
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-date {
         font-size: 13px;
     }
     
-    [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-description {
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-description {
         font-size: 13px;
     }
 
-    [component="snippets._"] .block-source .source-code #code-snippets .snippets-snippet > column > :first-child > :not(:nth-child(2)) {
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet > column > :first-child > :not(:nth-child(2)) {
         color: #0096c7;
     }
     
-    [component="snippets._"] .block-source .source-code .snippets-snippet .snippet-code {
+    [component="gists._"] .block-source .source-code .snippets-snippet .snippet-code {
         background: transparent;
         border: 1px solid #777;
         border-radius: 5px;
@@ -193,14 +193,14 @@
         width: 100%;
     }
     
-    [component="snippets._"] .block-source .source-code > column > box > row {
+    [component="gists._"] .block-source .source-code > column > box > row {
         align-items: center;
         margin: auto;
         max-width: 768px;
         padding: 10px 0;
     }
     
-    [component="snippets._"] .block-source .source-code > column > box > row > picture {
+    [component="gists._"] .block-source .source-code > column > box > row > picture {
         /* background-color: black; */
         border: 1px solid #555;
         border-radius: 15%;
@@ -209,7 +209,7 @@
         width: 64px;
     }
     
-    [component="snippets._"] .block-source .source-code > column > box > row > text {
+    [component="gists._"] .block-source .source-code > column > box > row > text {
         align-items: center;
         display: flex;
         flex-direction: row;
@@ -217,63 +217,63 @@
         padding: 0 10px;
     }
 
-    [component="snippets._"] .block-source .source-code > column > box > row > text > span:first-child {
+    [component="gists._"] .block-source .source-code > column > box > row > text > span:first-child {
         /* font-weight: bolder; */
     }
 
-    [component="snippets._"] .block-source .source-code > column > box > row > text > span:last-child {
+    [component="gists._"] .block-source .source-code > column > box > row > text > span:last-child {
         color: #ccc;
         /* font-size: 13px; */
     }
     
-    [component="snippets._"] .block-source .source-code > column > box > row > i {
+    [component="gists._"] .block-source .source-code > column > box > row > i {
         margin-left: auto;
     }
 }
 
 @media {
-    [component="snippets._"] .snippet-stats {
+    [component="gists._"] .snippet-stats {
         display: flex;
         gap: 10px;
         padding: 20px 0 0;
     }
     
-    [component="snippets._"] .snippet-stats i {
+    [component="gists._"] .snippet-stats i {
         display: inline-flex;
     }
     
-    [component="snippets._"] .snippet-stats row:nth-child(1) i {
+    [component="gists._"] .snippet-stats row:nth-child(1) i {
         width: 36px;
     }
     
-    [component="snippets._"] .snippet-stats row:nth-child(2) i {
+    [component="gists._"] .snippet-stats row:nth-child(2) i {
         width: 24px;
     }
     
-    [component="snippets._"] .snippet-stats row:nth-child(3) i {
+    [component="gists._"] .snippet-stats row:nth-child(3) i {
         width: 30px;
     }
     
-    [component="snippets._"] .snippet-stats row:nth-child(4) i {
+    [component="gists._"] .snippet-stats row:nth-child(4) i {
         width: 24px;
     }
 }
 
 /*BLOCK*/
 @media {
-    [component="snippets._._"] .block-code {
+    [component="gists._._"] .block-code {
         display: inline-flex;
         flex: 1;
         height: calc(100% - 86px);
         width: 100%;
     }
     
-    [component="snippets._._"] .block-code .hidden {
+    [component="gists._._"] .block-code .hidden {
         display: none;
     }
 
     @media (max-width: 768px) {
-        [component="snippets._._"] .block-code {
+        [component="gists._._"] .block-code {
             display: inline-flex;
             flex: unset;
             height: calc((100% - 50px)/2);
