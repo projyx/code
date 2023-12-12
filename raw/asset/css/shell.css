@@ -121,6 +121,23 @@
         width: 100%;
     }
 
+    .authenticate-avatar i {
+        border-radius: 50%;
+        height: 30px;
+        overflow: hidden;
+        width: 30px;
+    }
+
+    .authenticate-avatar i:empty {
+        border: 1px solid #555;
+        box-sizing: border-box;
+    }
+
+    .authenticate-avatar i img {
+        height: 100%;
+        width: 100%;
+    }
+
     .code-authenticate .authenticate-avatar i {
         box-sizing: border-box;
         border-radius: 50%;
