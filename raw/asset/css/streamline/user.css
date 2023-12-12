@@ -175,6 +175,21 @@
             max-width: 100%;
         }
     }
+    [component="user"] .block-source .source-search {
+        border: 1px solid #555;
+        border-radius: 3px;
+        flex: 1;
+    }
+    
+    [component="user"] .block-source .source-search form {
+        align-items: center;
+        display: flex;
+        flex: 1;
+        height: 100%;
+        line-height: 30px;
+        padding: 0 16px;
+        width: 100%;
+    }
 
     [component="user"] .block-source .source-filter form {
         display: flex;
@@ -193,6 +208,7 @@
     [component="user"] .block-source > header {
         display: flex;
         flex-wrap: wrap;
+        gap: 50px;
         justify-content: space-between;
         padding: 10px 0;
     }
