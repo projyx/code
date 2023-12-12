@@ -849,6 +849,10 @@ window.routes = function(uri, options) {
                             }
                         }
 
+                        console.log(852, {
+                            sub,
+                            me
+                        });
                         if (sub === me) {
                             var json = await github.user.repos(sub);
                         } else {
@@ -867,6 +871,10 @@ window.routes = function(uri, options) {
                             do {
                                 var row = json[i];
                                 var el = template.content.firstElementChild.cloneNode(true);
+                                console.log(874, {
+                                    el,
+                                    feed
+                                });
                                 el.setAttribute('href', '/:get/' + row.name)
                                 el.querySelector('text > span:first-child').textContent = row.name;
                                 el.querySelector('text > span:last-child').textContent = "Last pushed " + api.time.date(Date.parse(row.updated_at));
