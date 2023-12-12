@@ -103,6 +103,56 @@
         width: 50px;
     }
 
+    [component="gists._._"] .header-code .buttons-group > section > [href] {
+        border: 1px solid #777;
+        border-radius: 3px;
+        height: 30px;
+        margin: auto 10px;
+        padding: 0 10px;
+        white-space: nowrap;
+        width: auto;
+    }
+
+    [component="gists._._"] .header-code .buttons-group > section > dropdown {
+        border: 1px solid #777;
+        border-radius: 3px;
+        height: 30px;
+        margin: auto 10px;
+        padding: 0 10px;
+        white-space: nowrap;
+        width: auto;
+    }
+
+    [component="gists._._"] .header-code .buttons-group > section > :last-child {
+        border: 1px solid #777;
+        border-radius: 3px;
+        height: 30px;
+        margin: auto 10px;
+        padding: 0 10px;
+        white-space: nowrap;
+        width: auto;
+    }
+
+    [component="gists._._"] .header-code .buttons-group > section > dropdown text {
+        align-items: center;
+        display: inline-flex;
+        gap: 3px;
+        justify-content: center;
+        line-height: 20px;
+    }
+
+    [component="gists._._"] .header-code .buttons-group > section > dropdown:has(.gg-eye) text {
+        justify-content: space-between;
+    }
+
+    [component="gists._._"] .header-code .buttons-group > section > dropdown i {
+        height: 20px;
+    }
+
+    [component="gists._._"] .header-code .buttons-group > section > dropdown i con {
+        --ggs: 0.7;
+    }
+
     [component="gists._._"] .header-code .buttons-group > section dropdown:has([drop="down"] + *):not(.active) [drop="down"] + *:not(.active) {
         display: none;
     }
@@ -131,8 +181,8 @@
         display: none;
     }
 
-    [component="gists._._"] .header-code > section > dropdown:last-child > column.active {
-        /* background: #999; */
+    [component="gists._._"] .header-code > section dropdown > .active {
+        background: #999;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         color: black;
@@ -194,8 +244,6 @@
         display: flex;
     }
 
-    /*LIST*/
-    /*VIEW*/
     [component="gists._._"] .header-code .buttons-group > section dropdown:nth-child(5):has([drop="down"] + *) [drop="down"] + * > row {
         border: 2px solid #999;
         border-radius: 5px;
