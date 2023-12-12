@@ -38,11 +38,6 @@
         overflow: hidden;
         width: 30px;
     }
-    
-    [component="user"] .header-user .user-authenticate .authenticate-avatar i:empty {
-        border: 1px solid #555;
-        box-sizing: border-box;
-    }
 
     [component="user"] .header-user .user-authenticate .authenticate-avatar i img {
         height: 100%;
@@ -58,7 +53,7 @@
         background-image: url(/raw/asset/svg/github.svg);
         background-position: bottom center;
         background-repeat: no-repeat;
-        background-size: 75%;
+        background-size: 69%;
         filter: invert(1);
     }
 }

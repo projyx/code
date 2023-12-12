@@ -129,7 +129,7 @@
     }
 
     .authenticate-avatar i:empty {
-        border: 1px solid #555;
+        /* border: 1px solid #555; */
         box-sizing: border-box;
     }
 
