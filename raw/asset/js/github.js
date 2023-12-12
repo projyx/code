@@ -7,7 +7,7 @@ window.github = {
         login: (target)=>{
             console.log(8, target, target.closest('avi, i'));
             if (target.closest('avi, i').innerHTML.length > 0 && target.closest('avi, i').querySelector('img') && target.closest('avi, i').querySelector('img').hasAttribute('src') === false) {
-                var dropdown = target.closest('dropdown > :first-child + *');
+                var dropdown = target.closest('dropdown > :first-child').nextElementSibling;
                 dropdown.classList.toggle('active');
                 console.log(12, dropdown, dropdown.outerHTML);
                 var provider = new firebase.auth.GithubAuthProvider();
