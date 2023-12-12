@@ -182,6 +182,7 @@
 
     [component="gists"] .header-code .buttons-group > section > i {
         border: 1px solid #777;
+        box-sizing: border-box;
     }
 
     [component="gists"] .header-code .buttons-group > section > i {
@@ -193,6 +194,7 @@
     [component="gists"] .header-code .buttons-group > section > text {
         border: 1px solid #777;
         border-radius: 3px;
+        box-sizing: border-box;
         height: 36px;
         line-height: 36px;
         font-size: 14px;
@@ -242,10 +244,11 @@
     [component="gists"] .header-code .buttons-group > section > dropdown:nth-child(5) > * > i {
         border: 1px solid #777;
         border-radius: 3px;
+        box-sizing: border-box;
         /* border-top-left-radius: 50px; */
         /* border-bottom-left-radius: 50px; */
-        padding: 0 10px;
-        width: 36px;
+        padding: inherit;
+        width: 54px;
         height: 36px;
     }
 
@@ -294,20 +297,8 @@
         /* width: 150px; */
     }
 
-    [component="gists"] .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > column text {
-        display: flex;
-        justify-content: space-between;
-        line-height: 36px;
-        padding: 0 20px;
-    }
-
     [component="gists"] .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > column text:hover {
         background: #777;
-    }
-
-    [component="gists"] .header-code .buttons-group > section dropdown:has([drop="down"] + flex) [drop="down"] + flex > column text.active {
-        background: #555;
-        line-height: 36px;
     }
 
     [component="gists"] .header-code > section > dropdown:last-child > column:not(.active) {
