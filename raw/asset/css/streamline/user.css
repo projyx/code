@@ -1,24 +1,16 @@
 @media {
     [component="user"] {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         flex-wrap: wrap;
+        justify-content: center;
         width: 100%;
         overflow: hidden;
+        padding-top: 50px;
     }
 }
 
 @media {
-    [component="user"] .header-user {
-        background: #292a2d;
-        border-bottom: 1px solid #555;
-        box-sizing: border-box;
-        height: 50px;
-        padding: 0 10px;
-        position: fixed;
-        width: 100%;
-        z-index: 12345;
-    }
     [component="user"] .header-user > row {
         align-items: center;
         display: flex;
@@ -62,6 +54,7 @@
     [component="user"] .block-cover {
         /* background-color: #222; */
         position: relative;
+        width: 320px;
     }
 
     [component="user"] .block-cover > column {
@@ -71,16 +64,16 @@
     }
 
     [component="user"] .block-cover .cover-photo {
-        padding-top: 170px;
+        padding: 20px 20px 0;
     }
 
-    [component="user"] .block-cover .cover-photo > column {
-        align-items: center;
-        text-align: center;
+    [component="user"] .block-cover .cover-photo .photo-avatar {
+        width: 100%;
     }
 
     [component="user"] .block-cover .cover-photo .photo-user {
         margin: 10px 0;
+        width: 100%;
     }
 
     [component="user"] .block-cover .cover-photo .photo-user text:nth-child(1) {
@@ -97,11 +90,12 @@
         background-color: #292a2d;
         border: 1px solid #555;
         border-radius: 15%;
+        border-radius: 50%;
         box-sizing: border-box;
-        height: 120px;
+        height: 0;
         overflow: hidden;
-        /* padding: 10px; */
-        width: 120px;
+        padding-top: 100%;
+        width: 100%;
     }
 
     [component="user"] .block-cover .cover-photo .photo-avatar picture img {
@@ -116,6 +110,7 @@
         border-top: 1px solid #555;
         box-sizing: border-box;
         bottom: 0;
+        display: none;
         position: absolute;
         width: 100%;
     }
@@ -138,12 +133,41 @@
 }
 
 @media {
+    [component="user"] .block-source {
+        /* background-color: #222; */
+        position: relative;
+        width: 960px;
+    }
+    
+    [component="user"] .block-source .source-filter form {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+    
+    [component="user"] .block-source .source-filter form box {
+        border: 1px solid #777;
+        border-radius: 3px;
+        font-size: 13px;
+        line-height: 30px;
+        padding: 0 10px;
+    }
+    
+    [component="user"] .block-source > header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+    }
+    
     [component="user"] .block-source .source-code {
         /* background-color: #222; */
+        border-bottom: 1px solid #555;
+        border-top: 1px solid #555;
+        /* margin: 20px 0; */
         position: relative;
     }
     
-    [component="user"] .block-source .source-code > column > box {
+    [component="user"] .block-source .source-code > column > box:not(:last-child) {
         /* background-color: #292a2d; */
         border-bottom: 1px solid #555;
         box-sizing: border-box;
@@ -151,8 +175,8 @@
     
     [component="user"] .block-source .source-code > column > box > row {
         align-items: center;
-        margin: auto;
-        max-width: 768px;
+        /* margin: auto; */
+        /* max-width: 768px; */
         padding: 10px 0;
     }
     

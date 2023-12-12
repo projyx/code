@@ -54,15 +54,15 @@
     <column>
         <card class="cover-photo">
             <column>
+                <box class="photo-avatar">
+                    <column>
+                        <picture></picture>
+                    </column>
+                </box>
                 <box class="photo-user">
                     <column>
                         <text placeholder="Firstname Lastname"></text>
                         <text placeholder="@username"></text>
-                    </column>
-                </box>
-                <box class="photo-avatar">
-                    <column>
-                        <picture></picture>
                     </column>
                 </box>
             </column>
@@ -88,6 +88,60 @@
     </footer>
 </block>
 <block class="block-source">
+    <header>
+        <card class="source-search">
+            <form>
+                <box>
+                    <section>
+                        <input placeholder="Find a repository..." type="text">
+                    </section>
+                </box>
+            </form>
+        </card>
+        <card class="source-filter">
+            <form>
+                <box>
+                    <dropdown>
+                        <row drop="down">
+                            <text>Type</text>
+                            <i>
+                                <con class="gg-chevron-down"></con>
+                            </i>
+                        </row>
+                        <flex>
+                            <text></text>
+                        </flex>
+                    </dropdown>
+                </box>
+                <box>
+                    <dropdown>
+                        <row drop="down">
+                            <text>Language</text>
+                            <i>
+                                <con class="gg-chevron-down"></con>
+                            </i>
+                        </row>
+                        <flex>
+                            <text></text>
+                        </flex>
+                    </dropdown>
+                </box>
+                <box>
+                    <dropdown>
+                        <row drop="down">
+                            <text>Sort</text>
+                            <i>
+                                <con class="gg-chevron-down"></con>
+                            </i>
+                        </row>
+                        <flex>
+                            <text></text>
+                        </flex>
+                    </dropdown>
+                </box>
+            </form>
+        </card>
+    </header>
     <column>
         <card class="source-code">
             <column id="user-repositories"></column>
