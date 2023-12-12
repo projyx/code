@@ -80,7 +80,7 @@ window.routes = function(uri, options) {
                         });
 
                         var snippets = document.getElementById('code-snippets');
-                        var list = await github.gists.list();
+                        var list = await github.users.gists(username);
                         snippets.innerHTML = "";
                         list.forEach((item)=>{
                             var timeDate = item.updated_at ? item.updated_at : item.created_at;
