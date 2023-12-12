@@ -816,65 +816,78 @@ window.routes = function(uri, options) {
                         }
                     }
                 } else {
-                    console.log("routes.view user", {
-                        sub
+                    console.log(819, "routes.view user", {
+                        sub,
+                        user
                     });
-
-                    var json = await github.users.user(sub, {
-                        cache: "reload"
-                    });
-                    console.log(286, {
-                        json
-                    })
-
-                    component.querySelector('[placeholder="Firstname Lastname"]').textContent = json.name;
-                    component.querySelector('[placeholder="@username"]').textContent = '@' + json.login;
-
-                    var img = document.createElement('img');
-                    img.src = json.avatar_url;
-                    component.querySelector('.photo-avatar picture').innerHTML = img.outerHTML;
 
                     try {
-                        var res = await github.oauth.user();
-                        var user = res.login;
-                    } catch (e) {}
+                        var json = await github.users.user(sub, {
+                            cache: "reload"
+                        });
+                        console.log(286, {
+                            json
+                        })
+                        component.querySelector('[placeholder="Firstname Lastname"]').textContent = json.name;
+                        component.querySelector('[placeholder="@username"]').textContent = '@' + json.login;
 
-                    if (sub === user) {
-                        var json = await github.user.repos(user);
-                    } else {
-                        var req = 500;
+                        var img = document.createElement('img');
+                        img.src = json.avatar_url;
+                        component.querySelector('.photo-avatar picture').innerHTML = img.outerHTML;
+
                         try {
-                            var member = await github.orgs.members(paths[0], user);
-                            req = member.status;
-                            console.log(392, member);
+                            var res = await github.oauth.user(json.login);
+                            console.log(839, {
+                                res
+                            });
+                            var user = res.login;
                         } catch (e) {
-                            console.log(397, e);
+                            console.log(841, {
+                                e
+                            });
                         }
 
-                        if (req === 302) {
-                            var json = await github.users.repos(sub);
+                        if (sub === user) {
+                            var json = await github.user.repos(user);
                         } else {
-                            var json = await github.orgs.repos(sub);
-                        }
-                    }
-                    console.log(291, {
-                        json
-                    });
+                            var req = 500;
+                            try {
+                                var member = await github.orgs.members(paths[0], user);
+                                req = member.status;
+                                console.log(392, member);
+                            } catch (e) {
+                                console.log(397, e);
+                            }
 
-                    var feed = document.getElementById('user-repositories');
-                    var template = feed.nextElementSibling;
-                    feed.innerHTML = "";
-                    if (json.length > 0) {
-                        var i = 0;
-                        do {
-                            var row = json[i];
-                            var el = template.content.firstElementChild.cloneNode(true);
-                            el.setAttribute('href', '/:get/' + row.name)
-                            el.querySelector('text > span:first-child').textContent = row.name;
-                            el.querySelector('text > span:last-child').textContent = "Last pushed " + api.time.date(Date.parse(row.updated_at));
-                            feed.insertAdjacentHTML('beforeend', el.outerHTML);
-                            i++;
-                        } while (i < json.length);
+                            if (req === 302) {
+                                var json = await github.users.repos(sub);
+                            } else {
+                                var json = await github.orgs.repos(sub);
+                            }
+                        }
+                        console.log(291, {
+                            json
+                        });
+
+                        var feed = document.getElementById('user-repositories');
+                        var template = feed.nextElementSibling;
+                        feed.innerHTML = "";
+                        if (json.length > 0) {
+                            var i = 0;
+                            do {
+                                var row = json[i];
+                                var el = template.content.firstElementChild.cloneNode(true);
+                                el.setAttribute('href', '/:get/' + row.name)
+                                el.querySelector('text > span:first-child').textContent = row.name;
+                                el.querySelector('text > span:last-child').textContent = "Last pushed " + api.time.date(Date.parse(row.updated_at));
+                                feed.insertAdjacentHTML('beforeend', el.outerHTML);
+                                i++;
+                            } while (i < json.length);
+                        }
+                    } catch (e) {
+                        console.log(888, 'routes.js /:user 404', {
+                            e
+                        });
                     }
                 }
             }

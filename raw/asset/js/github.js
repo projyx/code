@@ -44,10 +44,15 @@ window.github = {
         }
         ,
         user: async(target)=>{
-            try {
-                var user = await github.users.user(localStorage.user)
-            } catch (e) {
-                console.log(e);
+            if (localStorage.user) {
+                try {
+                    var user = await github.users.user(localStorage.user)
+                } catch (e) {
+                    console.log(e);
+                    var user = null;
+                }
+            } else {
+                var user = null;
             }
             console.log(44, user)
             return user
@@ -651,7 +656,7 @@ github.user.repos = (params,settings)=>{
     }
     );
 }
-github.user.self = function(usernam, settings) {
+github.user.self = function(username, settings) {
     settings ? null : settings = {};
     return new Promise((resolve,reject)=>{
         const url = github.endpoint + "/user";
@@ -774,6 +779,10 @@ github.users.user = function(username, settings) {
             }
         } : null;
         request(url, settings).then(a).catch(b);
+        console.log(777, {
+            username,
+            settings
+        });
     }
     );
 }

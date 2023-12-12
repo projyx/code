@@ -37,12 +37,13 @@ window.onload = async(event)=>{
         projectId: "pro-jyx",
         appId: "1:492439614306:web:58cffeca539613b875b23b"
     });
-    firebase.auth().onAuthStateChanged(user=>{
+    firebase.auth().onAuthStateChanged(async(user)=>{
         if (user) {
-            0 > 1 ? console.log(42, 'index.user', {
+            0 < 1 ? console.log(42, 'index.user', {
                 user
             }) : null;
-            github.user.self().then(function(user) {
+            try {
+                var user = await github.user.self();
                 //console.log(user);
                 var avatar_url = user.avatar_url;
                 Array.from(document.body.querySelectorAll(".avatar-image")).forEach(function(avatar) {
@@ -52,7 +53,11 @@ window.onload = async(event)=>{
                     avatar.innerHTML = img.outerHTML;
                 });
                 localStorage.setItem("user", user.login);
-            });
+            } catch(e) {
+                console.log(56, 'onAuthStateChanged', {
+                    e
+                });
+            }
         } else {
             localStorage.removeItem('githubAccessToken');
             Array.from(document.body.querySelectorAll(".avatar-image")).forEach(function(avatar) {
