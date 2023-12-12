@@ -1591,7 +1591,7 @@
     }
 
     [component="gists"] .footer-snippet > row {
-        display: none;
+        /* display: none; */
         justify-content: space-between;
         width: 100%;
     }
