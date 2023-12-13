@@ -6,10 +6,7 @@ window.github = {
         },
         login: (target)=>{
             console.log(8, target, target.closest('avi, i'));
-            if (target.closest('avi, i').innerHTML.length > 0 && target.closest('avi, i').querySelector('img') && target.closest('avi, i').querySelector('img').hasAttribute('src') === false) {
-                var dropdown = target.closest('dropdown > :first-child').nextElementSibling;
-                dropdown.classList.toggle('active');
-                console.log(12, dropdown, dropdown.outerHTML);
+            //if (target.closest('avi, i').innerHTML.length > 0 && target.closest('avi, i').querySelector('img') && target.closest('avi, i').querySelector('img').hasAttribute('src') === false) {            
                 var provider = new firebase.auth.GithubAuthProvider();
                 //"delete_repo,gist,user,public_repo,repo"
                 provider.addScope('delete_repo');
@@ -40,7 +37,9 @@ window.github = {
                     });
                 }
                 );
-            }
+            //} else {
+                //alert("You are not logged in.");
+            //}
         }
         ,
         sign_out: async() => {

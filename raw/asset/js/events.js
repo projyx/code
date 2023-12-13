@@ -43,8 +43,8 @@ window.events.onclick.document = async function(event) {
         var drop = elem.querySelector('[drop="down"]');
         if (drop) {
             if (drop.nextElementSibling.classList.contains('active')) {
-                Array.from(document.querySelectorAll('dropdown [drop="down"]')).forEach(elem=>{
-                    elem.nextElementSibling.classList.remove('active');
+                Array.from(document.querySelectorAll('dropdown [drop="down"]')).forEach(el=>{
+                    el.nextElementSibling.classList.remove('active');
                 }
                 );
                 drop.nextElementSibling.classList.remove('active');
