@@ -4,11 +4,28 @@
             <section>
                 <box class="brand-image" href="/">
                     <section>
-                        <i>
-                            <con class="icon-code-slash"></con>
+                        <i class="image-icon">
+                            <con class="gg-code-slash"></con>
                         </i>
-                        <text>CodePencil</text>
                     </section>
+                </box>
+                <box class="user-name" href="/:get">
+                    <section>
+                        <text name="username"></text>
+                    </section>
+                </box>
+            </section>
+        </card>
+        <card class="shell-search">
+            <section>
+                <box class="search-bar">
+                    <form onsubmit="events.onsubmit.search(event)">
+                        <i>
+                            <con class="gg-search"></con>
+                        </i>
+                        <input type="text">
+                        <input type="submit">
+                    </form>
                 </box>
             </section>
         </card>
@@ -18,7 +35,7 @@
                     <section>
                         <span class="authenticate-avatar">
                             <section>
-                                <i class="avatar-image" onclick="window[0 < 1 ? 'github' : 'api'].oauth.login(event.target)"></i>
+                                <i class="avatar-image" onclick="wgithub.oauth.login(event.target)"></i>
                             </section>
                         </span>
                     </section>
@@ -42,7 +59,7 @@
                         </text>
                         <text>
                             <span>Settings</span>
-                            <span>Log Out</span>
+                            <span onclick="github.oauth.sign_out()">Log Out</span>
                         </text>
                     </column>
                 </box>

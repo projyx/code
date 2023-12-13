@@ -43,6 +43,11 @@ window.github = {
             }
         }
         ,
+        sign_out: async() => {
+            firebase.auth().signOut();
+            localStorage.removeItem('githubAccessToken');
+            localStorage.removeItem('user');
+        },
         user: async(target)=>{
             if (localStorage.user) {
                 try {

@@ -1,5 +1,12 @@
 /*SYSTEM*/
 @media {
+    body input[type="submit"] {
+        -webkit-appearnace: none;
+        font-size: 0;
+        background: none;
+        border: 0;
+    }
+    
     @media (prefers-color-scheme: dark) {
         body[theme="system"] {
             background: #292a2d;

@@ -615,3 +615,7 @@ window.events.onsubmit.function = event=>{
     console.log(488, 'events.onsubmit.function');
     event.preventDefault();
 }
+window.events.onsubmit.search = event=>{
+    console.log(488, 'events.onsubmit.search');
+    event.preventDefault();
+}
