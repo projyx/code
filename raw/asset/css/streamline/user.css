@@ -49,12 +49,14 @@
     }
 
     [component="user"] .header-user .user-authenticate .authenticate-avatar .avatar-image:empty {
+        /* border: 1px solid #000; */
         background-color: white;
         background-image: url(/raw/asset/svg/github.svg);
         background-position: bottom center;
         background-repeat: no-repeat;
         background-size: 69%;
         filter: invert(1);
+        /* opacity: 0.5; */
     }
 }
 
