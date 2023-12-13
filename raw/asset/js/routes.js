@@ -23,6 +23,7 @@ window.routes = function(uri, options) {
                 var img = document.createElement("img");
                 //img.src = usr.avatar_url;
                 avatar.innerHTML = img.outerHTML;
+                console.log(img);
             }) : null;
         }
 

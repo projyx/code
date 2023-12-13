@@ -41,10 +41,16 @@
         display: flex;
     }
 
+    @media (max-width: 768px) {
+        body:has(.component-user.active) .header-user .shell-brand .user-name + * {
+        display: none;
+        }
+    }
+
     body:has(.component-user.active) .header-user .shell-brand .user-name + * nav {
         align-items: center;
         display: flex;
-        gap: 10px;
+        gap: 3px;
         justify-content: center;
     }
 
