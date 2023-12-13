@@ -92,6 +92,14 @@
         content: attr(placeholder);
         opacity: 0.5;
     }
+    
+    body[uid] [uid="false"] {
+        display: none;
+    }
+    
+    body:not([uid]) [uid="true"] {
+        display: none;
+    }
 }
 
 @media {

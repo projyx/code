@@ -43,6 +43,7 @@ window.onload = async(event)=>{
                 user
             }) : null;
             try {
+                var uid = user.uid;
                 var user = await github.user.self();
                 //console.log(user);
                 var avatar_url = user.avatar_url;
@@ -52,8 +53,12 @@ window.onload = async(event)=>{
                     img.src = avatar_url;
                     avatar.innerHTML = img.outerHTML;
                 });
+
+                document.body.setAttribute('uid', uid)
+                localStorage.setItem('githubAccessToken', token);
+
                 localStorage.setItem("user", user.login);
-            } catch(e) {
+            } catch (e) {
                 console.log(56, 'onAuthStateChanged', {
                     e
                 });
@@ -68,7 +73,7 @@ window.onload = async(event)=>{
     }
     );
     document.body.onclick = window.events.onclick.document;
-    
+
     document.onkeydown = window.events.onkeydown;
 
     window.dom = {};

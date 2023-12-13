@@ -80,6 +80,11 @@
 
     .header-user .shell-search .search-bar form input {
         height: 30px;
+        width: 320px;
+    }
+
+    .header-user .shell-search .search-bar form input[type="submit"] {
+        display: none;
     }
 
     .header-user > row {
@@ -110,7 +115,7 @@
     }
 
     body:has(.component-home.active) .component-home .header-user > row > :last-child {
-        display:none;
+        /* display:none; */
     }
 
     .header-user dropdown:last-child > .active {

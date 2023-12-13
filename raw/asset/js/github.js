@@ -22,9 +22,12 @@ window.github = {
                     var credential = result.credential;
                     var token = credential.accessToken;
                     var user = result.user;
-                    console.log({
-                        result
+                    var uid = user.uid;
+                    console.log(25, {
+                        result,
+                        user
                     });
+                    document.body.setAttribute('uid', uid)
                     localStorage.setItem('githubAccessToken', token);
                 }
                 ).catch((error)=>{
