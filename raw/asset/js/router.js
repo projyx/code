@@ -17,7 +17,7 @@ window.rout.er = (href,params)=>{
         var link = pathname;
         if (paths.length > 0) {
             var r = [];
-            paths.forEach(function(path, index) {
+            paths.forEach(async function(path, index) {
                 var p = path;
                 if (p.startsWith(":")) {
                     var x = p.split(":")[1];
@@ -31,18 +31,19 @@ window.rout.er = (href,params)=>{
                         });
                     }
                     if (x === "user") {
-                        var p = localStorage.user;
-                        console.log(p);
+                        var p = document.body.getAttribute('uid');
+                        var p = localStorage.getItem('user');
+                        console.log(35, p);
                     }
                 } else if (p.startsWith("*")) {
                     p = window.location.pathname.split('/').splice(1)[i];
                 }
                 r.push(p);
                 //return p;
-                //console.log(link, r, p);
+                console.log(43, link, r, p);
             });
             link = "/" + r.join('/');
-            //console.log(38, link, r);
+            console.log(38, link, r);
         }
         pathname = link;
         paths = pathname.split("/").splice(1).filter(n=>n.length > 0);

@@ -28,6 +28,7 @@ window.github = {
                     });
                     document.body.setAttribute('uid', uid)
                     localStorage.setItem('githubAccessToken', token);
+                    localStorage.setItem('user', result.additionalUserInfo.username);
                 }
                 ).catch((error)=>{
                     var errorCode = error.code;

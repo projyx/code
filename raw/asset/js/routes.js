@@ -22,7 +22,7 @@ window.routes = function(uri, options) {
             avis.length > 0 ? Array.from(avis).forEach(function(avatar) {
                 var img = document.createElement("img");
                 //img.src = usr.avatar_url;
-                avatar.innerHTML = img.outerHTML;
+                //avatar.innerHTML = img.outerHTML;
                 console.log(img);
             }) : null;
         }
