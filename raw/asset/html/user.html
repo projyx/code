@@ -39,15 +39,24 @@
                         <input type="submit">
                     </form>
                 </box>
+                <box class="user-authenticate" onclick="github.oauth.login()" uid="false">
+                    <section>
+                        <span class="authenticate-avatar">
+                            <section>
+                                <i class="avatar-image"></i>
+                            </section>
+                        </span>
+                    </section>
+                </box>
             </section>
         </card>
-        <dropdown>
+        <dropdown uid="true">
             <row drop="down">
                 <box class="user-authenticate">
                     <section>
                         <span class="authenticate-avatar">
                             <section>
-                                <i class="avatar-image" onclick="github.oauth.login(event.target)"></i>
+                                <i class="avatar-image"></i>
                             </section>
                         </span>
                     </section>

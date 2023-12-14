@@ -5,7 +5,6 @@ window.github = {
             "code.jyxer.tld": "627d321fca16fcbe8180",
         },
         login: (target)=>{
-            console.log(8, target, target.closest('avi, i'));
             //if (target.closest('avi, i').innerHTML.length > 0 && target.closest('avi, i').querySelector('img') && target.closest('avi, i').querySelector('img').hasAttribute('src') === false) {            
                 var provider = new firebase.auth.GithubAuthProvider();
                 //"delete_repo,gist,user,public_repo,repo"
@@ -47,6 +46,7 @@ window.github = {
         ,
         sign_out: async() => {
             firebase.auth().signOut();
+            document.body.removeAttribute('uid');
             localStorage.removeItem('githubAccessToken');
             localStorage.removeItem('user');
         },
