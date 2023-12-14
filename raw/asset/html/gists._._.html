@@ -1,3 +1,57 @@
+<block style="display: none">
+    <section>
+        <card class="shell-brand">
+            <section>
+                <box class="brand-image" href="/">
+                    <section>
+                        <i>
+                            <con class="icon-code-slash"></con>
+                        </i>
+                        <text>CodePencil</text>
+                    </section>
+                </box>
+            </section>
+        </card>
+        <dropdown>
+            <row drop="down">
+                <box class="code-authenticate">
+                    <section>
+                        <span class="authenticate-avatar">
+                            <section>
+                                <i class="avatar-image" onclick="window[0 < 1 ? 'github' : 'api'].oauth.login(event.target)">
+                                    <img>
+                                </i>
+                            </section>
+                        </span>
+                    </section>
+                </box>
+            </row>
+            <column>
+                <box>
+                    <column>
+                        <text>
+                            <span href="/:user">My Apps</span>
+                            <span href="/gists/:user">My Snippets</span>
+                        </text>
+                        <text>
+                            <span href="/gists">New Snippet</span>
+                            <span href="/:user/new/wide/main">New Web App</span>
+                            <span>New Archive</span>
+                        </text>
+                        <text>
+                            <span>File Cloud</span>
+                            <span>Documentation</span>
+                        </text>
+                        <text>
+                            <span>Settings</span>
+                            <span>Log Out</span>
+                        </text>
+                    </column>
+                </box>
+            </column>
+        </dropdown>
+    </section>
+</block>
 <header class="header-code">
     <section>
         <div class="code-file">
