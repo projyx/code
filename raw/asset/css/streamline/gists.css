@@ -32,6 +32,7 @@
     [component="gists"] .header-code {
         background: aliceblue;
         background: #1a1a1a;
+        /* background: #555; */
         /* border-bottom: 1px solid #666; */
         box-sizing: border-box;
         display: flex;
@@ -92,6 +93,7 @@
 
     [component="gists"] .header-code .file-meta {
         align-items: center;
+        color: #fff;
         display: flex;
         justify-content: center;
     }
