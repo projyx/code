@@ -8,23 +8,21 @@ window.routes = function(uri, options) {
         console.log(5, 'routes.js', {
             options,
             paths,
-            uri
+            uri,
+            user: window.user
         });
         var e = {};
         var status = 200;
 
-        if (0 < 1) {
+        if (window.user) {
             //var usr = await github.oauth.user(localStorage.user);
             var avis = document.body.querySelectorAll(".avatar-image");
-            console.log(19, {
-                avis
-            });
-            avis.length > 0 ? Array.from(avis).forEach(function(avatar) {
+            Array.from(avis).forEach(function(avi) {
                 var img = document.createElement("img");
-                //img.src = usr.avatar_url;
-                //avatar.innerHTML = img.outerHTML;
-                console.log(img);
-            }) : null;
+                //img.setAttribute('href', '/:user');
+                img.src = window.user.photoURL;
+                avi.innerHTML = img.outerHTML;
+            });
         }
 
         Array.from(document.querySelectorAll('dropdown [drop="down"] + *')).forEach(el=>{
@@ -83,8 +81,9 @@ window.routes = function(uri, options) {
                             paths,
                             selector: '[route="/' + paths.join('/') + '"]'
                         });
-
-                        (component.querySelector('[route="/gists/*"]') || component.querySelector('[routes="/gists/*"]')).textContent = username;
+                        var el = component.querySelector('[name="username"]');
+                        console.log(85, el);
+                        el.textContent = username;
 
                         var snippets = document.getElementById('code-snippets');
                         var list = await github.users.gists(username);

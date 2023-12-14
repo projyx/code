@@ -30,7 +30,6 @@ window.onload = async(event)=>{
         routes: window.routes
     }) : null;
 
-    rout.er(window.location.pathname);
     firebase.initializeApp({
         apiKey: "AIzaSyA2K41RYhtZm4nx2F1liIJ8ly4ejy6gqc8",
         authDomain: "pro-jyx.firebaseapp.com",
@@ -39,6 +38,7 @@ window.onload = async(event)=>{
     });
     firebase.auth().onAuthStateChanged(async(user)=>{
         if (user) {
+            window.user = user;
             0 < 1 ? console.log(42, 'index.user', {
                 user
             }) : null;
@@ -47,27 +47,27 @@ window.onload = async(event)=>{
                 var user = await github.user.self();
                 //console.log(user);
                 var avatar_url = user.avatar_url;
-                Array.from(document.body.querySelectorAll(".avatar-image")).forEach(function(avatar) {
-                    var img = document.createElement("img");
-                    //img.setAttribute('href', '/:user');
-                    img.src = avatar_url;
-                    avatar.innerHTML = img.outerHTML;
-                });
 
                 document.body.setAttribute('uid', uid)
                 localStorage.setItem('githubAccessToken', token);
 
                 localStorage.setItem("user", user.login);
+
+                rout.er(window.location.pathname);
             } catch (e) {
                 console.log(56, 'onAuthStateChanged', {
                     e
                 });
+
+                rout.er(window.location.pathname);
             }
         } else {
+            window.user = null;
             localStorage.removeItem('githubAccessToken');
             Array.from(document.body.querySelectorAll(".avatar-image")).forEach(function(avatar) {
                 avatar.innerHTML = "";
             });
+            rout.er(window.location.pathname);
         }
         //dom.body.dataset.load = "ed";
     }
