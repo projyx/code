@@ -13,7 +13,7 @@
         /* border-bottom: 1px solid #555; */
         box-sizing: border-box;
         height: 50px;
-        padding: 0 10px;
+        /* padding: 0 10px; */
         position: fixed;
         width: 100%;
         z-index: 12345;
@@ -22,6 +22,16 @@
 
     .header-user .shell-brand {
         margin-right: auto;
+    }
+
+    .header-user .shell-brand .brand-image {
+        font-size: 13px;
+        font-weight: bolder;
+    }
+
+    .header-user .shell-brand .image-icon {
+        height: 50px;
+        width: 50px;
     }
 
     .header-user .shell-search {
@@ -34,7 +44,7 @@
         border: 1px solid #777;
         border-radius: 20px;
         height: 30px;
-        margin-right: 10px;
+        margin-right: 0;
         overflow: hidden;
         width: auto;
     }
@@ -43,7 +53,7 @@
         display: none;
     }
 
-    body:has(.component-user.active) .header-user .shell-brand .user-name + * {
+    body:not([uid]):has(.component-user.active) .header-user .shell-brand .user-name + * {
         display: flex;
     }
 
@@ -58,6 +68,10 @@
         display: flex;
         gap: 3px;
         justify-content: center;
+    }
+
+    body:has(.component-user.active) .header-user .shell-brand .user-name + * nav text:first-child span {
+        margin-right: 20px;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -113,16 +127,23 @@
 
     .header-user .shell-brand .brand-image i {
         align-items: center;
+        background: whitesmoke;
+        border-radius: 50%;
+        color: #555;
+        margin: 10px;
         display: flex;
         height: 30px;
         justify-content: center;
-        margin-left: auto;
         width: 30px;
+    }
+
+    .header-user .shell-brand .brand-image i con {
+    transform: rotate(15deg) scale(var(--icons,1.2));
     }
 
     .header-user dropdown {
         height: 30px;
-        /* margin-left: auto; */
+        margin: 0 10px;
         width: 30px;
     }
 

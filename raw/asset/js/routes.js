@@ -817,7 +817,7 @@ window.routes = function(uri, options) {
                         }
                     }
                 } else {
-                    console.log(819, "routes.view user", {
+                    console.log(819, "routes.view user /:user", {
                         sub
                     });
 

@@ -92,7 +92,7 @@
 
     [component="gists._._"] .header-code .buttons-group > section {
         display: flex;
-        gap: 5px;
+        gap: 0;
         position: relative;
     }
 

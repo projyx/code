@@ -7,20 +7,46 @@
                         <i>
                             <con class="icon-code-slash"></con>
                         </i>
-                        <text>CodePencil</text>
+                        <text name="username"></text>
                     </section>
                 </box>
             </section>
         </card>
-        <dropdown>
+        <card class="shell-search">
+            <section>
+                <box class="search-bar">
+                    <form onsubmit="events.onsubmit.search(event)">
+                        <i>
+                            <con class="gg-search"></con>
+                        </i>
+                        <input placeholder="Search" type="text">
+                        <input type="submit">
+                    </form>
+                </box>
+            </section>
+        </card>
+        <card uid="false">
             <row drop="down">
-                <box class="code-authenticate">
+                <box class="user-authenticate">
                     <section>
                         <span class="authenticate-avatar">
                             <section>
-                                <i class="avatar-image" onclick="window[0 < 1 ? 'github' : 'api'].oauth.login(event.target)">
-                                    <img>
+                                <i class="avatar-image" onclick="github.oauth.login(event.target)">
+                                    <img src="/raw/assets/svg/github.svg">
                                 </i>
+                            </section>
+                        </span>
+                    </section>
+                </box>
+            </row>
+        </card>
+        <dropdown uid="true">
+            <row drop="down">
+                <box class="user-authenticate">
+                    <section>
+                        <span class="authenticate-avatar">
+                            <section>
+                                <i class="avatar-image"></i>
                             </section>
                         </span>
                     </section>
@@ -44,7 +70,7 @@
                         </text>
                         <text>
                             <span>Settings</span>
-                            <span>Log Out</span>
+                            <span onclick="github.oauth.sign_out()">Log Out</span>
                         </text>
                     </column>
                 </box>
@@ -52,6 +78,7 @@
         </dropdown>
     </row>
 </header>
+
 <block class="block-cover">
     <column>
         <card class="cover-photo">
