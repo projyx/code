@@ -77,8 +77,14 @@ window.routes = function(uri, options) {
                     } else {
                         var username = paths[1];
                         console.log(33, {
-                            username
+                            component,
+                            username,
+                            options,
+                            paths,
+                            selector: '[route="/' + paths.join('/') + '"]'
                         });
+
+                        (component.querySelector('[route="/gists/*"]') || component.querySelector('[routes="/gists/*"]')).textContent = username;
 
                         var snippets = document.getElementById('code-snippets');
                         var list = await github.users.gists(username);
@@ -828,6 +834,7 @@ window.routes = function(uri, options) {
                         console.log(286, {
                             json
                         })
+                        component.querySelector('[name="username"]').textContent = json.login;
                         component.querySelector('[placeholder="Firstname Lastname"]').textContent = json.name;
                         component.querySelector('[placeholder="@username"]').textContent = '@' + json.login;
 

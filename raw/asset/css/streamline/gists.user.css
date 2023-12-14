@@ -14,7 +14,6 @@
         border-bottom: 1px solid #555;
         box-sizing: border-box;
         height: 50px;
-        padding: 0 10px;
         position: fixed;
         width: 100%;
         z-index: 12345;
@@ -37,11 +36,6 @@
         height: 30px;
         overflow: hidden;
         width: 30px;
-    }
-    
-    [component="gists._"] .header-user .user-authenticate .authenticate-avatar i:empty {
-        border: 1px solid #555;
-        box-sizing: border-box;
     }
 
     [component="gists._"] .header-user .user-authenticate .authenticate-avatar i img {

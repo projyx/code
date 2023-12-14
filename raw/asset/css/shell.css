@@ -24,6 +24,13 @@
         margin-right: auto;
     }
 
+    .header-user .shell-brand .user-name {
+        align-items: center;
+        display: flex;
+        font-weight: bolder;
+        justify-content: center;
+    }
+
     .header-user .shell-brand .brand-image {
         font-size: 13px;
         font-weight: bolder;
