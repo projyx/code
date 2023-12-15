@@ -519,7 +519,7 @@ async function wIDE(paths) {
         var file = paths[paths.length - 1];
         var path = paths.splice(4, paths.length - 1);
         var resource = "index.html";
-        //console.log(243, resource);
+        console.log(243, resource, paths);
 
         var html = await github.raw.file({
             owner: paths[0],

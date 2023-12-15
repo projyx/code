@@ -240,13 +240,15 @@ window.rout.er = (href,params)=>{
                 search
             }
         };
+            var name = options.match.matched.replace('*','_').split('/').filter(o => o.length > 0).join('.');
         0 < 1 ? console.log(4, "browse.route", {
+                name,
             uri,
             options,
             params
         }) : null;
         document.querySelectorAll('component').forEach(c=>c.classList.remove('active'));
-        var html = await request('/raw/asset/html/' + route.file);
+        var html = await request('/raw/asset/html/' + (name.length === 0 ? "-" : name) + '.html');
         component.innerHTML.length === 0 ? component.innerHTML = html : null;
         try {
             uri = await window.routes(uri, options);

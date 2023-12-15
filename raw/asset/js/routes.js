@@ -744,6 +744,7 @@ window.routes = function(uri, options) {
                                     var urt = split.splice(5, split.length - 1);
                                     filetrees.path = 0 < 1 ? "" : (urt.length > 1 ? "/" : "") + urt.join("/");
                                 }
+                                console.log(540, paths);
                                 var contentWindow = await wIDE(paths);
                                 //console.log(540, contentWindow);
 
