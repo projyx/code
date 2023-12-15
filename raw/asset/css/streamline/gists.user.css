@@ -50,6 +50,7 @@
     [component="gists._"] .block-cover {
         /* background-color: #222; */
         position: relative;
+        max-width: 100%;
     }
 
     [component="gists._"] .block-cover > column {
