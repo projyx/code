@@ -240,9 +240,9 @@ window.rout.er = (href,params)=>{
                 search
             }
         };
-            var name = options.match.matched.replace('*','_').split('/').filter(o => o.length > 0).join('.');
+        var name = options.match.matched.replaceAll('*', '_').split('/').filter(o=>o.length > 0).join('.');
         0 < 1 ? console.log(4, "browse.route", {
-                name,
+            name,
             uri,
             options,
             params

@@ -489,7 +489,7 @@ window.routes = function(uri, options) {
                                 var json = await github.repos.contents({
                                     owner: paths[0],
                                     repo: paths[1],
-                                    path: path.join('/')
+                                    resource: path.join('/')
                                 }, {
                                     cache: 'reload'
                                 });
@@ -785,7 +785,7 @@ window.routes = function(uri, options) {
                         var json = await github.repos.contents({
                             owner: paths[0],
                             repo: paths[1],
-                            path: path.join('/')
+                            resource: path.join('/')
                         }, {
                             cache: 'reload'
                         });

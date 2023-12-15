@@ -1,3 +1,93 @@
+<header class="header-user">
+    <row>
+        <card class="shell-brand">
+            <section>
+                <box class="brand-image" href="/">
+                    <section>
+                        <i class="image-icon">
+                            <con class="gg-code-slash"></con>
+                        </i>
+                    </section>
+                </box>
+                <box class="user-name" href="/:get">
+                    <section>
+                        <text name="username"></text>
+                    </section>
+                </box>
+                <box uid="false">
+                    <nav>
+                        <text>
+                            <span>Community</span>
+                            <span>Academy</span>
+                            <span>Blog</span>                            
+                        </text>
+                        <text>
+                            <span>Pricing</span>
+                        </text>
+                    </nav>
+                </box>
+            </section>
+        </card>
+        <card class="shell-search">
+            <section>
+                <box class="search-bar">
+                    <form onsubmit="events.onsubmit.search(event)">
+                        <i>
+                            <con class="gg-search"></con>
+                        </i>
+                        <input placeholder="Search" type="text">
+                        <input type="submit">
+                    </form>
+                </box>
+                <box class="user-authenticate" onclick="github.oauth.login()" uid="false">
+                    <section>
+                        <span class="authenticate-avatar">
+                            <section>
+                                <i class="avatar-image"></i>
+                            </section>
+                        </span>
+                    </section>
+                </box>
+            </section>
+        </card>
+        <dropdown uid="true">
+            <row drop="down">
+                <box class="user-authenticate">
+                    <section>
+                        <span class="authenticate-avatar">
+                            <section>
+                                <i class="avatar-image"></i>
+                            </section>
+                        </span>
+                    </section>
+                </box>
+            </row>
+            <column>
+                <box>
+                    <column>
+                        <text>
+                            <span href="/:user">My Apps</span>
+                            <span href="/gists/:user">My Snippets</span>
+                        </text>
+                        <text>
+                            <span href="/gists">New Snippet</span>
+                            <span href="/new">New Web App</span>
+                            <span style="display: none;">New Archive</span>
+                        </text>
+                        <text>
+                            <span>File Cloud</span>
+                            <span>Documentation</span>
+                        </text>
+                        <text>
+                            <span>Settings</span>
+                            <span onclick="github.oauth.sign_out()">Log Out</span>
+                        </text>
+                    </column>
+                </box>
+            </column>
+        </dropdown>
+    </row>
+</header>
 <block class="block-info">
     <row>
         <card class="info-repo">
