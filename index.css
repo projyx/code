@@ -84,6 +84,14 @@
 }
 
 @media {
+    [after]::after {
+        content: attr(after)
+    }
+
+    [before]::before {
+        content: attr(before)
+    }
+    
     [data-before]::before {
         content: attr(data-before)
     }

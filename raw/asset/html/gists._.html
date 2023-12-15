@@ -78,29 +78,28 @@
         </dropdown>
     </row>
 </header>
-
 <block class="block-cover">
     <column>
         <card class="cover-photo">
-            <column>
+            <flex>
+                <box class="photo-avatar">
+                    <column>
+                        <picture></picture>
+                    </column>
+                </box>
                 <box class="photo-user">
                     <column>
                         <text placeholder="Firstname Lastname"></text>
                         <text placeholder="@username"></text>
                     </column>
                 </box>
-                <box class="photo-avatar">
-                    <column>
-                        <picture></picture>
-                    </column>
-                </box>
-            </column>
+            </flex>
         </card>
     </column>
     <footer>
         <card class="cover-stats">
             <column>
-                <box class="stats-follow">
+                <box class="stats-follow" style="display: none;">
                     <section>
                         <text>
                             <span>0</span>
@@ -144,25 +143,25 @@
                                 <i>
                                     <con class="gg-code-slash"></con>
                                 </i>
-                                <span after="files">2 files</span>
+                                <span after="files">2 </span>
                             </row>
                             <row>
                                 <i>
                                     <con class="gg-git-fork"></con>
                                 </i>
-                                <span after="forks">0 forks</span>
+                                <span after="forks">0 </span>
                             </row>
                             <row>
                                 <i>
                                     <con class="gg-comment"></con>
                                 </i>
-                                <span after="comments">0 comments</span>
+                                <span after="comments">0 </span>
                             </row>
                             <row>
                                 <i>
                                     <con class="gg-bookmark"></con>
                                 </i>
-                                <span after="saves">0 saves</span>
+                                <span after="saves">0 </span>
                             </row>
                         </text>
                         <textarea class="snippet-code"></textarea>
