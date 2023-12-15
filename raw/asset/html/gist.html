@@ -107,17 +107,21 @@
                 <box>
                     <column>
                         <text>
-                            <span href="/snippet/:user">Your Work</span>
-                            <span href="/:user">Profile</span>
+                            <span href="/:user">My Apps</span>
+                            <span href="/gists/:user">My Snippets</span>
                         </text>
                         <text>
-                            <span href="/snippet/">Snippet</span>
-                            <span href="/:user/new/wide/main">Web App</span>
-                            <span>Archive</span>
+                            <span href="/gists">New Snippet</span>
+                            <span href="/new">New Web App</span>
+                            <span style="display: none;">New Archive</span>
                         </text>
                         <text>
-                            <span>Settings</span>
-                            <span>Log Out</span>
+                            <span href="/raw">File Cloud</span>
+                            <span href="/docs">Documentation</span>
+                        </text>
+                        <text>
+                            <span href="/settings">Settings</span>
+                            <span onclick="github.oauth.sign_out()">Log Out</span>
                         </text>
                     </column>
                 </box>

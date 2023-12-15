@@ -110,7 +110,7 @@
         min-height: 100%;
     }
 
-    [component]:not(.active) {
+    component:not(.active) {
         display: none;
     }
 

@@ -1,5 +1,5 @@
 @media {
-    [component="user"] {
+    [component="_"] {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -10,7 +10,7 @@
     }
 
     @media (max-width: 768px) {
-        [component="user"] {
+        [component="_"] {
             display: flex;
             flex-direction: column;
             width: 100%;
@@ -19,58 +19,58 @@
 }
 
 @media {
-    [component="user"] .header-user > row {
+    [component="_"] .header-user > row {
         align-items: center;
         display: flex;
         flex: 1;
         height: 100%;
     }
 
-    [component="user"] .header-user .user-authenticate {
+    [component="_"] .header-user .user-authenticate {
         height: 30px;
         margin-left: auto;
         width: 30px;
     }
 
-    [component="user"] .header-user .user-authenticate .authenticate-avatar i {
+    [component="_"] .header-user .user-authenticate .authenticate-avatar i {
         border-radius: 50%;
         height: 30px;
         overflow: hidden;
         width: 30px;
     }
 
-    [component="user"] .header-user .user-authenticate .authenticate-avatar i img {
+    [component="_"] .header-user .user-authenticate .authenticate-avatar i img {
         height: 100%;
         width: 100%;
     }
 
-    [component="user"] .header-user .user-authenticate .authenticate-avatar i:has(img:not([src])) {
+    [component="_"] .header-user .user-authenticate .authenticate-avatar i:has(img:not([src])) {
         border: 1px solid #777;
     }
 }
 
 @media {
-    [component="user"] .block-cover {
+    [component="_"] .block-cover {
         /* background-color: #222; */
         position: relative;
         width: 320px;
     }
 
     @media (max-width: 768px) {
-        [component="user"] .block-cover {
+        [component="_"] .block-cover {
             position: relative;
             width: 100%
         }
     }
 
-    [component="user"] .block-cover > column {
+    [component="_"] .block-cover > column {
         height: auto;
         /* padding-bottom: 25px; */
         position: relative;
         z-index: 123;
     }
 
-    [component="user"] .block-cover .cover-photo {
+    [component="_"] .block-cover .cover-photo {
         padding: 20px 20px 0;
         position: fixed;
         top: 50px;
@@ -78,7 +78,7 @@
     }
 
     @media (max-width: 768px) {
-        [component="user"] .block-cover .cover-photo {
+        [component="_"] .block-cover .cover-photo {
             flex: 1;
             padding: 0;
             position: relative;
@@ -87,16 +87,16 @@
         }
     }
 
-    [component="user"] .block-cover .cover-photo .photo-avatar {
+    [component="_"] .block-cover .cover-photo .photo-avatar {
         width: 100%;
     }
 
     @media (max-width: 768px) {
-        [component="user"] .block-cover .cover-photo .photo-avatar {
+        [component="_"] .block-cover .cover-photo .photo-avatar {
             width: 120px;
         }
 
-        [component="user"] .block-cover .cover-photo > * {
+        [component="_"] .block-cover .cover-photo > * {
             flex-direction: row;
             gap: 10px;
             align-items: center;
@@ -105,7 +105,7 @@
     }
 
     @media (max-width: 480px) {
-        [component="user"] .block-cover .cover-photo > * {
+        [component="_"] .block-cover .cover-photo > * {
             flex-direction: column;
             gap: 10px;
             align-items: center;
@@ -113,35 +113,35 @@
         }
     }
 
-    [component="user"] .block-cover .cover-photo .photo-user {
+    [component="_"] .block-cover .cover-photo .photo-user {
         flex: 1;
         margin: 10px 0;
         width: 100%;
     }
 
-    [component="user"] .block-cover .cover-photo .photo-user text:nth-child(1) {
+    [component="_"] .block-cover .cover-photo .photo-user text:nth-child(1) {
         font-size: 24px;
         font-weight: bolder;
     }
 
     @media (max-width: 480px) {
-        [component="user"] .block-cover .cover-photo .photo-user text:nth-child(1) {
+        [component="_"] .block-cover .cover-photo .photo-user text:nth-child(1) {
             text-align: center;
         }
     }
 
-    [component="user"] .block-cover .cover-photo .photo-user text:nth-child(2) {
+    [component="_"] .block-cover .cover-photo .photo-user text:nth-child(2) {
         color: #ccc;
         font-size: 16px;
     }
 
     @media (max-width: 480px) {
-        [component="user"] .block-cover .cover-photo .photo-user text:nth-child(2) {
+        [component="_"] .block-cover .cover-photo .photo-user text:nth-child(2) {
             text-align: center;
         }
     }
 
-    [component="user"] .block-cover .cover-photo .photo-avatar picture {
+    [component="_"] .block-cover .cover-photo .photo-avatar picture {
         background-color: #292a2d;
         background: #555;
         /* border: 1px solid #555; */
@@ -155,7 +155,7 @@
         width: 100%;
     }
 
-    [component="user"] .block-cover .cover-photo .photo-avatar picture img {
+    [component="_"] .block-cover .cover-photo .photo-avatar picture img {
         height: 100%;
         object-fit: contain;
         position: absolute;
@@ -163,7 +163,7 @@
         width: 100%;
     }
 
-    [component="user"] .block-cover > footer {
+    [component="_"] .block-cover > footer {
         /* background: #292a2d; */
         border-bottom: 1px solid #555;
         border-top: 1px solid #555;
@@ -174,7 +174,7 @@
         width: 100%;
     }
 
-    [component="user"] .block-cover .cover-stats .stats-follow {
+    [component="_"] .block-cover .cover-stats .stats-follow {
         align-items: center;
         display: flex;
         height: 50px;
@@ -182,17 +182,17 @@
         padding: 0 20px;
     }
 
-    [component="user"] .block-cover .cover-stats .stats-follow > section {
+    [component="_"] .block-cover .cover-stats .stats-follow > section {
         gap: 10px;
     }
 
-    [component="user"] .block-cover .cover-stats .stats-follow > section > text > span:last-child {
+    [component="_"] .block-cover .cover-stats .stats-follow > section > text > span:last-child {
         color: #777;
     }
 }
 
 @media {
-    [component="user"] .block-source {
+    [component="_"] .block-source {
         /* background-color: #222; */
         margin-right: 20px;
         max-width: calc(100% - 340px);
@@ -201,19 +201,19 @@
     }
 
     @media (max-width: 768px) {
-        [component="user"] .block-source {
+        [component="_"] .block-source {
             position: relative;
             max-width: 100%;
         }
     }
 
-    [component="user"] .block-source .source-search {
+    [component="_"] .block-source .source-search {
         border: 1px solid #555;
         border-radius: 3px;
         flex: 1;
     }
 
-    [component="user"] .block-source .source-search form {
+    [component="_"] .block-source .source-search form {
         align-items: center;
         display: flex;
         flex: 1;
@@ -224,13 +224,13 @@
         width: 100%;
     }
 
-    [component="user"] .block-source .source-filter form {
+    [component="_"] .block-source .source-filter form {
         display: flex;
         flex-direction: row;
         gap: 10px;
     }
 
-    [component="user"] .block-source .source-filter form box {
+    [component="_"] .block-source .source-filter form box {
         border: 1px solid #777;
         border-radius: 3px;
         font-size: 13px;
@@ -238,7 +238,7 @@
         padding: 0 10px;
     }
 
-    [component="user"] .block-source > header {
+    [component="_"] .block-source > header {
         display: flex;
         flex-wrap: wrap;
         gap: 50px;
@@ -247,12 +247,12 @@
     }
 
     @media (max-width: 858px) {
-        [component="user"] .block-source > header {
+        [component="_"] .block-source > header {
             row-gap: 10px;
         }
     }
 
-    [component="user"] .block-source .source-code {
+    [component="_"] .block-source .source-code {
         /* background-color: #222; */
         border-bottom: 1px solid #555;
         border-top: 1px solid #555;
@@ -260,20 +260,20 @@
         position: relative;
     }
 
-    [component="user"] .block-source .source-code > column > box:not(:last-child) {
+    [component="_"] .block-source .source-code > column > box:not(:last-child) {
         /* background-color: #292a2d; */
         border-bottom: 1px solid #555;
         box-sizing: border-box;
     }
 
-    [component="user"] .block-source .source-code > column > box > row {
+    [component="_"] .block-source .source-code > column > box > row {
         align-items: center;
         /* margin: auto; */
         /* max-width: 768px; */
         padding: 10px 0;
     }
 
-    [component="user"] .block-source .source-code > column > box > row > picture {
+    [component="_"] .block-source .source-code > column > box > row > picture {
         /* background-color: black; */
         border: 1px solid #555;
         border-radius: 15%;
@@ -282,22 +282,22 @@
         width: 64px;
     }
 
-    [component="user"] .block-source .source-code > column > box > row > text {
+    [component="_"] .block-source .source-code > column > box > row > text {
         display: flex;
         flex-direction: column;
         padding: 0 10px;
     }
 
-    [component="user"] .block-source .source-code > column > box > row > text > span:first-child {
+    [component="_"] .block-source .source-code > column > box > row > text > span:first-child {
         font-weight: bolder;
     }
 
-    [component="user"] .block-source .source-code > column > box > row > text > span:last-child {
+    [component="_"] .block-source .source-code > column > box > row > text > span:last-child {
         color: #ccc;
         font-size: 13px;
     }
 
-    [component="user"] .block-source .source-code > column > box > row > i {
+    [component="_"] .block-source .source-code > column > box > row > i {
         margin-left: auto;
     }
 }

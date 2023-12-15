@@ -217,12 +217,13 @@ window.rout.er = (href,params)=>{
         //PAGE ROUTE
         var uri = link + (search ? "?" + search : "");
         var route = window.rout.es.filter(o=>o.url === matched)[0];
+        var sr = matched.replaceAll('*', '_').split('/').filter(o=>o.length > 0);
+        var name = sr.length > 0 ? sr.join('.') : '-';
+        var component = document.querySelector('[route="' + route.url + '"], [routes="' + route.url + '"]');
         //console.log(145, route, matched, pool);
-        var component = document.querySelector('[component="' + route.file.split('.html')[0] + '"]');
         0 > 1 ? console.log(216, {
             route,
             file: route.file,
-            component,
             path: route.file.split('.html')[0]
         }) : null;
         var options = {
@@ -240,23 +241,29 @@ window.rout.er = (href,params)=>{
                 search
             }
         };
-        var name = options.match.matched.replaceAll('*', '_').split('/').filter(o=>o.length > 0).join('.');
+        var file = component && component.getAttribute('component') ? (component.getAttribute('component')) : (name.length === 0 ? "-" : name);
         0 < 1 ? console.log(4, "browse.route", {
-            name,
+            file,
+            component,
+            huh: '[route="' + route.url + '"]',
             uri,
+            sr,
             options,
-            params
+            params,
+            route
         }) : null;
         document.querySelectorAll('component').forEach(c=>c.classList.remove('active'));
-        var html = await request('/raw/asset/html/' + (name.length === 0 ? "-" : name) + '.html');
-        component.innerHTML.length === 0 ? component.innerHTML = html : null;
-        try {
-            uri = await window.routes(uri, options);
-            component.classList.add('active');
-        } catch (e) {
-            console.log(route, route.file, e);
-            alert(e.message);
-        }
+        var html = await request('/raw/asset/html/' + file + '.html');
+        if (component) {
+            component.innerHTML.length === 0 ? component.innerHTML = html : null;
+            try {
+                uri = await window.routes(uri, options);
+                component.classList.add('active');
+            } catch (e) {
+                console.log(route, route.file, e);
+                alert(e.message);
+            }
+        } else {}
 
         //VIEW PAGE
         const pop = params && params.pop;

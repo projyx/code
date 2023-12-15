@@ -50,8 +50,8 @@
     <body theme="system">
         <boot id="boot"></boot>
         <main>
-            <component class="component component-home" component="home" route="/"></component>
-            <component class="component component-user" component="user" route="/*"></component>
+            <component class="component component-home" route="/"></component>
+            <component class="component component-user" component="_" route="/*"></component>
             <component class="component component-tree" component="tree" routes="/*/*"></component>
             <component class="component component-wide" component="wide" oncontextmenu="window.events.oncontextmenu.wIDE(event)" routes="/*/*/wide"></component>
             <component class="component component-edit" component="edit" routes="/*/*/edit"></component>
@@ -59,6 +59,7 @@
             <component class="component component-gists-user" component="gists._" routes="/gists/*"></component>
             <component class="component component-gists-discover" component="gists.discover" routes="/gists/discover"></component>
             <component class="component component-gists-user-gist" component="gists._._" routes="/gists/*/*"></component>
+            <component class="component component-settings" component="settings" route="/settings"></component>
         </main>
     </body>
 </html>
