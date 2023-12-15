@@ -93,7 +93,7 @@
 
     @media (max-width: 768px) {
         [component="_"] .block-cover .cover-photo .photo-avatar {
-            width: 120px;
+            width: 180px;
         }
 
         [component="_"] .block-cover .cover-photo > * {
