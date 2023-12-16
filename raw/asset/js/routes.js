@@ -74,16 +74,34 @@ window.routes = function(uri, options) {
                         );
                     } else {
                         var username = paths[1];
-                        console.log(33, {
+                        var json = await github.users.user(username);
+                        var img = document.createElement('img');
+                        img.src = json.avatar_url;
+                        component.querySelector('.photo-avatar picture').innerHTML = img.outerHTML;
+                        component.querySelector('[name="bio"]').textContent = json.bio;
+                        component.querySelectorAll('[name="username"]').forEach(el=>{
+                            console.log(85, el);
+                            el.textContent = username;
+                        }
+                        );
+                        component.querySelectorAll('[name="fullname"]').forEach(el=>{
+                            console.log(86, el);
+                            el.textContent = json.name;
+                        }
+                        );
+                        component.querySelectorAll('[name="bio"]').forEach(el=>{
+                            console.log(91, el);
+                            el.textContent = json.bio;
+                        }
+                        );
+                        console.log(86, {
+                            json,
                             component,
                             username,
                             options,
                             paths,
                             selector: '[route="/' + paths.join('/') + '"]'
                         });
-                        var el = component.querySelector('[name="username"]');
-                        console.log(85, el);
-                        el.textContent = username;
 
                         var snippets = document.getElementById('code-snippets');
                         var list = await github.users.gists(username);
@@ -837,7 +855,8 @@ window.routes = function(uri, options) {
                         component.querySelector('[name="username"]').textContent = json.login;
                         component.querySelector('[placeholder="Firstname Lastname"]').textContent = json.name;
                         component.querySelector('[placeholder="@username"]').textContent = '@' + json.login;
-
+                        component.querySelector('[name="bio"]').textContent = json.bio;
+                                            
                         var img = document.createElement('img');
                         img.src = json.avatar_url;
                         component.querySelector('.photo-avatar picture').innerHTML = img.outerHTML;

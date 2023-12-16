@@ -87,8 +87,21 @@
                 </box>
                 <box class="photo-user">
                     <column>
-                        <text placeholder="Firstname Lastname"></text>
-                        <text placeholder="@username"></text>
+                        <text name="fullname" placeholder="Firstname Lastname"></text>
+                        <text name="username" placeholder="@username"></text>
+                        <text class="follow hidden">Follow</text>
+                        <text name="bio"></text>
+                        <text class="stats">
+                            <i class="stats-icon">
+                                <con class="gg-user" style="--ggs:calc(2/3);"></con>
+                            </i>
+                            <span name="followers">0</span>
+                            <span>followers</span>
+                            <span>&middot;</span>
+                            <span name="following">0</span>
+                            <span>following</span>
+                        </text>
+                        <text class="profile" href="/:user">Open Profile</text>
                     </column>
                 </box>
             </flex>

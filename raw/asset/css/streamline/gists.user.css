@@ -54,9 +54,18 @@
     }
 
     [component="gists._"] .block-cover > column {
-        padding-bottom: 25px;
+        padding-bottom: 100px;
         position: relative;
         z-index: 123;
+    }
+
+    @media (max-width: 480px) {
+        [component="gists._"] .block-cover > column {
+            height: 100%;
+            padding-bottom: 0px;
+            position: relative;
+            z-index: 123;
+        }
     }
 
     [component="gists._"] .block-cover .cover-photo {
@@ -66,8 +75,21 @@
         width: calc(100% - 20px);
     }
 
+    @media (max-width: 480px) {
+        [component="gists._"] .block-cover .cover-photo {
+            padding: 120px 0 60px;
+        }
+    }
+
     [component="gists._"] .block-cover .cover-photo > flex {
         gap: 10px;
+    }
+
+    @media (max-width: 480px) {
+        [component="gists._"] .block-cover .cover-photo > flex {
+            flex-direction: column;
+            gap: 10px;
+        }
     }
 
     [component="gists._"] .block-cover .cover-photo > column {
@@ -78,42 +100,149 @@
     [component="gists._"] .block-cover .cover-photo .photo-avatar {
         display: flex;
         margin: 0;
+        /* width: 100%; */
+    }
+
+    [component="gists._"] .block-cover .cover-photo .photo-avatar > column {
+        align-items: self-start;
+        justify-content: flex-start;
+        width: 100%;
     }
 
     [component="gists._"] .block-cover .cover-photo .photo-user {
         display: flex;
     }
+    
+    [component="gists._"] .block-cover .cover-photo .photo-user .stats {
+        align-items: center;
+        display: flex;
+        margin: 20px 0;
+    }
+    
+    [component="gists._"] .block-cover .cover-photo .photo-user .stats .stats-icon {
+        opacity: 0.5;
+    }
+    
+    [component="gists._"] .block-cover .cover-photo .photo-user .stats [name="followers"] {
+        font-weight: bolder;
+        margin-right: 3px;
+    }
+    
+    [component="gists._"] .block-cover .cover-photo .photo-user .stats [name="followers"] + * {
+        color: #777;
+    }
+    
+    [component="gists._"] .block-cover .cover-photo .photo-user .stats [name="following"] {
+        font-weight: bolder;
+        margin-right: 3px;
+    }
+    
+    [component="gists._"] .block-cover .cover-photo .photo-user .stats [name="following"] + * {
+        color: #777;
+    }
+    
+    [component="gists._"] .block-cover .cover-photo .photo-user .stats :nth-child(4) {
+        font-weight: bolder;
+        margin: 0 5px;
+    }
+    
+    [component="gists._"] .block-cover .cover-photo .photo-user .stats i.stats-icon {
+        align-items: center;
+        display: inline-flex;
+        height: 20px;
+        justify-content: Center;
+        width: 20px;
+    }
+
+    [component="gists._"] .block-cover .cover-photo .photo-user .follow {
+        background: #444;
+        border: 1px solid #777;
+        border-radius: 5px;
+        color: #ccc;
+        font-size: 14px;
+        font-weight: bolder;
+        line-height: 30px;
+        text-align: center;
+        width: 100%;
+        height: 30px;
+        margin-bottom: 20px;
+    }
+
+    [component="gists._"] .block-cover .cover-photo .photo-user .follow.hidden {
+        display: none;
+    }
+
+    [component="gists._"] .block-cover .cover-photo .photo-user .profile {
+        background: #444;
+        border: 1px solid #777;
+        border-radius: 5px;
+        color: #ccc;
+        font-size: 14px;
+        font-weight: bolder;
+        line-height: 30px;
+        text-align: center;
+        width: 100%;
+        height: 30px;
+        margin-bottom: 20px;
+    }
+
+    [component="gists._"] .block-cover .cover-photo .photo-user .profile.hidden {
+        display: none;
+    }
+
+    @media (max-width: 480px) {
+        [component="gists._"] .block-cover .cover-photo .photo-user .follow {
+            margin: 20px 0;
+            order: 5;
+        }
+    }
 
     [component="gists._"] .block-cover .cover-photo .photo-user > column {
+        flex: 1;
         justify-content: end;
     }
 
     [component="gists._"] .block-cover .cover-photo .photo-user text:nth-child(1) {
-        font-size: 18px;
-        /* font-weight: bolder; */
+        font-size: 24px;
+        font-weight: bolder;
+    }
+
+    [component="gists._"] .block-cover .cover-photo .photo-user text:nth-child(1):empty {
+        display: none;
     }
 
     [component="gists._"] .block-cover .cover-photo .photo-user text:nth-child(2) {
         color: #ccc;
         font-size: 24px;
+        margin-bottom: 10px;
     }
 
     [component="gists._"] .block-cover .cover-photo .photo-avatar picture {
         background-color: #292a2d;
-        border: 1px solid #555;
         border-radius: 15%;
         box-sizing: border-box;
-        height: 120px;
+        height: 160px;
         overflow: hidden;
         /* padding: 10px; */
-        width: 120px;
+        width: 160px;
+    }
+
+    @media (max-width: 960px) {
+        [component="gists._"] .block-cover .cover-photo .photo-avatar picture {
+            height: 120px;
+            width: 120px;
+        }
+    }
+
+    [component="gists._"] .block-cover .cover-photo .photo-avatar picture:empty {
+        border: 1px solid #555;
     }
 
     @media (max-width: 480px) {
-    [component="gists._"] .block-cover .cover-photo .photo-avatar picture {
-        height: 60px;
-        width: 60px;
-    }
+        [component="gists._"] .block-cover .cover-photo .photo-avatar picture {
+            height: 120px;
+            width: 120px;
+        }
     }
 
     [component="gists._"] .block-cover .cover-photo .photo-avatar picture img {
