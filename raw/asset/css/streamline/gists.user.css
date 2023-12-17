@@ -78,7 +78,13 @@
         margin: auto;
         padding-top: 170px;
         max-width: 960px;
-        width: calc(100% - 20px);
+        width: calc(100% - 40px);
+    }
+
+    @media (max-width: 768px) {
+        [component="gists._"] .block-cover .cover-photo {
+            width: calc(100% - 20px);
+        }
     }
 
     @media (max-width: 480px) {
@@ -118,40 +124,40 @@
     [component="gists._"] .block-cover .cover-photo .photo-user {
         display: flex;
     }
-    
+
     [component="gists._"] .block-cover .cover-photo .photo-user .stats {
         align-items: center;
         display: flex;
         margin: 20px 0;
     }
-    
+
     [component="gists._"] .block-cover .cover-photo .photo-user .stats .stats-icon {
         opacity: 0.5;
     }
-    
+
     [component="gists._"] .block-cover .cover-photo .photo-user .stats [name="followers"] {
         font-weight: bolder;
         margin-right: 3px;
     }
-    
+
     [component="gists._"] .block-cover .cover-photo .photo-user .stats [name="followers"] + * {
         color: #777;
     }
-    
+
     [component="gists._"] .block-cover .cover-photo .photo-user .stats [name="following"] {
         font-weight: bolder;
         margin-right: 3px;
     }
-    
+
     [component="gists._"] .block-cover .cover-photo .photo-user .stats [name="following"] + * {
         color: #777;
     }
-    
+
     [component="gists._"] .block-cover .cover-photo .photo-user .stats :nth-child(4) {
         font-weight: bolder;
         margin: 0 5px;
     }
-    
+
     [component="gists._"] .block-cover .cover-photo .photo-user .stats i.stats-icon {
         align-items: center;
         display: inline-flex;
@@ -313,6 +319,13 @@
         margin: auto;
         max-width: 960px;
         width: calc(100% - 40px);
+    }
+
+    @media(max-width: 768px) {
+        [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet {
+            max-width: 960px;
+            width: calc(100% - 20px);
+        }
     }
 
     [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet > column > text:nth-child(1) {
