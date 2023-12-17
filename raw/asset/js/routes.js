@@ -119,13 +119,21 @@ window.routes = function(uri, options) {
                             box.querySelector('.snippet-file').setAttribute('href', '/:get/:get/' + item.id);
                             box.querySelector('.snippet-description').textContent = item.description;
                             snippets.insertAdjacentHTML('beforeend', box.outerHTML);
-                            console.log(33, {
+                            console.log(122, {
                                 item,
                                 lastActive,
                                 m,
                                 timeDate,
                                 dateTime
                             });
+                            Object.keys(item.files).forEach(function(file) {
+                                var text = document.createElement('text');
+                                text.textContent = file;
+                                snippets.lastElementChild.firstElementChild.querySelector('.snippet-code').firstElementChild.insertAdjacentHTML('beforeend', text.outerHTML);
+                                console.log(133, {
+                                    file
+                                });
+                            })
                         }
                         );
                     }
@@ -856,7 +864,7 @@ window.routes = function(uri, options) {
                         component.querySelector('[placeholder="Firstname Lastname"]').textContent = json.name;
                         component.querySelector('[placeholder="@username"]').textContent = '@' + json.login;
                         component.querySelector('[name="bio"]').textContent = json.bio;
-                                            
+
                         var img = document.createElement('img');
                         img.src = json.avatar_url;
                         component.querySelector('.photo-avatar picture').innerHTML = img.outerHTML;
