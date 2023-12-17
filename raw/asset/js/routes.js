@@ -74,11 +74,16 @@ window.routes = function(uri, options) {
                         );
                     } else {
                         var username = paths[1];
-                        var json = await github.users.user(username);
+                        var json = await github.users.user(username, {
+                            body: JSON.stringify({
+                                'per_page': 6
+                            })
+                        });
                         var img = document.createElement('img');
                         img.src = json.avatar_url;
                         component.querySelector('.photo-avatar picture').innerHTML = img.outerHTML;
                         component.querySelector('[name="bio"]').textContent = json.bio;
+                        component.querySelector('.profile').setAttribute('href', '/' + json.login);
                         component.querySelectorAll('[name="username"]').forEach(el=>{
                             console.log(85, el);
                             el.textContent = username;
@@ -126,10 +131,16 @@ window.routes = function(uri, options) {
                                 timeDate,
                                 dateTime
                             });
-                            Object.keys(item.files).forEach(function(file) {
+                            Object.keys(item.files).forEach(function(key, index) {
                                 var text = document.createElement('text');
-                                text.textContent = file;
+                                text.textContent = key;
                                 snippets.lastElementChild.firstElementChild.querySelector('.snippet-code').firstElementChild.insertAdjacentHTML('beforeend', text.outerHTML);
+
+                                var text = document.createElement('text');
+                                var file = Object.values(item.files)[index];
+                                text.textContent = file;
+                                snippets.lastElementChild.firstElementChild.querySelector('.snippet-code').lastElementChild = text.outerHTML;
+
                                 console.log(133, {
                                     file
                                 });
@@ -850,7 +861,9 @@ window.routes = function(uri, options) {
                     }
                 } else {
                     console.log(819, "routes.view user /:user", {
-                        sub
+                        sub,
+                        pic: component.querySelector('.photo-avatar picture'),
+                        classes: component.querySelector('.photo-avatar picture').classList
                     });
 
                     try {
@@ -860,6 +873,7 @@ window.routes = function(uri, options) {
                         console.log(286, {
                             json
                         })
+                        component.querySelector('.photo-user .follow').classList[firebase.auth().currentUser && localStorage.user === paths[0] ? "add" : "remove"]("hidden");
                         component.querySelector('[name="username"]').textContent = json.login;
                         component.querySelector('[placeholder="Firstname Lastname"]').textContent = json.name;
                         component.querySelector('[placeholder="@username"]').textContent = '@' + json.login;

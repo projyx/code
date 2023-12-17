@@ -57,7 +57,7 @@
     }
 
     [route="/*"] .block-cover > column {
-        padding-bottom: 100px;
+        padding-bottom: 50px;
         position: relative;
         z-index: 123;
     }
@@ -115,40 +115,40 @@
     [route="/*"] .block-cover .cover-photo .photo-user {
         display: flex;
     }
-    
+
     [route="/*"] .block-cover .cover-photo .photo-user .stats {
         align-items: center;
         display: flex;
         margin: 20px 0;
     }
-    
+
     [route="/*"] .block-cover .cover-photo .photo-user .stats .stats-icon {
         opacity: 0.5;
     }
-    
+
     [route="/*"] .block-cover .cover-photo .photo-user .stats [name="followers"] {
         font-weight: bolder;
         margin-right: 3px;
     }
-    
+
     [route="/*"] .block-cover .cover-photo .photo-user .stats [name="followers"] + * {
         color: #777;
     }
-    
+
     [route="/*"] .block-cover .cover-photo .photo-user .stats [name="following"] {
         font-weight: bolder;
         margin-right: 3px;
     }
-    
+
     [route="/*"] .block-cover .cover-photo .photo-user .stats [name="following"] + * {
         color: #777;
     }
-    
+
     [route="/*"] .block-cover .cover-photo .photo-user .stats :nth-child(4) {
         font-weight: bolder;
         margin: 0 5px;
     }
-    
+
     [route="/*"] .block-cover .cover-photo .photo-user .stats i.stats-icon {
         align-items: center;
         display: inline-flex;
@@ -292,7 +292,7 @@
     }
 }
 
-@media {    
+@media {
     [route="/*"] .block-cover .cover-photo .photo-user > column {
         flex: 1;
         justify-content: end;
@@ -589,6 +589,12 @@
         }
     }
 
+    @media (max-width: 768px) {
+        [route="/*"] .block-source > header {
+            padding: 10px;
+        }
+    }
+
     [route="/*"] .block-source .source-code {
         /* background-color: #222; */
         border-bottom: 1px solid #555;
@@ -608,6 +614,12 @@
         /* margin: auto; */
         /* max-width: 768px; */
         padding: 10px 0;
+    }
+
+    @media (max-width: 768px) {
+        [route="/*"] .block-source .source-code > column > box > row {
+            padding: 10px;
+        }
     }
 
     [route="/*"] .block-source .source-code > column > box > row > picture {

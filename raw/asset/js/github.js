@@ -712,7 +712,7 @@ github.users.events = (username,settings)=>{
 }
 github.users.gists = async function(user, query) {
     return new Promise(function(resolve, reject) {
-        query = query ? query : "?per_page=60"
+        query = query ? query : "per_page=60"
         const url = github.endpoint + "/users/" + user + "/gists?" + query;
         const a = data=>{
             console.log(308, data);
