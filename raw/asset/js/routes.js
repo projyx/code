@@ -874,6 +874,7 @@ window.routes = function(uri, options) {
                             json
                         })
                         component.querySelector('.photo-user .follow').classList[firebase.auth().currentUser && localStorage.user === paths[0] ? "add" : "remove"]("hidden");
+                        component.querySelector('.photo-user .edit').classList[firebase.auth().currentUser && localStorage.user === paths[0] ? "remove" : "add"]("hidden");
                         component.querySelector('[name="username"]').textContent = json.login;
                         component.querySelector('[placeholder="Firstname Lastname"]').textContent = json.name;
                         component.querySelector('[placeholder="@username"]').textContent = '@' + json.login;
