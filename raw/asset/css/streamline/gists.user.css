@@ -336,6 +336,24 @@
         margin-bottom: 5px;
     }
 
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-code text {
+        overflow: hidden;
+        width: 100%;
+    }
+
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-code text .CodeMirror {
+        background: transparent;
+    }
+
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-code text .CodeMirror-gutters {
+        background: transparent;
+        border-right: 1px solid #777;
+    }
+
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-code text .CodeMirror-scroll {
+        overflow: hidden !important;
+    }
+
     [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-code text:last-child {
         border-right: 0;
     }
@@ -359,15 +377,17 @@
         box-sizing: border-box;
         margin: 20px auto;
         min-height: 120px;
+        overflow: hidden;
         width: calc(100% - 0px);
     }
 
     [component="gists._"] .block-source .source-code .snippets-snippet .snippet-code > header {
         border-bottom: 1px solid #777;
         color: #ccc;
-        display: inline-flex;
+        display: block;
         flex: 1;
         font-size: 14px;
+        justify-content: space-evenly;
         height: 20px;
         line-height: 20px;
         overflow-y: hidden;

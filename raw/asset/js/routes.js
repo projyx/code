@@ -111,7 +111,7 @@ window.routes = function(uri, options) {
                         var snippets = document.getElementById('code-snippets');
                         var list = await github.users.gists(username);
                         snippets.innerHTML = "";
-                        list.forEach((item)=>{
+                        list.forEach(async(item)=>{
                             var timeDate = item.updated_at ? item.updated_at : item.created_at;
                             var dateTime = model.time.date(timeDate);
                             var box = snippets.nextElementSibling.content.firstElementChild.cloneNode(true);
@@ -124,25 +124,39 @@ window.routes = function(uri, options) {
                             box.querySelector('.snippet-file').setAttribute('href', '/:get/:get/' + item.id);
                             box.querySelector('.snippet-description').textContent = item.description;
                             snippets.insertAdjacentHTML('beforeend', box.outerHTML);
+                            var snippetCode = snippets.lastElementChild.firstElementChild.querySelector('.snippet-code');
+                            var gist = await github.gists.id(item.id);
+                            var files = gist.files;
                             console.log(122, {
+                                gist,
+                                files,
                                 item,
                                 lastActive,
                                 m,
                                 timeDate,
                                 dateTime
                             });
-                            Object.keys(item.files).forEach(function(key, index) {
+                            Object.keys(item.files).forEach(async function(key, index) {
                                 var text = document.createElement('text');
                                 text.textContent = key;
-                                snippets.lastElementChild.firstElementChild.querySelector('.snippet-code').firstElementChild.insertAdjacentHTML('beforeend', text.outerHTML);
+                                snippetCode.firstElementChild.insertAdjacentHTML('beforeend', text.outerHTML);
 
-                                var text = document.createElement('text');
-                                var file = Object.values(item.files)[index];
-                                text.textContent = file;
-                                snippets.lastElementChild.firstElementChild.querySelector('.snippet-code').lastElementChild = text.outerHTML;
-
+                                var textarea = document.createElement('text');
+                                var content = Object.values(files)[index].content;
+                                textarea.value = content;
+                                snippetCode.lastElementChild.innerHTML = textarea.outerHTML;
+                                textarea = snippetCode.lastElementChild.querySelector('text');
+                                textarea.cm = CodeMirror(textarea, {
+                                    value: content,
+                                    mode: "css",
+                                    lineNumbers: true,
+                                    scrollbarStyle: null
+                                });
+                                textarea.cm.setOption("theme", "3024-night");
                                 console.log(133, {
-                                    file
+                                    snippetCode,
+                                    key,
+                                    content
                                 });
                             })
                         }
