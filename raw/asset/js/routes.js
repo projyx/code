@@ -166,7 +166,12 @@ window.routes = function(uri, options) {
                                 snippetCode.lastElementChild.innerHTML = textarea.outerHTML;
                                 textarea = snippetCode.lastElementChild.querySelector('text');
                                 if (textarea.innerHTML === "") {
+                                    box = textarea.closest('box');
+                                    box.querySelector('.snippet-code > section').setAttribute('after', 'View ' + key);
                                     console.log(163, {
+                                        code: box.querySelector('.snippet-code > section'),
+                                        box,
+                                        key,
                                         mode
                                     });
                                     textarea.cm = CodeMirror(textarea, {

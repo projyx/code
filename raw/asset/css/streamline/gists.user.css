@@ -359,6 +359,24 @@
         position: relative;
     }
 
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-code > section:not(:hover):after {
+        display: none;
+    }
+
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-code > section:hover:after {
+        background: #0096c7;
+        color: #fff;
+        content: attr(after);
+        font-size: 13px;
+        line-height: 24px;
+        padding: 0px 10px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
+        z-index: 123;
+    }
+
     [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-code > section:before {
         content: "";
         display: block;
