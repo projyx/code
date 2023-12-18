@@ -99,15 +99,6 @@ window.routes = function(uri, options) {
                             el.textContent = json.bio;
                         }
                         );
-                        console.log(86, {
-                            json,
-                            component,
-                            username,
-                            options,
-                            paths,
-                            selector: '[route="/' + paths.join('/') + '"]'
-                        });
-
                         var snippets = document.getElementById('code-snippets');
                         var list = await github.users.gists(username);
                         snippets.innerHTML = "";
@@ -127,37 +118,65 @@ window.routes = function(uri, options) {
                             var snippetCode = snippets.lastElementChild.firstElementChild.querySelector('.snippet-code');
                             var gist = await github.gists.id(item.id);
                             var files = gist.files;
-                            console.log(122, {
-                                gist,
-                                files,
-                                item,
-                                lastActive,
-                                m,
-                                timeDate,
-                                dateTime
-                            });
+                            var mirror = [];
+                            var assets = 0;
+                            var tlm = null;
                             Object.keys(item.files).forEach(async function(key, index) {
+                                var ext = key.split(".")[key.split(".").length - 1];
+                                if (["index.css", "index.html", "index.js"].includes(key)) {
+                                    var text = document.createElement('text');
+                                    var i = document.createElement("i");
+                                    var con = document.createElement("con");
+                                    i.insertAdjacentHTML("beforeend", con.outerHTML);
+                                    if (ext === "html") {
+                                        i.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <path fill="#E34F26" d="M71,460 L30,0 481,0 440,460 255,512"/>
+  <path fill="#EF652A" d="M256,472 L405,431 440,37 256,37"/>
+  <path fill="#EBEBEB" d="M256,208 L181,208 176,150 256,150 256,94 255,94 114,94 115,109 129,265 256,265zM256,355 L255,355 192,338 188,293 158,293 132,293 139,382 255,414 256,414z"/>
+  <path fill="#FFF" d="M255,208 L255,265 325,265 318,338 255,355 255,414 371,382 372,372 385,223 387,208 371,208zM255,94 L255,129 255,150 255,150 392,150 392,150 392,150 393,138 396,109 397,94z"/>
+</svg>`;
+                                    }
+                                    text.insertAdjacentHTML('beforeend', i.outerHTML);
+                                    mirror.push(ext);
+                                } else {
+                                    assets++;
+                                }
+                                snippetCode.previousElementSibling.querySelector('.stats-files').setAttribute('before', assets);
+
                                 var text = document.createElement('text');
-                                text.textContent = key;
+                                var span = document.createElement("span");
+                                span.textContent = key;
+                                text.insertAdjacentHTML('beforeend', span.outerHTML);
                                 snippetCode.firstElementChild.insertAdjacentHTML('beforeend', text.outerHTML);
+                                var rra = 0;
+                                var arr = ["html", "css", "js"];
 
                                 var textarea = document.createElement('text');
-                                var content = Object.values(files)[index].content;
+                                var array = Object.values(files)[index].content.split("\n").slice(0, 10);
+                                while (array.length) {
+                                    const last = array[array.length - 1];
+                                    if (last !== "" && last !== "\r") {
+                                        break;
+                                    }
+                                    --array.length;
+                                }
+                                var mode = mirror[mirror.length - 1];
+                                var content = array.join("\n");
                                 textarea.value = content;
                                 snippetCode.lastElementChild.innerHTML = textarea.outerHTML;
                                 textarea = snippetCode.lastElementChild.querySelector('text');
-                                textarea.cm = CodeMirror(textarea, {
-                                    value: content,
-                                    mode: "css",
-                                    lineNumbers: true,
-                                    scrollbarStyle: null
-                                });
-                                textarea.cm.setOption("theme", "3024-night");
-                                console.log(133, {
-                                    snippetCode,
-                                    key,
-                                    content
-                                });
+                                if (textarea.innerHTML === "") {
+                                    console.log(163, {
+                                        mode
+                                    });
+                                    textarea.cm = CodeMirror(textarea, {
+                                        value: content,
+                                        lineNumbers: true,
+                                        scrollbarStyle: null
+                                    });
+                                    textarea.cm.setOption("theme", "3024-night");
+                                }
+                                snippetCode.lastElementChild.setAttribute('href', '/gists/:get/' + item.id);
                             })
                         }
                         );

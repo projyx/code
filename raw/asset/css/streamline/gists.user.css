@@ -343,6 +343,7 @@
 
     [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-code text .CodeMirror {
         background: transparent;
+        height: auto;
     }
 
     [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-code text .CodeMirror-gutters {
@@ -352,6 +353,24 @@
 
     [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-code text .CodeMirror-scroll {
         overflow: hidden !important;
+    }
+
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-code > section {
+        position: relative;
+    }
+
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-code > section:before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        z-index: 1234;
+        position: absolute;
+    }
+
+    [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-code > section:hover:before {
+        border: 2px solid #0096c7;
+        box-sizing: border-box;
     }
 
     [component="gists._"] .block-source .source-code #code-snippets .snippets-snippet .snippet-code text:last-child {
@@ -376,7 +395,7 @@
         border-radius: 5px;
         box-sizing: border-box;
         margin: 20px auto;
-        min-height: 120px;
+        min-height: 60px;
         overflow: hidden;
         width: calc(100% - 0px);
     }
