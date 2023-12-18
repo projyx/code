@@ -165,10 +165,11 @@ window.routes = function(uri, options) {
                                 textarea.value = content;
                                 snippetCode.lastElementChild.innerHTML = textarea.outerHTML;
                                 textarea = snippetCode.lastElementChild.querySelector('text');
-                                if (textarea.innerHTML === "") {
+                                if (!textarea.cm) {
                                     box = textarea.closest('box');
                                     box.querySelector('.snippet-code > section').setAttribute('after', 'View ' + key);
                                     console.log(163, {
+                                        cm: textarea.cm,
                                         code: box.querySelector('.snippet-code > section'),
                                         box,
                                         key,
