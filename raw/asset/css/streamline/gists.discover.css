@@ -1,5 +1,5 @@
 @media {
-    [component="gists.discover"] {
+    [routes="/gists/discover"] {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
@@ -9,7 +9,7 @@
 }
 
 @media {
-    [component="gists.discover"] .header-user {
+    [routes="/gists/discover"] .header-user {
         /* background: #292a2d; */
         /* background: #444; */
         /* box-sizing: border-box; */
@@ -19,39 +19,39 @@
         /* width: 100%; */
         /* z-index: 12345; */
     }
-    [component="gists.discover"] .header-user > row {
+    [routes="/gists/discover"] .header-user > row {
         align-items: center;
         display: flex;
         flex: 1;
         height: 100%;
     }
     
-    [component="gists.discover"] .header-user .user-authenticate {
+    [routes="/gists/discover"] .header-user .user-authenticate {
         height: 30px;
         margin-left: auto;
         width: 30px;
     }
     
-    [component="gists.discover"] .header-user .user-authenticate .authenticate-avatar i {
+    [routes="/gists/discover"] .header-user .user-authenticate .authenticate-avatar i {
         border-radius: 50%;
         height: 30px;
         overflow: hidden;
         width: 30px;
     }
     
-    [component="gists.discover"] .header-user .user-authenticate .authenticate-avatar i:empty {
+    [routes="/gists/discover"] .header-user .user-authenticate .authenticate-avatar i:empty {
         border: 1px solid #555;
         box-sizing: border-box;
     }
 
-    [component="gists.discover"] .header-user .user-authenticate .authenticate-avatar i img {
+    [routes="/gists/discover"] .header-user .user-authenticate .authenticate-avatar i img {
         height: 100%;
         width: 100%;
     }
 }
 
 @media {
-    [component="gists.discover"] .block-cover {
+    [routes="/gists/discover"] .block-cover {
         /* background-color: #222; */
         border-bottom: 1px solid #777;
         min-height: 50px;
@@ -59,46 +59,46 @@
         position: relative;
     }
 
-    [component="gists.discover"] .block-cover > column {
+    [routes="/gists/discover"] .block-cover > column {
         /* padding-bottom: 25px; */
         position: relative;
         z-index: 123;
     }
     
-    [component="gists.discover"] .block-cover .cover-card {
+    [routes="/gists/discover"] .block-cover .cover-card {
         align-items: center;
         display: flex;
         margin: 0 20px;
         padding-top: 20px;
     }
     
-    [component="gists.discover"] .block-cover .cover-card > column {
+    [routes="/gists/discover"] .block-cover .cover-card > column {
         gap: 20px;
     }
     
-    [component="gists.discover"] .block-cover .card-title {
+    [routes="/gists/discover"] .block-cover .card-title {
         font-size: 20px;
     }
     
-    [component="gists.discover"] .block-cover .card-title > row i {
+    [routes="/gists/discover"] .block-cover .card-title > row i {
         height: 20px;
         width: 20px;
     }
     
-    [component="gists.discover"] .block-cover .card-tabs > row {
+    [routes="/gists/discover"] .block-cover .card-tabs > row {
         gap: 10px;
     }
     
-    [component="gists.discover"] .block-cover .card-tabs > row i {
+    [routes="/gists/discover"] .block-cover .card-tabs > row i {
         height: 20px;
         width: 20px;
     }
     
-    [component="gists.discover"] .block-cover .card-tabs > row i con {
+    [routes="/gists/discover"] .block-cover .card-tabs > row i con {
         --ggs: 0.75;
     }
     
-    [component="gists.discover"] .block-cover .card-tabs > row text {
+    [routes="/gists/discover"] .block-cover .card-tabs > row text {
         align-items: center;
         display: inline-flex;
         font-size: 13px;
@@ -111,17 +111,17 @@
 }
 
 @media {
-    [component="gists.discover"] .block-source .source-code {
+    [routes="/gists/discover"] .block-source .source-code {
         /* background-color: #222; */
         padding: 36px 0;
         position: relative;
     }
     
-    [component="gists.discover"] .block-source .source-code #code-snippets {
+    [routes="/gists/discover"] .block-source .source-code #code-snippets {
         gap: 40px;
     }
     
-    [component="gists.discover"] .block-source .source-code #code-snippets .snippets-snippet {
+    [routes="/gists/discover"] .block-source .source-code #code-snippets .snippets-snippet {
         /* background-color: #292a2d; */
         box-sizing: border-box;
         margin: auto;
@@ -129,30 +129,30 @@
         width: calc(100% - 20px);
     }
     
-    [component="gists.discover"] .block-source .source-code #code-snippets .snippets-snippet text:nth-child(1) {
+    [routes="/gists/discover"] .block-source .source-code #code-snippets .snippets-snippet text:nth-child(1) {
         margin-bottom: 5px;
     }
     
-    [component="gists.discover"] .block-source .source-code #code-snippets .snippets-snippet text:nth-child(2) {
+    [routes="/gists/discover"] .block-source .source-code #code-snippets .snippets-snippet text:nth-child(2) {
         margin-bottom: 5px;
     }
     
-    [component="gists.discover"] .block-source .source-code #code-snippets .snippets-snippet text:nth-child(3) {
+    [routes="/gists/discover"] .block-source .source-code #code-snippets .snippets-snippet text:nth-child(3) {
     }
     
-    [component="gists.discover"] .block-source .source-code #code-snippets .snippets-snippet .snippet-date {
+    [routes="/gists/discover"] .block-source .source-code #code-snippets .snippets-snippet .snippet-date {
         font-size: 13px;
     }
     
-    [component="gists.discover"] .block-source .source-code #code-snippets .snippets-snippet .snippet-description {
+    [routes="/gists/discover"] .block-source .source-code #code-snippets .snippets-snippet .snippet-description {
         font-size: 13px;
     }
 
-    [component="gists.discover"] .block-source .source-code #code-snippets .snippets-snippet > column > :first-child > :not(:nth-child(2)) {
+    [routes="/gists/discover"] .block-source .source-code #code-snippets .snippets-snippet > column > :first-child > :not(:nth-child(2)) {
         color: #0096c7;
     }
     
-    [component="gists.discover"] .block-source .source-code .snippets-snippet .snippet-code {
+    [routes="/gists/discover"] .block-source .source-code .snippets-snippet .snippet-code {
         background: transparent;
         border: 1px solid #777;
         border-radius: 5px;
@@ -161,14 +161,14 @@
         width: 100%;
     }
     
-    [component="gists.discover"] .block-source .source-code > column > box > row {
+    [routes="/gists/discover"] .block-source .source-code > column > box > row {
         align-items: center;
         margin: auto;
         max-width: 768px;
         padding: 10px 0;
     }
     
-    [component="gists.discover"] .block-source .source-code > column > box > row > picture {
+    [routes="/gists/discover"] .block-source .source-code > column > box > row > picture {
         /* background-color: black; */
         border: 1px solid #555;
         border-radius: 15%;
@@ -177,7 +177,7 @@
         width: 64px;
     }
     
-    [component="gists.discover"] .block-source .source-code > column > box > row > text {
+    [routes="/gists/discover"] .block-source .source-code > column > box > row > text {
         align-items: center;
         display: flex;
         flex-direction: row;
@@ -185,44 +185,44 @@
         padding: 0 10px;
     }
 
-    [component="gists.discover"] .block-source .source-code > column > box > row > text > span:first-child {
+    [routes="/gists/discover"] .block-source .source-code > column > box > row > text > span:first-child {
         /* font-weight: bolder; */
     }
 
-    [component="gists.discover"] .block-source .source-code > column > box > row > text > span:last-child {
+    [routes="/gists/discover"] .block-source .source-code > column > box > row > text > span:last-child {
         color: #ccc;
         /* font-size: 13px; */
     }
     
-    [component="gists.discover"] .block-source .source-code > column > box > row > i {
+    [routes="/gists/discover"] .block-source .source-code > column > box > row > i {
         margin-left: auto;
     }
 }
 
 @media {
-    [component="gists.discover"] .snippet-stats {
+    [routes="/gists/discover"] .snippet-stats {
         display: flex;
         gap: 10px;
         padding: 20px 0 0;
     }
     
-    [component="gists.discover"] .snippet-stats i {
+    [routes="/gists/discover"] .snippet-stats i {
         display: inline-flex;
     }
     
-    [component="gists.discover"] .snippet-stats row:nth-child(1) i {
+    [routes="/gists/discover"] .snippet-stats row:nth-child(1) i {
         width: 36px;
     }
     
-    [component="gists.discover"] .snippet-stats row:nth-child(2) i {
+    [routes="/gists/discover"] .snippet-stats row:nth-child(2) i {
         width: 24px;
     }
     
-    [component="gists.discover"] .snippet-stats row:nth-child(3) i {
+    [routes="/gists/discover"] .snippet-stats row:nth-child(3) i {
         width: 30px;
     }
     
-    [component="gists.discover"] .snippet-stats row:nth-child(4) i {
+    [routes="/gists/discover"] .snippet-stats row:nth-child(4) i {
         width: 24px;
     }
 }
