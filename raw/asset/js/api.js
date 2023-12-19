@@ -277,55 +277,78 @@ api.snippet.saved = ()=>{
     }
     );
 }
-api.snippet.save = async()=>{
+api.snippet.save = async(target)=>{
     console.log(116, 1, 'api.gists.likes', {
         paths: rout.e.paths,
         path: rout.e.paths[2]
     });
-    try {
-        var starred = await github.gists.star({
-            id: rout.e.paths[2]
-        });
-        console.log(116, 2, 'api.gists.likes 200', {
-            starred
+    if (target.closest('text').querySelector('i:has(.gg-bookmark)').style.color.length === 0) {
+        //throw new TypeError(`{"msg": "You already like this."}`);
+        console.log(116, 3.0, 'api.gists.likes 404', {
+            star
         });
         try {
-            alert("You unlike like this");
             var star = await github.gists.star({
                 id: rout.e.paths[2]
             }, {
                 method: "PUT"
             });
-            console.log(116, 3, 'api.gists.likes 200', {
+            console.log(116, 4, 'api.gists.likes 200s', {
                 star
             });
+            target.closest('text').querySelector('i:has(.gg-bookmark)').style.color = "#0096c7";
         } catch (e) {
-            console.log(116, 3, 'api.gists.likes 404', {
-                e
-            });
+            console.log(328, 4, 'api.gists.likes 404', e);
         }
-    } catch (e) {
-        var msg = JSON.parse(e.message)
-        console.log(116, 2, 'api.gists.likes 404', {
-            e,
-            msg
-        });
-        if (msg.code === 404) {
-            alert("You like this");
-            console.log(116, 3.5, 'api.gists.likes 404', {
-                star
+    } else {
+        try {
+            var starred = await github.gists.star({
+                id: rout.e.paths[2]
+            });
+            console.log(116, 2, 'api.gists.likes 200', {
+                starred,
+                length: target.closest('text').querySelector('i:has(.gg-bookmark)').style.color.length
             });
             try {
+                //alert("You unlike this");
                 var star = await github.gists.star({
                     id: rout.e.paths[2]
                 }, {
-                    method: "PUT"
+                    method: "DELETE"
                 });
-                console.log(116, 4, 'api.gists.likes 200s', {
+                console.log(116, 3, 'api.gists.likes 200', {
                     star
                 });
+                target.closest('text').querySelector('i:has(.gg-bookmark)').removeAttribute('style');
             } catch (e) {
-                console.log(328, 4, 'api.gists.likes 404', e);
+                console.log(116, 3, 'api.gists.likes 404', {
+                    e
+                });
+            }
+        } catch (e) {
+            var msg = JSON.parse(e.message)
+            console.log(116, 2.5, 'api.gists.likes 404', {
+                e,
+                msg
+            });
+            if (msg.code === 404) {
+                //alert("You like this");
+                console.log(116, 3.5, 'api.gists.likes 404', {
+                    star
+                });
+                try {
+                    var star = await github.gists.star({
+                        id: rout.e.paths[2]
+                    }, {
+                        method: "PUT"
+                    });
+                    console.log(116, 4, 'api.gists.likes 200s', {
+                        star
+                    });
+                    target.closest('text').querySelector('i:has(.gg-bookmark)').style.color = "#0096c7";
+                } catch (e) {
+                    console.log(328, 4, 'api.gists.likes 404', e);
+                }
             }
         }
     }

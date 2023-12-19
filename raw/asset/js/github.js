@@ -394,7 +394,7 @@ github.gists.star = async(params,settings)=>{
     });
     if (settings) {
         if (settings.method) {
-            if (settings.method === "PUT") {
+            //if (settings.method === "PUT") {
                 return new Promise((resolve,reject)=>{
                     const url = github.endpoint + "/gists/" + params.id + "/star";
                     const a = (data)=>{
@@ -414,7 +414,7 @@ github.gists.star = async(params,settings)=>{
                     request(url, settings).then(a).catch(b);
                 }
                 );
-            }
+            //}
         }
     } else {
         return new Promise((resolve,reject)=>{

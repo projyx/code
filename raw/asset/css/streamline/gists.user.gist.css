@@ -149,6 +149,7 @@
 
     [component="gists._._"] .header-code .buttons-group > section > :last-child i:not(:last-child) {
         border-right: 1px solid #777;
+        color: white;
         height: 30px;
         padding: 0 5px;
         width: 24px;

@@ -210,7 +210,7 @@ window.routes = function(uri, options) {
                                 if (lv === 204) {
                                     component.querySelector(".gg-bookmark").closest("i").style.color = "#0096c7";
                                 } else {
-                                    component.querySelector(".gg-bookmark").closest("i").style.color = "initial";
+                                    component.querySelector(".gg-bookmark").closest("i").removeAttribute('style');
                                 }
                             } catch (e) {
                                 console.log(211, e);
