@@ -138,10 +138,14 @@ window.routes = function(uri, options) {
                                     }
                                     text.insertAdjacentHTML('beforeend', i.outerHTML);
                                     mirror.push(ext);
+                                    assets++;
                                 } else {
                                     assets++;
                                 }
+                                snippetCode.previousElementSibling.querySelector('.stats-comments').setAttribute('before', gist.comments);
                                 snippetCode.previousElementSibling.querySelector('.stats-files').setAttribute('before', assets);
+                                snippetCode.previousElementSibling.querySelector('.stats-forks').setAttribute('before', gist.forks.length);
+                                snippetCode.previousElementSibling.querySelector('.stats-saves').setAttribute('before', gist.forks.length);
 
                                 var text = document.createElement('text');
                                 var span = document.createElement("span");
@@ -192,6 +196,26 @@ window.routes = function(uri, options) {
                 if (paths.length === 1 || paths.length > 1) {
                     var username = paths[0];
                     if (paths.length === 1 || paths.length > 2) {
+
+                        if (paths.length > 2) {
+                            try {
+                                var starred = await github.gists.star({
+                                    id: paths[2]
+                                });
+                                var lv = starred.status;
+                                console.log(284, {
+                                    starred,
+                                    lv
+                                });
+                                if (lv === 204) {
+                                    component.querySelector(".gg-bookmark").closest("i").style.color = "#0096c7";
+                                } else {
+                                    component.querySelector(".gg-bookmark").closest("i").style.color = "initial";
+                                }
+                            } catch (e) {
+                                console.log(211, e);
+                            }
+                        }
 
                         var i = paths[3] ? (paths[3] ? ['details', 'full', 'debug'].indexOf(paths[3]) : 1) + 2 : '1';
                         var btn = document.querySelector('.buttons-group > * > :nth-child(5) [drop="down"] + flex > column text:nth-child(' + i + ')');

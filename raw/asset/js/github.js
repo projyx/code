@@ -405,12 +405,12 @@ github.gists.star = async(params,settings)=>{
                         reject(error);
                     }
                     const accessToken = localStorage.githubAccessToken;
-                    var settings = {};
+                    //var settings = {};
                     accessToken ? settings.headers = {
                         Accept: "application/vnd.github+json",
                         Authorization: "token " + accessToken
                     } : null;
-                    //console.log({ url, settings });
+                    console.log(413, { url, settings });
                     request(url, settings).then(a).catch(b);
                 }
                 );
@@ -433,7 +433,7 @@ github.gists.star = async(params,settings)=>{
                 Authorization: "token " + accessToken
             } : null;
             //console.log({ url, settings });
-            request(url, settings).then(a).catch(b);
+            fetch(url, settings).then(a).catch(b);
         }
         );
     }
