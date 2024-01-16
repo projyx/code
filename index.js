@@ -72,6 +72,7 @@ window.onload = async(event)=>{
         //dom.body.dataset.load = "ed";
     }
     );
+    
     document.body.onclick = window.events.onclick.document;
 
     document.onkeydown = window.events.onkeydown;

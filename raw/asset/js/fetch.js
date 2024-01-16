@@ -1,5 +1,5 @@
 window.Fetch = window.fetch;
-window.fetch = window.request = async(resource,options)=>{
+window.fetches = window.request = async(resource,options)=>{
     resource = resource.toString();
     options ? null : options = {};
     console.log(3, 'window.fetch', resource);
