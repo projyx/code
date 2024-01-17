@@ -1,0 +1,148 @@
+<header class="header-user">
+    <row>
+        <card class="shell-brand">
+            <section>
+                <box class="brand-image" href="/">
+                    <section>
+                        <i>
+                            <con class="icon-code-slash"></con>
+                        </i>
+                        <text>CodePencil</text>
+                    </section>
+                </box>
+            </section>
+        </card>
+        <dropdown>
+            <row drop="down">
+                <box class="code-authenticate">
+                    <section>
+                        <span class="authenticate-avatar">
+                            <section>
+                                <i class="avatar-image" onclick="window[0 < 1 ? 'github' : 'api'].oauth.login(event.target)"></i>
+                            </section>
+                        </span>
+                    </section>
+                </box>
+            </row>
+            <column>
+                <box>
+                    <column>
+                        <text>
+                            <span href="/:user">My Apps</span>
+                            <span href="/gists/:user">My Snippets</span>
+                        </text>
+                        <text>
+                            <span href="/gists">New Snippet</span>
+                            <span href="/new">New Web App</span>
+                            <span style="display: none;">New Archive</span>
+                        </text>
+                        <text>
+                            <span href="/raw">File Cloud</span>
+                            <span href="/docs">Documentation</span>
+                        </text>
+                        <text>
+                            <span href="/settings">Settings</span>
+                            <span onclick="github.oauth.sign_out()">Log Out</span>
+                        </text>
+                    </column>
+                </box>
+            </column>
+        </dropdown>
+    </row>
+</header>
+<block class="block-cover">
+    <column>
+        <card class="cover-card">
+            <column>
+                <box class="card-title">
+                    <row>
+                        <text>
+                            <i> 
+                                <con class="gg-code-slash"></con>
+                            </i>
+                            <span>Discover Snippets</span>
+                        </text>
+                    </row>
+                </box>
+                <box class="card-tabs">
+                    <row>
+                        <text>
+                            <i> 
+                                <con class="gg-code-slash"></con>
+                            </i>
+                            <span>All Snippets</span>
+                        </text>
+                        <text>
+                            <i>
+                                <con class="gg-git-fork"></con>
+                            </i>
+                            <span>Forked</span>
+                        </text>
+                        <text>
+                            <i>
+                                <con class="gg-bookmark"></con>
+                            </i>
+                            <span>Saved</span>
+                        </text>
+                    </row>
+                </box>
+            </column>
+        </card>
+    </column>
+</block>
+<block class="block-source">
+    <column>
+        <card class="source-code">
+            <column id="code-snippets"></column>
+            <template>
+                <box class="snippets-snippet">
+                    <column>
+                        <!--<picture></picture>-->
+                        <text>
+                            <span class="snippet-user" placeholder="username"></span>
+                            <span>/</span>
+                            <span class="snippet-file" placeholder="file.ext"></span>
+                        </text>
+                        <text>
+                            <span class="snippet-date"></span>
+                        </text>
+                        <text>
+                            <span class="snippet-name"></span>
+                        </text>
+                        <text class="snippet-description">
+                            <header class="description-header"></header>
+                            <section class="description-content"></section>
+                        </text>
+                        <text class="snippet-stats">
+                            <row>
+                                <i>
+                                    <con class="gg-code-slash"></con>
+                                </i>
+                                <span after="files">2 files</span>
+                            </row>
+                            <row>
+                                <i>
+                                    <con class="gg-git-fork"></con>
+                                </i>
+                                <span after="forks">0 forks</span>
+                            </row>
+                            <row>
+                                <i>
+                                    <con class="gg-comment"></con>
+                                </i>
+                                <span after="comments">0 comments</span>
+                            </row>
+                            <row>
+                                <i>
+                                    <con class="gg-bookmark"></con>
+                                </i>
+                                <span after="saves">0 saves</span>
+                            </row>
+                        </text>
+                        <textarea class="snippet-code"></textarea>
+                    </column>
+                </box>
+            </template>
+        </card>
+    </column>
+</block>

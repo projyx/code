@@ -1,0 +1,278 @@
+<header class="header-code">
+    <section>
+        <div class="code-file">
+            <section>
+                <span class="file-menu" onclick="events.onclick.exit()">
+                    <section>
+                        <i>
+                            <con class="icon-chevron-left"></con>
+                        </i>
+                    </section>
+                </span>
+                <span class="file-meta">
+                    <section>
+                        <text class="meta-title" name="title" placeholder="Untitled"></text>
+                        <text class="meta-owner" name="owner" placeholder="Username"></text>
+                    </section>
+                </span>
+            </section>
+        </div>
+        <div class="code-buttons">
+            <section>
+                <span class="buttons-group">
+                    <section>
+                        <dropdown>
+                            <row drop="down">
+                                <i>
+                                    <con class="gg-layout-list"></con>
+                                </i>
+                            </row>
+                            <flex>
+                                <column>
+                                    <text>
+                                        <i onclick="api.gists.push()">
+                                            <con class="gg-software-upload"></con>
+                                        </i>
+                                        <span>Save</span>
+                                    </text>
+                                    <text>
+                                        <i onclick="api.gists.push()">
+                                            <con class="gg-options"></con>
+                                        </i>
+                                        <span>Settings</span>
+                                    </text>
+                                </column>
+                            </flex>
+                        </dropdown>
+                        <i onclick="api.gists.push()">
+                            <con class="icon-upload"></con>
+                        </i>
+                        <i onclick="api.gists.config()">
+                            <con class="icon-config"></con>
+                        </i>
+                        <dropdown>
+                            <row drop="down">
+                                <i>
+                                    <con class="icon-eye"></con>
+                                </i>
+                            </row>
+                            <flex>
+                                <header>
+                                    <box>
+                                        <section>
+                                            <text>Change View</text>
+                                        </section>
+                                    </box>
+                                </header>
+                                <row>
+                                    <picture class="active">
+                                        <svg viewBox="0 0 20 20" class="EditorHeaderViewSwitcher_iconPen-jP26l">
+                                            <path d="M0 9.002C0 8.45.455 8 .992 8h18.016c.548 0 .992.456.992 1.002v9.996c0 .553-.455 1.002-.992 1.002H.992C.444 20 0 19.544 0 18.998V9.002Zm0-8C0 .45.451 0 .99 0h4.02A.99.99 0 0 1 6 1.003v4.994C6 6.551 5.549 7 5.01 7H.99A.99.99 0 0 1 0 5.997V1.003Zm7 0C7 .45 7.451 0 7.99 0h4.02A.99.99 0 0 1 13 1.003v4.994C13 6.551 12.549 7 12.01 7H7.99A.99.99 0 0 1 7 5.997V1.003Zm7 0C14 .45 14.451 0 14.99 0h4.02A.99.99 0 0 1 20 1.003v4.994C20 6.551 19.549 7 19.01 7h-4.02A.99.99 0 0 1 14 5.997V1.003Z"></path>
+                                        </svg>
+                                    </picture>
+                                    <picture>
+                                        <svg viewBox="0 0 20 20" class="EditorHeaderViewSwitcher_iconPen-jP26l">
+                                            <path d="M0 9.002C0 8.45.455 8 .992 8h18.016c.548 0 .992.456.992 1.002v9.996c0 .553-.455 1.002-.992 1.002H.992C.444 20 0 19.544 0 18.998V9.002Zm0-8C0 .45.451 0 .99 0h4.02A.99.99 0 0 1 6 1.003v4.994C6 6.551 5.549 7 5.01 7H.99A.99.99 0 0 1 0 5.997V1.003Zm7 0C7 .45 7.451 0 7.99 0h4.02A.99.99 0 0 1 13 1.003v4.994C13 6.551 12.549 7 12.01 7H7.99A.99.99 0 0 1 7 5.997V1.003Zm7 0C14 .45 14.451 0 14.99 0h4.02A.99.99 0 0 1 20 1.003v4.994C20 6.551 19.549 7 19.01 7h-4.02A.99.99 0 0 1 14 5.997V1.003Z"></path>
+                                        </svg>
+                                    </picture>
+                                    <picture>
+                                        <svg viewBox="0 0 20 20" class="EditorHeaderViewSwitcher_iconPen-jP26l">
+                                            <path d="M0 9.002C0 8.45.455 8 .992 8h18.016c.548 0 .992.456.992 1.002v9.996c0 .553-.455 1.002-.992 1.002H.992C.444 20 0 19.544 0 18.998V9.002Zm0-8C0 .45.451 0 .99 0h4.02A.99.99 0 0 1 6 1.003v4.994C6 6.551 5.549 7 5.01 7H.99A.99.99 0 0 1 0 5.997V1.003Zm7 0C7 .45 7.451 0 7.99 0h4.02A.99.99 0 0 1 13 1.003v4.994C13 6.551 12.549 7 12.01 7H7.99A.99.99 0 0 1 7 5.997V1.003Zm7 0C14 .45 14.451 0 14.99 0h4.02A.99.99 0 0 1 20 1.003v4.994C20 6.551 19.549 7 19.01 7h-4.02A.99.99 0 0 1 14 5.997V1.003Z"></path>
+                                        </svg>
+                                    </picture>
+                                </row>
+                            </flex>
+                        </dropdown>
+                        <i onclick="api.gists.likes()">
+                            <con class="gg-heart"></con>
+                        </i>
+                    </section>
+                </span>
+            </section>
+        </div>
+        <dropdown>
+            <row drop="down">
+                <div class="code-authenticate">
+                    <section>
+                        <span class="authenticate-avatar">
+                            <section>
+                                <i class="avatar-image"></i>
+                                <!--onclick="window[0 < 1 ? 'github' : 'api'].oauth.login(event.target)"></i>-->
+                            </section>
+                        </span>
+                    </section>
+                </div>
+            </row>
+            <column>
+                <box>
+                    <column>
+                        <text>
+                            <span href="/:user">My Apps</span>
+                            <span href="/gists/:user">My Snippets</span>
+                        </text>
+                        <text>
+                            <span href="/gists">New Snippet</span>
+                            <span href="/new">New Web App</span>
+                            <span style="display: none;">New Archive</span>
+                        </text>
+                        <text>
+                            <span href="/raw">File Cloud</span>
+                            <span href="/docs">Documentation</span>
+                        </text>
+                        <text>
+                            <span href="/settings">Settings</span>
+                            <span onclick="github.oauth.sign_out()">Log Out</span>
+                        </text>
+                    </column>
+                </box>
+            </column>
+        </dropdown>
+    </section>
+</header>
+<aside class="aside-code">
+    <header>
+        <box class="file-type active">
+            <section>
+                <text>
+                    <picture>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="#E34F26" d="M71,460 L30,0 481,0 440,460 255,512"/>
+                            <path fill="#EF652A" d="M256,472 L405,431 440,37 256,37"/>
+                            <path fill="#EBEBEB" d="M256,208 L181,208 176,150 256,150 256,94 255,94 114,94 115,109 129,265 256,265zM256,355 L255,355 192,338 188,293 158,293 132,293 139,382 255,414 256,414z"/>
+                            <path fill="#FFF" d="M255,208 L255,265 325,265 318,338 255,355 255,414 371,382 372,372 385,223 387,208 371,208zM255,94 L255,129 255,150 255,150 392,150 392,150 392,150 393,138 396,109 397,94z"/>
+                        </svg>
+                    </picture>
+                    <span>HTML</span>
+                </text>
+            </section>
+        </box>
+        <box class="file-type">
+            <section>
+                <text>
+                    <picture>
+                        <svg height="800px" width="800px" xmlns="http://www.w3.org/2000/svg" aria-label="CSS3" role="img" viewBox="0 0 512 512">
+                            <path fill="#264de4" d="M72 460L30 0h451l-41 460-184 52"/>
+                            <path fill="#2965f1" d="M256 37V472l149-41 35-394"/>
+                            <path fill="#ebebeb" d="m114 94h142v56H119m5 58h132v57H129m3 28h56l4 45 64 17v59L139 382"/>
+                            <path fill="#ffffff" d="m256 208v57h69l-7 73-62 17v59l115-32 26-288H256v56h80l-5.5 58Z"/>
+                        </svg>
+                    </picture>
+                    <span>CSS</span>
+                </text>
+            </section>
+        </box>
+        <box class="file-type">
+            <section>
+                <text>
+                    <picture>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="4000" height="4548" viewBox="0 0 4000 4548" version="1.1">
+                            <path d="M 1451.705 1104.750 C 1451.360 1229.463, 1450.291 1700.612, 1449.329 2151.750 C 1448.367 2602.887, 1447.247 2972, 1446.840 2972 C 1446.103 2972, 1422.250 2965.693, 1304.500 2934.364 C 1197.727 2905.956, 1029.010 2859.903, 880 2818.493 C 820.398 2801.930, 797.226 2795.502, 710.654 2771.514 C 691.489 2766.203, 675.669 2762.003, 675.499 2762.179 C 675.056 2762.639, 676.877 3240.211, 677.324 3240.658 C 677.801 3241.134, 1847.748 3557, 1849.035 3557 C 1849.654 3557, 1850 3076.990, 1850 2217.500 L 1850 878 1651.166 878 L 1452.332 878 1451.705 1104.750" stroke="none" fill="#ebebeb" fill-rule="evenodd"/>
+                            <path d="M 0.025 3.670 C 0.085 12.725, 370.739 4087.134, 371.575 4087.922 C 372.084 4088.401, 737.965 4191.907, 1184.645 4317.934 L 1996.791 4547.073 2814.133 4316.197 L 3631.475 4085.321 3632.109 4081.411 C 3632.457 4079.260, 3715.263 3162.131, 3816.121 2043.347 C 3916.979 924.563, 3999.831 9.713, 4000.235 10.347 C 4000.639 10.981, 4000.976 9.025, 4000.985 6 L 4001 0.500 2000.500 0.170 L -0 -0.160 0.025 3.670 M 1452.640 877.773 C 1452.378 878.198, 1451.128 1349.573, 1449.863 1925.273 C 1448.598 2500.973, 1447.234 2972, 1446.833 2972 C 1444.578 2972, 869.632 2815.485, 733.659 2777.856 C 701.846 2769.053, 675.676 2761.996, 675.504 2762.175 C 675.057 2762.638, 676.874 3240.208, 677.324 3240.658 C 677.801 3241.134, 1847.748 3557, 1849.035 3557 C 1849.654 3557, 1850 3076.811, 1850 2217 L 1850 877 1651.559 877 C 1542.416 877, 1452.903 877.348, 1452.640 877.773 M 3398 877.709 C 3377.375 877.837, 3120.425 879.059, 2827 880.425 C 2275.751 882.990, 2162.004 883.663, 2161.304 884.363 C 2160.890 884.777, 2177.864 2620.198, 2178.286 2620.620 C 2178.412 2620.745, 2351.536 2591.187, 2563.007 2554.936 C 2774.478 2518.684, 2948.544 2489.019, 2949.820 2489.012 L 2952.141 2489 2951.523 2502.750 C 2951.184 2510.313, 2948.656 2597.261, 2945.906 2695.970 C 2943.156 2794.678, 2940.518 2875.678, 2940.042 2875.970 C 2939.567 2876.261, 2764.200 2923.030, 2550.339 2979.899 C 2336.478 3036.769, 2161.362 3083.406, 2161.194 3083.538 C 2160.732 3083.901, 2168.610 3555.944, 2169.086 3556.415 C 2169.621 3556.944, 3244.260 3277.036, 3245.244 3276.111 C 3246.077 3275.329, 3353.667 1969.317, 3352.953 1968.649 C 3352.704 1968.416, 3174.075 1988.188, 2956 2012.588 C 2737.925 2036.988, 2559.162 2056.962, 2558.750 2056.976 C 2558.338 2056.989, 2558 1899.566, 2558 1707.146 L 2558 1357.293 2741.750 1356.610 C 3090.600 1355.315, 3406.390 1353.943, 3406.548 1353.722 C 3406.635 1353.600, 3414.207 1248.425, 3423.375 1120 C 3432.543 991.575, 3440.301 884.362, 3440.616 881.750 C 3441.185 877.023, 3441.174 877.001, 3438.344 877.237 C 3436.780 877.368, 3418.625 877.580, 3398 877.709 M 2641 4050.772 C 2297.525 4144.044, 2016.351 4220.463, 2016.169 4220.593 C 2015.987 4220.722, 2015.987 4221.682, 2016.169 4222.726 C 2016.469 4224.447, 2074.477 4208.734, 2639.500 4053.882 C 2982.150 3959.975, 3263.850 3882.705, 3265.500 3882.173 C 3267.150 3881.640, 3267.825 3881.200, 3267 3881.196 C 3266.175 3881.192, 2984.475 3957.501, 2641 4050.772" stroke="none" fill="#dfc436" fill-rule="evenodd"/>
+                        </svg>
+                    </picture>
+                    <span>JS</span>
+                </text>
+            </section>
+        </box>
+        <box class="file-icon active">
+            <section>
+                <text>
+                    <i>
+                        <con class="gg-eye"></con>
+                    </i>
+                </text>
+            </section>
+        </box>
+    </header>
+    <section>
+        <card class="code-file code-html active">
+            <header>
+                <box class="file-type">
+                    <section>
+                        <text>
+                            <span>HTML</span>
+                        </text>
+                    </section>
+                </box>
+                <i>
+                    <con class="gg-options"></con>
+                </i>
+                <i>
+                    <con class="gg-chevron-down"></con>
+                </i>
+            </header>
+            <section>
+                <box>
+                    <section id="code-html"></section>
+                </box>
+            </section>
+        </card>
+        <card class="code-file code-css">
+            <header>
+                <box class="file-type">
+                    <section>
+                        <text>CSS</text>
+                    </section>
+                </box>
+                <i>
+                    <con class="gg-options"></con>
+                </i>
+                <i>
+                    <con class="gg-chevron-down"></con>
+                </i>
+            </header>
+            <section>
+                <box>
+                    <section id="code-css"></section>
+                </box>
+            </section>
+        </card>
+        <card class="code-file code-js">
+            <header>
+                <box class="file-type">
+                    <section>
+                        <text>JS</text>
+                    </section>
+                </box>
+                <i>
+                    <con class="gg-options"></con>
+                </i>
+                <i>
+                    <con class="gg-chevron-down"></con>
+                </i>
+            </header>
+            <section>
+                <box>
+                    <section id="code-js"></section>
+                </box>
+            </section>
+        </card>
+    </section>
+</aside>
+<line class="block-line"></line>
+<block class="block-code">
+    <iframe class="code-frame" id="code-frame"></iframe>
+</block>
+<footer class="footer-snippet">
+    <section>
+        <card class="snippet-tools">
+            <row>
+                <box class="tools-tool tools-console">
+                    <section>
+                        <text>Console</text>
+                    </section>
+                </box>
+                <box class="tools-tool tools-assets">
+                    <section>
+                        <text>Assets</text>
+                    </section>
+                </box>
+                <box class="tools-tool tools-shortcuts">
+                    <section>
+                        <text>Shortcuts</text>
+                    </section>
+                </box>
+            </row>
+        </card>
+    </section>
+</footer>

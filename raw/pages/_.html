@@ -1,0 +1,215 @@
+<header class="header-user">
+    <row>
+        <card class="shell-brand">
+            <section>
+                <box class="brand-image" href="/">
+                    <section>
+                        <i class="image-icon">
+                            <con class="gg-code-slash"></con>
+                        </i>
+                    </section>
+                </box>
+                <box class="user-name" href="/:get">
+                    <section>
+                        <text name="username"></text>
+                    </section>
+                </box>
+                <box uid="false">
+                    <nav>
+                        <text>
+                            <span>Community</span>
+                            <span>Academy</span>
+                            <span>Blog</span>                            
+                        </text>
+                        <text>
+                            <span>Pricing</span>
+                        </text>
+                    </nav>
+                </box>
+            </section>
+        </card>
+        <card class="shell-search">
+            <section>
+                <box class="search-bar">
+                    <form onsubmit="events.onsubmit.search(event)">
+                        <i>
+                            <con class="gg-search"></con>
+                        </i>
+                        <input placeholder="Search" type="text">
+                        <input type="submit">
+                    </form>
+                </box>
+                <box class="user-authenticate" onclick="github.oauth.login()" uid="false">
+                    <section>
+                        <span class="authenticate-avatar">
+                            <section>
+                                <i class="avatar-image"></i>
+                            </section>
+                        </span>
+                    </section>
+                </box>
+            </section>
+        </card>
+        <dropdown uid="true">
+            <row drop="down">
+                <box class="user-authenticate">
+                    <section>
+                        <span class="authenticate-avatar">
+                            <section>
+                                <i class="avatar-image"></i>
+                            </section>
+                        </span>
+                    </section>
+                </box>
+            </row>
+            <column>
+                <box>
+                    <column>
+                        <text>
+                            <span href="/:user">My Apps</span>
+                            <span href="/gists/:user">My Snippets</span>
+                        </text>
+                        <text>
+                            <span href="/gists">New Snippet</span>
+                            <span href="/new">New Web App</span>
+                            <span style="display: none;">New Archive</span>
+                        </text>
+                        <text>
+                            <span href="/raw">File Cloud</span>
+                            <span href="/docs">Documentation</span>
+                        </text>
+                        <text>
+                            <span href="/settings">Settings</span>
+                            <span onclick="github.oauth.sign_out()">Log Out</span>
+                        </text>
+                    </column>
+                </box>
+            </column>
+        </dropdown>
+    </row>
+</header>
+<block class="block-cover">
+    <column>
+        <card class="cover-photo">
+            <column>
+                <box class="photo-avatar">
+                    <column>
+                        <picture></picture>
+                    </column>
+                </box>
+                <box class="photo-user">
+                    <column>
+                        <text name="fullname" placeholder="Firstname Lastname"></text>
+                        <text name="username" placeholder="@username"></text>
+                        <text class="follow hidden">Follow</text>
+                        <text name="bio"></text>
+                        <text class="stats">
+                            <i class="stats-icon">
+                                <con class="gg-user" style="--ggs:calc(2/3);"></con>
+                            </i>
+                            <span name="followers">0</span>
+                            <span>followers</span>
+                            <span>&middot;</span>
+                            <span name="following">0</span>
+                            <span>following</span>
+                        </text>
+                        <text class="edit follow hidden">Edit Profile</text>
+                    </column>
+                </box>
+            </column>
+        </card>
+    </column>
+    <footer>
+        <card class="cover-stats">
+            <column>
+                <box class="stats-follow">
+                    <section>
+                        <text>
+                            <span>0</span>
+                            <span>followers</span>
+                        </text>
+                        <text>
+                            <span>0</span>
+                            <span>following</span>
+                        </text>
+                    </section>
+                </box>
+            </column>
+        </card>
+    </footer>
+</block>
+<block class="block-source">
+    <header>
+        <card class="source-search">
+            <form>
+                <box>
+                    <section>
+                        <input placeholder="Search Apps" type="text">
+                    </section>
+                </box>
+            </form>
+        </card>
+        <card class="source-filter">
+            <form>
+                <box>
+                    <dropdown>
+                        <row drop="down">
+                            <text>Type</text>
+                            <i>
+                                <con class="gg-chevron-down"></con>
+                            </i>
+                        </row>
+                        <flex>
+                            <text></text>
+                        </flex>
+                    </dropdown>
+                </box>
+                <box>
+                    <dropdown>
+                        <row drop="down">
+                            <text>Language</text>
+                            <i>
+                                <con class="gg-chevron-down"></con>
+                            </i>
+                        </row>
+                        <flex>
+                            <text></text>
+                        </flex>
+                    </dropdown>
+                </box>
+                <box>
+                    <dropdown>
+                        <row drop="down">
+                            <text>Sort</text>
+                            <i>
+                                <con class="gg-chevron-down"></con>
+                            </i>
+                        </row>
+                        <flex>
+                            <text></text>
+                        </flex>
+                    </dropdown>
+                </box>
+            </form>
+        </card>
+    </header>
+    <column>
+        <card class="source-code">
+            <column id="user-repositories"></column>
+            <template>
+                <box class="code-repository">
+                    <row>
+                        <picture></picture>
+                        <text>
+                            <span>Name</span>
+                            <span>Last pushed on Jan 1, 1970</span>
+                        </text>
+                        <i>
+                            <con class="icon-chevron-right"></con>
+                        </i>
+                    </row>
+                </box>
+            </template>
+        </card>
+    </column>
+</block>

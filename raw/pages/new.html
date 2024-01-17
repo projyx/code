@@ -1,0 +1,102 @@
+<header class="header-code">
+    <section>
+        <div class="code-file">
+            <section>
+                <span class="file-menu" onclick="events.onclick.exit()">
+                    <section>
+                        <i>
+                            <con class="icon-chevron-left"></con>
+                        </i>
+                    </section>
+                </span>
+                <span class="file-meta">
+                    <section>
+                        <text class="meta-title" name="title" placeholder="Untitled"></text>
+                        <text class="meta-owner" name="owner" placeholder="Anonymous"></text>
+                    </section>
+                </span>
+            </section>
+        </div>
+        <div class="code-buttons">
+            <section>
+                <span class="buttons-group">
+                    <section>
+                        <i onclick="api.code.push()">
+                            <con class="icon-upload"></con>
+                        </i>
+                        <i>
+                            <con class="icon-config"></con>
+                        </i>
+                        <i>
+                            <con class="icon-eye"></con>
+                        </i>
+                    </section>
+                </span>
+            </section>
+        </div>
+        <div class="code-authenticate">
+            <section>
+                <span class="authenticate-avatar">
+                    <section>
+                        <i class="avatar-image" onclick="window[0 < 1 ? 'github' : 'api'].oauth.login(event.target)"></i>
+                    </section>
+                </span>
+            </section>
+        </div>
+    </section>
+</header>
+<aside class="aside-code">
+    <section>
+        <card class="code-file code-html">
+            <header>
+                <box class="file-type">
+                    <section>
+                        <text>
+                            <i>
+                                <con></con>
+                            </i>
+                            <span>HTML</span>
+                        </text>
+                    </section>
+                </box>
+            </header>
+            <section>
+                <box>
+                    <section id="code-html"></section>
+                </box>
+            </section>
+        </card>
+        <card class="code-file code-css">
+            <header>
+                <box class="file-type">
+                    <section>
+                        <text>CSS</text>
+                    </section>
+                </box>
+            </header>
+            <section>
+                <box>
+                    <section id="code-css"></section>
+                </box>
+            </section>
+        </card>
+        <card class="code-file code-js">
+            <header>
+                <box class="file-type">
+                    <section>
+                        <text>JS</text>
+                    </section>
+                </box>
+            </header>
+            <section>
+                <box>
+                    <section id="code-js"></section>
+                </box>
+            </section>
+        </card>
+    </section>
+</aside>
+<line class="block-line"></line>
+<block class="block-code">
+    <iframe class="code-frame" id="code-frame"></iframe>
+</block>

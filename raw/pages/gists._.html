@@ -1,0 +1,187 @@
+<header class="header-user">
+    <row>
+        <card class="shell-brand">
+            <section>
+                <box class="brand-image" href="/">
+                    <section>
+                        <i>
+                            <con class="icon-code-slash"></con>
+                        </i>
+                        <text name="username"></text>
+                    </section>
+                </box>
+            </section>
+        </card>
+        <card class="shell-search">
+            <section>
+                <box class="search-bar">
+                    <form onsubmit="events.onsubmit.search(event)">
+                        <i>
+                            <con class="gg-search"></con>
+                        </i>
+                        <input placeholder="Search" type="text">
+                        <input type="submit">
+                    </form>
+                </box>
+            </section>
+        </card>
+        <card uid="false">
+            <row drop="down">
+                <box class="user-authenticate">
+                    <section>
+                        <span class="authenticate-avatar">
+                            <section>
+                                <i class="avatar-image" onclick="github.oauth.login(event.target)"></i>
+                            </section>
+                        </span>
+                    </section>
+                </box>
+            </row>
+        </card>
+        <dropdown uid="true">
+            <row drop="down">
+                <box class="user-authenticate">
+                    <section>
+                        <span class="authenticate-avatar">
+                            <section>
+                                <i class="avatar-image"></i>
+                            </section>
+                        </span>
+                    </section>
+                </box>
+            </row>
+            <column>
+                <box>
+                    <column>
+                        <text>
+                            <span href="/:user">My Apps</span>
+                            <span href="/gists/:user">My Snippets</span>
+                        </text>
+                        <text>
+                            <span href="/gists">New Snippet</span>
+                            <span href="/new">New Web App</span>
+                            <span style="display: none;">New Archive</span>
+                        </text>
+                        <text>
+                            <span href="/raw">File Cloud</span>
+                            <span href="/docs">Documentation</span>
+                        </text>
+                        <text>
+                            <span href="/settings">Settings</span>
+                            <span onclick="github.oauth.sign_out()">Log Out</span>
+                        </text>
+                    </column>
+                </box>
+            </column>
+        </dropdown>
+    </row>
+</header>
+<block class="block-cover">
+    <column>
+        <card class="cover-photo">
+            <flex>
+                <box class="photo-avatar">
+                    <column>
+                        <picture></picture>
+                    </column>
+                </box>
+                <box class="photo-user">
+                    <column>
+                        <text name="fullname" placeholder="Firstname Lastname"></text>
+                        <text name="username" placeholder="@username"></text>
+                        <text class="follow hidden">Follow</text>
+                        <text name="bio"></text>
+                        <text class="stats">
+                            <i class="stats-icon">
+                                <con class="gg-user" style="--ggs:calc(2/3);"></con>
+                            </i>
+                            <span name="followers">0</span>
+                            <span>followers</span>
+                            <span>&middot;</span>
+                            <span name="following">0</span>
+                            <span>following</span>
+                        </text>
+                        <text class="profile">Open Profile</text>
+                    </column>
+                </box>
+            </flex>
+        </card>
+    </column>
+    <footer>
+        <card class="cover-stats">
+            <column>
+                <box class="stats-follow" style="display: none;">
+                    <section>
+                        <text>
+                            <span>0</span>
+                            <span>followers</span>
+                        </text>
+                        <text>
+                            <span>0</span>
+                            <span>following</span>
+                        </text>
+                    </section>
+                </box>
+            </column>
+        </card>
+    </footer>
+</block>
+<block class="block-source">
+    <column>
+        <card class="source-code">
+            <column id="code-snippets"></column>
+            <template>
+                <box class="snippets-snippet">
+                    <column>
+                        <!--<picture></picture>-->
+                        <text>
+                            <span class="snippet-user" placeholder="username"></span>
+                            <span>/</span>
+                            <span class="snippet-file" placeholder="file.ext"></span>
+                        </text>
+                        <text>
+                            <span class="snippet-date"></span>
+                        </text>
+                        <text>
+                            <span class="snippet-name"></span>
+                        </text>
+                        <text class="snippet-description">
+                            <header class="description-header"></header>
+                            <section class="description-content"></section>
+                        </text>
+                        <text class="snippet-stats">
+                            <row>
+                                <i>
+                                    <con class="gg-cloud"></con>
+                                </i>
+                                <span after="files" before="0" class="stats-files"></span>
+                            </row>
+                            <row>
+                                <i>
+                                    <con class="gg-git-fork"></con>
+                                </i>
+                                <span after="forks" before="0" class="stats-forks"></span>
+                            </row>
+                            <row>
+                                <i>
+                                    <con class="gg-comment"></con>
+                                </i>
+                                <span after="comments" before="0" class="stats-comments"></span>
+                            </row>
+                            <row>
+                                <i>
+                                    <con class="gg-bookmark"></con>
+                                </i>
+                                <span after="saves" before="0" class="stats-saves"></span>
+                            </row>
+                        </text>
+                        <text class="snippet-code">
+                            <header></header>
+                            <section></section>
+                        </text>
+                    </column>
+                </box>
+            </template>
+        </card>
+    </column>
+</block>

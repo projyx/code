@@ -1,0 +1,294 @@
+<block class="address-bar">
+    <section>
+        <card class="bar-history">
+            <row>
+                <box class="history-back">
+                    <section>
+                        <ico>
+                            <n class="icon-arrow-left"></n>
+                        </ico>
+                    </section>
+                </box>
+                <box class="history-forward">
+                    <section>
+                        <ico>
+                            <n class="icon-arrow-right"></n>
+                        </ico>
+                    </section>
+                </box>
+                <box class="history-reload">
+                    <section>
+                        <ico>
+                            <n class="icon-reload"></n>
+                        </ico>
+                    </section>
+                </box>
+            </row>
+        </card>
+        <card class="bar-search">
+            <form>
+                <box class="search-box">
+                    <row>
+                        <text name="security">
+                            <ico>
+                                <n class="icon"></n>
+                            </ico>
+                            <span></span>
+                        </text>
+                        <text name="protocol"></text>
+                        <text name="subdomain"></text>
+                        <span>.</span>
+                        <text name="domain"></text>
+                        <span>.</span>
+                        <text name="tld"></text>
+                        <text name="pathname"></text>
+                    </row>
+                </box>
+            </form>
+        </card>
+        <card class="bar-avatar">
+            <row>
+                <box class="avatar-authenticate">
+                    <section>
+                        <picture></picture>
+                    </section>
+                </box>
+            </row>
+        </card>
+    </section>
+</block>
+<block class="dev-tools">
+    <header>
+        <card class="tools-tabs">
+            <row onclick="editor.tools.tool(event)">
+                <box>
+                    <row>
+                        <text>
+                            <span>Sources</span>
+                        </text>
+                    </row>
+                </box>
+                <box>
+                    <row>
+                        <text>
+                            <span>Console</span>
+                        </text>
+                    </row>
+                </box>
+                <box>
+                    <row>
+                        <text>
+                            <span>Elements</span>
+                        </text>
+                    </row>
+                </box>
+            </row>
+        </card>
+    </header>
+    <column>
+        <card class="tools-tab tab-sources">
+            <aside>
+                <box class="sources-files" id="sources-files">
+                    <header>
+                        <text>
+                            <span placeholder="Filesystem"></span>
+                            <span>main</span>
+                        </text>
+                        <text>
+                            <i>
+                                <con class="icon-plus"></con>
+                            </i>
+                            <span>Create new project</span>
+                        </text>
+                    </header>
+                    <column id="file-trees"></column>
+                    <template>
+                        <text data-before="&#x25b6;">
+                            <i>
+                                <con class="icon-folder"></con>
+                            </i>
+                            <span placeholder="dir">...</span>
+                        </text>
+                        <text data-before="&#9654;">
+                            <i>
+                                <con class="icon-folder"></con>
+                            </i>
+                            <span placeholder="dir"></span>
+                        </text>
+                        <text>
+                            <i>
+                                <con class="icon-file"></con>
+                            </i>
+                            <span onfocusout="editor.tree.mv(event)" placeholder="file"></span>
+                        </text>
+                    </template>
+                    <template>
+                        <box class="context-menu modal modal-popup popup-dir">
+                            <column>
+                                <text>Open folder</text>
+                            </column>
+                            <column>
+                                <text>Search in folder</text>
+                            </column>
+                            <column>
+                                <text onclick="events.onclick.touch(event)">New file</text>
+                                <text>Exclude folder</text>
+                                <text>Add folder to workspace</text>
+                            </column>
+                        </box>
+                    </template>
+                    <template>
+                        <box class="context-menu modal modal-popup popup-file">
+                            <column>
+                                <text>Open in GitHub</text>
+                            </column>
+                            <column>
+                                <text onclick="events.onclick.mv(event)">Rename...</text>
+                                <text>Make a copy...</text>
+                                <text onclick="events.onclick.rm(event)">Delete</text>
+                            </column>
+                            <column>
+                                <text>Copy link address</text>
+                                <text>Copy file name</text>
+                            </column>
+                            <column>
+                                <text>Save as...</text>
+                            </column>
+                            <column>
+                                <text>Add script to ignore list</text>
+                            </column>
+                        </box>
+                    </template>
+                </box>
+            </aside>
+            <section>
+                <box class="sources-panel">
+                    <header>
+                        <button>
+                            <i>
+                                <con class="icon-shrink-x"></con>
+                            </i>
+                        </button>
+                    </header>
+                    <template>
+                        <text>
+                            <i>
+                                <con class="icon-file"></con>
+                            </i>
+                            <span placeholder="file.ext"></span>
+                            <i>
+                                <con class="icon-exit"></con>
+                            </i>
+                        </text>
+                    </template>
+                    <section></section>
+                </box>
+            </section>
+        </card>
+        <card class="tools-tab tab-console">
+            <aside data-tab="0.67">
+                <box class="console-filters">
+                    <column>
+                        <text data-before="&#x25b6;">
+                            <i>
+                                <con class="icon-list"></con>
+                            </i>
+                            <span>0 messages</span>
+                        </text>
+                        <text data-before="&#x25b6;">
+                            <i>
+                                <con class="icon-user"></con>
+                            </i>
+                            <span>0 user messages</span>
+                        </text>
+                        <text data-before="&#x25b6;">
+                            <i style="--ggs: 0.67">
+                                <con class="icon-close"></con>
+                            </i>
+                            <span>7 errors</span>
+                        </text>
+                        <text data-before="&#x25b6;">
+                            <i>
+                                <con class="icon-warn"></con>
+                            </i>
+                            <span>No warnings</span>
+                        </text>
+                        <text data-before="&#x25b6;">
+                            <i style="--ggs: 0.67">
+                                <con class="icon-info"></con>
+                            </i>
+                            <span>1 info</span>
+                        </text>
+                        <text data-before="&#x25b6;">
+                            <i style="--ggs: 0.67">
+                                <con class="icon-debug"></con>
+                            </i>
+                            <span>No verbose</span>
+                        </text>
+                    </column>
+                </box>
+            </aside>
+            <column>
+                <box>
+                    <section>
+                        <ico>
+                            <n class="icon-arrow-right"></n>
+                        </ico>
+                        <text></text>
+                    </section>
+                </box>
+            </column>
+            <template>
+                <box>
+                    <section>
+                        <text>
+                            <span></span>
+                        </text>
+                        <text>
+                            <span></span>
+                        </text>
+                    </section>
+                </box>
+            </template>
+        </card>
+        <card class="tools-tab tab-elements">
+            <section onclick="window.editor.elements.selecting(event)" onmouseout="window.editor.elements.onmouseout(event)" onmouseover="window.editor.elements.onmouseover(event)"></section>
+            <template>
+                <box class="element" html-entity="&#x25B6;">
+                    <fold html-entity="&#x25B6;" onclick="event.target.closest('box').classList.toggle('expand')"></fold>
+                    <header></header>
+                    <section></section>
+                    <footer></footer>
+                </box>
+            </template>
+            <aside onfocusout="window.editor.elements.styles(event)" onmousedown="window.editor.elements.styles(event)" onmouseup="window.editor.elements.styles(event)"></aside>
+            <template>
+                <box>
+                    <header>
+                        <div class="rule"></div>
+                        <div class="file"></div>
+                        <div class="slct"></div>
+                    </header>
+                    <column></column>
+                    <template>
+                        <text class="connected">
+                            <label class="declaration">
+                                <input type="checkbox" checked="checked">
+                                <span class="checkbox"></span>
+                            </label>
+                            <span class="property" onkeydown="window.editor.elements.property(event)" onkeyup="window.editor.elements.property(event)"></span>
+                            <span>:</span>
+                            <span class="value" onkeydown="window.editor.elements.value(event)" onkeyup="window.editor.elements.value(event)"></span>
+                            <span>;</span>
+                        </text>
+                    </template>
+                    <footer></footer>
+                </box>
+            </template>
+        </card>
+    </column>
+</block>
+<line id="resizer"></line>
+<block class="live-preview">
+    <iframe id="preview-editor"></iframe>
+</block>
