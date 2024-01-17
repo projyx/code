@@ -37,6 +37,10 @@ window.onload = async(event)=>{
         appId: "1:492439614306:web:58cffeca539613b875b23b"
     });
     firebase.auth().onAuthStateChanged(async(user)=>{
+        var pathname = window.location.href.split(document.head.querySelector("base").href)[1];
+        console.log(41, {
+            pathname
+        });
         if (user) {
             window.user = user;
             0 < 1 ? console.log(42, 'index.user', {
@@ -53,13 +57,13 @@ window.onload = async(event)=>{
 
                 localStorage.setItem("user", user.login);
 
-                rout.er(window.location.pathname);
+                rout.er(pathname);
             } catch (e) {
                 console.log(56, 'onAuthStateChanged', {
                     e
                 });
 
-                rout.er(window.location.pathname);
+                rout.er(pathname);
             }
         } else {
             window.user = null;
@@ -67,7 +71,7 @@ window.onload = async(event)=>{
             Array.from(document.body.querySelectorAll(".avatar-image")).forEach(function(avatar) {
                 avatar.innerHTML = "";
             });
-            rout.er(window.location.pathname);
+            rout.er(pathname);
         }
         //dom.body.dataset.load = "ed";
     }

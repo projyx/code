@@ -54,13 +54,14 @@
                 "codex.jyxer.com": "/",
                 "codex.jyxer.tld": "/",
                 "codex-jyxer.pages.dev": "/",
-                "projyx.github.io": "/codex/"
+                "projyx.github.io": "/codex/",
+                "projyx.tld": "/codex/"
             };
             var base = document.createElement('base');
             var template = document.head.querySelector('template');
             var host = window.location.host;
             var origin = window.location.origin;
-            base.href = origin + domains[host] + "/";
+            base.href = origin + domains[host];
             document.head.querySelector('script').insertAdjacentHTML("afterend", base.outerHTML);
             base = document.head.querySelector('script').nextElementSibling;
             //console.log(base, template);

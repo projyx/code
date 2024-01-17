@@ -12,6 +12,13 @@ window.rout.er = (href,params)=>{
         var pathname = url.pathname;
         var search = url.search ? url.search : null;
         var paths = pathname.split("/").splice(1).filter(n=>n.length > 0);
+        console.log(15, {
+            href,
+            url,
+            pathname,
+            search,
+            paths
+        });
 
         //TRANSFORM URL
         var link = pathname;
