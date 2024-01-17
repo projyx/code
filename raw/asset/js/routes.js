@@ -923,11 +923,11 @@ window.routes = function(uri, options) {
                         }
                     }
                 } else {
-                    console.log(819, "routes.view user /:user", {
+                    0 > 1 ? console.log(819, "routes.view user /:user", {
                         sub,
                         pic: component.querySelector('.photo-avatar picture'),
                         classes: component.querySelector('.photo-avatar picture').classList
-                    });
+                    }) : null;
 
                     try {
                         var json = await github.users.user(sub, {
