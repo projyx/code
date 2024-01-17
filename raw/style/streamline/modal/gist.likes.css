@@ -1,0 +1,235 @@
+@media {
+    aside:has([modal="gist-likes"]) {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        background-color: rgba(0,0,0,0.5);
+        /* display: flex; */
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin: auto;
+        width: 100%;
+    }
+}
+
+@media {
+    aside:has([modal="gist-likes"]) blocks {
+        align-items: center;
+        width: 100%;
+        min-height: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media {
+    [modal="gist-likes"] {
+        /* background: #111; */
+        border-radius: 10px;
+        box-shadow: 0 0 10pc -9px;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 60px auto;
+        /* min-height: 240px; */
+        overflow: hidden;
+        padding: 0 0px 0px;
+        width: 960px;
+        max-width: calc(100% - 40px);
+    }
+
+    @media (max-width: 540px) {
+        [modal="gist-likes"] {
+            /* background: #111; */
+            border-radius: 0px;
+            box-shadow: 0 0 10pc -9px;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
+            /* min-height: 240px; */
+            overflow: hidden;
+            padding: 0 0px 0px;
+            width: 960px;
+            max-width: calc(100% - 0px);
+        }
+    }
+
+    [modal="gist-likes"] > row {
+        /* background: #111; */
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+        width: 100%;
+    }
+
+    [modal="gist-likes"] > row > card {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 9px;
+        width: calc((100% - 40px)/3);
+    }
+
+    [modal="gist-likes"] > row > card > footer {
+        display: flex;
+        gap: 10px;
+    }
+
+    @media (max-width: 768px) {
+        [modal="gist-likes"] > row > card {
+            width: calc((100% - 40px)/2);
+        }
+    }
+
+    @media (max-width: 540px) {
+        [modal="gist-likes"] > row > card {
+            width: calc((100% - 0px)/1);
+        }
+    }
+
+    [modal="gist-likes"] > row > card > section {
+        /* padding-top: 56.25%; */
+        width: 100%;
+    }
+
+    [modal="gist-likes"] > row > card > section > box {
+        width: 100%;
+    }
+
+    [modal="gist-likes"] > row > card > section > box picture {
+        background: black;
+        display: flex;
+        padding-top: 56.25%;
+        width: 100%;
+    }
+
+    [modal="gist-likes"] > row > card > footer > box {
+        /* width: calc((100% - 20px)/3); */
+    }
+
+    [modal="gist-likes"] > row > card > footer > box:nth-child(2) > section {
+        flex-direction: column;
+    }
+
+    [modal="gist-likes"] > row > card > footer > box:nth-child(3) {
+        height: 36px;
+        margin-left: auto;
+        width: 36px;
+    }
+
+    [modal="gist-likes"] > row > card > footer > box:nth-child(3) i {
+        display: flex;
+        height: 36px;
+        width: 36px;
+    }
+
+    [modal="gist-likes"] > row > card > footer > box picture {
+        background: black;
+        border-radius: 5px;
+        height: 36px;
+        width: 36px;
+    }
+}
+
+@media {
+    [modal="gist-likes"] > header {
+        /* background: #111; */
+        border-bottom: 2px solid transparent;
+        display: flex;
+        height: auto;
+        justify-content: space-between;
+        margin-bottom: 5px;
+        padding: 20px;
+        width: 100%;
+    }
+
+    @media (max-width: 480px) {
+        [modal="gist-likes"] > header {
+            /* position: fixed; */
+            top: 0;
+        }
+    }
+
+    [modal="gist-likes"] > header text {
+        font-size: 18px;
+    }
+}
+
+@media {
+    [modal="gist-likes"] > column {
+        border-bottom: 2px solid #333;
+        display: flex;
+        height: auto;
+        justify-content: space-between;
+        padding: 20px;
+        width: 100%;
+    }
+
+    [modal="gist-likes"] card box text {
+        min-width: 100px;
+    }
+
+    [modal="gist-likes"] card box text:nth-child(1) {
+        min-width: 100px;
+    }
+
+    [modal="gist-likes"] card box text:nth-child(2) {
+        min-width: 100px;
+    }
+
+    [modal="gist-likes"] card box:nth-child(2) text:nth-child(1) {
+        font-weight: bolder;
+    }
+
+    [modal="gist-likes"] card box:nth-child(2) text:nth-child(2) {
+        font-size: 13px;
+    }
+
+    [modal="gist-likes"] card box text:nth-child(3) {
+        min-width: 100px;
+    }
+
+    [modal="gist-likes"] card box text:nth-child(4) {
+        min-width: 100px;
+    }
+}
+
+[modal="gist-likes"] > nav {
+    background: #333;
+}
+
+[modal="gist-likes"] > nav + section + footer {
+    background: #111;
+    margin: 20px auto 0;
+    width: 100%;
+}
+
+[modal="gist-likes"] > footer {
+    /* background: #111; */
+    bottom: 0;
+    margin: 5px auto 0;
+    position: footer;
+    width: 100%;
+}
+
+[modal="gist-likes"] > footer card text {
+    background: limegreen;
+    border-radius: 5px;
+    color: black;
+    height: 36px;
+    line-height: 36px;
+    margin: 20px auto 20px auto;
+    padding: 0 16px;
+}
+
+@media {
+    [modal="likes-feed"] {
+        background: #111;
+        border-radius: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 60px auto;
+        /* min-height: 240px; */
+        overflow: hidden;
+        padding: 0 0px 0px;
+        width: 640px;
+    }
+}

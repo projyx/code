@@ -1,0 +1,49 @@
+/*SYSTEM*/
+@media {
+    body input[type="submit"] {
+        -webkit-appearnace: none;
+        font-size: 0;
+        background: none;
+        border: 0;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+        body[theme="system"] {
+            background: #292a2d;
+            color: #fff;
+        }
+
+        body[theme="system"] input {
+            /* color: #fff; */
+        }
+    }
+}
+
+/*PALETTE*/
+@media {
+    .color-indigo {
+        color: #1f3667;
+    }
+
+    .color-orange {
+        color: #dd7513;
+    }
+
+    .color-red {
+        color: #c53535;
+    }
+}
+
+/*SCROLLBAR*/
+::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgb(52 52 52);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a2a2a2;
+}
