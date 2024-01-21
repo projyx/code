@@ -62,7 +62,7 @@
             var host = window.location.host;
             var origin = window.location.origin;
             base.href = origin + domains[host];
-            document.head.querySelector('script').insertAdjacentHTML("afterend", base.outerHTML);
+            document.head.insertAdjacentHTML("afterbegin", base.outerHTML);
             base = document.head.querySelector('script').nextElementSibling;
             //console.log(base, template);
             //base.insertAdjacentHTML("afterend", template.content.firstElementChild.innerHTML);

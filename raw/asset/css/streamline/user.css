@@ -481,15 +481,15 @@
     [route="/*"] .block-cover .cover-photo .photo-avatar picture {
         background-color: #292a2d;
         background: #555;
-        /* border: 1px solid #555; */
+        /* border: 10px solid #555; */
         border-radius: 15%;
-        border-radius: 50%;
+        /* border-radius: 50%; */
         box-sizing: border-box;
         height: 0;
         overflow: hidden;
-        padding-top: 100%;
+        padding-top: calc(100% - 0px);
         position: relative;
-        width: 100%;
+        width: calc(100% - 0px);
     }
 
     [route="/*"] .block-cover .cover-photo .photo-avatar picture img {
